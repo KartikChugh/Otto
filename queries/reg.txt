@@ -1,0 +1,25 @@
+fit a regression model to the number of deaths in a city
+make a regression graph for stoplight count
+perform regression on median home values
+do regression on financial data
+regression for average occupancy
+make a projection of healthcare expenditures over time
+create a projection for mean college tuition
+form projections about total fatalities
+projection on rate of increase
+build projection for covid
+estimate normal life expectancy from medical data
+make an estimate for the value of a house
+do estimates of mean car accidents
+estimate the gdp growth number in q4
+estimate infection rates
+forecast stock prices over the next year
+construct a forecast for crime numbers in DC
+build forecasts on total food quantity
+forecast the amount of rain
+forecast the weather
+project the cost of living in the boston suburbs
+project median incomes for 2023
+project total coronavirus case count
+project the quantity of drinks
+project inflation 
