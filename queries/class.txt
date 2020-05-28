@@ -1,0 +1,30 @@
+do image classification on cifar-10
+perform classification of audio samples
+make a classifier to identify high-risk populations
+classifier for detecting frowns
+perform facial recognition 
+do voice recognition 
+automated detection of safe drinking water
+phishing detection
+make a model that tells if a drawing is a cat
+be able to tell whether a string is a phone number or not
+know if a loan application will be accepted or denied
+build a model that knows whether a medical procedure will succeed
+create something that predicts if a crime will occur
+predict whether trump will get re-elected
+label news as real or fake
+label photos by if they are authentic or not
+detect fraud
+detect if a patient has bronchitis from xrays
+identify likely epicenters of outbreaks
+model which identifies contaminants
+recognize face expressions 
+construct a model that recognizes if a woman is sad or happy
+classifies spam texts
+classify between different types of groceries
+determine whether a picture was drawn by a gan
+determines the level of security of a codebase
+decide if an email was spoofed
+decide what kind of animal this is
+a model that categorizes paintings by artistic style
+categorize car pics between sedan or minivan
