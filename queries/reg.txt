@@ -1,21 +1,30 @@
-fit a regression model to the number of deaths in a city
-make a regression graph for stoplight count
-perform regression on median home values
-do regression on financial data
+regression model to the number of deaths in a city
+regression graph for stoplight count
+regression on median home values
+regression on financial data
 regression for average occupancy
-make a projection of healthcare expenditures over time
-create a projection for mean college tuition
-form projections about total fatalities
-projection on rate of increase
-build projection for covid
+projection of healthcare expenditures over time
+projection for college tuition
+projections about fatalities
+projection on wage increases
+projection for covid
+purchase forecasting
+quota forecasting
+forecasting the level of precipitation
+forecasting state budget shortfalls
+tariff projections
+revenue projection
+annual profit estimation
+deficit estimation
+estimation of the budget
 estimate normal life expectancy from medical data
-make an estimate for the value of a house
-do estimates of mean car accidents
-estimate the gdp growth number in q4
-estimate infection rates
+estimate for the stock of affordable housing
+estimates of car accidents
+estimate the gdp growth in q4
+estimate infections
 forecast stock prices over the next year
-construct a forecast for crime numbers in DC
-build forecasts on total food quantity
+forecast for crime numbers in DC
+forecasts on food quantity
 forecast the amount of rain
 forecast the weather
 project the cost of living in the boston suburbs
@@ -23,3 +32,14 @@ project median incomes for 2023
 project total coronavirus case count
 project the quantity of drinks
 project inflation 
+predict mean plane crashes
+model total vaccinations
+predict the rate of reproduction for a given strain
+model the value of banking assets
+model mean mortalities in any given stretch of time
+predict the average sales number 
+model infertility rates
+predict total number of csections
+model property values around the bay area
+predict median asset figures
+model traffic violation count
