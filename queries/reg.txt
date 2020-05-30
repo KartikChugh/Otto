@@ -3,6 +3,7 @@ regression graph for stoplight count
 regression on median home values
 regression on financial data
 regression for average occupancy
+regression concerning the effect of trees on crime
 projection of healthcare expenditures over time
 projection for college tuition
 projections about fatalities
@@ -19,9 +20,14 @@ deficit estimation
 estimation of the budget
 estimate normal life expectancy from medical data
 estimate for the stock of affordable housing
+estimate body fat percentage based on photos
 estimates of car accidents
 estimate the gdp growth in q4
+estimate closing price
+estimate average living expenses based on amazon orders
+estimate potential stats of NFL draft prospect
 estimate infections
+estimate age of a resident
 forecast stock prices over the next year
 forecast for crime numbers in DC
 forecasts on food quantity
@@ -32,14 +38,29 @@ project median incomes for 2023
 project total coronavirus case count
 project the quantity of drinks
 project inflation 
+determine the total energy of an atomic system
+determine the number of leaves outside a mansion
+predict number of likes on an instagram post
 predict mean plane crashes
-model total vaccinations
+model the total vaccination count
 predict the rate of reproduction for a given strain
 model the value of banking assets
 model mean mortalities in any given stretch of time
+predict percentage of manslaughter that is intended
 predict the average sales number 
 model infertility rates
 predict total number of csections
-model property values around the bay area
+model the property values around the bay area
 predict median asset figures
 model traffic violation count
+predict the average length of friendships
+predict the number of views on a video
+model field goal percentage 
+predict number of matches on tinder
+predict average artist popularity after a new song release
+model average earnings of musicians 
+estimate percentage of produce grown in the US
+predict total population in 2050
+predict the amount of time where status would get the most likes
+predict the average length of Instagram downtime
+predict the rate of immunization use among the general population

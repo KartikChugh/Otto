@@ -5,33 +5,106 @@ classifier to identify high-risk populations
 classifier for detecting frowns
 facial recognition 
 voice recognition 
-audio recognition to figure out the speaker
+audio recognition that figures out the speaker
 automated detection of safe drinking water
 phishing detection
+detection of hacking
+test whether a patient is sick from their medical history
+tell if a song is old hip-hop vs new hip-hop
 tells if a drawing is a cat
 tells me whether a string is a phone number or not
+tell whether a pamphlet has logos in it or not
 know if a loan application will be accepted or denied
 knows whether a medical procedure will succeed
-predicts if a crime will occur
-predict the odds of dying
-predict whether trump will get re-elected
+know whether tesla stock will go up or down tomorrow
 label news as real or fake
 label photos by if they are authentic or not
+label dog breed as aggressive or non-aggressive
+label comments on facebook posts as belonging to a specific party
 detect fraud
 detect if a patient has bronchitis from xrays
+detect political affiliation from tweets
+identify the squares with crosswalks
 identify likely epicenters of outbreaks
 identifies contaminants
 identify handwriting
+identify nations likely to undergo sudden change
+identify a type of disease based on the symptoms
 recognize face expressions 
 recognize questions for customer service interactions
 recognizes if a woman is sad or happy
+recognize someone as a movie actor vs tv show actor
+classify types of music
+classify plants as toxic/not toxic
+classify diagrams of bacteria
+classify air quality
+classify a tumor as cancerous or benign
+classify locations as viable / non viable for a species
 classifies spam texts
 classify between different types of groceries
+classify antibiotics by side effects
+determine which team will emerge victorious
 determine whether a picture was drawn by a gan
+determine whether a rebate is legit or not
+determine whether or not an illustration contains an arm
+determine whether a nose is long or small
 determines the level of security of a codebase
+determine if a figure is male or female
 decide if an email was spoofed
 decide what kind of animal this is
 categorizes paintings by artistic style
 categorize car pics between sedan or minivan
 sort sketches that are based on the work of van gogh
+sort music by historical influences
+sort dialects into regions
 sort album covers
+discriminate weeds from grass
+discriminate between spanish and french
+predicts if a crime will occur
+predict if an account is related to terrorism or not
+predict if a confession is truthful
+predict whether trump will get re-elected
+predict whether a flight will be cancelled
+predict whether hail will form
+predict which chess strategy be used
+predict which search queries will
+predict what shots to take
+predict what plays will be called
+predict basketball tournament outcome
+predict outcome of a rock paper scissors match
+predict surgery outcomes
+predict grading outcomes
+predict the category a logo belongs in
+model the bias category
+discrete categories of information
+put consumer products into categories
+predict the type of damage
+predict the wine type in a glass
+identify what type of truck is in a frame
+determine the fungi type
+figure out what kind of plant this is
+determine the kind of bullet in a gun
+determine the category
+predict the odds of dying
+predict the odds that obama will tweet
+predict likelihood of an ad being clicked on based on internet activity
+predict the probability of retaliation
+determine the probability that halo3 exists
+determine the likelihood of an appeal
+determine the likelihood that tomorrow is rainy
+predict the chances that a tsunami happens
+predict the chances that amazon will be down
+estimate the probability that i can fly
+estimate the chance of a lawsuit
+estimate the likelihood of a structural failure
+estimate likelihood of getting hired from my resume
+estimate likelihood of my dad coming back from the cigarette store
+predict the chance of a wildfire
+model the odds that biden will win
+estimate the odds of economic collapse
+model the probability of another recession happening
+model the probability of snowfall
+model the likelihood of inbox delay
+estimate probability of acceptance into grad school
+estimate the chances of a bonus
+model the chances of recidivism based on race
