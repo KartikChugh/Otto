@@ -1,0 +1,58 @@
+natural language processing on reddit posts
+natural language processing to figure out sentiment
+natural language processing
+natural language understanding model
+natural language interpretation
+natural language expressions
+nlp for semantic analysis
+nlp that parses play dialogues
+nlp model
+natural language analysis of a tweet
+linguistic analysis to identify an author
+linguistic analysis of shakespeare
+textual analysis
+analyze how good the presidents speech was
+analyze the structure of a sentence
+analyze the sentiment in text
+analyze the quality of a rhetorical device
+analyze the meaning of a sentence
+analyze internet search history for illegal activity
+analyze state policy to determine efficacy
+analyze text
+analyze quotes
+analyze meaning
+analyze the tone of an email
+examine the tone of a quote
+examine the meaning of text
+examine the quality of metaphors
+assess the tone of writing
+assess the quality of writing
+assess news pieces
+assess the force behind words
+assess the likeability of a post
+process language
+process writing to figure out sentiment
+process text to figure out its meaning
+summarize the content of news
+summarize medium articles
+summarize the meaning of sms
+summarize some words for me
+summary of opinion article
+extract summary of some text
+extract meaning of strings
+extract meaning from quotes
+find the meaning behind phrases
+figure out the meaning of something
+interpret conversations between me and my friends
+interpret sentences
+interpret natural language
+interpret the meaning of written poetry
+interpretation of hemingway
+interpret strings
+describe the meaning of an excerpt
+describe the tone in a paragraph
+identify threatening language in posts
+identify personal information in documents
+extract information from text
+extract expressions of support or opposition for an issue
+summarize the contents of a technical report using nontechnical language

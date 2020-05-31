@@ -20,14 +20,15 @@ deficit estimation
 estimation of the budget
 estimate normal life expectancy from medical data
 estimate for the stock of affordable housing
-estimate body fat percentage based on photos
+zillow estimates
 estimates of car accidents
 estimate the gdp growth in q4
-estimate closing price
+estimate of closing price
 estimate average living expenses based on amazon orders
 estimate potential stats of NFL draft prospect
 estimate infections
 estimate age of a resident
+estimate the racial composition of the neighborhood
 forecast stock prices over the next year
 forecast for crime numbers in DC
 forecasts on food quantity
@@ -39,28 +40,30 @@ project total coronavirus case count
 project the quantity of drinks
 project inflation 
 determine the total energy of an atomic system
-determine the number of leaves outside a mansion
+determine the number of dandelions outside a property line
 predict number of likes on an instagram post
 predict mean plane crashes
 model the total vaccination count
-predict the rate of reproduction for a given strain
 model the value of banking assets
+predict the rate of reproduction for a given strain
+determine the value of bail from demographics
 model mean mortalities in any given stretch of time
-predict percentage of manslaughter that is intended
-predict the average sales number 
 model infertility rates
+model reopenings over time
+predict lightning strikes over time
+model hair growth over the next few months
+predict the liability level over the next quarter
+predict the average sales number 
 predict total number of csections
-model the property values around the bay area
 predict median asset figures
+model the property values around the bay area
 model traffic violation count
+model average earnings of musicians 
 predict the average length of friendships
 predict the number of views on a video
-model field goal percentage 
 predict number of matches on tinder
 predict average artist popularity after a new song release
-model average earnings of musicians 
-estimate percentage of produce grown in the US
-predict total population in 2050
+predict the total population in 2050
 predict the amount of time where status would get the most likes
-predict the average length of Instagram downtime
+predict average length of Instagram downtime
 predict the rate of immunization use among the general population
