@@ -1,0 +1,18 @@
+model segregation
+model community distrust
+model corn texture
+model handsomeness of stars
+predict salience of facts
+predict distillation
+model the ability of athletes
+model the issue of sexism in the country
+model for racial division
+predict polarization across the globe
+predict the turning of tables in a state of war
+predict actions
+predict the elections
+predict the deficit
+analyze civil society
+analyze data
+analyze wall street bets
+analyze curiosity of babies

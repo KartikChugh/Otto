@@ -1,3 +1,4 @@
+sex classification
 image classification on cifar-10
 classification of audio samples
 classification model for movie genres
@@ -28,10 +29,12 @@ identify the squares with crosswalks
 identify likely epicenters of outbreaks
 identifies contaminants
 identify handwriting
+identify the language of a street sign
 identify nations likely to undergo sudden change
 identify a type of disease based on the symptoms
+identify treatment by doctor report
 recognize face expressions 
-recognize questions for customer service interactions
+recognize questions as customer service interactions
 recognizes if a woman is sad or happy
 recognize someone as a movie actor vs tv show actor
 classify types of music
@@ -43,6 +46,7 @@ classify locations as viable / non viable for a species
 classifies spam texts
 classify between different types of groceries
 classify antibiotics by side effects
+classify ideological positions by voting record
 determine which team will emerge victorious
 determine whether a picture was drawn by a gan
 determine whether a rebate is legit or not
@@ -50,6 +54,7 @@ determine whether or not an illustration contains an arm
 determine whether a nose is long or small
 determines the level of security of a codebase
 determine if a figure is male or female
+determine gender by outline
 decide if an email was spoofed
 decide what kind of animal this is
 categorizes paintings by artistic style
@@ -72,6 +77,9 @@ predict what shots to take
 predict what plays will be called
 predict basketball tournament outcome
 predict outcome of a rock paper scissors match
+predict the outcome of elections
+predict democratic outcomes
+predict outcome of senate race
 predict surgery outcomes
 predict grading outcomes
 predict the category a logo belongs in
@@ -79,27 +87,29 @@ model the bias category
 discrete categories of information
 put consumer products into categories
 predict the type of damage
-predict the wine type in a glass
+predict wine type in a glass
 identify what type of truck is in a frame
 determine the fungi type
 figure out what kind of plant this is
 determine the kind of bullet in a gun
 determine the category
-predict the odds of dying
+predict odds of dying
 predict the odds that obama will tweet
 predict likelihood of an ad being clicked on based on internet activity
 predict the probability of retaliation
+predict probability of an earthquake using seismic data
 determine the probability that halo3 exists
 determine the likelihood of an appeal
-determine the likelihood that tomorrow is rainy
+determine the likelihood that the afternoon is rainy
 predict the chances that a tsunami happens
-predict the chances that amazon will be down
-estimate the probability that i can fly
+predict chances that amazon will be down
+estimate the probability that i can repay debt
 estimate the chance of a lawsuit
 estimate the likelihood of a structural failure
 estimate likelihood of getting hired from my resume
 estimate likelihood of my dad coming back from the cigarette store
 predict the chance of a wildfire
+forecast the chance of flurries next tuesday
 model the odds that biden will win
 estimate the odds of economic collapse
 model the probability of another recession happening
@@ -107,4 +117,8 @@ model the probability of snowfall
 model the likelihood of inbox delay
 estimate probability of acceptance into grad school
 estimate the chances of a bonus
-model the chances of recidivism based on race
+model the chances of recidivism based on race 
+estimate body fat percentage based on photos
+predict percentage of manslaughter that is intended
+model field goal percentage 
+estimate percentage of produce grown in the US
