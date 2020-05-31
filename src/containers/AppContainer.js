@@ -40,7 +40,7 @@ function App() {
       </Row>
       <Widget
         handleSubmit={handleNewUserMessage}
-        launcher={() => <div></div>}
+        launcher={() => null}
         subtitle=""
         title="Otto"
         titleAvatar={logo}
