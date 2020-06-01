@@ -25,12 +25,12 @@ function App() {
     addResponseMessage("Welcome! What would you like to do today?");
   }, []);
 
-  const handleNewUserMessage = (userMessage) => {
-    addUserMessage(userMessage);
+  const handleNewUserMessage = (userMsg) => {
+    addUserMessage(userMsg);
     document.getElementsByClassName("rcw-sender")[0].message.value = "";
-    console.log(`New message incoming! ${userMessage}`);
+    console.log(`New message incoming! ${userMsg}`);
 
-    const response = convo.respondTo(userMessage);
+    const response = convo.respondTo(userMsg);
 
     addResponseMessage(response);
   };
