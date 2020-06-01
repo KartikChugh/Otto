@@ -1,28 +1,27 @@
-const StateEnum = Object.freeze({
+const State = Object.freeze({
     GET_TASK : 1,
     GET_TOPIC : 2,
 })
 
 class Conversation {
 
-    state = StateEnum.GET_TASK;
+    state = State.GET_TASK;
 
-    // constructor() {
-    //     state = StateEnum.GET_TASK;
-    // }
+    responderMap = {
+        [State.GET_TASK] : this.responderGetTask,
+    }
 
     respondTo(msg) {
 
         let response = "";
-
-        switch (this.state) {
-            case StateEnum.GET_TASK:
-                response = msg;
-                break;
-            
-        }
+        let responder = this.responderMap[this.state];
+        response = responder(msg);
 
         return response;
+    }
+
+    responderGetTask(msg) {
+        return msg;
     }
 
 }
