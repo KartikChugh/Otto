@@ -14,19 +14,24 @@ import logo from "logo.svg";
 
 import HeaderContainer from "containers/HeaderContainer";
 import ContentContainer from "containers/ContentContainer";
+import Conversation from "conversation";
 
 function App() {
+
+  const convo = new Conversation();
+
   React.useEffect(() => {
     toggleWidget();
     addResponseMessage("Welcome! What would you like to do today?");
   }, []);
 
-  const handleNewUserMessage = (newMessage) => {
-    addUserMessage(newMessage);
+  const handleNewUserMessage = (userMessage) => {
+    addUserMessage(userMessage);
     document.getElementsByClassName("rcw-sender")[0].message.value = "";
-    console.log(`New message incoming! ${newMessage}`);
-    // Now generate a response for the message!! @kchugh
-    const response = "idk";
+    console.log(`New message incoming! ${userMessage}`);
+
+    const response = convo.respondTo(userMessage);
+
     addResponseMessage(response);
   };
 
