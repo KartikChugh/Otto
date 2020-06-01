@@ -12,19 +12,19 @@ class Conversation {
     }
 
     respondTo(userMsg) {
-
         let response = "";
         let responder = this.responderMap[this.state];
         response = responder(userMsg);
+        return response;
     }
 
     attemptGetTask(userMsg) {
         let response = "";
 
         let witResponse = {};
-        let task = witResponse.getTask();
-        let topic = witResponse.getTopic();
-        let sampleDataset = matchSampleDataset(topic ? topic : userMsg); // scan topic if exists
+        let task = null; //witResponse.getTask();
+        let topic = null; // witResponse.getTopic();
+        let sampleDataset = false; //matchSampleDataset(topic ? topic : userMsg); // scan topic if exists
         if (sampleDataset) {
             // OBTAIN CORRESPONDING TASK
             // we know task and dataset (sample)
@@ -33,10 +33,13 @@ class Conversation {
 
         if (topic && task) {
             // we know task and dataset (custom)
+            response = `Great! Sounds like a ${task} model could help you out with that.`
         } else if (task) {
             // we know task but not dataset
+            response = `I think a ${task} model would help you explore that idea!`
         } else {
             // we know neither task nor dataset
+            response = "Hmm... I couldn't identify a specific machine learning task to help you.";
         }
 
         //     if (topic) {
