@@ -3,6 +3,10 @@ const State = Object.freeze({
     GET_TOPIC : 2,
 })
 
+function getWitResponse(msg) {
+    return {task: 0, subject: 1};
+}
+
 class Conversation {
 
     state = State.GET_TASK;
@@ -37,6 +41,7 @@ class Conversation {
         } else if (task) {
             // we know task but not dataset
             responses.push(`I think a ${task} model would help you explore that idea!`);
+            responses.push(`Check out a few sample datasets if you'd like, or leave it blank to use your own data.`)
         } else {
             // we know neither task nor dataset
             responses.push("Nice!");
