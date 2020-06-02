@@ -19,7 +19,7 @@ class Conversation {
     }
 
     attemptGetTask(userMsg) {
-        let response = "";
+        const responses = [];
 
         let witResponse = {};
         let task = null; //witResponse.getTask();
@@ -33,43 +33,17 @@ class Conversation {
 
         if (topic && task) {
             // we know task and dataset (custom)
-            response = `Great! Sounds like a ${task} model could help you out with that.`
+            responses.push(`Great! Sounds like a ${task} model could help you out with that.`);
         } else if (task) {
             // we know task but not dataset
-            response = `I think a ${task} model would help you explore that idea!`
+            responses.push(`I think a ${task} model would help you explore that idea!`);
         } else {
             // we know neither task nor dataset
-            response = "Hmm... I couldn't identify a specific machine learning task to help you.";
+            responses.push("Nice!");
+            responses.push("Here are some pointers to help you figure out what type of machine learning task can help you with that.")
         }
 
-        //     if (topic) {
-        //         let sampleDataset = matchSampleDataset(userMsg);
-        //         if (sampleDataset) {
-        //             // TODO task = get task for sample
-        //             // we know task and dataset (sample)
-                    
-        //         } else {
-        //             // we know task and dataset (custom)
-                    
-        //         }
-        //     } else {
-        //         // we know task but NOT dataset
-        //         response = "Great! We offer sample datasets to help you get started with. \
-        //             Pick one if you'd like, or leave it blank to use your own data.";
-        //     }
-        // } else {
-        //     let sampleDataset = matchSampleDataset(userMsg);
-        //     if (sampleDataset) {
-        //         // task = get task for sample
-        //         // we know task and dataset (sample)
-
-        //     } else {
-        //         // we know NEITHER task nor dataset
-        //         response = "Tf bro?"
-        //     }
-        // }
-
-        return response;
+        return responses;
     }
 
 }

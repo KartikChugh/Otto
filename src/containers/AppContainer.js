@@ -30,9 +30,11 @@ function App() {
     document.getElementsByClassName("rcw-sender")[0].message.value = "";
     console.log(`New message incoming! ${userMsg}`);
 
-    const response = convo.respondTo(userMsg);
-
-    addResponseMessage(response);
+    const responses = convo.respondTo(userMsg);
+    responses.forEach(response => {
+      addResponseMessage(response);
+    });
+    
   };
 
   return (
