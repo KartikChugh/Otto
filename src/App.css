@@ -49,10 +49,12 @@
 .contentContainer {
   height: calc(100% - 60px);
   min-height: 1000px;
+  padding-left: 70px;
 }
 
 .summaryContainer {
-  min-width: 300px;
+  min-width: 350px;
+  /* border-right: 1px solid black; */
 }
 
 .mainColumnContainer {
@@ -64,15 +66,15 @@
 }
 
 .visualizerContainer {
-  height: 75%;
+  height: 65%;
 }
 
 .codeContainer {
-  height: 25%;
+  height: 35%;
 }
 
 .toolboxContainer {
-  height: 60%;
+  height: 50%;
 }
 
 .ottoContainer {
