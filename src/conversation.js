@@ -3,7 +3,50 @@ const token = require('./TOKEN.json');
 const State = Object.freeze({
     GET_TASK : 1,
     GET_TOPIC : 2,
-})
+});
+
+const Tasks = ['task_reg', 'task_class', 'task_nlp'];
+
+/**
+ * Returns a matched sample dataset name and the relevant keywords
+ * @param {string} subject 
+ */
+function matchSampleDataset(subject) {
+    let sampleDataset = null;
+    let matchedKeywords = null;
+    return [sampleDataset, matchedKeywords];
+}
+
+/**
+ * Returns most probable task identified, or null if none.
+ * @param {Object} witResponse 
+ */
+function extractTask(witResponse) {
+    let intents = witResponse.intents;
+    let task = null;
+    if (intents.length > 0) {
+        let topIntent = intents[0];
+        let topIntentName = topIntent.name;
+        task = topIntentName;
+    }
+    
+    return task;
+}
+
+/**
+ * Returns first subject entity identified, or null if none
+ * @param {Object} witResponse 
+ */
+function extractSubject(witResponse) {
+    let entities = witResponse.entities;
+    let subject = null;
+    if ("subject:subject" in entities) {
+        let subjectArray = entities["subject:subject"];
+        let subjectObject = subjectArray[0];
+        subject = subjectObject["body"];
+    }
+    return subject;
+}
 
 class Conversation {
     wit;
@@ -18,7 +61,7 @@ class Conversation {
 
     async getWitResponse(msg) {
         const witResponse = await this.wit.message(msg);
-        return JSON.stringify(witResponse);
+        return witResponse;
     }
 
     responderMap = {
@@ -33,38 +76,38 @@ class Conversation {
 
     async attemptGetTask(userMsg, context) {
         const responses = [];
-        const witResponse = await context.getWitResponse();
-        responses.push(witResponse);
-        return responses;
-        //thiz.getWitResponse("hey");
+        const witResponse = await context.getWitResponse(userMsg);
+        console.log(witResponse);
 
-        // thiz.getWitResponse(userMsg)
-        // .then((witResponse) => {
-        //     responses.push(witResponse);
-        //     return responses;
-        // });
+        const task = extractTask(witResponse);
+        const subject = extractSubject(witResponse);
+        console.log(task);
+        console.log(subject);
+
+        const effectiveSubject = subject ? subject : userMsg;
+        const [sampleDataset, matchedKeywords] = matchSampleDataset(effectiveSubject); // scan topic if exists
+        console.log(sampleDataset);
+        console.log(matchedKeywords);
         
-        // let task = null; //witResponse.getTask();
-        // let topic = null; // witResponse.getTopic();
-        // let sampleDataset = false; //matchSampleDataset(topic ? topic : userMsg); // scan topic if exists
-        // if (sampleDataset) {
-        //     // OBTAIN CORRESPONDING TASK
-        //     // we know task and dataset (sample)
-        //     // return here
-        // }
+        if (sampleDataset) {
+            // OBTAIN CORRESPONDING TASK
+            // we know task and dataset (sample) - "regression on boston housing data"
+            // return here
+            responses.push(`Awesome! We offer a sample dataset regarding ${matchedKeywords} if you'd like to use it.`);
+        } else if (subject && task) {
+            // we know task and dataset (custom) - "model the number of extinctions"
+            responses.push(`Great! Sounds like a ${task} model could help you out with that.`);
+        } else if (task) {
+            // we know task but not dataset - "regression model"
+            responses.push(`I think a ${task} model would help you explore that idea!`);
+            responses.push(`Check out a few sample datasets if you'd like, or leave it blank to use your own data.`)
+        } else {
+            // we know neither task nor dataset - "create something cool"
+            responses.push("Nice!");
+            responses.push("Here are some pointers to help you figure out what type of machine learning task can help you with that.")
+        }
 
-        // if (topic && task) {
-        //     // we know task and dataset (custom)
-        //     responses.push(`Great! Sounds like a ${task} model could help you out with that.`);
-        // } else if (task) {
-        //     // we know task but not dataset
-        //     responses.push(`I think a ${task} model would help you explore that idea!`);
-        //     responses.push(`Check out a few sample datasets if you'd like, or leave it blank to use your own data.`)
-        // } else {
-        //     // we know neither task nor dataset
-        //     responses.push("Nice!");
-        //     responses.push("Here are some pointers to help you figure out what type of machine learning task can help you with that.")
-        // }
+        return responses;
     }
 
 }
