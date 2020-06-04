@@ -27,10 +27,23 @@ function WidgetContainer() {
     performResponse(userMessage);
   };
 
+  /**
+   * Returns time in ms for how long Otto takes to read/write a message
+   * @param {string} msg 
+   */
+  function readWriteDelay(msg) {
+    const WPM = 500;
+    const length = msg.length;
+    const timeRead = length/3.5/WPM * 60 * 1000;
+    return timeRead;
+  }
+
   async function performResponse(userMessage) {
     const responses = await convo.respondTo(userMessage);
+    await new Promise(r => setTimeout(r, readWriteDelay(userMessage)));
     for (const i in responses) {
       const response = responses[i];
+      await new Promise(r => setTimeout(r, readWriteDelay(response)));
       addResponseMessage(response);
     }
   }
