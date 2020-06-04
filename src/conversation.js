@@ -25,7 +25,6 @@ class Conversation {
         //return {task: 0, subject: 1};
     }
 
-
     responderMap = {
         [State.GET_TASK] : this.attemptGetTask,
     }
@@ -71,7 +70,6 @@ class Conversation {
         //     responses.push("Here are some pointers to help you figure out what type of machine learning task can help you with that.")
         // }
 
-        
     }
 
 }
