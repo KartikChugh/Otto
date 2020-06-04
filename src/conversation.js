@@ -1,13 +1,11 @@
 const {Wit, log} = require('node-wit');
 const token = require('./TOKEN.json');
-
 const State = Object.freeze({
     GET_TASK : 1,
     GET_TOPIC : 2,
 })
 
 class Conversation {
-
     wit;
     state = State.GET_TASK;
 
@@ -25,7 +23,6 @@ class Conversation {
         //return {task: 0, subject: 1};
     }
 
-
     responderMap = {
         [State.GET_TASK] : this.attemptGetTask,
     }
@@ -38,7 +35,6 @@ class Conversation {
     }
 
     attemptGetTask(userMsg, thiz) {
-        
         const responses = [];
         return responses;
         //thiz.getWitResponse("hey");
@@ -70,8 +66,6 @@ class Conversation {
         //     responses.push("Nice!");
         //     responses.push("Here are some pointers to help you figure out what type of machine learning task can help you with that.")
         // }
-
-        
     }
 
 }
