@@ -24,10 +24,16 @@ function WidgetContainer() {
     document.getElementsByClassName("rcw-sender")[0].message.value = "";
     console.log(`New message incoming! ${userMessage}`);
 
-    const response = convo.respondTo(userMessage);
-
-    addResponseMessage(response);
+    performResponse(userMessage);
   };
+
+  async function performResponse(userMessage) {
+    const responses = await convo.respondTo(userMessage);
+    for (const i in responses) {
+      const response = responses[i];
+      addResponseMessage(response);
+    }
+  }
 
   return (
     <Widget

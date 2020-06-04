@@ -11,31 +11,30 @@ class Conversation {
 
     constructor() {
         this.wit = new Wit({
-            accessToken: token.TOKEN,
+            accessToken: token.tester,
             logger: new log.Logger(log.DEBUG)
         });
     }
 
     async getWitResponse(msg) {
-        return 0;
-        //const witResponse = await this.wit.message(msg);
-        //return witResponse;
-        //return {task: 0, subject: 1};
+        const witResponse = await this.wit.message(msg);
+        return JSON.stringify(witResponse);
     }
 
     responderMap = {
         [State.GET_TASK] : this.attemptGetTask,
     }
 
-    respondTo(userMsg) {
-        let response = "";
+    async respondTo(userMsg) {
         let responder = this.responderMap[this.state];
-        response = responder(userMsg, this);
+        const response = await responder(userMsg, this);
         return response;
     }
 
-    attemptGetTask(userMsg, thiz) {
+    async attemptGetTask(userMsg, context) {
         const responses = [];
+        const witResponse = await context.getWitResponse();
+        responses.push(witResponse);
         return responses;
         //thiz.getWitResponse("hey");
 
