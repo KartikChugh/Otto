@@ -2,13 +2,14 @@ const {Wit, log} = require('node-wit');
 const token = require('./TOKEN.json');
 const State = Object.freeze({
     GET_OBJECTIVE : 1,
+    GET_MODEL : 2,
 });
 
-const TASKS = {
+const TASKS = Object.freeze({
     task_reg: 'regression',
     task_class: 'classification', 
     task_nlp: 'NLP',
-};
+});
 
 /**
  * Returns a matched sample dataset name and the relevant keywords
@@ -17,7 +18,22 @@ const TASKS = {
 function matchSampleDataset(subject) {
     let sampleDataset = null;
     let matchedKeywords = null;
-    return [sampleDataset, matchedKeywords];
+    return [sampleDataset, matchedKeywords]; // TODO: return matched task too
+}
+
+function matchRegressionModel(description) {
+    const regModelMap = {
+        poisson: ['count', 'event'],
+        ordinal: ['rank', 'order'],
+    }
+    for (const [model, keywords] of Object.entries(regModelMap)) { 
+        for (const keyword of keywords) {
+            if (description.includes(keyword)) {
+                return model;
+            }
+        }
+    }
+    return null;
 }
 
 /**
@@ -65,13 +81,17 @@ class Conversation {
         });
     }
 
+    /**
+     * Pings the Wit client for a response
+     */
     async getWitResponse(msg) {
         const witResponse = await this.wit.message(msg);
         return witResponse;
     }
 
     responderMap = {
-        [State.GET_OBJECTIVE] : this.attemptGetTask,
+        [State.GET_OBJECTIVE] : this.attemptGetObjective,
+        [State.GET_MODEL] : this.attemptGetModel,
     }
 
     async respondTo(userMsg) {
@@ -80,7 +100,17 @@ class Conversation {
         return response;
     }
 
-    async attemptGetTask(userMsg, context) {
+    async attemptGetModel(userMsg, context) {
+        const responses = [];
+        
+        if (taskIsRegression) { // TODO: access task
+            model = matchRegressionModel(userMsg) || 'linear';
+        }
+
+        return responses;
+    }
+
+    async attemptGetObjective(userMsg, context) {
         const responses = [];
         const witResponse = await context.getWitResponse(userMsg);
         console.log(witResponse);
@@ -96,7 +126,7 @@ class Conversation {
         console.log(matchedKeywords);
         
         if (sampleDataset) {
-            // OBTAIN CORRESPONDING TASK
+            // TODO: OBTAIN CORRESPONDING TASK
             // we know task and dataset (sample) - "regression on boston housing data"
             // return here
             responses.push(`Awesome! We offer a sample dataset regarding ${matchedKeywords} if you'd like to use it.`);
