@@ -1,11 +1,14 @@
 const {Wit, log} = require('node-wit');
 const token = require('./TOKEN.json');
 const State = Object.freeze({
-    GET_TASK : 1,
-    GET_TOPIC : 2,
+    GET_OBJECTIVE : 1,
 });
 
-const Tasks = ['task_reg', 'task_class', 'task_nlp'];
+const TASKS = {
+    task_reg: 'regression',
+    task_class: 'classification', 
+    task_nlp: 'NLP',
+};
 
 /**
  * Returns a matched sample dataset name and the relevant keywords
@@ -27,7 +30,10 @@ function extractTask(witResponse) {
     if (intents.length > 0) {
         let topIntent = intents[0];
         let topIntentName = topIntent.name;
-        task = topIntentName;
+        // If its a valid task, map to its equivalent task name
+        if (topIntentName in TASKS) {
+            task = TASKS[topIntentName];
+        }
     }
     
     return task;
@@ -50,7 +56,7 @@ function extractSubject(witResponse) {
 
 class Conversation {
     wit;
-    state = State.GET_TASK;
+    state = State.GET_OBJECTIVE;
 
     constructor() {
         this.wit = new Wit({
@@ -65,7 +71,7 @@ class Conversation {
     }
 
     responderMap = {
-        [State.GET_TASK] : this.attemptGetTask,
+        [State.GET_OBJECTIVE] : this.attemptGetTask,
     }
 
     async respondTo(userMsg) {
