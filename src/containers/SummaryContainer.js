@@ -8,6 +8,9 @@ import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { Card } from "@material-ui/core";
+import { useState } from "state/State";
+import { StepperStateOrder } from "state/StateTypes";
+import { Actions } from "state/Actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,9 +32,12 @@ const useStyles = makeStyles((theme) => ({
   },
   headerText: {
     paddingLeft: theme.spacing(0),
-    paddingTop: theme.spacing(5),
+    paddingTop: theme.spacing(7),
     paddingBottom: theme.spacing(1),
     fontWeight: "600",
+  },
+  card: {
+    marginTop: "4px",
   },
 }));
 
@@ -59,19 +65,44 @@ function getStepContent(step) {
 
 export default function VerticalLinearStepper() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [state, dispatch] = useState();
   const steps = getSteps();
 
+  const getActiveStep = () => {
+    return state.stepper_finish
+      ? StepperStateOrder.length
+      : StepperStateOrder.indexOf(state.stepper_state);
+  };
+
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    console.log(
+      "calling dispath??",
+      state.stepper_state,
+      getActiveStep(),
+      StepperStateOrder,
+      StepperStateOrder.indexOf(state.stepper_state)
+    );
+    dispatch({
+      type: Actions.STEPPER_HANDLE_NEXT,
+    });
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    dispatch({
+      type: Actions.STEPPER_HANDLE_PREVIOUS,
+    });
   };
 
   const handleReset = () => {
-    setActiveStep(0);
+    dispatch({
+      type: Actions.HANDLE_RESET,
+    });
+  };
+
+  const handleFinish = () => {
+    dispatch({
+      type: Actions.HANDLE_STEPPER_FINISH,
+    });
   };
 
   return (
@@ -79,8 +110,8 @@ export default function VerticalLinearStepper() {
       <Typography className={classes.headerText} variant="h5">
         Pipeline Architecture
       </Typography>
-      <Card variant="outlined">
-        <Stepper activeStep={activeStep} orientation="vertical">
+      <Card className={classes.card} variant="outlined">
+        <Stepper activeStep={getActiveStep()} orientation="vertical">
           {steps.map((label, index) => (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
@@ -89,7 +120,7 @@ export default function VerticalLinearStepper() {
                 <div className={classes.actionsContainer}>
                   <div>
                     <Button
-                      disabled={activeStep === 0}
+                      disabled={getActiveStep() === 0}
                       onClick={handleBack}
                       className={classes.button}
                     >
@@ -98,10 +129,14 @@ export default function VerticalLinearStepper() {
                     <Button
                       variant="contained"
                       color="primary"
-                      onClick={handleNext}
+                      onClick={
+                        getActiveStep() === steps.length - 1
+                          ? handleFinish
+                          : handleNext
+                      }
                       className={classes.button}
                     >
-                      {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                      {getActiveStep() === steps.length - 1 ? "Finish" : "Next"}
                     </Button>
                   </div>
                 </div>
@@ -110,7 +145,7 @@ export default function VerticalLinearStepper() {
           ))}
         </Stepper>
       </Card>
-      {activeStep === steps.length && (
+      {getActiveStep() === steps.length && (
         <Paper square elevation={0} className={classes.resetContainer}>
           <Typography>All steps completed - you&apos;re finished</Typography>
           <Button onClick={handleReset} className={classes.button}>

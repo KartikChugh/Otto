@@ -27,11 +27,11 @@ export const StepperState = Object.freeze({
   MODEL: "model",
 });
 
-export const StepperStateMap = {
-  task: 0,
-  dataset: 1,
-  model: 2,
-};
+export const StepperStateOrder = [
+  StepperState.TASK,
+  StepperState.DATASET,
+  StepperState.MODEL,
+];
 
 export type TasksType =
   | "classification"
@@ -49,12 +49,15 @@ export type DatasetCategoryType = "custom" | "sample";
 
 export type SampleDatasetType = "iris";
 
+export type StepperStateType = "task" | "dataset" | "model";
+
 export type StateType = {
   task: ?TasksType,
   model: ?ModelsType,
   dataset_category: ?DatasetCategoryType,
   sample_dataset: ?SampleDatasetType,
-  stepper_state: Number,
+  stepper_state: StepperStateType,
+  stepper_finish: Boolean,
 };
 
 export const InitialState: StateType = {
@@ -62,5 +65,6 @@ export const InitialState: StateType = {
   model: null,
   dataset_category: null,
   sample_dataset: null,
-  stepper_state: StepperStateMap[StepperState.TASK],
+  stepper_state: StepperState.TASK,
+  stepper_finish: false,
 };

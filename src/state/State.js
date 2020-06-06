@@ -1,24 +1,63 @@
 import React from "react";
 import { useReducer, createContext, useContext } from "react";
 
+import { deleteMessages, addResponseMessage } from "react-chat-widget";
 import { InitialState, StateType } from "state/StateTypes";
 import { ActionType, Actions } from "state/Actions";
+import { StepperStateOrder } from "state/StateTypes";
+
+import { initializeWidget } from "containers/WidgetContainer";
 
 // See https://www.basefactor.com/global-state-with-react for details
 const initialState = InitialState;
 
-const StateContext = createContext(initialState);
-const DispatchStateContext = createContext(undefined);
+export const StateContext = createContext(initialState);
+export const DispatchStateContext = createContext(() =>
+  console.log("called!!")
+);
+const NumSteps = StepperStateOrder.length;
 
 function reducer(state: StateType, action: ActionType): StateType {
+  console.log("where are we?");
+  console.log("action", action);
+  console.log("state", state);
+
+  const getActiveStep = () => {
+    return StepperStateOrder.indexOf(state.stepper_state);
+  };
+
   switch (action.type) {
     case Actions.SET_TASK:
       const newState = { ...state, task: action.task };
-      console.log(newState);
       return newState;
     case Actions.SET_DATASET_CATEGORY:
       return { ...state, dataset_category: action.dataset_category };
+    case Actions.STEPPER_HANDLE_NEXT:
+      return {
+        ...state,
+        stepper_state:
+          NumSteps === getActiveStep()
+            ? NumSteps
+            : StepperStateOrder[getActiveStep() + 1],
+      };
+    case Actions.STEPPER_HANDLE_PREVIOUS:
+      return {
+        ...state,
+        stepper_state:
+          StepperStateOrder[StepperStateOrder.indexOf(state.stepper_state) - 1],
+        stepper_finish: false,
+      };
+    case Actions.HANDLE_STEPPER_FINISH:
+      return {
+        ...state,
+        stepper_finish: true,
+      };
+    case Actions.HANDLE_RESET:
+      initializeWidget();
+      console.log("init state");
+      return initialState;
     default:
+      return state;
   }
 }
 

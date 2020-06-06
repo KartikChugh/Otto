@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-chat-widget/lib/styles.css";
 import "App.css";
 
-import { GlobalStateProvider } from "GlobalState";
+import { StateProvider } from "state/State";
 import ContentContainer from "containers/ContentContainer";
 import HeaderContainer from "containers/HeaderContainer";
 import WidgetContainer from "containers/WidgetContainer";
@@ -13,15 +13,15 @@ import WidgetContainer from "containers/WidgetContainer";
 function App() {
   return (
     <Container className={"vh-100"} fluid>
-      <GlobalStateProvider>
-        <Row className={"outerContainer headerContainer"}>
+      <StateProvider>
+        <Row className={"headerContainer"}>
           <HeaderContainer />
         </Row>
-        <Row className={"outerContainer contentContainer"}>
+        <Row className={"contentContainer"}>
           <ContentContainer />
         </Row>
         <WidgetContainer />
-      </GlobalStateProvider>
+      </StateProvider>
     </Container>
   );
 }
