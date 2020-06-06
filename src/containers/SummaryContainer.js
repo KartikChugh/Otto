@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ["Machine Learning Task", "Data Set", "Model"];
+  return ["Task", "Dataset", "Model"];
 }
 
 function getStepContent(step) {
