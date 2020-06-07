@@ -1,23 +1,26 @@
-export const msgIntro = () => {
-    return "Hey there! What would you like to do today?";
+export const Intro = () => {
+    return [
+        "Hey there!",
+        "What would you like to do today?"
+    ];
 }
 
-const msgSampleData = (topic) => {
+export const SampleData = (topic) => {
     return `We have some sample data for ${topic} if you'd like to use that`;
 }
 
-const msgTask = (task) => {
-    return `Sounds like a {task} model could help you out with that`
+export const Task = (task) => {
+    return `Sounds like a ${task} model could help you out with that`
 }
 
-const msgTaskAndSample = (task) => {
+export const TaskAndSample = (task) => {
     return [
-        `I think a {task} model would help you explore that idea`,
+        `I think a ${task} model would help you explore that idea`,
         "Check out a few sample datasets if you'd like, or leave it blank to use your own"
     ]
 }
 
-const msgTaskInfo = () => {
+export const TaskInfo = () => {
     return [
         "Here are some pointers to help you figure out what type of machine learning task to select",
         "Regression is used to model numerical variables, such as stock prices or infection rates, while classification predicts categorical outcomes, like whether an image is a cat or a dog or if a candidate will win or not", 

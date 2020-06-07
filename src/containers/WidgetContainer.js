@@ -15,35 +15,21 @@ import * as msgs from "conversation/msgs";
 //import Conversation from "conversation";
 import Conversation from "conversation/Conversation"
 
+const convo = new Conversation(addResponseMessage);
+
 export function initializeWidget() {
   deleteMessages();
-  //say("hi");
-  //addResponseMessage(say.sayIntro());
+  convo.sayMessages(msgs.Intro());
 }
 
 function WidgetContainer() {
-  const convo = new Conversation(addResponseMessage);
+  
 
   useEffect(() => {
     toggleWidget();
     initializeWidget();
   }, []);
 
-  const handleUserMessage = (userMessage) => {
-    convo.handleUserMessage(userMessage);
-  }
-
-  const handleNewUserMessage = (userMessage) => {
-    document.getElementsByClassName("rcw-sender")[0].message.value = "";
-    console.log(`New message incoming! ${userMessage}`);
-
-    performResponse(userMessage);
-  };
-
-  /**
-   * Returns time in ms for how long Otto takes to read/write a message
-   * @param {string} msg
-   */
   function readWriteDelay(msg) {
     const WPM = 500;
     const length = msg.length;
@@ -63,7 +49,7 @@ function WidgetContainer() {
 
   return (
     <Widget
-      handleSubmit={handleUserMessage}
+      handleSubmit={convo.handleUserMessage}
       launcher={() => null}
       subtitle=""
       title="Otto"
