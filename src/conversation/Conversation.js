@@ -1,9 +1,11 @@
 import React from "react";
+import { ResponsiveEmbed } from "react-bootstrap";
+import { useState } from "state/State";
+import responseTo from "conversation/Respond"
 
-export default class Conversation extends React.Component {
+export default class Conversation  {
 
     constructor(sayer) {
-        super();
         this.say = sayer;
     }
 
@@ -17,12 +19,14 @@ export default class Conversation extends React.Component {
         }
     };
     
-    handleUserMessage = (userMessage) => {
+    handleUserMessage = async (userMessage) => {
         document.getElementsByClassName("rcw-sender")[0].message.value = "";
         console.log(`New message incoming! ${userMessage}`);
-        
-        alert(userMessage);
+
+        await this.say(responseTo(userMessage, state, dispatch)); // responseTo is async function in another file
     };
+
+    
 
     render() {
         return null;
