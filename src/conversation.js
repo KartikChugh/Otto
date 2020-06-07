@@ -1,5 +1,8 @@
+import { useState } from "state/State";
+
 const { Wit, log } = require("node-wit");
 const token = require("./TOKEN.json");
+
 const State = Object.freeze({
   GET_OBJECTIVE: 1,
   GET_MODEL: 2,
@@ -16,9 +19,11 @@ const TASKS = Object.freeze({
  * @param {string} subject
  */
 function matchSampleDataset(subject) {
+    // TODO: implement this
   let sampleDataset = null;
   let matchedKeywords = null;
-  return [sampleDataset, matchedKeywords]; // TODO: return matched task too
+  let matchedTask = null;
+  return [matchedTask, sampleDataset, matchedKeywords];
 }
 
 function matchRegressionModel(description) {
@@ -72,7 +77,7 @@ function extractSubject(witResponse) {
 
 class Conversation {
   wit;
-  state = State.GET_OBJECTIVE;
+  state = State.GET_OBJECTIVE; 
 
   constructor() {
     this.wit = new Wit({
@@ -89,6 +94,7 @@ class Conversation {
     return witResponse;
   }
 
+  // TODO: map global states instead
   responderMap = {
     [State.GET_OBJECTIVE]: this.attemptGetObjective,
     [State.GET_MODEL]: this.attemptGetModel,
@@ -103,14 +109,21 @@ class Conversation {
   async attemptGetModel(userMsg, context) {
     const responses = [];
 
-    // if (taskIsRegression) { // TODO: access task
+    // TODO: access task
+    // if (taskIsRegression) { 
     //     model = matchRegressionModel(userMsg) || 'linear';
+    // }
+
+    // if (taskIsClassification) {
+    //     model = matchClassificationModel(userMsg);
     // }
 
     return responses;
   }
 
+  // TODO: How do we switch to the next state?
   async attemptGetObjective(userMsg, context) {
+
     const responses = [];
     const witResponse = await context.getWitResponse(userMsg);
     console.log(witResponse);
@@ -121,9 +134,10 @@ class Conversation {
     console.log(subject);
 
     const effectiveSubject = subject ? subject : userMsg;
-    const [sampleDataset, matchedKeywords] = matchSampleDataset(
+    const [matchedTask, sampleDataset, matchedKeywords] = matchSampleDataset(
       effectiveSubject
     ); // scan topic if exists
+    console.log(matchedTask);
     console.log(sampleDataset);
     console.log(matchedKeywords);
 
@@ -136,6 +150,7 @@ class Conversation {
       );
     } else if (subject && task) {
       // we know task and dataset (custom) - "model the number of extinctions"
+      
       responses.push(
         `Great! Sounds like a ${task} model could help you out with that.`
       );

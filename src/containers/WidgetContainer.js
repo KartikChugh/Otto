@@ -14,7 +14,7 @@ import Conversation from "conversation";
 
 export function initializeWidget() {
   deleteMessages();
-  addResponseMessage("Welcome! What would you like to do today?");
+  addResponseMessage("Hey there! What would you like to do today?");
 }
 
 function WidgetContainer() {
