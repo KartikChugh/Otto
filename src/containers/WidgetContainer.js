@@ -10,20 +10,28 @@ import {
 } from "react-chat-widget";
 import logo from "logo.svg";
 
-import Conversation from "conversation";
+import * as msgs from "conversation/msgs";
+
+//import Conversation from "conversation";
+import Conversation from "conversation/Conversation"
 
 export function initializeWidget() {
   deleteMessages();
-  addResponseMessage("Hey there! What would you like to do today?");
+  //say("hi");
+  //addResponseMessage(say.sayIntro());
 }
 
 function WidgetContainer() {
-  const convo = new Conversation();
+  const convo = new Conversation(addResponseMessage);
 
   useEffect(() => {
     toggleWidget();
     initializeWidget();
   }, []);
+
+  const handleUserMessage = (userMessage) => {
+    convo.handleUserMessage(userMessage);
+  }
 
   const handleNewUserMessage = (userMessage) => {
     document.getElementsByClassName("rcw-sender")[0].message.value = "";
@@ -44,18 +52,18 @@ function WidgetContainer() {
   }
 
   async function performResponse(userMessage) {
-    const responses = await convo.respondTo(userMessage);
-    await new Promise((r) => setTimeout(r, readWriteDelay(userMessage)));
-    for (const i in responses) {
-      const response = responses[i];
-      await new Promise((r) => setTimeout(r, readWriteDelay(response)));
-      addResponseMessage(response);
-    }
+    // const responses = await convo.respondTo(userMessage);
+    // await new Promise((r) => setTimeout(r, readWriteDelay(userMessage)));
+    // for (const i in responses) {
+    //   const response = responses[i];
+    //   await new Promise((r) => setTimeout(r, readWriteDelay(response)));
+    //   addResponseMessage(response);
+    // }
   }
 
   return (
     <Widget
-      handleSubmit={handleNewUserMessage}
+      handleSubmit={handleUserMessage}
       launcher={() => null}
       subtitle=""
       title="Otto"
