@@ -1,26 +1,42 @@
 import { StepperState } from "state/StateTypes"
+import { getWitResult, extractTask, extractSubject, extractSampleDataset } from "conversation/ConversationUtils"
 
-export default async function responseTo(userMessage, state, dispatch) {
+const responseTo = async (userMessage, wit, state, dispatch) => {
     
     switch (state.stepper_state) {
         case StepperState.TASK:
-            return taskStep(userMessage, state, dispatch);
+            return await taskStep(userMessage, wit, state, dispatch);
         case StepperState.DATASET:
-            return dataStep(userMessage, state, dispatch);
+            return dataStep(userMessage, wit, state, dispatch);
          default:
              break;
     }
     // return "meh";
 }
 
-function taskStep(userMessage, state, dispatch) {
-    const responses = [];
+const taskStep = async (userMessage, wit, state, dispatch) => {
+
+    const witResult = await getWitResult(wit, userMessage);
+    console.log(witResult);
+
+    const task = extractTask(witResult);
+    return task;
+    // const subject = extractSubject(witResponse);
+    // console.log(task);
+    // console.log(subject);
+
+    // const effectiveSubject = subject ? subject : userMsg;
+    // const [matchedTask, sampleDataset, matchedKeywords] = matchSampleDataset(
+    //   effectiveSubject
+    // ); // scan topic if exists
 
     return "task step!";
 
-    return responses;
+    //return responses;
 }
 
 function dataStep(userMessage, state, dispatch) {
-    
+
 }
+
+export default responseTo;

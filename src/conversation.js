@@ -1,5 +1,3 @@
-import { useState } from "state/State";
-
 const { Wit, log } = require("node-wit");
 const token = require("./TOKEN.json");
 
