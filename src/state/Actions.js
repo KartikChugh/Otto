@@ -19,7 +19,7 @@ export const Actions = Object.freeze({
 export type ActionType =
   | { type: "SET_TASK", task: TasksType }
   | { type: "SET_MODEL", model: ModelsType }
-  | { type: "SET_DATASET_CATEGORY", data_category: DatasetCategoryType }
+  | { type: "SET_DATASET_CATEGORY", dataset_category: DatasetCategoryType }
   | { type: "SET_SAMPLE_DATASET", sample_dataset: SampleDatasetType }
   | { type: "STEPPER_HANDLE_NEXT" }
   | { type: "STEPPER_HANDLE_PREVIOUS" }

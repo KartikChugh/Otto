@@ -1,20 +1,45 @@
 export const Tasks = Object.freeze({
-  CLASSIFICATION: "classification",
-  REGRESSION: "regression",
-  NATURAL_LANGUAGE_PROCESSING: "natural_language_processing",
+  CLASSIFICATION: "Classification",
+  REGRESSION: "Regression",
+  NATURAL_LANGUAGE: "Natural Language",
 });
 
 export const Models = Object.freeze({
-  LINEAR_REGRESSION: "linear_regression",
-  KNN: "knn",
-  NEURAL_NETWORK_FF: "neural_network_ff",
-  SENTIMENT_ANALYSIS: "sentiment_analysis",
-  ENTITY_RECOGNITION: "entity_recognition",
+  LINEAR_REGRESSION: "Linear Regression",
+  KNN: "KNN",
+  NEURAL_NETWORK_FF: "Neural Network FF",
+  SENTIMENT_ANALYSIS: "Sentiment Analysis",
+  ENTITY_RECOGNITION: "Entity Recognition",
 });
 
+export const TaskToModelsMap = (task: TasksType) => {
+  let validModels;
+  switch (Tasks[task]) {
+    case Tasks.CLASSIFICATION:
+      validModels = (({ KNN, NEURAL_NETWORK_FF }) => ({
+        KNN,
+        NEURAL_NETWORK_FF,
+      }))(Models);
+      return validModels;
+    case Tasks.REGRESSION:
+      validModels = (({ LINEAR_REGRESSION }) => ({
+        LINEAR_REGRESSION,
+      }))(Models);
+      return validModels;
+    case Tasks.NATURAL_LANGUAGE:
+      validModels = (({ SENTIMENT_ANALYSIS, ENTITY_RECOGNITION }) => ({
+        SENTIMENT_ANALYSIS,
+        ENTITY_RECOGNITION,
+      }))(Models);
+      return validModels;
+    default:
+      return [];
+  }
+};
+
 export const DatasetCategory = Object.freeze({
-  CUSTOM: "custom",
-  SAMPLE: "sample",
+  CUSTOM: "Custom",
+  SAMPLE: "Sample",
 });
 
 export const SampleDataset = Object.freeze({
@@ -33,19 +58,16 @@ export const StepperStateOrder = [
   StepperState.MODEL,
 ];
 
-export type TasksType =
-  | "classification"
-  | "regression"
-  | "natural_language_processing";
+export type TasksType = "Classification" | "Regression" | "Natural Language";
 
 export type ModelsType =
-  | "linear_regression"
-  | "knn"
-  | "neural_network_ff"
-  | "sentiment_analysis"
-  | "entity_recognition";
+  | "Linear Regression"
+  | "KNN"
+  | "Neural Network FF"
+  | "Sentiment Analysis"
+  | "Entity Recognition";
 
-export type DatasetCategoryType = "custom" | "sample";
+export type DatasetCategoryType = "Sustom" | "Sample";
 
 export type SampleDatasetType = "iris";
 

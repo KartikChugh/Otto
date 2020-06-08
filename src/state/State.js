@@ -12,16 +12,10 @@ import { initializeWidget } from "containers/WidgetContainer";
 const initialState = InitialState;
 
 export const StateContext = createContext(initialState);
-export const DispatchStateContext = createContext(() =>
-  console.log("called!!")
-);
+export const DispatchStateContext = createContext(() => null);
 const NumSteps = StepperStateOrder.length;
 
 function reducer(state: StateType, action: ActionType): StateType {
-  console.log("where are we?");
-  console.log("action", action);
-  console.log("state", state);
-
   const getActiveStep = () => {
     return StepperStateOrder.indexOf(state.stepper_state);
   };
@@ -32,6 +26,8 @@ function reducer(state: StateType, action: ActionType): StateType {
       return newState;
     case Actions.SET_DATASET_CATEGORY:
       return { ...state, dataset_category: action.dataset_category };
+    case Actions.SET_MODEL:
+      return { ...state, model: action.model };
     case Actions.STEPPER_HANDLE_NEXT:
       return {
         ...state,
@@ -54,7 +50,6 @@ function reducer(state: StateType, action: ActionType): StateType {
       };
     case Actions.HANDLE_RESET:
       initializeWidget();
-      console.log("init state");
       return initialState;
     default:
       return state;
