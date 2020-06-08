@@ -1,11 +1,10 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Widget,
   toggleWidget,
   addResponseMessage,
-  addUserMessage,
   deleteMessages,
 } from "react-chat-widget";
 import logo from "logo.svg";
@@ -23,12 +22,17 @@ export function initializeWidget() {
 }
 
 function WidgetContainer() {
-  
+
+  const [state, dispatch] = useState();
 
   useEffect(() => {
     toggleWidget();
     initializeWidget();
   }, []);
+
+  const handleSubmit = (userMessage) => {
+    convo.handleUserMessage(userMessage, state, dispatch)
+  }
 
   // async function performResponse(userMessage) {
   //   const responses = await convo.respondTo(userMessage);
@@ -42,7 +46,7 @@ function WidgetContainer() {
 
   return (
     <Widget
-      handleSubmit={convo.handleUserMessage}
+      handleSubmit={handleSubmit}
       launcher={() => null}
       subtitle=""
       title="Otto"
