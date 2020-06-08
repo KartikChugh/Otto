@@ -36,7 +36,7 @@ const taskStep = async (userMessage, wit, state, dispatch) => {
 
     // extract the sample dataset or null
     const effectiveSubject = subject ? subject : userMessage;
-    const [taskForSampleDataset, sampleDataset, matchedKeywords] = extractSampleDataset(
+    const [taskForSampleDataset, modelForSampleDataset, sampleDataset, matchedKeywords] = extractSampleDataset(
         effectiveSubject
     );
     console.log(taskForSampleDataset);
@@ -47,8 +47,7 @@ const taskStep = async (userMessage, wit, state, dispatch) => {
     const task = taskForSampleDataset ? taskForSampleDataset : extractTask(witResult);
 
     if (sampleDataset) {
-        // update dataset state with sample
-        // TODO: UPDATE MODEL
+        // update dataset/model state with sample
         dispatch({
             type: Actions.SET_DATASET_CATEGORY,
             task: DatasetCategory.SAMPLE,
@@ -56,6 +55,10 @@ const taskStep = async (userMessage, wit, state, dispatch) => {
         dispatch({
             type: Actions.SET_SAMPLE_DATASET,
             task: sampleDataset,
+        });
+        dispatch({
+            type: Actions.SET_MODEL,
+            task: modelForSampleDataset,
         });
     }
 

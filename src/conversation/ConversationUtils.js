@@ -23,7 +23,8 @@ export const extractSampleDataset = (statement) => {
     let sampleDataset = null;
     let matchedKeywords = null;
     let matchedTask = null;
-    return [matchedTask, sampleDataset, matchedKeywords];
+    let matchedModel = null;
+    return [matchedTask, matchedModel, sampleDataset, matchedKeywords];
 } 
 
 export const extractTask = (witResponse) => { // TODO: threshold
