@@ -3,10 +3,10 @@ import { ResponsiveEmbed } from "react-bootstrap";
 import { useState } from "state/State";
 import responseTo from "conversation/Respond"
 
-export default class Conversation extends React.Component  {
+export default class Conversation /* extends React.Component */  {
 
     constructor(say) {
-        super();
+        // super();
         this.say = say;
     }
 
@@ -26,7 +26,7 @@ export default class Conversation extends React.Component  {
         console.log(state);
 
         // const [state, dispatch] = null;
-        await this.say(
+        await this.sayMessages(
             await responseTo(userMessage, state, dispatch)
         ); 
     };
