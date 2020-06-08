@@ -21,11 +21,10 @@ export default class Conversation /* extends React.Component */  {
             messages = [messages];
         }
         for (let message of messages) {
-            if (message == null) {
-                message = 'null';
+            if (message != null) {
+                await new Promise((r) => setTimeout(r, readWriteDelay(message)));
+                this.say(message);
             }
-            await new Promise((r) => setTimeout(r, readWriteDelay(message)));
-            this.say(message);
         }
     };
     
