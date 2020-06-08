@@ -67,7 +67,7 @@ export type ModelsType =
   | "Sentiment Analysis"
   | "Entity Recognition";
 
-export type DatasetCategoryType = "Sustom" | "Sample";
+export type DatasetCategoryType = "Custom" | "Sample";
 
 export type SampleDatasetType = "iris";
 
