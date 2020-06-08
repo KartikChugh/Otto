@@ -23,6 +23,7 @@ export default class Conversation  {
         document.getElementsByClassName("rcw-sender")[0].message.value = "";
         console.log(`New message incoming! ${userMessage}`);
 
+        const [state, dispatch] = null;
         await this.say(responseTo(userMessage, state, dispatch)); // responseTo is async function in another file
     };
 
