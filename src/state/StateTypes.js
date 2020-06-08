@@ -6,6 +6,8 @@ export const Tasks = Object.freeze({
 
 export const Models = Object.freeze({
   LINEAR_REGRESSION: "Linear Regression",
+  POISSON_REGRESSION: "Poisson Regression",
+  ORDINAL_REGRESSION: "Ordinal Regression",
   KNN: "KNN",
   NEURAL_NETWORK_FF: "Neural Network FF",
   SENTIMENT_ANALYSIS: "Sentiment Analysis",
@@ -22,8 +24,10 @@ export const TaskToModelsMap = (task: TasksType) => {
       }))(Models);
       return validModels;
     case Tasks.REGRESSION:
-      validModels = (({ LINEAR_REGRESSION }) => ({
+      validModels = (({ LINEAR_REGRESSION, POISSON_REGRESSION, ORDINAL_REGRESSION }) => ({
         LINEAR_REGRESSION,
+        POISSON_REGRESSION,
+        ORDINAL_REGRESSION,
       }))(Models);
       return validModels;
     case Tasks.NATURAL_LANGUAGE:
@@ -62,6 +66,8 @@ export type TasksType = "Classification" | "Regression" | "Natural Language";
 
 export type ModelsType =
   | "Linear Regression"
+  | "Poisson Regression"
+  | "Ordinal Regression"
   | "KNN"
   | "Neural Network FF"
   | "Sentiment Analysis"
