@@ -1,4 +1,4 @@
-export const Intro = () => {
+export const IntroQuestion = () => {
     return [
         "Hey there!",
         "What would you like to do today?"

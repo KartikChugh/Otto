@@ -19,7 +19,7 @@ const convo = new Conversation(addResponseMessage);
 
 export function initializeWidget() {
   deleteMessages();
-  convo.sayMessages(msgs.Intro());
+  convo.sayMessages(msgs.IntroQuestion());
 }
 
 function WidgetContainer() {
