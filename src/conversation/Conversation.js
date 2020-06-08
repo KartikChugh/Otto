@@ -23,9 +23,12 @@ export default class Conversation extends React.Component  {
     handleUserMessage = async (userMessage, state, dispatch) => {
         document.getElementsByClassName("rcw-sender")[0].message.value = "";
         console.log(`New message incoming! ${userMessage}`);
+        console.log(state);
 
         // const [state, dispatch] = null;
-        await this.say(responseTo(userMessage, state, dispatch)); // responseTo is async function in another file
+        await this.say(
+            await responseTo(userMessage, state, dispatch)
+        ); 
     };
 
     render() {
