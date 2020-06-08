@@ -1,4 +1,19 @@
-import { Tasks } from "state/StateTypes"
+import { Tasks, Models } from "state/StateTypes"
+
+const intentToTask = {
+    task_reg: [Tasks.REGRESSION],
+    task_class: [Tasks.CLASSIFICATION],
+    task_nlp: [Tasks.NATURAL_LANGUAGE],
+}
+
+const regressionModelToKeywords = {
+    [Models.POISSON_REGRESSION]: ["count", "number", "event"],
+    [Models.ORDINAL_REGRESSION]: ["rank", "order"],
+}; 
+
+const classificationModelToKeywords = {
+    [Models.KNN]: ["few", "small", "simple", "tiny"]
+}
 
 export const getWitResult = async (wit, utterance) => {
     return await wit.message(utterance);
@@ -10,12 +25,6 @@ export const extractSampleDataset = (statement) => {
     let matchedTask = null;
     return [matchedTask, sampleDataset, matchedKeywords];
 } 
-
-const intentToTask = {
-    task_reg: [Tasks.REGRESSION],
-    task_class: [Tasks.CLASSIFICATION],
-    task_nlp: [Tasks.NATURAL_LANGUAGE],
-}
 
 export const extractTask = (witResponse) => { // TODO: threshold
     let intents = witResponse.intents;
@@ -37,4 +46,30 @@ export const extractSubject = (witResponse) => {
       subject = subjectObject["body"];
     }
     return subject;
+}
+
+export const extractRegressionModel = (statement, wit) => {
+    let regressionModel = null;
+    const kvp = Object.entries(regressionModelToKeywords);
+    for (const [model, keywords] of kvp) {
+        for (const keyword of keywords) {
+            if (statement.includes(keyword)) {
+                regressionModel = model;
+            }
+        }
+    }
+    return regressionModel;
+}
+
+export const extractClassificationModel = (statement, wit) => {
+    let classificationModel = null;
+    const kvp = Object.entries(classificationModelToKeywords);
+    for (const [model, keywords] of kvp) {
+        for (const keyword of keywords) {
+            if (statement.includes(keyword)) {
+                classificationModel = model;
+            }
+        }
+    }
+    return classificationModel;
 }
