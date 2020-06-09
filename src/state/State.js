@@ -37,6 +37,10 @@ function reducer(state: StateType, action: ActionType): StateType {
       return { ...state, model_otto: action.model };
     case Actions.SET_SAMPLE_DATASET_OTTO:
       return { ...state, sample_dataset_otto: action.sample_dataset };
+    case Actions.SET_PREPROCESSORS:
+      return { ...state, preprocessors: action.preprocessors };
+    case Actions.SET_PREPROCESSORS_OTTO:
+      return { ...state, preprocessors_otto: action.preprocessors };
     case Actions.STEPPER_HANDLE_NEXT:
       return {
         ...state,
