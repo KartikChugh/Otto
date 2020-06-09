@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ["Task", "Dataset", "Model"];
+  return ["Task", "Dataset", "Model", "Preprocessors"];
 }
 
 function getStepContent(step) {
