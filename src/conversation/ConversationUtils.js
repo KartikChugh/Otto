@@ -13,7 +13,7 @@ const regressionModelToKeywords = {
 
 const classificationModelToKeywords = {
     [Models.KNN]: ["few", "small", "simple", "tiny"]
-}
+} 
 
 export const getWitResult = async (wit, utterance) => {
     return await wit.message(utterance);
@@ -74,3 +74,13 @@ export const extractClassificationModel = (statement, wit) => {
     }
     return classificationModel;
 }
+
+export const extractArchitectureChange = (witResponse) => {
+    // let architectureChange = {};
+    // const intent = witResponse.intent;
+    // architectureChange.intent = intent;
+}
+
+// const getOrDefault = (obj, key, defaultValue) => {
+
+// }

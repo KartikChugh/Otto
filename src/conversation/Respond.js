@@ -131,6 +131,12 @@ const modelStep = (userMessage, wit, state, dispatch) => {
 
 }
 
+const architectureStep = async (userMessage, wit, state, dispatch) => {
 
+    const witResult = await getWitResult(wit, userMessage); 
+    // convert witresult to architecture change
+    // relay change to architecture
+
+}
 
 export default responseTo;
