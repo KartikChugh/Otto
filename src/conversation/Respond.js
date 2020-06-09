@@ -47,17 +47,31 @@ const taskStep = async (userMessage, wit, state, dispatch) => {
     const task = taskForSampleDataset ? taskForSampleDataset : extractTask(witResult);
     console.log(task);
     if (sampleDataset) {
-        // update dataset/model state with sample
+        // update dataset type
         dispatch({
             type: Actions.SET_DATASET_CATEGORY,
             dataset_category: DatasetCategory.SAMPLE,
         });
         dispatch({
+            type: Actions.SET_DATASET_CATEGORY_OTTO,
+            dataset_category: DatasetCategory.SAMPLE,
+        });
+        // update sample dataset
+        dispatch({
             type: Actions.SET_SAMPLE_DATASET,
             sample_dataset: sampleDataset,
         });
         dispatch({
+            type: Actions.SET_SAMPLE_DATASET_OTTO,
+            sample_dataset: sampleDataset,
+        });
+        // update model
+        dispatch({
             type: Actions.SET_MODEL,
+            model: modelForSampleDataset,
+        });
+        dispatch({
+            type: Actions.SET_MODEL_OTTO,
             model: modelForSampleDataset,
         });
     }
@@ -66,6 +80,10 @@ const taskStep = async (userMessage, wit, state, dispatch) => {
         // update task state
         dispatch({
             type: Actions.SET_TASK,
+            task: task,
+        });
+        dispatch({
+            type: Actions.SET_TASK_OTTO,
             task: task,
         });
 
@@ -82,15 +100,12 @@ const modelStep = (userMessage, wit, state, dispatch) => {
     const task = state.task;
     let model = state.model;
 
-    console.log("Task:");
-    console.log(task);
-    console.log("Model:");
-    console.log(model);
+    console.log("Task: \n", task);
+    console.log("Model: \n", model);
 
-    console.log(Tasks.REGRESSION);
-    // model not predefined (sample dataset)
+    // model not predefined (custom dataset)
     if (!model) {
-        switch (state.task) {
+        switch (task) {
             case Tasks.REGRESSION:
                 model = extractRegressionModel(userMessage, wit) || 
                     Models.LINEAR_REGRESSION;
@@ -100,11 +115,22 @@ const modelStep = (userMessage, wit, state, dispatch) => {
                     Models.NEURAL_NETWORK_FF;
                 break;
         }
+
+        dispatch({
+            type: Actions.SET_MODEL,
+            model: model,
+        });
+        dispatch({
+            type: Actions.SET_MODEL_OTTO,
+            model: model,
+        });
+
     }
 
-    console.log(model);
     return msgs.ModelRecommendation(model);
 
 }
+
+
 
 export default responseTo;
