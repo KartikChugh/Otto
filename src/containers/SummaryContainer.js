@@ -48,11 +48,13 @@ function getSteps() {
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return "";
+      return "Identify the machine learning task that describes your goal";
     case 1:
-      return "";
+      return "Choose from provided datasets, or use your own";
     case 2:
-      return "";
+      return "Select the model best equipped to unlock insights from your data";
+    case 3:
+      return "Optimize your data for machine learning";
     default:
       return "Unknown step";
   }
