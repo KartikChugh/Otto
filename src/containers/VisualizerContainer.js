@@ -187,10 +187,10 @@ function VisualizerContainer() {
           type: Actions.SET_TASK,
           task: value,
         });
-        dispatcher({
-          type: Actions.SET_TASK_OTTO,
-          task: value,
-        });
+        // dispatcher({
+        //   type: Actions.SET_TASK_OTTO,
+        //   task: value,
+        // });
         break;
       case StepperState.DATASET:
         dispatcher({
