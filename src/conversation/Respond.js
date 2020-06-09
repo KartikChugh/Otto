@@ -104,13 +104,7 @@ const modelStep = (userMessage, wit, state, dispatch) => {
 
     console.log(model);
     return msgs.ModelRecommendation(model);
-    // TODO: appropriate responses here
 
-    return "datastep";
 }
-
-// const modelStep = (userMessage, wit, state, dispatch) => {
-//     return "modelstep";
-// }
 
 export default responseTo;
