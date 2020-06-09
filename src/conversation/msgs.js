@@ -12,7 +12,7 @@ export const IntroQuestion = () => {
 export const TaskRecommendation = (task) => {
     return [
         `Sounds cool!`,
-        `I'd recommend a ${task} model to help you explore that idea!`
+        `I'd recommend a ${task} model to help you explore that idea`
     ];
 }
 
@@ -32,21 +32,28 @@ export const TaskInfo = () => {
     ];
 }
 
-// TODO: use below 3
+// TODO: use 
 export const ModelPreface = () => {
     return [
         "Now that we have our machine learning task and dataset figured out, the next step is to select an appropriate model",
     ];
 }
-
+// TODO: use
 export const RegressionModelQuestion = () => {
     return [
         "Could you describe the dependent variable in more detail?"
     ]
 }
-
+// TODO: use
 export const ClassificationModelQuestion = () => {
     return [
         "Could you describe the dataset in more detail?"
+    ]
+}
+
+export const ModelRecommendation = (model) => {
+    return [
+        "Gotcha, thanks",
+        `I think a ${model} model would be perfect`
     ]
 }

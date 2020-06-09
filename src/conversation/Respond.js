@@ -15,8 +15,8 @@ const responseTo = async (userMessage, wit, state, dispatch) => {
     switch (state.stepper_state) {
         case StepperState.TASK:
             return await taskStep(userMessage, wit, state, dispatch);
-        case StepperState.DATASET:
-            return dataStep(userMessage, wit, state, dispatch);
+        // case StepperState.DATASET:
+        //     return dataStep(userMessage, wit, state, dispatch);
         case StepperState.MODEL:
             return modelStep(userMessage, wit, state, dispatch);
     }
@@ -45,7 +45,7 @@ const taskStep = async (userMessage, wit, state, dispatch) => {
 
     // define the task or null
     const task = taskForSampleDataset ? taskForSampleDataset : extractTask(witResult);
-
+    console.log(task);
     if (sampleDataset) {
         // update dataset/model state with sample
         dispatch({
@@ -76,14 +76,21 @@ const taskStep = async (userMessage, wit, state, dispatch) => {
 
 }
 
-const dataStep = (userMessage, wit, state, dispatch) => {
+const modelStep = (userMessage, wit, state, dispatch) => {
+    console.log("modelStep");
 
     const task = state.task;
     let model = state.model;
 
+    console.log("Task:");
+    console.log(task);
+    console.log("Model:");
+    console.log(model);
+
+    console.log(Tasks.REGRESSION);
     // model not predefined (sample dataset)
     if (!model) {
-        switch (task) {
+        switch (state.task) {
             case Tasks.REGRESSION:
                 model = extractRegressionModel(userMessage, wit) || 
                     Models.LINEAR_REGRESSION;
@@ -94,13 +101,16 @@ const dataStep = (userMessage, wit, state, dispatch) => {
                 break;
         }
     }
+
+    console.log(model);
+    return msgs.ModelRecommendation(model);
     // TODO: appropriate responses here
 
     return "datastep";
 }
 
-const modelStep = (userMessage, wit, state, dispatch) => {
-    return "modelstep";
-}
+// const modelStep = (userMessage, wit, state, dispatch) => {
+//     return "modelstep";
+// }
 
 export default responseTo;
