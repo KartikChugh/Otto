@@ -138,6 +138,7 @@ function getOptions(state: StateType) {
           type: StepperState.MODEL,
         })
       );
+      console.log("when model", options);
       return options;
     default:
       return options;

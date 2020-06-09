@@ -16,7 +16,7 @@ export const Models = Object.freeze({
 
 export const TaskToModelsMap = (task: TasksType) => {
   let validModels;
-  switch (Tasks[task]) {
+  switch (task) {
     case Tasks.CLASSIFICATION:
       validModels = (({ KNN, NEURAL_NETWORK_FF }) => ({
         KNN,
