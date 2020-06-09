@@ -46,7 +46,7 @@ export default class Conversation /* extends React.Component */  {
 }
 
 function readWriteDelay(msg) {
-    const WPM = 500;
+    const WPM = 300;
     const length = msg.length;
     const timeRead = (length / 3.5 / WPM) * 60 * 1000;
     return timeRead;
