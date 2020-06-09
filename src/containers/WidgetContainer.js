@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "state/State";
+import { Actions } from "state/Actions";
 
 import {
   Widget,
@@ -13,7 +14,8 @@ import logo from "logo.svg";
 import * as msgs from "conversation/msgs";
 
 //import Conversation from "conversation";
-import Conversation from "conversation/Conversation"
+import Conversation from "conversation/Conversation";
+import { Tasks } from "state/StateTypes";
 
 const convo = new Conversation(addResponseMessage);
 
@@ -23,17 +25,20 @@ export function initializeWidget() {
 }
 
 function WidgetContainer() {
-
   const [state, dispatch] = useState();
 
   useEffect(() => {
     toggleWidget();
     initializeWidget();
+    dispatch({
+      type: Actions.SET_TASK_OTTO,
+      task: Tasks.NATURAL_LANGUAGE,
+    });
   }, []);
 
   const handleSubmit = (userMessage) => {
-    convo.handleUserMessage(userMessage, state, dispatch)
-  }
+    convo.handleUserMessage(userMessage, state, dispatch);
+  };
 
   // async function performResponse(userMessage) {
   //   const responses = await convo.respondTo(userMessage);

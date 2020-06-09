@@ -22,12 +22,21 @@ function reducer(state: StateType, action: ActionType): StateType {
 
   switch (action.type) {
     case Actions.SET_TASK:
-      const newState = { ...state, task: action.task };
-      return newState;
+      return { ...state, task: action.task };
     case Actions.SET_DATASET_CATEGORY:
       return { ...state, dataset_category: action.dataset_category };
     case Actions.SET_MODEL:
       return { ...state, model: action.model };
+    case Actions.SET_SAMPLE_DATASET:
+      return { ...state, sample_dataset: action.sample_dataset };
+    case Actions.SET_TASK_OTTO:
+      return { ...state, task_otto: action.task };
+    case Actions.SET_DATASET_CATEGORY_OTTO:
+      return { ...state, dataset_category_otto: action.dataset_category };
+    case Actions.SET_MODEL_OTTO:
+      return { ...state, model_otto: action.model };
+    case Actions.SET_SAMPLE_DATASET_OTTO:
+      return { ...state, sample_dataset_otto: action.sample_dataset };
     case Actions.STEPPER_HANDLE_NEXT:
       return {
         ...state,

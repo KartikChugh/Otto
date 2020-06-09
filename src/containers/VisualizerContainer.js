@@ -1,13 +1,14 @@
 import React from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { Grid } from "@material-ui/core";
-import { Avatar } from "@material-ui/core";
+import { Grid, Avatar, Badge, Tooltip } from "@material-ui/core";
+
+import logo from "logo.svg";
 
 import { useState } from "state/State";
 import {
@@ -21,6 +22,36 @@ import {
   StateType,
 } from "state/StateTypes";
 import { Actions } from "state/Actions";
+
+const StyledBadge = withStyles((theme) => ({
+  badge: {
+    // backgroundColor: "#44b700",
+    // color: "#44b700",
+    width: 10,
+    // boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    "&::after": {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      borderRadius: "50%",
+      // animation: "$ripple 1.2s infinite ease-in-out",
+      // border: "1px solid currentColor",
+      content: '""',
+    },
+  },
+  // "@keyframes ripple": {
+  //   "0%": {
+  //     transform: "scale(.8)",
+  //     opacity: 1,
+  //   },
+  //   "100%": {
+  //     transform: "scale(2.4)",
+  //     opacity: 0,
+  //   },
+  // },
+}))(Badge);
 
 const useStyles = makeStyles((theme) => ({
   rootExplanation: {
@@ -75,6 +106,9 @@ const useStyles = makeStyles((theme) => ({
   avatarLabelSelected: {
     fontWeight: 500,
   },
+  recommend: {
+    width: 30,
+  },
 }));
 
 function getOptions(state: StateType) {
@@ -86,7 +120,6 @@ function getOptions(state: StateType) {
         options.push({
           label: Tasks[key],
           type: StepperState.TASK,
-          value: key,
         })
       );
       return options;
@@ -95,7 +128,6 @@ function getOptions(state: StateType) {
         options.push({
           label: DatasetCategory[key],
           type: StepperState.DATASET,
-          value: key,
         })
       );
       return options;
@@ -104,7 +136,6 @@ function getOptions(state: StateType) {
         options.push({
           label: Models[key],
           type: StepperState.MODEL,
-          value: key,
         })
       );
       return options;
@@ -117,13 +148,46 @@ function VisualizerContainer() {
   const classes = useStyles();
   const [state, dispatcher] = useState();
   const getIsSelected = (value) =>
-    [state.task, state.dataset_category, state.model].includes(value);
+    [
+      state.task,
+      state.dataset_category,
+      state.sample_dataset,
+      state.model,
+    ].includes(value);
+
+  const getIsRecommended = (value) =>
+    [
+      state.task_otto,
+      state.dataset_category_otto,
+      state.sample_dataset_otto,
+      state.model_otto,
+    ].includes(value);
+
+  function AvatarItem(props: { avatar: any }) {
+    const avatar = props.avatar;
+    return (
+      <Avatar
+        alt={avatar.label}
+        src={logo}
+        className={
+          getIsSelected(avatar.label)
+            ? classes.avatarItemSelected
+            : classes.large
+        }
+        onClick={() => optionOnClickHandler(avatar.type, avatar.label)}
+      />
+    );
+  }
 
   const optionOnClickHandler = (type: StepperStateType, value) => {
     switch (type) {
       case StepperState.TASK:
         dispatcher({
           type: Actions.SET_TASK,
+          task: value,
+        });
+        dispatcher({
+          type: Actions.SET_TASK_OTTO,
           task: value,
         });
         break;
@@ -169,22 +233,32 @@ function VisualizerContainer() {
           >
             {getOptions(state).map((avatar) => (
               <Grid item className={classes.avatarItem} key={avatar.label}>
-                <Avatar
-                  alt={avatar.label}
-                  src="/static/images/avatar/1.jpg"
-                  className={
-                    getIsSelected(avatar.value)
-                      ? classes.avatarItemSelected
-                      : classes.large
-                  }
-                  onClick={() =>
-                    optionOnClickHandler(avatar.type, avatar.value)
-                  }
-                />
+                {getIsRecommended(avatar.label) ? (
+                  <Tooltip title="Recommended by Otto!" placement="top">
+                    <StyledBadge
+                      overlap="circle"
+                      anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                      }}
+                      badgeContent={
+                        <img
+                          className={classes.recommend}
+                          src="https://img.icons8.com/ultraviolet/80/000000/good-quality.png"
+                          alt="R"
+                        />
+                      }
+                    >
+                      <AvatarItem avatar={avatar} />
+                    </StyledBadge>
+                  </Tooltip>
+                ) : (
+                  <AvatarItem avatar={avatar} />
+                )}
                 <Typography
                   color="textPrimary"
                   className={
-                    getIsSelected(avatar.value)
+                    getIsSelected(avatar.label)
                       ? classes.avatarLabelSelected
                       : classes.avatarLabel
                   }

@@ -24,7 +24,11 @@ export const TaskToModelsMap = (task: TasksType) => {
       }))(Models);
       return validModels;
     case Tasks.REGRESSION:
-      validModels = (({ LINEAR_REGRESSION, POISSON_REGRESSION, ORDINAL_REGRESSION }) => ({
+      validModels = (({
+        LINEAR_REGRESSION,
+        POISSON_REGRESSION,
+        ORDINAL_REGRESSION,
+      }) => ({
         LINEAR_REGRESSION,
         POISSON_REGRESSION,
         ORDINAL_REGRESSION,
@@ -81,18 +85,27 @@ export type StepperStateType = "task" | "dataset" | "model";
 
 export type StateType = {
   task: ?TasksType,
+  task_otto: ?TasksType,
   model: ?ModelsType,
+  model_otto: ?ModelsType,
   dataset_category: ?DatasetCategoryType,
+  dataset_category_otto: ?DatasetCategoryType,
   sample_dataset: ?SampleDatasetType,
+  sample_dataset_otto: ?SampleDatasetType,
+
   stepper_state: StepperStateType,
   stepper_finish: Boolean,
 };
 
 export const InitialState: StateType = {
   task: null,
+  task_otto: null,
   model: null,
+  model_otto: null,
   dataset_category: null,
+  dataset_category_otto: null,
   sample_dataset: null,
+  sample_dataset_otto: null,
   stepper_state: StepperState.TASK,
   stepper_finish: false,
 };
