@@ -38,6 +38,15 @@ export const ModelPreface = () => {
         "Now that we have our machine learning task and dataset figured out, the next step is to select an appropriate model",
     ];
 }
+
+// TODO: use
+export const NLPModelInfo = () => {
+    return [
+        "Entity recognition is useful for extracting key information from text (like phone numbers, album names, and times)",
+        "While sentiment analysis classifies expressions by their polarity (positive, negative, or neutral)",
+    ]
+}
+
 // TODO: use
 export const RegressionModelQuestion = () => {
     return [
@@ -53,7 +62,21 @@ export const ClassificationModelQuestion = () => {
 
 export const ModelRecommendation = (model) => {
     return [
-        "Gotcha, thanks",
-        `I think a ${model} model would be perfect`
+        `In that case, I think a ${model} model would be perfect`
+    ]
+}
+
+// TODO: use
+export const PreprocessorRecommendation = (preprocessors) => {
+    return [
+        "I've gone ahead and setup some data preprocessors to help optimize the learning process."
+    ]
+}
+
+// TODO: use
+export const NeuralNetworkPreface = () => {
+    return [
+        "Finally, we're ready to build and configure our neural network!",
+        "I've made a basic classifier to start with, but you can adjust it to your needs"
     ]
 }
