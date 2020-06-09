@@ -1,9 +1,9 @@
 import { Tasks, Models } from "state/StateTypes"
 
 const intentToTask = {
-    task_reg: [Tasks.REGRESSION],
-    task_class: [Tasks.CLASSIFICATION],
-    task_nlp: [Tasks.NATURAL_LANGUAGE],
+    task_reg: Tasks.REGRESSION,
+    task_class: Tasks.CLASSIFICATION,
+    task_nlp: Tasks.NATURAL_LANGUAGE,
 }
 
 const regressionModelToKeywords = {
