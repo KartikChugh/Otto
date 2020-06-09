@@ -50,15 +50,15 @@ const taskStep = async (userMessage, wit, state, dispatch) => {
         // update dataset/model state with sample
         dispatch({
             type: Actions.SET_DATASET_CATEGORY,
-            task: DatasetCategory.SAMPLE,
+            dataset_category: DatasetCategory.SAMPLE,
         });
         dispatch({
             type: Actions.SET_SAMPLE_DATASET,
-            task: sampleDataset,
+            sample_dataset: sampleDataset,
         });
         dispatch({
             type: Actions.SET_MODEL,
-            task: modelForSampleDataset,
+            model: modelForSampleDataset,
         });
     }
 
