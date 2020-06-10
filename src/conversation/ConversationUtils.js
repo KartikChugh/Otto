@@ -1,5 +1,7 @@
 import { Tasks, Models } from "state/StateTypes"
 
+// TODO: refactor elsewhere?
+
 const intentToTask = {
     task_reg: Tasks.REGRESSION,
     task_class: Tasks.CLASSIFICATION,
@@ -14,6 +16,8 @@ const regressionModelToKeywords = {
 const classificationModelToKeywords = {
     [Models.KNN]: ["few", "small", "simple", "tiny"]
 } 
+
+
 
 export const getWitResult = async (wit, utterance) => {
     return await wit.message(utterance);
