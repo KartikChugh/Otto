@@ -20,6 +20,8 @@ function reducer(state: StateType, action: ActionType): StateType {
     return StepperStateOrder.indexOf(state.stepper_state);
   };
 
+  console.log("received action: \n", action);
+
   switch (action.type) {
     case Actions.SET_TASK:
       return { ...state, task: action.task };

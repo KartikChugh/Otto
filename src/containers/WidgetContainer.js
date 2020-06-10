@@ -30,10 +30,6 @@ function WidgetContainer() {
   useEffect(() => {
     toggleWidget();
     initializeWidget();
-    dispatch({
-      type: Actions.SET_TASK_OTTO,
-      task: Tasks.NATURAL_LANGUAGE,
-    });
   }, []);
 
   const handleSubmit = (userMessage) => {
