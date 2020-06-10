@@ -7,6 +7,10 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Grid, Avatar, Badge, Tooltip } from "@material-ui/core";
+import {
+  NavigateNextRounded,
+  NavigateBeforeRounded,
+} from "@material-ui/icons/";
 
 import logo from "logo.svg";
 
@@ -14,6 +18,7 @@ import { useState } from "state/State";
 import {
   StepperStateType,
   StepperState,
+  StepperStateOrder,
   Tasks,
   TasksType,
   Models,
@@ -22,6 +27,7 @@ import {
   StateType,
 } from "state/StateTypes";
 import { Actions } from "state/Actions";
+import { getSteps } from "containers/SummaryContainer";
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
@@ -65,7 +71,8 @@ const useStyles = makeStyles((theme) => ({
     width: "800%",
     textAlign: "center",
     paddingTop: theme.spacing(1),
-    marginTop: theme.spacing(-40),
+    marginTop: theme.spacing(-39),
+    position: "relative",
   },
   bullet: {
     display: "inline-block",
@@ -102,12 +109,20 @@ const useStyles = makeStyles((theme) => ({
       "0px 5px 5px -3px rgba(0,0,0,0.2), 0px 0px 6px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)",
     border: "solid 1px #3f51b5",
   },
-  avatarLabel: {},
+  avatarLabel: {
+    marginTop: 20,
+  },
   avatarLabelSelected: {
+    marginTop: 20,
     fontWeight: 500,
   },
   recommend: {
     width: 30,
+  },
+  button: {
+    marginBottom: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    marginLeft: theme.spacing(1),
   },
 }));
 
@@ -148,6 +163,32 @@ function getOptions(state: StateType) {
 function VisualizerContainer() {
   const classes = useStyles();
   const [state, dispatcher] = useState();
+  const steps = getSteps();
+
+  const handleNext = () => {
+    dispatcher({
+      type: Actions.STEPPER_HANDLE_NEXT,
+    });
+  };
+
+  const handleBack = () => {
+    dispatcher({
+      type: Actions.STEPPER_HANDLE_PREVIOUS,
+    });
+  };
+
+  const handleReset = () => {
+    dispatcher({
+      type: Actions.HANDLE_RESET,
+    });
+  };
+
+  const handleFinish = () => {
+    dispatcher({
+      type: Actions.HANDLE_STEPPER_FINISH,
+    });
+  };
+
   const getIsSelected = (value) =>
     [
       state.task,
@@ -163,6 +204,12 @@ function VisualizerContainer() {
       state.sample_dataset_otto,
       state.model_otto,
     ].includes(value);
+
+  const getActiveStep = () => {
+    return state.stepper_finish
+      ? StepperStateOrder.length
+      : StepperStateOrder.indexOf(state.stepper_state);
+  };
 
   function AvatarItem(props: { avatar: any }) {
     const avatar = props.avatar;
@@ -187,10 +234,6 @@ function VisualizerContainer() {
           type: Actions.SET_TASK,
           task: value,
         });
-        // dispatcher({
-        //   type: Actions.SET_TASK_OTTO,
-        //   task: value,
-        // });
         break;
       case StepperState.DATASET:
         dispatcher({
@@ -217,7 +260,7 @@ function VisualizerContainer() {
           </Typography>
         </CardContent>
       </Card>
-      <Card className={classes.rootActions} raised={true}>
+      <Card className={classes.rootActions} variant="outlined">
         <CardContent>
           <Typography className={classes.titleInner} color="textPrimary">
             Let's get started!
@@ -270,6 +313,43 @@ function VisualizerContainer() {
             ))}
           </Grid>
         </CardContent>
+        <CardActions
+          style={{
+            position: "absolute",
+            bottom: "2px",
+            display: "inline-block",
+            width: "100%",
+            left: 0,
+          }}
+        >
+          {getActiveStep() > 0 ? (
+            <Button
+              onClick={handleBack}
+              className={classes.button}
+              style={{ float: "left" }}
+              startIcon={<NavigateBeforeRounded />}
+            >
+              {steps[getActiveStep() - 1]}
+            </Button>
+          ) : null}
+          <Button
+            disabled={
+              !getOptions(state).some((val) => getIsSelected(val.label))
+            }
+            variant="contained"
+            color="primary"
+            onClick={
+              getActiveStep() === steps.length - 1 ? handleFinish : handleNext
+            }
+            className={classes.button}
+            style={{ float: "right" }}
+            endIcon={<NavigateNextRounded />}
+          >
+            {getActiveStep() === steps.length - 1
+              ? "Finish"
+              : steps[getActiveStep() + 1]}
+          </Button>
+        </CardActions>
       </Card>
     </>
   );

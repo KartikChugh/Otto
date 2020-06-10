@@ -39,9 +39,16 @@ const useStyles = makeStyles((theme) => ({
   card: {
     marginTop: "4px",
   },
+  optionLabel: {
+    marginLeft: 12,
+    borderLeft: "1px solid #bdbdbd",
+    paddingLeft: 12,
+    height: 32,
+    paddingTop: 4,
+  },
 }));
 
-function getSteps() {
+export function getSteps() {
   return ["Task", "Dataset", "Model", "Preprocessors"];
 }
 
@@ -71,27 +78,33 @@ export default function VerticalLinearStepper() {
       : StepperStateOrder.indexOf(state.stepper_state);
   };
 
-  const handleNext = () => {
-    dispatch({
-      type: Actions.STEPPER_HANDLE_NEXT,
-    });
-  };
-
-  const handleBack = () => {
-    dispatch({
-      type: Actions.STEPPER_HANDLE_PREVIOUS,
-    });
+  const SelectedOptionLabel = (props: { index: number }) => {
+    let option = null;
+    switch (props.index) {
+      case 0:
+        option = state.task;
+        break;
+      case 1:
+        option = state.dataset_category;
+        break;
+      case 2:
+        option = state.model;
+        break;
+      case 3:
+        option = "";
+        break;
+      default:
+        break;
+    }
+    if (option == null || getActiveStep() <= props.index) {
+      return null;
+    }
+    return <Typography className={classes.optionLabel}>{option}</Typography>;
   };
 
   const handleReset = () => {
     dispatch({
       type: Actions.HANDLE_RESET,
-    });
-  };
-
-  const handleFinish = () => {
-    dispatch({
-      type: Actions.HANDLE_STEPPER_FINISH,
     });
   };
 
@@ -107,30 +120,8 @@ export default function VerticalLinearStepper() {
               <StepLabel>{label}</StepLabel>
               <StepContent>
                 <Typography>{getStepContent(index)}</Typography>
-                <div className={classes.actionsContainer}>
-                  <div>
-                    <Button
-                      disabled={getActiveStep() === 0}
-                      onClick={handleBack}
-                      className={classes.button}
-                    >
-                      Back
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={
-                        getActiveStep() === steps.length - 1
-                          ? handleFinish
-                          : handleNext
-                      }
-                      className={classes.button}
-                    >
-                      {getActiveStep() === steps.length - 1 ? "Finish" : "Next"}
-                    </Button>
-                  </div>
-                </div>
               </StepContent>
+              <SelectedOptionLabel index={index} />
             </Step>
           ))}
         </Stepper>
