@@ -12,9 +12,9 @@ export class FeedforwardNN {
             new Layer(5),
             new Layer(2)
         ];
-        this.activations = Activations.RELU;
-        this.outputActivations = Activations.SOFTMAX;
-
+        this.activation = Activations.RELU;
+        this.outputActivation = Activations.SOFTMAX;
+        this.initializer = Initializers.GLOROT;
         this.optimizer = Optimizers.ADAM;
         this.loss = Losses.BINARY_CLASS;
         
