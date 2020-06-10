@@ -20,3 +20,8 @@ export const Initializers = Object.freeze({
     HE: "he_uniform",
     LECUN: "lecun_uniform",
 });
+
+export const Layers = Object.freeze({
+    INPUT: "Input",
+    DENSE: "Dense"
+});
