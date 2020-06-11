@@ -8,8 +8,8 @@ export const Models = Object.freeze({
   LINEAR_REGRESSION: "Linear Regression",
   POISSON_REGRESSION: "Poisson Regression",
   ORDINAL_REGRESSION: "Ordinal Regression",
-  KNN: "KNN",
-  NEURAL_NETWORK_FF: "Neural Network FF",
+  KNN: "K-Nearest Neighbors",
+  NEURAL_NETWORK_FF: "Feedforward Neural Network",
   SENTIMENT_ANALYSIS: "Sentiment Analysis",
   ENTITY_RECOGNITION: "Entity Recognition",
 });
@@ -79,8 +79,8 @@ export type ModelsType =
   | "Linear Regression"
   | "Poisson Regression"
   | "Ordinal Regression"
-  | "KNN"
-  | "Neural Network FF"
+  | "K-Nearest Neighbors"
+  | "Feedforward Neural Network"
   | "Sentiment Analysis"
   | "Entity Recognition";
 
