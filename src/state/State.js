@@ -9,7 +9,7 @@ import { StepperStateOrder } from "state/StateTypes";
 import { initializeWidget } from "containers/WidgetContainer";
 
 // See https://www.basefactor.com/global-state-with-react for details
-const initialState = InitialState;
+const initialState = InitialState();
 
 export const StateContext = createContext(initialState);
 export const DispatchStateContext = createContext(() => null);
@@ -87,7 +87,7 @@ function reducer(state: StateType, action: ActionType): StateType {
       };
     case Actions.HANDLE_RESET:
       initializeWidget();
-      return initialState;
+      return InitialState();
     default:
       return state;
   }

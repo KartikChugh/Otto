@@ -9,16 +9,16 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { Card } from "@material-ui/core";
 import { useState } from "state/State";
-import { StepperStateOrder } from "state/StateTypes";
+import { StepperStateOrder, StateType } from "state/StateTypes";
 import { Actions } from "state/Actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%",
-    alignContent: "centre",
+    width: "80%",
+    marginLeft: 110,
   },
-  less: {
-    width: "60%",
+  stepLabel: {
+    fontSize: 19,
   },
   button: {
     marginTop: theme.spacing(1),
@@ -67,16 +67,15 @@ function getStepContent(step) {
   }
 }
 
+export const getActiveStep = (state: StateType) =>
+  state.stepper_finish
+    ? StepperStateOrder.length
+    : StepperStateOrder.indexOf(state.stepper_state);
+
 export default function VerticalLinearStepper() {
   const classes = useStyles();
   const [state, dispatch] = useState();
   const steps = getSteps();
-
-  const getActiveStep = () => {
-    return state.stepper_finish
-      ? StepperStateOrder.length
-      : StepperStateOrder.indexOf(state.stepper_state);
-  };
 
   const SelectedOptionLabel = (props: { index: number }) => {
     let option = null;
@@ -96,7 +95,7 @@ export default function VerticalLinearStepper() {
       default:
         break;
     }
-    if (option == null || getActiveStep() <= props.index) {
+    if (option == null || getActiveStep(state) <= props.index) {
       return null;
     }
     return <Typography className={classes.optionLabel}>{option}</Typography>;
@@ -114,10 +113,12 @@ export default function VerticalLinearStepper() {
         Pipeline Architecture
       </Typography>
       <Card className={classes.card} variant="outlined">
-        <Stepper activeStep={getActiveStep()} orientation="vertical">
+        <Stepper activeStep={getActiveStep(state)} orientation="vertical">
           {steps.map((label, index) => (
             <Step key={label}>
-              <StepLabel>{label}</StepLabel>
+              <StepLabel>
+                {<Typography variant="h6">{label}</Typography>}
+              </StepLabel>
               <StepContent>
                 <Typography>{getStepContent(index)}</Typography>
               </StepContent>
@@ -126,7 +127,7 @@ export default function VerticalLinearStepper() {
           ))}
         </Stepper>
       </Card>
-      {getActiveStep() === steps.length && (
+      {getActiveStep(state) === steps.length && (
         <Paper square elevation={0} className={classes.resetContainer}>
           <Typography>All steps completed - you&apos;re finished</Typography>
           <Button onClick={handleReset} className={classes.button}>

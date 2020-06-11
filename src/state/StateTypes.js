@@ -108,7 +108,7 @@ export type StateType = {
   stepper_finish: Boolean,
 };
 
-export const InitialState: StateType = {
+export const InitialState: () => StateType = () => ({
   task: null,
   task_otto: null,
   model: null,
@@ -122,4 +122,4 @@ export const InitialState: StateType = {
 
   stepper_state: StepperState.TASK,
   stepper_finish: false,
-};
+});
