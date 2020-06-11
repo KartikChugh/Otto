@@ -9,7 +9,7 @@ export const networkCode = (network) => {
 
     sb.appendLine(`model.compile(optimizer='${network.optimizer}', loss='${network.loss}')`);
 
-    sb.appendLine("model.fit(x_train, y_train, batch_size=32, epochs=100)");
+    sb.appendLine("model.fit(X_train, y_train, batch_size=32, epochs=100)");
 
     return sb.toString();
 }
