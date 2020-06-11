@@ -2,6 +2,10 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "state/State";
 import { Actions } from "state/Actions";
+import { FeedforwardNN} from "nn-architecture/Network"
+import { Layer } from "nn-architecture/Layer"
+import { Optimizers, Losses, Activations, Initializers } from "nn-architecture/hyperparams" 
+import { networkCode } from "nn-architecture/networkToCode"
 
 import {
   Widget,
@@ -56,5 +60,19 @@ function WidgetContainer() {
     />
   );
 }
+
+
+// TODO: remove
+// let nn = new FeedforwardNN();
+// nn.loss = Losses.MULTI_CLASS;
+// console.log(networkCode(nn));
+
+// nn.pushLayer();
+// nn.pushLayer();
+// console.log(networkCode(nn));
+
+// nn.popLayer();
+// console.log(networkCode(nn));
+
 
 export default WidgetContainer;
