@@ -1,16 +1,18 @@
 import React from "react";
 import "App.css";
-import { Row } from "react-bootstrap";
 import VisualizerContainer from "containers/VisualizerContainer";
+import { Grid } from "@material-ui/core";
 
 function MainColumnContainer() {
   return (
-    <>
-      <Row className="visualizerContainer">
+    <Grid container style={{ height: "100%" }}>
+      <Grid item className="visualizerContainer">
         <VisualizerContainer />
-      </Row>
-      <Row className="outerContainer codeContainer">Output Code</Row>
-    </>
+      </Grid>
+      <Grid item className="outerContainer codeContainer">
+        Output Code
+      </Grid>
+    </Grid>
   );
 }
 

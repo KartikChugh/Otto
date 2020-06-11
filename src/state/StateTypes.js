@@ -54,11 +54,16 @@ export const SampleDataset = Object.freeze({
   IRIS: "iris",
 });
 
+export const Preprocessors = Object.freeze({
+  PCA: "PCA",
+  NORMALIZATION: "Normalization",
+});
+
 export const StepperState = Object.freeze({
   TASK: "task",
   DATASET: "dataset",
   MODEL: "model",
-  PREPROCESSORS: "preprocessors"
+  PREPROCESSORS: "preprocessors",
 });
 
 export const StepperStateOrder = [
@@ -83,6 +88,8 @@ export type DatasetCategoryType = "Custom" | "Sample";
 
 export type SampleDatasetType = "iris";
 
+export type PreprocessorsType = "PCA" | "Normalization";
+
 export type StepperStateType = "task" | "dataset" | "model" | "preprocessors";
 
 export type StateType = {
@@ -94,8 +101,8 @@ export type StateType = {
   dataset_category_otto: ?DatasetCategoryType,
   sample_dataset: ?SampleDatasetType,
   sample_dataset_otto: ?SampleDatasetType,
-  preprocessors: ?PreprocessorsType,
-  preprocessors_otto: ?PreprocessorsType,
+  preprocessors: Array<PreprocessorsType>,
+  preprocessors_otto: Array<PreprocessorsType>,
 
   stepper_state: StepperStateType,
   stepper_finish: Boolean,
@@ -110,8 +117,8 @@ export const InitialState: StateType = {
   dataset_category_otto: null,
   sample_dataset: null,
   sample_dataset_otto: null,
-  preprocessors: null,
-  preprocessors_otto: null,
+  preprocessors: [],
+  preprocessors_otto: [],
 
   stepper_state: StepperState.TASK,
   stepper_finish: false,

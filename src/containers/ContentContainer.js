@@ -3,7 +3,6 @@ import { Col } from "react-bootstrap";
 import RightColumnContainer from "containers/RightColumnContainer";
 import MainColumnContainer from "containers/MainColumnContainer";
 import SummaryContainer from "containers/SummaryContainer";
-import { Divider } from "@material-ui/core";
 
 function ContentContainer() {
   return (

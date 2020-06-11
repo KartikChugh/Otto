@@ -3,6 +3,7 @@ import {
   ModelsType,
   DatasetCategoryType,
   SampleDatasetType,
+  PreprocessorsType,
 } from "state/StateTypes";
 
 export const Actions = Object.freeze({
@@ -14,8 +15,8 @@ export const Actions = Object.freeze({
   SET_MODEL_OTTO: "SET_MODEL_OTTO",
   SET_DATASET_CATEGORY_OTTO: "SET_DATASET_CATEGORY_OTTO",
   SET_SAMPLE_DATASET_OTTO: "SET_SAMPLE_DATASET_OTTO",
-  SET_PREPROCESSORS: "SET_PREPROCESSORS",
-  SET_PREPROCESSORS_OTTO: "SET_PREPROCESSORS_OTTO",
+  TOGGLE_PREPROCESSOR: "TOGGLE_PREPROCESSOR",
+  TOGGLE_PREPROCESSOR_OTTO: "TOGGLE_PREPROCESSOR_OTTO",
   STEPPER_HANDLE_NEXT: "STEPPER_HANDLE_NEXT",
   STEPPER_HANDLE_PREVIOUS: "STEPPER_HANDLE_PREVIOUS",
   HANDLE_STEPPER_FINISH: "HANDLE_STEPPER_FINISH",
@@ -34,8 +35,8 @@ export type ActionType =
       dataset_category: DatasetCategoryType,
     }
   | { type: "SET_SAMPLE_DATASET_OTTO", sample_dataset: SampleDatasetType }
-  | { type: "SET_PREPROCESSORS", preprocessors: PreprocessorsType }
-  | { type: "SET_PREPROCESSORS_OTTO", preprocessors: PreprocessorsType }
+  | { type: "TOGGLE_PREPROCESSOR", preprocessor: PreprocessorsType }
+  | { type: "TOGGLE_PREPROCESSOR_OTTO", preprocessor: PreprocessorsType }
   | { type: "STEPPER_HANDLE_NEXT" }
   | { type: "STEPPER_HANDLE_PREVIOUS" }
   | { type: "HANDLE_STEPPER_FINISH" }

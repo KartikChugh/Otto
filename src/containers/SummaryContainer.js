@@ -91,7 +91,7 @@ export default function VerticalLinearStepper() {
         option = state.model;
         break;
       case 3:
-        option = "";
+        option = state.preprocessors.join(", ");
         break;
       default:
         break;

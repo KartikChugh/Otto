@@ -20,8 +20,6 @@ function reducer(state: StateType, action: ActionType): StateType {
     return StepperStateOrder.indexOf(state.stepper_state);
   };
 
-  console.log("received action: \n", action);
-
   switch (action.type) {
     case Actions.SET_TASK:
       return { ...state, task: action.task };
@@ -39,10 +37,34 @@ function reducer(state: StateType, action: ActionType): StateType {
       return { ...state, model_otto: action.model };
     case Actions.SET_SAMPLE_DATASET_OTTO:
       return { ...state, sample_dataset_otto: action.sample_dataset };
-    case Actions.SET_PREPROCESSORS:
-      return { ...state, preprocessors: action.preprocessors };
-    case Actions.SET_PREPROCESSORS_OTTO:
-      return { ...state, preprocessors_otto: action.preprocessors };
+    case Actions.TOGGLE_PREPROCESSOR: {
+      let currentPreprocessors = state.preprocessors;
+      if (currentPreprocessors.includes(action.preprocessor)) {
+        currentPreprocessors = currentPreprocessors.filter(
+          (val) => val !== action.preprocessor
+        );
+      } else {
+        currentPreprocessors.push(action.preprocessor);
+      }
+      return {
+        ...state,
+        preprocessors: currentPreprocessors,
+      };
+    }
+    case Actions.TOGGLE_PREPROCESSOR_OTTO: {
+      let currentPreprocessors = state.preprocessors_otto;
+      if (currentPreprocessors.includes(action.preprocessor)) {
+        currentPreprocessors = currentPreprocessors.filter(
+          (val) => val !== action.preprocessor
+        );
+      } else {
+        currentPreprocessors = currentPreprocessors.push(action.preprocessor);
+      }
+      return {
+        ...state,
+        preprocessors_otto: currentPreprocessors,
+      };
+    }
     case Actions.STEPPER_HANDLE_NEXT:
       return {
         ...state,
@@ -82,7 +104,7 @@ export const StateProvider = ({ children }) => {
   );
 };
 
-export const useState = () => [
+export const useState: () => [StateType, () => any] = () => [
   useContext(StateContext),
   useContext(DispatchStateContext),
 ];

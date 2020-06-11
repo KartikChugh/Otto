@@ -20,11 +20,11 @@ import {
   StepperState,
   StepperStateOrder,
   Tasks,
-  TasksType,
   Models,
   DatasetCategory,
   TaskToModelsMap,
   StateType,
+  Preprocessors,
 } from "state/StateTypes";
 import { Actions } from "state/Actions";
 import { getSteps } from "containers/SummaryContainer";
@@ -68,10 +68,11 @@ const useStyles = makeStyles((theme) => ({
     height: 100,
   },
   rootActions: {
-    width: "800%",
+    width: "100%",
+    height: "100%",
     textAlign: "center",
     paddingTop: theme.spacing(1),
-    marginTop: theme.spacing(-39),
+    // marginTop: theme.spacing(-39),
     position: "relative",
   },
   bullet: {
@@ -80,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
     transform: "scale(0.8)",
   },
   title: {
-    fontSize: 42,
+    fontSize: "2vw",
     fontWeight: 300,
     marginTop: -5,
   },
@@ -124,6 +125,15 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
     marginLeft: theme.spacing(1),
   },
+  fullWidth: {
+    width: "100%",
+  },
+  fullHeight: {
+    height: "100%",
+  },
+  visualizerHeight: {
+    height: "calc(100% - 100px)",
+  },
 }));
 
 function getOptions(state: StateType) {
@@ -153,7 +163,14 @@ function getOptions(state: StateType) {
           type: StepperState.MODEL,
         })
       );
-      console.log("when model", options);
+      return options;
+    case StepperState.PREPROCESSORS:
+      Object.keys(Preprocessors).map((key) =>
+        options.push({
+          label: Preprocessors[key],
+          type: StepperState.PREPROCESSORS,
+        })
+      );
       return options;
     default:
       return options;
@@ -195,6 +212,7 @@ function VisualizerContainer() {
       state.dataset_category,
       state.sample_dataset,
       state.model,
+      ...state.preprocessors,
     ].includes(value);
 
   const getIsRecommended = (value) =>
@@ -203,6 +221,7 @@ function VisualizerContainer() {
       state.dataset_category_otto,
       state.sample_dataset_otto,
       state.model_otto,
+      ...state.preprocessors_otto,
     ].includes(value);
 
   const getActiveStep = () => {
@@ -247,111 +266,128 @@ function VisualizerContainer() {
           model: value,
         });
         break;
+      case StepperState.PREPROCESSORS:
+        dispatcher({
+          type: Actions.TOGGLE_PREPROCESSOR,
+          preprocessor: value,
+        });
+        break;
       default:
     }
   };
 
   return (
-    <>
-      <Card className={classes.rootExplanation}>
-        <CardContent>
-          <Typography className={classes.title} color="primary">
-            Build a machine learning pipeline with Otto
-          </Typography>
-        </CardContent>
-      </Card>
-      <Card className={classes.rootActions} variant="outlined">
-        <CardContent>
-          <Typography className={classes.titleInner} color="textPrimary">
-            Let's get started!
-          </Typography>
-          <Typography variant="h6" className={classes.subtitle}>
-            Chat with Otto to get a {state.stepper_state} recommendation.
-          </Typography>
-          <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            spacing={5}
-          >
-            {getOptions(state).map((avatar) => (
-              <Grid item className={classes.avatarItem} key={avatar.label}>
-                {getIsRecommended(avatar.label) ? (
-                  <Tooltip title="Recommended by Otto!" placement="top">
-                    <StyledBadge
-                      overlap="circle"
-                      anchorOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                      }}
-                      badgeContent={
-                        <img
-                          className={classes.recommend}
-                          src="https://img.icons8.com/ultraviolet/80/000000/good-quality.png"
-                          alt="R"
-                        />
-                      }
-                    >
-                      <AvatarItem avatar={avatar} />
-                    </StyledBadge>
-                  </Tooltip>
-                ) : (
-                  <AvatarItem avatar={avatar} />
-                )}
-                <Typography
-                  color="textPrimary"
-                  className={
-                    getIsSelected(avatar.label)
-                      ? classes.avatarLabelSelected
-                      : classes.avatarLabel
-                  }
-                >
-                  {avatar.label}
-                </Typography>
-              </Grid>
-            ))}
-          </Grid>
-        </CardContent>
-        <CardActions
-          style={{
-            position: "absolute",
-            bottom: "2px",
-            display: "inline-block",
-            width: "100%",
-            left: 0,
-          }}
-        >
-          {getActiveStep() > 0 ? (
-            <Button
-              onClick={handleBack}
-              className={classes.button}
-              style={{ float: "left" }}
-              startIcon={<NavigateBeforeRounded />}
+    <Grid
+      container
+      direction="column"
+      justify="flex-start"
+      alignItems="center"
+      className={classes.fullHeight}
+    >
+      <Grid item className={classes.fullWidth}>
+        <Card className={classes.rootExplanation}>
+          <CardContent>
+            <Typography className={classes.title} color="primary">
+              Build a machine learning pipeline with Otto
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+      <Grid className={`${classes.fullWidth} ${classes.visualizerHeight}`} item>
+        <Card className={classes.rootActions} variant="outlined">
+          <CardContent>
+            <Typography className={classes.titleInner} color="textPrimary">
+              Let's get started!
+            </Typography>
+            <Typography variant="h6" className={classes.subtitle}>
+              Chat with Otto to get a {state.stepper_state} recommendation.
+            </Typography>
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              spacing={5}
             >
-              {steps[getActiveStep() - 1]}
-            </Button>
-          ) : null}
-          <Button
-            disabled={
-              !getOptions(state).some((val) => getIsSelected(val.label))
-            }
-            variant="contained"
-            color="primary"
-            onClick={
-              getActiveStep() === steps.length - 1 ? handleFinish : handleNext
-            }
-            className={classes.button}
-            style={{ float: "right" }}
-            endIcon={<NavigateNextRounded />}
+              {getOptions(state).map((avatar) => (
+                <Grid item className={classes.avatarItem} key={avatar.label}>
+                  {getIsRecommended(avatar.label) ? (
+                    <Tooltip title="Recommended by Otto!" placement="top">
+                      <StyledBadge
+                        overlap="circle"
+                        anchorOrigin={{
+                          vertical: "top",
+                          horizontal: "right",
+                        }}
+                        badgeContent={
+                          <img
+                            className={classes.recommend}
+                            src="https://img.icons8.com/ultraviolet/80/000000/good-quality.png"
+                            alt="R"
+                          />
+                        }
+                      >
+                        <AvatarItem avatar={avatar} />
+                      </StyledBadge>
+                    </Tooltip>
+                  ) : (
+                    <AvatarItem avatar={avatar} />
+                  )}
+                  <Typography
+                    color="textPrimary"
+                    className={
+                      getIsSelected(avatar.label)
+                        ? classes.avatarLabelSelected
+                        : classes.avatarLabel
+                    }
+                  >
+                    {avatar.label}
+                  </Typography>
+                </Grid>
+              ))}
+            </Grid>
+          </CardContent>
+          <CardActions
+            style={{
+              position: "absolute",
+              bottom: "2px",
+              display: "inline-block",
+              width: "100%",
+              left: 0,
+            }}
           >
-            {getActiveStep() === steps.length - 1
-              ? "Finish"
-              : steps[getActiveStep() + 1]}
-          </Button>
-        </CardActions>
-      </Card>
-    </>
+            {getActiveStep() > 0 ? (
+              <Button
+                onClick={handleBack}
+                className={classes.button}
+                style={{ float: "left" }}
+                startIcon={<NavigateBeforeRounded />}
+              >
+                {steps[getActiveStep() - 1]}
+              </Button>
+            ) : null}
+            <Button
+              disabled={
+                getActiveStep() !== steps.length - 1 &&
+                !getOptions(state).some((val) => getIsSelected(val.label))
+              }
+              variant="contained"
+              color="primary"
+              onClick={
+                getActiveStep() === steps.length - 1 ? handleFinish : handleNext
+              }
+              className={classes.button}
+              style={{ float: "right" }}
+              endIcon={<NavigateNextRounded />}
+            >
+              {getActiveStep() === steps.length - 1
+                ? "Finish"
+                : steps[getActiveStep() + 1]}
+            </Button>
+          </CardActions>
+        </Card>
+      </Grid>
+    </Grid>
   );
 }
 
