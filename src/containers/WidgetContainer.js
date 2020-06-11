@@ -5,7 +5,7 @@ import { Actions } from "state/Actions";
 import { FeedforwardNN} from "nn-architecture/Network"
 import { Layer } from "nn-architecture/Layer"
 import { Optimizers, Losses, Activations, Initializers } from "nn-architecture/hyperparams" 
-import { networkCode } from "nn-architecture/networkToCode"
+import { networkCode } from "nn-architecture/networkCode"
 
 import {
   Widget,
