@@ -1,29 +1,20 @@
 import { Layers } from "nn-architecture/hyperparams";
-const StringBuilder = require('stringbuilder');
+const StringBuilder = require('string-builder');
 
 export const networkCode = (network) => {
-    const sb = new StringBuilder( {newline:'\r\n'} );
+    const sb = new StringBuilder();
 
     sb.appendLine("model = Sequential()");
-
-    sb.appendLine(layerCode(network.layers));
-
-    sb.appendLine(optimizerCode(network.optimizer));
+    sb.append(layerCode(network));
 
     sb.appendLine(`model.compile(optimizer='${network.optimizer}', loss='${network.loss}')`);
 
-    sb.appendLine("model.fit(x_train, y_train, batch_size=32, epochs=100");
 
-    return sb;
+    return sb.toString();
 }
 
-const optimizerCode = (optimizer) => {
-    const str = `opt=${optimizer}()`
-    return str;
-}
-
-const layerCode = (layers) => {
-    const sb = new StringBuilder( {newline:'\r\n'} );
+const layerCode = (network) => {
+    const sb = new StringBuilder();
     const layers = network.layers;
     for (let i = 0; i < layers.length; i++) {
         const layer = layers[i];
@@ -40,7 +31,7 @@ const layerCode = (layers) => {
         sb.appendLine(layerCode);
 
     }
-    return sb;
+    return sb.toString();
 }
 
 const inputLayerCode = (layer) => {
