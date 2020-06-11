@@ -20,6 +20,19 @@ export class FeedforwardNN {
         
     }
 
+    pushLayer() {
+        const layers = this.layers;
+        const lastHiddenLayer = layers[layers.length-2];
+        const lastHiddenSize = lastHiddenLayer.units;
+        const newLayer = new Layer(lastHiddenSize);
+        layers.splice(layers.length-1, 0, newLayer);
+    }
+
+    popLayer() {
+        const layers = this.layers;
+        layers.splice(layers.length-2, 1);
+    }
+
 }
 
     //  setBatchSize(newBatch) {
