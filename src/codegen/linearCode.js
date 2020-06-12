@@ -1,11 +1,11 @@
-const linearCode = () => {
+const linearParamsCode = (column) => {
+    return `FEATURE_COLUMN = ${column}`;
+}
+
+const linearModelCode = () => {
 
     const linear = 
     `
-    FEATURE_COLUMN = 5
-
-    X, y = loadData()
-    
     X = X[:, np.newaxis, FEATURE_COLUMN]
     
     # Split the data into training/testing sets
