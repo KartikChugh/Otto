@@ -23,7 +23,7 @@ const knnModelCode = () => {
     Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
     
     # Put the result into a color plot
-    cmap = 'YlGn'
+    cmap = 'coolwarm'
     Z = Z.reshape(xx.shape)
     plt.figure()
     plt.pcolormesh(xx, yy, Z, cmap=cmap)
