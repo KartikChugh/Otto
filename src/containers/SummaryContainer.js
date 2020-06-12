@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export function getSteps() {
-  return ["Task", "Dataset", "Model", "Preprocessors"];
+  return ["Task", "Dataset", "Model", "Preprocessors", "Visualize"];
 }
 
 function getStepContent(step) {
@@ -62,6 +62,8 @@ function getStepContent(step) {
       return "Select the model best equipped to unlock insights from your data";
     case 3:
       return "Optimize your data for machine learning";
+    case 4:
+      return "Fine tune and visualize your model";
     default:
       return "Unknown step";
   }

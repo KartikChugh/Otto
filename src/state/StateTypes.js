@@ -64,6 +64,7 @@ export const StepperState = Object.freeze({
   DATASET: "dataset",
   MODEL: "model",
   PREPROCESSORS: "preprocessors",
+  VISUALIZE: "visualize",
 });
 
 export const StepperStateOrder = [
@@ -71,6 +72,7 @@ export const StepperStateOrder = [
   StepperState.DATASET,
   StepperState.MODEL,
   StepperState.PREPROCESSORS,
+  StepperState.VISUALIZE,
 ];
 
 export type TasksType = "Classification" | "Regression" | "Natural Language";
@@ -90,7 +92,12 @@ export type SampleDatasetType = "iris";
 
 export type PreprocessorsType = "PCA" | "Normalization";
 
-export type StepperStateType = "task" | "dataset" | "model" | "preprocessors";
+export type StepperStateType =
+  | "task"
+  | "dataset"
+  | "model"
+  | "preprocessors"
+  | "visualize";
 
 export type StateType = {
   task: ?TasksType,
