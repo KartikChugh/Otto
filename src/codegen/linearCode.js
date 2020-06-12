@@ -2,12 +2,14 @@ const linearParamsCode = (column) => {
     return `FEATURE_COLUMN = ${column}`;
 }
 
+const linearSliceCode = () => {
+    return `X = X[:, np.newaxis, FEATURE_COLUMN]`;
+}
+
 const linearModelCode = () => {
 
     const linear = 
-    `
-    X = X[:, np.newaxis, FEATURE_COLUMN]
-    
+    `    
     # Split the data into training/testing sets
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
     

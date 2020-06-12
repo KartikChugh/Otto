@@ -21,6 +21,10 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 }
 
+const knnImportsCode = () => {
+    return `from sklearn import neighbors`
+}
+
 const datasetsImportCode = () => {
     return `from sklearn import datasets`
 }
