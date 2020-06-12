@@ -62,17 +62,4 @@ function WidgetContainer() {
 }
 
 
-// TODO: remove
-// let nn = new FeedforwardNN();
-// nn.loss = Losses.MULTI_CLASS;
-// console.log(networkCode(nn));
-
-// nn.pushLayer();
-// nn.pushLayer();
-// console.log(networkCode(nn));
-
-// nn.popLayer();
-// console.log(networkCode(nn));
-
-
 export default WidgetContainer;
