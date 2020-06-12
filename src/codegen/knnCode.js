@@ -26,7 +26,7 @@ const knnModelCode = () => {
     cmap = 'coolwarm'
     Z = Z.reshape(xx.shape)
     plt.figure()
-    plt.pcolormesh(xx, yy, Z, cmap=cmap)
+    plt.contourf(xx, yy, Z, cmap=cmap, alpha=0.7)
     
     # Plot the training points
     plt.scatter(X[:, 0], X[:, 1], c=y, cmap=cmap,
