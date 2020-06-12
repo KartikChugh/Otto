@@ -8,6 +8,7 @@ import { Grid } from "@material-ui/core";
 
 import { useState } from "state/State";
 import VisualizerOptionSelectionGrid from "components/VisualizerOptionSelectionGrid";
+import VisualizerNNContainer from "components/VisualizerNNContainer";
 import { Models } from "state/StateTypes";
 
 const useStyles = makeStyles((theme) => ({
@@ -65,7 +66,7 @@ function VisualizerContainer() {
       <Grid className={`${classes.fullWidth} ${classes.visualizerHeight}`} item>
         <Card className={classes.rootActions} variant="outlined">
           {state.stepper_finish && state.model === Models.NEURAL_NETWORK_FF ? (
-            <div>NN Stuff here</div>
+            <VisualizerNNContainer />
           ) : (
             <VisualizerOptionSelectionGrid />
           )}
