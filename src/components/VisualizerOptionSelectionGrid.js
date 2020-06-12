@@ -5,7 +5,6 @@ import {
   Avatar,
   Badge,
   Tooltip,
-  Card,
   CardContent,
   CardActions,
   Typography,
@@ -15,6 +14,8 @@ import {
   NavigateNextRounded,
   NavigateBeforeRounded,
 } from "@material-ui/icons/";
+
+import { invoke } from "js-ml/knn";
 
 import {
   StepperStateType,
@@ -144,12 +145,6 @@ export default function VisualizerOptionSelectionGrid() {
   const handleBack = () => {
     dispatcher({
       type: Actions.STEPPER_HANDLE_PREVIOUS,
-    });
-  };
-
-  const handleReset = () => {
-    dispatcher({
-      type: Actions.HANDLE_RESET,
     });
   };
 
@@ -298,7 +293,7 @@ export default function VisualizerOptionSelectionGrid() {
         ) : null}
         <Button
           disabled={
-            getActiveStep(state) !== steps.length - 1 &&
+            state.stepper_state !== StepperState.PREPROCESSORS &&
             !getOptions(state).some((val) => getIsSelected(val.label))
           }
           variant="contained"
