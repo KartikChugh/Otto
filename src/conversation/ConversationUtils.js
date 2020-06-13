@@ -9,7 +9,7 @@ const intentToTask = {
 }
 
 const regressionModelToKeywords = {
-    [Models.POISSON_REGRESSION]: ["count", "number", "event"],
+    [Models.POISSON_REGRESSION]: ["count", "number", "event", "occurrence"],
     [Models.ORDINAL_REGRESSION]: ["rank", "order"],
 }; 
 

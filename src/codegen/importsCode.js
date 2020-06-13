@@ -11,14 +11,17 @@ from sklearn.model_selection import train_test_split
 }
 
 const linearImportsCode = () => {
-    
-    const linearImports = `
+    return `
 from sklearn import linear_model
 from sklearn.metrics import mean_squared_error, r2_score
     `;
+}
 
-    return linearImports;
-
+const poissonImportsCode = () => {
+    return `
+from sklearn import linear_model
+from sklearn.metrics import mean_poisson_deviance
+    `;
 }
 
 const knnImportsCode = () => {
