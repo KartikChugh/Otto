@@ -47,6 +47,15 @@ const codeGen = (state) => {
             sb.appendLine(sharedCode.loadDataFunctionCode());
             break;
     }
+
+    switch (state.model) {
+        case Models.KNN:
+            sb.appendLine(knnCode.knnParamsCode(7)); // TODO: replace with number of neighbors
+            break;
+        case Models.LINEAR_REGRESSION:
+            sb.appendLine(regressionCode.regressionParamsCode(5)); // TODO: replace with feature column
+            break;
+    }
     }
 
 
