@@ -3,15 +3,16 @@ import * as regressionCode from "codegen/regressionCode"
 import * as knnCode from "codegen/knnCode";
 import * as sharedCode from "codegen/sharedCode";
 import {Models, DatasetCategory} from "state/StateTypes";
-import { networkCode } from "nn-architecture/networkCode";
+import { networkCode } from "codegen/networkCode";
 import { FeedforwardNN } from "nn-architecture/Network";
 const StringBuilder = require("string-builder");
 
-const codeGen = (state) => {
+export const codeGen = (state) => {
 
     const sb = new StringBuilder();
-    sb.appendLine(importsCode.standardImportsCode());
+    sb.append(importsCode.standardImportsCode());
 
+    // model-specific imports
     switch(state.model) {
         case Models.KNN:
             sb.appendLine(importsCode.knnImportsCode());
@@ -30,15 +31,14 @@ const codeGen = (state) => {
             break;
     } 
 
+    // import sklearn datasets
     switch (state.dataset_category) {
         case DatasetCategory.SAMPLE:
             sb.appendLine(importsCode.datasetsImportCode());
             break;
     }
 
-    sb.appendLine();
-    sb.appendLine();
-
+    // defines loadData function
     switch (state.dataset_category) {
         case DatasetCategory.SAMPLE:
             sb.appendLine(sharedCode.loadSampleDatasetFunctionCode(state.sample_dataset));
@@ -48,6 +48,7 @@ const codeGen = (state) => {
             break;
     }
 
+    // defines model params
     switch (state.model) {
         case Models.KNN:
             sb.appendLine(knnCode.knnParamsCode(7)); // TODO: replace with number of neighbors
@@ -57,8 +58,10 @@ const codeGen = (state) => {
             break;
     }
 
+    // loads data
     sb.appendLine(sharedCode.loadDataCode());
 
+    // slices data
     switch (state.model) {
         case Models.KNN:
             sb.appendLine(knnCode.knnSliceCode());
@@ -70,8 +73,10 @@ const codeGen = (state) => {
             break;
     }
 
+    // splits training/testing sets
     sb.appendLine(sharedCode.splitDataCode()); // TODO: exempt nlp
 
+    // fits model
     switch (state.model) {
         case Models.KNN:
             sb.appendLine(knnCode.knnModelCode());
@@ -90,6 +95,6 @@ const codeGen = (state) => {
             break;
     }
 
-
+    return sb.toString();
 }
 
