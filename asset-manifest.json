@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/otto/static/css/main.e8eb2a6d.chunk.css",
-    "main.js": "/otto/static/js/main.5e2aa832.chunk.js",
-    "main.js.map": "/otto/static/js/main.5e2aa832.chunk.js.map",
-    "runtime-main.js": "/otto/static/js/runtime-main.e540dd69.js",
-    "runtime-main.js.map": "/otto/static/js/runtime-main.e540dd69.js.map",
-    "static/css/2.ba27f8b8.chunk.css": "/otto/static/css/2.ba27f8b8.chunk.css",
-    "static/js/2.d8a02f8c.chunk.js": "/otto/static/js/2.d8a02f8c.chunk.js",
-    "static/js/2.d8a02f8c.chunk.js.map": "/otto/static/js/2.d8a02f8c.chunk.js.map",
-    "index.html": "/otto/index.html",
-    "precache-manifest.e684b5bd28bf1278cbd2214f105e0c95.js": "/otto/precache-manifest.e684b5bd28bf1278cbd2214f105e0c95.js",
-    "service-worker.js": "/otto/service-worker.js",
-    "static/css/2.ba27f8b8.chunk.css.map": "/otto/static/css/2.ba27f8b8.chunk.css.map",
-    "static/css/main.e8eb2a6d.chunk.css.map": "/otto/static/css/main.e8eb2a6d.chunk.css.map",
-    "static/js/2.d8a02f8c.chunk.js.LICENSE.txt": "/otto/static/js/2.d8a02f8c.chunk.js.LICENSE.txt",
-    "static/media/logo.svg": "/otto/static/media/logo.5d5d9eef.svg",
-    "static/media/index.css": "/otto/static/media/roboto-latin-900-normal.bb1e4dc6.woff"
+    "main.css": "/Otto/static/css/main.e8eb2a6d.chunk.css",
+    "main.js": "/Otto/static/js/main.fe33c761.chunk.js",
+    "main.js.map": "/Otto/static/js/main.fe33c761.chunk.js.map",
+    "runtime-main.js": "/Otto/static/js/runtime-main.74b96ef3.js",
+    "runtime-main.js.map": "/Otto/static/js/runtime-main.74b96ef3.js.map",
+    "static/css/2.9a56aa8a.chunk.css": "/Otto/static/css/2.9a56aa8a.chunk.css",
+    "static/js/2.54f5361a.chunk.js": "/Otto/static/js/2.54f5361a.chunk.js",
+    "static/js/2.54f5361a.chunk.js.map": "/Otto/static/js/2.54f5361a.chunk.js.map",
+    "index.html": "/Otto/index.html",
+    "precache-manifest.4d403461bd322792d35f711daa0975b2.js": "/Otto/precache-manifest.4d403461bd322792d35f711daa0975b2.js",
+    "service-worker.js": "/Otto/service-worker.js",
+    "static/css/2.9a56aa8a.chunk.css.map": "/Otto/static/css/2.9a56aa8a.chunk.css.map",
+    "static/css/main.e8eb2a6d.chunk.css.map": "/Otto/static/css/main.e8eb2a6d.chunk.css.map",
+    "static/js/2.54f5361a.chunk.js.LICENSE.txt": "/Otto/static/js/2.54f5361a.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/Otto/static/media/logo.5d5d9eef.svg",
+    "static/media/index.css": "/Otto/static/media/roboto-latin-900-normal.bb1e4dc6.woff"
   },
   "entrypoints": [
-    "static/js/runtime-main.e540dd69.js",
-    "static/css/2.ba27f8b8.chunk.css",
-    "static/js/2.d8a02f8c.chunk.js",
+    "static/js/runtime-main.74b96ef3.js",
+    "static/css/2.9a56aa8a.chunk.css",
+    "static/js/2.54f5361a.chunk.js",
     "static/css/main.e8eb2a6d.chunk.css",
-    "static/js/main.5e2aa832.chunk.js"
+    "static/js/main.fe33c761.chunk.js"
   ]
 }
