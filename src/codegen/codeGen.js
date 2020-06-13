@@ -71,6 +71,23 @@ const codeGen = (state) => {
     }
 
     sb.appendLine(sharedCode.splitDataCode()); // TODO: exempt nlp
+
+    switch (state.model) {
+        case Models.KNN:
+            sb.appendLine(knnCode.knnModelCode());
+            break;
+        case Models.NEURAL_NETWORK_FF:
+            sb.appendLine(networkCode.networkCode(new FeedforwardNN())); // TODO: replace with NN
+            break;
+        case Models.LINEAR_REGRESSION:
+            sb.appendLine(regressionCode.linearModelCode());
+            break;
+        case Models.ORDINAL_REGRESSION:
+            sb.appendLine(regressionCode.ordinalModelCode());
+            break;
+        case Models.POISSON_REGRESSION:
+            sb.appendLine(regressionCode.poissonModelCode());
+            break;
     }
 
 
