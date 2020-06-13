@@ -1,6 +1,5 @@
 import React from "react";
 import { Sigma, RandomizeNodePositions, RelativeSize } from "react-sigma";
-import Graph from "react-sigma-graph";
 import { FeedforwardNN } from "nn-architecture/Network";
 
 export default function VisualizerNNContainer() {
@@ -16,13 +15,6 @@ export default function VisualizerNNContainer() {
   // console.log(networkCode(nn));
 
   let g = toGraph(nn);
-  let myGraph = {
-    nodes: [
-      { id: "n1", label: "Alice", color: "#000" },
-      { id: "n2", label: "Rabbit", color: "#000" },
-    ],
-    edges: [{ id: "e1", source: "n1", target: "n2", label: "SEES" }],
-  };
 
   return getSigma(g);
 }
