@@ -23,6 +23,10 @@ const codeGen = (state) => {
             sb.appendLine(importsCode.poissonImportsCode());
     } 
 
+    switch (state.dataset_category) {
+        case DatasetCategory.SAMPLE:
+            sb.appendLine(importsCode.datasetsImportCode());
+    }
 
 
 }
