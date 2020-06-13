@@ -24,6 +24,13 @@ from sklearn.metrics import mean_poisson_deviance
     `;
 }
 
+const ordinalImportsCode = () => {
+    return `
+import mord
+from sklearn.metrics import accuracy_score
+    `;
+}
+
 const knnImportsCode = () => {
     return `from sklearn import neighbors`
 }
