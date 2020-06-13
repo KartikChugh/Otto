@@ -1,12 +1,12 @@
-const linearParamsCode = (column) => {
+export const regressionParamsCode = (column) => {
     return `FEATURE_COLUMN = ${column}`;
 }
 
-const linearSliceCode = () => {
+export const regressionSliceCode = () => {
     return `X = X[:, np.newaxis, FEATURE_COLUMN]`;
 }
 
-const linearModelCode = () => {
+export const linearModelCode = () => {
 
     const linear = 
     `    
@@ -41,7 +41,7 @@ const linearModelCode = () => {
     return linear;
 }
 
-const poissonModelCode = () => {
+export const poissonModelCode = () => {
     const poisson = 
     `    
     # Split the data into training/testing sets
@@ -72,7 +72,7 @@ const poissonModelCode = () => {
     return poisson;
 }
 
-const ordinalModel = () => {
+export const ordinalModelCode = () => {
     const ordinal = 
     `    
     # Split the data into training/testing sets

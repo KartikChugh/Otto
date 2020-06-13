@@ -1,12 +1,12 @@
-const knnParamsCode = (neighbors) => {
+export const knnParamsCode = (neighbors) => {
     return `NEIGHBORS = ${neighbors}`;
 }
 
-const knnSliceCode = () => {
+export const knnSliceCode = () => {
     return `X = X[:, :2]`;
 }
 
-const knnModelCode = () => {
+export const knnModelCode = () => {
 
     const knn = 
     `    
