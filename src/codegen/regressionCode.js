@@ -10,9 +10,6 @@ export const linearModelCode = () => {
 
     const linear = 
     `    
-    # Split the data into training/testing sets
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-    
     # Create linear regression object
     regr = linear_model.LinearRegression()
     
@@ -43,10 +40,7 @@ export const linearModelCode = () => {
 
 export const poissonModelCode = () => {
     const poisson = 
-    `    
-    # Split the data into training/testing sets
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-    
+    `  
     # Create linear regression object
     regr = linear_model.PoissonRegressor()
     
@@ -74,10 +68,7 @@ export const poissonModelCode = () => {
 
 export const ordinalModelCode = () => {
     const ordinal = 
-    `    
-    # Split the data into training/testing sets
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-    
+    `       
     # Create linear regression object
     regr = mord.OrdinalRidge()
     
