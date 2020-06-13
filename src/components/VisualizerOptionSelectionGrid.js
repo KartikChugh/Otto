@@ -1,19 +1,6 @@
 import React from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import {
-  Grid,
-  Avatar,
-  Badge,
-  Tooltip,
-  CardContent,
-  CardActions,
-  Typography,
-  Button,
-} from "@material-ui/core";
-import {
-  NavigateNextRounded,
-  NavigateBeforeRounded,
-} from "@material-ui/icons/";
+import { Grid, Avatar, Badge, Tooltip, Typography } from "@material-ui/core";
 
 import { invoke } from "js-ml/knn";
 
@@ -29,7 +16,7 @@ import {
 } from "state/StateTypes";
 import { useState } from "state/State";
 import { Actions } from "state/Actions";
-import { getActiveStep, getSteps } from "containers/SummaryContainer";
+import { getSteps } from "containers/SummaryContainer";
 import logo from "logo.svg";
 
 const StyledBadge = withStyles((theme) => ({
@@ -90,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function getOptions(state: StateType) {
+export function getOptions(state: StateType) {
   const options = [];
   const stepperState = state.stepper_state;
   switch (stepperState) {
@@ -135,24 +122,6 @@ export default function VisualizerOptionSelectionGrid() {
   const classes = useStyles();
   const steps = getSteps();
   const [state, dispatcher] = useState();
-
-  const handleNext = () => {
-    dispatcher({
-      type: Actions.STEPPER_HANDLE_NEXT,
-    });
-  };
-
-  const handleBack = () => {
-    dispatcher({
-      type: Actions.STEPPER_HANDLE_PREVIOUS,
-    });
-  };
-
-  const handleFinish = () => {
-    dispatcher({
-      type: Actions.HANDLE_STEPPER_FINISH,
-    });
-  };
 
   const getIsRecommended = (value) =>
     [
@@ -220,98 +189,56 @@ export default function VisualizerOptionSelectionGrid() {
 
   return (
     <>
-      <CardContent>
-        <Typography className={classes.titleInner} color="textPrimary">
-          Let's get started!
-        </Typography>
-        <Typography variant="h6" className={classes.subtitle}>
-          Chat with Otto to get a {state.stepper_state} recommendation.
-        </Typography>
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
-          spacing={5}
-        >
-          {getOptions(state).map((avatar) => (
-            <Grid item className={classes.avatarItem} key={avatar.label}>
-              {getIsRecommended(avatar.label) ? (
-                <Tooltip title="Recommended by Otto!" placement="top">
-                  <StyledBadge
-                    overlap="circle"
-                    anchorOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                    badgeContent={
-                      <img
-                        className={classes.recommend}
-                        src="https://img.icons8.com/ultraviolet/80/000000/good-quality.png"
-                        alt="R"
-                      />
-                    }
-                  >
-                    <AvatarItem avatar={avatar} />
-                  </StyledBadge>
-                </Tooltip>
-              ) : (
-                <AvatarItem avatar={avatar} />
-              )}
-              <Typography
-                color="textPrimary"
-                className={
-                  getIsSelected(avatar.label)
-                    ? classes.avatarLabelSelected
-                    : classes.avatarLabel
-                }
-              >
-                {avatar.label}
-              </Typography>
-            </Grid>
-          ))}
-        </Grid>
-      </CardContent>
-      <CardActions
-        style={{
-          position: "absolute",
-          bottom: "2px",
-          display: "inline-block",
-          width: "100%",
-          left: 0,
-        }}
+      <Typography className={classes.titleInner} color="textPrimary">
+        Let's get started!
+      </Typography>
+      <Typography variant="h6" className={classes.subtitle}>
+        Chat with Otto to get a {state.stepper_state} recommendation.
+      </Typography>
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={5}
       >
-        {getActiveStep(state) > 0 ? (
-          <Button
-            onClick={handleBack}
-            className={classes.button}
-            style={{ float: "left" }}
-            startIcon={<NavigateBeforeRounded />}
-          >
-            {steps[getActiveStep(state) - 1]}
-          </Button>
-        ) : null}
-        <Button
-          disabled={
-            state.stepper_state !== StepperState.PREPROCESSORS &&
-            !getOptions(state).some((val) => getIsSelected(val.label))
-          }
-          variant="contained"
-          color="primary"
-          onClick={
-            getActiveStep(state) === steps.length - 1
-              ? handleFinish
-              : handleNext
-          }
-          className={classes.button}
-          style={{ float: "right" }}
-          endIcon={<NavigateNextRounded />}
-        >
-          {getActiveStep(state) === steps.length - 1
-            ? "Finish"
-            : steps[getActiveStep(state) + 1]}
-        </Button>
-      </CardActions>
+        {getOptions(state).map((avatar) => (
+          <Grid item className={classes.avatarItem} key={avatar.label}>
+            {getIsRecommended(avatar.label) ? (
+              <Tooltip title="Recommended by Otto!" placement="top">
+                <StyledBadge
+                  overlap="circle"
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  badgeContent={
+                    <img
+                      className={classes.recommend}
+                      src="https://img.icons8.com/ultraviolet/80/000000/good-quality.png"
+                      alt="R"
+                    />
+                  }
+                >
+                  <AvatarItem avatar={avatar} />
+                </StyledBadge>
+              </Tooltip>
+            ) : (
+              <AvatarItem avatar={avatar} />
+            )}
+            <Typography
+              color="textPrimary"
+              className={
+                getIsSelected(avatar.label)
+                  ? classes.avatarLabelSelected
+                  : classes.avatarLabel
+              }
+            >
+              {avatar.label}
+            </Typography>
+          </Grid>
+        ))}
+      </Grid>
     </>
   );
 }

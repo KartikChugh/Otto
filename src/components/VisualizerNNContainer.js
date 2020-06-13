@@ -30,7 +30,10 @@ export default function VisualizerNNContainer() {
 export const getSigma = (data) => (
   <Sigma
     graph={data}
-    style={{ marginLeft: "-900px", height: "100%" }}
+    style={{
+      height: "95%",
+      transform: "translate(-414px, -10px)",
+    }}
     // style={{ height: "100%" }}
     // onClickNode={onClickNodeFunc}
     //onOverNode={this.onOverNodeFunc}
