@@ -56,6 +56,21 @@ const codeGen = (state) => {
             sb.appendLine(regressionCode.regressionParamsCode(5)); // TODO: replace with feature column
             break;
     }
+
+    sb.appendLine(sharedCode.loadDataCode());
+
+    switch (state.model) {
+        case Models.KNN:
+            sb.appendLine(knnCode.knnSliceCode());
+            break;
+        case Models.ORDINAL_REGRESSION:
+        case Models.POISSON_REGRESSION:
+        case Models.LINEAR_REGRESSION:
+            sb.appendLine(regressionCode.regressionSliceCode());
+            break;
+    }
+
+    sb.appendLine(sharedCode.splitDataCode()); // TODO: exempt nlp
     }
 
 
