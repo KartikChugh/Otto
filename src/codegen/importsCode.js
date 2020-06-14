@@ -37,3 +37,11 @@ from tensorflow.keras.layers import Dense, Input
 export const datasetsImportCode = () => {
     return `from sklearn import datasets`
 }
+
+export const normalizationImportCode = () => {
+    return `from sklearn.preprocessing import scale`
+}
+
+export const pcaImportCode = () => {
+    return `from sklearn.decomposition import PCA`
+}

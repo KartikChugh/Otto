@@ -2,7 +2,8 @@ import * as importsCode from "codegen/importsCode";
 import * as regressionCode from "codegen/regressionCode"
 import * as knnCode from "codegen/knnCode";
 import * as sharedCode from "codegen/sharedCode";
-import {Models, DatasetCategory} from "state/StateTypes";
+import * as preprocessCode from "codegen/preprocessCode";
+import {Models, DatasetCategory, Preprocessors} from "state/StateTypes";
 import { networkCode } from "codegen/networkCode";
 import { FeedforwardNN } from "nn-architecture/Network";
 const StringBuilder = require("string-builder");
@@ -38,6 +39,8 @@ export const codeGen = (state) => {
             break;
     }
 
+    sb.appendLine();
+
     // defines loadData function
     switch (state.dataset_category) {
         case DatasetCategory.SAMPLE:
@@ -48,6 +51,8 @@ export const codeGen = (state) => {
             break;
     }
 
+    sb.appendLine();
+
     // defines model params
     switch (state.model) {
         case Models.KNN:
@@ -57,6 +62,8 @@ export const codeGen = (state) => {
             sb.appendLine(regressionCode.regressionParamsCode(5)); // TODO: replace with feature column
             break;
     }
+
+    sb.appendLine();
 
     // loads data
     sb.appendLine(sharedCode.loadDataCode());
@@ -73,8 +80,15 @@ export const codeGen = (state) => {
             break;
     }
 
+    // scales data
+    if (normalizationWithoutPCA(state.preprocessors)) {
+        sb.appendLine(preprocessCode.normalization());
+    }
+
     // splits training/testing sets
     sb.appendLine(sharedCode.splitDataCode()); // TODO: exempt nlp
+
+    sb.appendLine();
 
     // fits model
     switch (state.model) {
@@ -96,5 +110,11 @@ export const codeGen = (state) => {
     }
 
     return sb.toString();
+}
+
+const normalizationWithoutPCA = (preprocessors) => {
+    return (preprocessors.includes(Preprocessors.NORMALIZATION) &&
+        !preprocessors.includes(Preprocessors.PCA)
+    );
 }
 
