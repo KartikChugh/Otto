@@ -53,37 +53,21 @@ export const codeGen = (state) => {
 
     sb.appendLine();
 
-    // defines model params
-    switch (state.model) {
-        case Models.KNN:
-            sb.appendLine(knnCode.params(7)); // TODO: replace with number of neighbors
-            break;
-        case Models.LINEAR_REGRESSION:
-            sb.appendLine(regressionCode.params(5)); // TODO: replace with feature column
-            break;
-    }
+    // defines params
+    sb.appendLine(params(state));
 
     sb.appendLine();
 
     // loads data
     sb.appendLine(sharedCode.load());
 
-    // slices data
-    switch (state.model) {
-        case Models.KNN:
-            sb.appendLine(knnCode.slice());
-            break;
-        case Models.ORDINAL_REGRESSION:
-        case Models.POISSON_REGRESSION:
-        case Models.LINEAR_REGRESSION:
-            sb.appendLine(regressionCode.slice());
-            break;
-    }
-
     // scales data
-    if (normalizationWithoutPCA(state.preprocessors)) {
+    if (state.preprocessors.includes(Preprocessors.NORMALIZATION)) {
         sb.appendLine(preprocessCode.normalization());
     }
+
+    // slices data (feature selection OR pca)
+    sb.appendLine(sliceData(state));
 
     // splits training/testing sets
     sb.appendLine(sharedCode.split()); // TODO: exempt nlp
@@ -112,9 +96,55 @@ export const codeGen = (state) => {
     return sb.toString();
 }
 
-const normalizationWithoutPCA = (preprocessors) => {
-    return (preprocessors.includes(Preprocessors.NORMALIZATION) &&
-        !preprocessors.includes(Preprocessors.PCA)
-    );
+const componentsForModel = (model) => {
+    switch (model) {
+        case Models.KNN:
+            return 2;
+        case Models.NEURAL_NETWORK_FF:
+            return "None";
+        case Models.ORDINAL_REGRESSION:
+        case Models.POISSON_REGRESSION:
+        case Models.LINEAR_REGRESSION:
+            return 1;
+    }
 }
+
+const params = (state) => {
+
+    if (state.preprocessors.includes(Preprocessors.PCA)) {
+        const components = componentsForModel(state.model);
+        return preprocessCode.paramsPca(components);
+    }
+
+    switch (state.model) {
+        case Models.KNN:
+            return knnCode.params(7); // TODO: replace with number of neighbors
+        case Models.LINEAR_REGRESSION:
+            return regressionCode.params(5); // TODO: replace with feature column
+    }
+    
+}
+
+const sliceData = (state) => {
+
+    if (state.preprocessors.includes(Preprocessors.PCA)) {
+        return preprocessCode.pca();
+    }
+
+    switch (state.model) {
+        case Models.KNN:
+            return knnCode.slice();
+        case Models.ORDINAL_REGRESSION:
+        case Models.POISSON_REGRESSION:
+        case Models.LINEAR_REGRESSION:
+            return regressionCode.slice();
+    }
+    
+}
+
+// const normalizationWithoutPCA = (preprocessors) => {
+//     return (preprocessors.includes(Preprocessors.NORMALIZATION) &&
+//         !preprocessors.includes(Preprocessors.PCA)
+//     );
+// }
 
