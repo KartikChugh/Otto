@@ -1,11 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "state/State";
-import { Actions } from "state/Actions";
-import { FeedforwardNN} from "nn-architecture/Network"
-import { Layer } from "nn-architecture/Layer"
-import { Optimizers, Losses, Activations, Initializers } from "nn-architecture/hyperparams" 
-import { networkCode } from "codegen/networkCode"
 
 import {
   Widget,
@@ -16,10 +11,7 @@ import {
 import logo from "logo.svg";
 
 import * as msgs from "conversation/msgs";
-
-//import Conversation from "conversation";
 import Conversation from "conversation/Conversation";
-import { Tasks } from "state/StateTypes";
 
 const convo = new Conversation(addResponseMessage);
 

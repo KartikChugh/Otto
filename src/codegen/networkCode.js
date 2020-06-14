@@ -1,7 +1,7 @@
 import { Layers } from "nn-architecture/hyperparams";
 const StringBuilder = require("string-builder");
 
-export const networkCode = (network) => {
+export const model = (network) => {
   const sb = new StringBuilder();
 
   sb.appendLine("model = Sequential()");

@@ -11,31 +11,31 @@ const StringBuilder = require("string-builder");
 export const codeGen = (state) => {
 
     const sb = new StringBuilder();
-    sb.append(importsCode.standardImportsCode());
+    sb.append(importsCode.universal());
 
     // model-specific imports
     switch(state.model) {
         case Models.KNN:
-            sb.appendLine(importsCode.knnImportsCode());
+            sb.appendLine(importsCode.knn());
             break;
         case Models.NEURAL_NETWORK_FF:
-            sb.appendLine(importsCode.nnImportsCode());
+            sb.appendLine(importsCode.nn());
             break;
         case Models.LINEAR_REGRESSION:
-            sb.appendLine(importsCode.linearImportsCode());
+            sb.appendLine(importsCode.linear());
             break;
         case Models.ORDINAL_REGRESSION:
-            sb.appendLine(importsCode.ordinalImportsCode());
+            sb.appendLine(importsCode.ordinal());
             break;
         case Models.POISSON_REGRESSION:
-            sb.appendLine(importsCode.poissonImportsCode());
+            sb.appendLine(importsCode.poisson());
             break;
     } 
 
     // import sklearn datasets
     switch (state.dataset_category) {
         case DatasetCategory.SAMPLE:
-            sb.appendLine(importsCode.datasetsImportCode());
+            sb.appendLine(importsCode.sklearnDatasets());
             break;
     }
 
@@ -44,10 +44,10 @@ export const codeGen = (state) => {
     // defines loadData function
     switch (state.dataset_category) {
         case DatasetCategory.SAMPLE:
-            sb.appendLine(sharedCode.loadSampleDatasetFunctionCode(state.sample_dataset));
+            sb.appendLine(sharedCode.defineLoadDataset(state.sample_dataset));
             break;
         case DatasetCategory.CUSTOM:
-            sb.appendLine(sharedCode.loadDataFunctionCode());
+            sb.appendLine(sharedCode.defineLoadUnspecified());
             break;
     }
 
@@ -56,27 +56,27 @@ export const codeGen = (state) => {
     // defines model params
     switch (state.model) {
         case Models.KNN:
-            sb.appendLine(knnCode.knnParamsCode(7)); // TODO: replace with number of neighbors
+            sb.appendLine(knnCode.params(7)); // TODO: replace with number of neighbors
             break;
         case Models.LINEAR_REGRESSION:
-            sb.appendLine(regressionCode.regressionParamsCode(5)); // TODO: replace with feature column
+            sb.appendLine(regressionCode.params(5)); // TODO: replace with feature column
             break;
     }
 
     sb.appendLine();
 
     // loads data
-    sb.appendLine(sharedCode.loadDataCode());
+    sb.appendLine(sharedCode.load());
 
     // slices data
     switch (state.model) {
         case Models.KNN:
-            sb.appendLine(knnCode.knnSliceCode());
+            sb.appendLine(knnCode.slice());
             break;
         case Models.ORDINAL_REGRESSION:
         case Models.POISSON_REGRESSION:
         case Models.LINEAR_REGRESSION:
-            sb.appendLine(regressionCode.regressionSliceCode());
+            sb.appendLine(regressionCode.slice());
             break;
     }
 
@@ -86,26 +86,26 @@ export const codeGen = (state) => {
     }
 
     // splits training/testing sets
-    sb.appendLine(sharedCode.splitDataCode()); // TODO: exempt nlp
+    sb.appendLine(sharedCode.split()); // TODO: exempt nlp
 
     sb.appendLine();
 
     // fits model
     switch (state.model) {
         case Models.KNN:
-            sb.appendLine(knnCode.knnModelCode());
+            sb.appendLine(knnCode.model());
             break;
         case Models.NEURAL_NETWORK_FF:
-            sb.appendLine(networkCode.networkCode(new FeedforwardNN())); // TODO: replace with NN
+            sb.appendLine(networkCode.model(new FeedforwardNN())); // TODO: replace with NN
             break;
         case Models.LINEAR_REGRESSION:
-            sb.appendLine(regressionCode.linearModelCode());
+            sb.appendLine(regressionCode.modelLinear());
             break;
         case Models.ORDINAL_REGRESSION:
-            sb.appendLine(regressionCode.ordinalModelCode());
+            sb.appendLine(regressionCode.modelOrdinal());
             break;
         case Models.POISSON_REGRESSION:
-            sb.appendLine(regressionCode.poissonModelCode());
+            sb.appendLine(regressionCode.modelPoisson());
             break;
     }
 

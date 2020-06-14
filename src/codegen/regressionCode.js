@@ -1,12 +1,12 @@
-export const regressionParamsCode = (column) => {
+export const params = (column) => {
     return `FEATURE_COLUMN = ${column}`;
 }
 
-export const regressionSliceCode = () => {
+export const slice = () => {
     return `X = X[:, np.newaxis, FEATURE_COLUMN]`;
 }
 
-export const linearModelCode = () => {
+export const modelLinear = () => {
 
     const linear = 
 `# Create linear regression object
@@ -37,7 +37,7 @@ plt.show()
     return linear;
 }
 
-export const poissonModelCode = () => {
+export const modelPoisson = () => {
     const poisson = 
 `# Create linear regression object
 regr = linear_model.PoissonRegressor()
@@ -64,7 +64,7 @@ plt.show()
     return poisson;
 }
 
-export const ordinalModelCode = () => {
+export const modelOrdinal = () => {
     const ordinal = 
 `# Create linear regression object
 regr = mord.OrdinalRidge()

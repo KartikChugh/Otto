@@ -1,12 +1,12 @@
-export const knnParamsCode = (neighbors) => {
+export const params = (neighbors) => {
     return `NEIGHBORS = ${neighbors}`;
 }
 
-export const knnSliceCode = () => {
+export const slice = () => {
     return `X = X[:, :2]`;
 }
 
-export const knnModelCode = () => {
+export const model = () => {
 
     const knn = 
 `# we create an instance of Neighbours Classifier and fit the data.
