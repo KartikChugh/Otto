@@ -4,7 +4,7 @@ import * as knnCode from "codegen/knnCode";
 import * as sharedCode from "codegen/sharedCode";
 import * as preprocessCode from "codegen/preprocessCode";
 import {Models, DatasetCategory, Preprocessors} from "state/StateTypes";
-import { networkCode } from "codegen/networkCode";
+import * as networkCode from "codegen/networkCode";
 import { FeedforwardNN } from "nn-architecture/Network";
 const StringBuilder = require("string-builder");
 
