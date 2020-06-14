@@ -1,7 +1,4 @@
-import React from "react";
-import { ResponsiveEmbed } from "react-bootstrap";
-import { useState } from "state/State";
-import responseTo from "conversation/Respond"
+import responseTo from "conversation/Respond";
 const { Wit, log } = require("node-wit");
 const token = require("TOKEN.json");
 
