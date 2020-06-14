@@ -32,6 +32,14 @@ export const codeGen = (state) => {
             break;
     } 
 
+    // preprocessor imports
+    if (state.preprocessors.includes(Preprocessors.NORMALIZATION)) {
+        sb.appendLine(importsCode.normalization());
+    }
+    if (state.preprocessors.includes(Preprocessors.PCA)) {
+        sb.appendLine(importsCode.pca());
+    }
+
     // import sklearn datasets
     switch (state.dataset_category) {
         case DatasetCategory.SAMPLE:

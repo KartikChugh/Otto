@@ -8,20 +8,17 @@ from sklearn.model_selection import train_test_split`;
 
 export const linear = () => {
     return `from sklearn import linear_model
-from sklearn.metrics import mean_squared_error, r2_score
-    `;
+from sklearn.metrics import mean_squared_error, r2_score`;
 }
 
 export const poisson = () => {
     return `from sklearn import linear_model
-from sklearn.metrics import mean_poisson_deviance
-    `;
+from sklearn.metrics import mean_poisson_deviance`;
 }
 
 export const ordinal = () => {
     return `import mord
-from sklearn.metrics import accuracy_score
-    `;
+from sklearn.metrics import accuracy_score`;
 }
 
 export const knn = () => {
@@ -30,8 +27,7 @@ export const knn = () => {
 
 export const nn = () => {
     return `from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Dense, Input
-    `;
+from tensorflow.keras.layers import Dense, Input`;
 }
 
 export const sklearnDatasets = () => {
@@ -42,6 +38,6 @@ export const normalization = () => {
     return `from sklearn.preprocessing import scale`
 }
 
-export const pcaImportCode = () => {
+export const pca = () => {
     return `from sklearn.decomposition import PCA`
 }
