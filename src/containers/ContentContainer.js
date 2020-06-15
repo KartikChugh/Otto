@@ -3,6 +3,7 @@ import { Col } from "react-bootstrap";
 import RightColumnContainer from "containers/RightColumnContainer";
 import MainColumnContainer from "containers/MainColumnContainer";
 import SummaryContainer from "containers/SummaryContainer";
+import { NNStateProvider } from "state/NNState";
 
 function ContentContainer() {
   return (
@@ -12,10 +13,14 @@ function ContentContainer() {
       </Col>
       {/* <Divider orientation="vertical" flexItem /> */}
       <Col className="mainColumnContainer">
-        <MainColumnContainer />
+        <NNStateProvider>
+          <MainColumnContainer />
+        </NNStateProvider>
       </Col>
       <Col className="rightColumnContainer" lg={3}>
-        <RightColumnContainer />
+        <NNStateProvider>
+          <RightColumnContainer />
+        </NNStateProvider>
       </Col>
     </>
   );
