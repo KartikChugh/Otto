@@ -11,7 +11,6 @@ function ContentContainer() {
       <Col className="summaryContainer" lg={2}>
         <SummaryContainer />
       </Col>
-      {/* <Divider orientation="vertical" flexItem /> */}
       <Col className="mainColumnContainer">
         <NNStateProvider>
           <MainColumnContainer />
