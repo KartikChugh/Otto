@@ -104,7 +104,7 @@ export const StateProvider = ({ children }) => {
   );
 };
 
-export const useState: () => [StateType, () => any] = () => [
-  useContext(StateContext),
-  useContext(DispatchStateContext),
-];
+export const useState = () => ({
+  state: useContext(StateContext),
+  dispatch: useContext(DispatchStateContext),
+});

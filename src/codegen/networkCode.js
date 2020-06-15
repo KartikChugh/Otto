@@ -1,14 +1,14 @@
 import { Layers } from "nn-architecture/hyperparams";
 const StringBuilder = require("string-builder");
 
-export const model = (network) => {
+export const model = (state) => {
   const sb = new StringBuilder();
 
   sb.appendLine("model = Sequential()");
-  sb.append(layerCode(network));
+  sb.append(layerCode(state));
 
   sb.appendLine(
-    `model.compile(optimizer='${network.optimizer}', loss='${network.loss}')`
+    `model.compile(optimizer='${state.optimizer}', loss='${state.loss}')`
   );
 
   sb.appendLine("model.fit(X_train, y_train, batch_size=32, epochs=100)");
@@ -16,9 +16,9 @@ export const model = (network) => {
   return sb.toString();
 };
 
-const layerCode = (network) => {
+const layerCode = (state) => {
   const sb = new StringBuilder();
-  const layers = network.layers;
+  const layers = state.layers;
   for (let i = 0; i < layers.length; i++) {
     const layer = layers[i];
 
@@ -26,9 +26,9 @@ const layerCode = (network) => {
     if (i === 0) {
       layerCode = inputLayerCode(layer);
     } else if (i === layers.length - 1) {
-      layerCode = outputLayerCode(layer, network);
+      layerCode = outputLayerCode(layer, state);
     } else {
-      layerCode = hiddenLayerCode(layer, network);
+      layerCode = hiddenLayerCode(layer, state);
     }
 
     sb.appendLine(layerCode);
@@ -43,19 +43,19 @@ const inputLayerCode = (layer) => {
   return str;
 };
 
-const hiddenLayerCode = (layer, network) => {
+const hiddenLayerCode = (layer, state) => {
   const units = layer.units;
-  const activation = network.activation;
-  const initializer = network.initializer;
+  const activation = state.activation;
+  const initializer = state.initializer;
 
   const str = `model.add(Dense(${units}, activation='${activation}', kernel_initializer='${initializer}'))`;
   return str;
 };
 
-const outputLayerCode = (layer, network) => {
+const outputLayerCode = (layer, state) => {
   const units = layer.units;
-  const activation = network.outputActivation;
-  const initializer = network.initializer;
+  const activation = state.outputActivation;
+  const initializer = state.initializer;
 
   const str = `model.add(Dense(${units}, activation='${activation}', kernel_initializer='${initializer}'))`;
   return str;

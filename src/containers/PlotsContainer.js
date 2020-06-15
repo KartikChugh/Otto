@@ -5,7 +5,7 @@ import VisualizerNNContainer from "components/VisualizerNNContainer";
 import PlotKNN from "components/PlotKNN";
 
 export default function PlotsContainer() {
-  const [state, dispatcher] = useState();
+  const { state } = useState();
   switch (state.model) {
     case Models.NEURAL_NETWORK_FF:
       return <VisualizerNNContainer />;

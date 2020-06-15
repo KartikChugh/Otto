@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 function VisualizerContainer() {
   const classes = useStyles();
   const steps = getSteps();
-  const [state, dispatcher] = useState();
+  const { state, dispatch } = useState();
 
   const getIsSelected = (value) =>
     [
@@ -68,19 +68,19 @@ function VisualizerContainer() {
     ].includes(value);
 
   const handleNext = () => {
-    dispatcher({
+    dispatch({
       type: Actions.STEPPER_HANDLE_NEXT,
     });
   };
 
   const handleBack = () => {
-    dispatcher({
+    dispatch({
       type: Actions.STEPPER_HANDLE_PREVIOUS,
     });
   };
 
   const handleFinish = () => {
-    dispatcher({
+    dispatch({
       type: Actions.HANDLE_STEPPER_FINISH,
     });
   };
