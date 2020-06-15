@@ -3,6 +3,7 @@ import "App.css";
 import VisualizerContainer from "containers/VisualizerContainer";
 import CodeContainer from "containers/CodeContainer";
 import { Grid } from "@material-ui/core";
+import { NNStateProvider } from "state/NNState";
 
 function MainColumnContainer() {
   return (
@@ -11,7 +12,9 @@ function MainColumnContainer() {
         <VisualizerContainer />
       </Grid>
       <Grid item className="outerContainer codeContainer">
-        <CodeContainer />
+        <NNStateProvider>
+          <CodeContainer />
+        </NNStateProvider>
       </Grid>
     </Grid>
   );
