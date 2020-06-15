@@ -7,9 +7,14 @@ export default class Conversation /* extends React.Component */  {
     constructor(say) {
         // super();
         this.say = say;
-        this.wit = new Wit({
-            accessToken: token.tester,
-            logger: new log.Logger(log.DEBUG),
+        this.ottoTask = new Wit({
+            accessToken: token.task_tester,
+        });
+        this.ottoModel = new Wit({
+            accessToken: token.model,
+        });
+        this.ottoNN = new Wit({
+            accessToken: token.nn,
         });
     }
 
@@ -32,7 +37,7 @@ export default class Conversation /* extends React.Component */  {
 
         // const [state, dispatch] = null;
         await this.sayMessages(
-            await responseTo(userMessage, this.wit, state, dispatch)
+            await responseTo(userMessage, this.ottoTask, state, dispatch)
         ); 
     };
 
