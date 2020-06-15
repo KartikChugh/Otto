@@ -24,9 +24,8 @@ export const getSigma = (data) => (
     graph={data}
     style={{
       height: "95%",
-      transform: "translate(-414px, -10px)",
+      transform: "translate(-50%, -10px)",
     }}
-    // style={{ height: "100%" }}
     // onClickNode={onClickNodeFunc}
     //onOverNode={this.onOverNodeFunc}
     //onOutNode={this.onOutNodeFunc}
