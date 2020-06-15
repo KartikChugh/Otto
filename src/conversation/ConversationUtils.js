@@ -8,14 +8,23 @@ const intentToTask = {
     task_nlp: Tasks.NATURAL_LANGUAGE,
 }
 
-const regressionModelToKeywords = {
-    [Models.POISSON_REGRESSION]: ["count", "number", "event", "occurrence"],
-    [Models.ORDINAL_REGRESSION]: ["rank", "order"],
-}; 
+const regressionEntityToModel = {
+    "poisson:poisson": Models.POISSON_REGRESSION,
+    "ordinal:ordinal": Models.ORDINAL_REGRESSION,
+}
 
-const classificationModelToKeywords = {
-    [Models.KNN]: ["few", "small", "simple", "tiny"]
-} 
+const classificationEntityToModel = {
+    "knn:knn": Models.KNN,
+}
+
+// const regressionModelToKeywords = {
+//     [Models.POISSON_REGRESSION]: ["count", "number", "event", "occurrence"],
+//     [Models.ORDINAL_REGRESSION]: ["rank", "order"],
+// }; 
+
+// const classificationModelToKeywords = {
+//     [Models.KNN]: ["few", "small", "simple", "tiny"]
+// } 
 
 
 
@@ -53,30 +62,46 @@ export const extractSubject = (witResponse) => {
     return subject;
 }
 
-export const extractRegressionModel = (statement, wit) => {
-    let regressionModel = null;
-    const kvp = Object.entries(regressionModelToKeywords);
-    for (const [model, keywords] of kvp) {
-        for (const keyword of keywords) {
-            if (statement.includes(keyword)) {
-                regressionModel = model;
-            }
-        }
+export const extractRegressionModel = async (statement, wit) => {
+    const witResponse = await getWitResult(wit, statement);
+    let entities = Object.keys(witResponse.entities); // note that this counts matches equally
+    let models = entities.map(entity => regressionEntityToModel[entity]);
+    if (models.length == 0) {
+        return Models.LINEAR_REGRESSION;
     }
-    return regressionModel;
+    return models[0]; // returns first match
+
+    // let regressionModel = null;
+    // const kvp = Object.entries(regressionModelToKeywords);
+    // for (const [model, keywords] of kvp) {
+    //     for (const keyword of keywords) {
+    //         if (statement.includes(keyword)) {
+    //             regressionModel = model;
+    //         }
+    //     }
+    // }
+    // return regressionModel;
 }
 
-export const extractClassificationModel = (statement, wit) => {
-    let classificationModel = null;
-    const kvp = Object.entries(classificationModelToKeywords);
-    for (const [model, keywords] of kvp) {
-        for (const keyword of keywords) {
-            if (statement.includes(keyword)) {
-                classificationModel = model;
-            }
-        }
+export const extractClassificationModel = async (statement, wit) => {
+    const witResponse = await getWitResult(wit, statement);
+    let entities = Object.keys(witResponse.entities); // note that this counts matches equally
+    let models = entities.map(entity => classificationEntityToModel[entity]);
+    if (models.length == 0) {
+        return Models.NEURAL_NETWORK_FF;
     }
-    return classificationModel;
+    return models[0]; // returns first match
+    
+    // let classificationModel = null;
+    // const kvp = Object.entries(classificationModelToKeywords);
+    // for (const [model, keywords] of kvp) {
+    //     for (const keyword of keywords) {
+    //         if (statement.includes(keyword)) {
+    //             classificationModel = model;
+    //         }
+    //     }
+    // }
+    // return classificationModel;
 }
 
 export const extractArchitectureChange = (witResponse) => {

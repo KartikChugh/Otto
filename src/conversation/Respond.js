@@ -94,7 +94,7 @@ const taskStep = async (userMessage, wit, state, dispatch) => {
 
 }
 
-const modelStep = (userMessage, wit, state, dispatch) => {
+const modelStep = async (userMessage, wit, state, dispatch) => {
     console.log("modelStep");
 
     const task = state.task;
@@ -107,11 +107,10 @@ const modelStep = (userMessage, wit, state, dispatch) => {
     if (!model) {
         switch (task) {
             case Tasks.REGRESSION:
-                model = extractRegressionModel(userMessage, wit) || 
-                    Models.LINEAR_REGRESSION;
+                model = await extractRegressionModel(userMessage, wit);
                 break;
             case Tasks.CLASSIFICATION:
-                model = extractClassificationModel(userMessage, wit) ||
+                model = await extractClassificationModel(userMessage, wit) ||
                     Models.NEURAL_NETWORK_FF;
                 break;
         }
