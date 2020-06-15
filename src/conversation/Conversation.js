@@ -16,6 +16,11 @@ export default class Conversation /* extends React.Component */  {
         this.ottoNN = new Wit({
             accessToken: token.nn,
         });
+        this.wits = {
+            task: this.ottoTask,
+            model: this.ottoModel,
+            nn: this.ottoNN,
+        };
     }
 
     sayMessages = async (messages) => {
@@ -37,7 +42,7 @@ export default class Conversation /* extends React.Component */  {
 
         // const [state, dispatch] = null;
         await this.sayMessages(
-            await responseTo(userMessage, this.ottoTask, state, dispatch)
+            await responseTo(userMessage, this.wits, state, dispatch)
         ); 
     };
 

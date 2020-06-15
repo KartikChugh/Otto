@@ -10,15 +10,15 @@ import {
     extractClassificationModel 
 } from "conversation/ConversationUtils";
 
-const responseTo = async (userMessage, wit, state, dispatch) => {
+const responseTo = async (userMessage, wits, state, dispatch) => {
     
     switch (state.stepper_state) {
         case StepperState.TASK:
-            return await taskStep(userMessage, wit, state, dispatch);
+            return await taskStep(userMessage, wits.task, state, dispatch);
         // case StepperState.DATASET:
         //     return dataStep(userMessage, wit, state, dispatch);
         case StepperState.MODEL:
-            return modelStep(userMessage, wit, state, dispatch);
+            return modelStep(userMessage, wits.model, state, dispatch);
     }
 
 }
