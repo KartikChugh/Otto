@@ -76,7 +76,7 @@ export const getActiveStep = (state: StateType) =>
 
 export default function VerticalLinearStepper() {
   const classes = useStyles();
-  const [state, dispatch] = useState();
+  const { state, dispatch } = useState();
   const steps = getSteps();
 
   const SelectedOptionLabel = (props: { index: number }) => {

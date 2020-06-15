@@ -21,7 +21,7 @@ export function initializeWidget() {
 }
 
 function WidgetContainer() {
-  const [state, dispatch] = useState();
+  const { state, dispatch } = useState();
 
   useEffect(() => {
     toggleWidget();
@@ -52,6 +52,5 @@ function WidgetContainer() {
     />
   );
 }
-
 
 export default WidgetContainer;

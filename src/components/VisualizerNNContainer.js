@@ -1,23 +1,7 @@
 import React from "react";
 import { Sigma, RandomizeNodePositions, RelativeSize } from "react-sigma";
 import { FeedforwardNN } from "nn-architecture/Network";
-
-export default function VisualizerNNContainer() {
-  let nn = new FeedforwardNN();
-  // nn.loss = Losses.MULTI_CLASS;
-  // console.log(networkCode(nn));
-
-  // nn.pushLayer();
-  // nn.pushLayer();
-  // console.log(networkCode(nn));
-
-  // nn.popLayer();
-  // console.log(networkCode(nn));
-
-  let g = toGraph(nn);
-
-  return getSigma(g);
-}
+import { useNNState } from "state/NNState";
 
 export const getSigma = (data) => (
   <Sigma
@@ -113,3 +97,21 @@ const getMaxNodeCount = (network) => {
   }
   return max;
 };
+
+export default function VisualizerNNContainer() {
+  const { nn_state, nn_dispatch } = useNNState();
+  let nn = new FeedforwardNN(nn_state);
+  // nn.loss = Losses.MULTI_CLASS;
+  // console.log(networkCode(nn));
+
+  // nn.pushLayer();
+  // nn.pushLayer();
+  // console.log(networkCode(nn));
+
+  // nn.popLayer();
+  // console.log(networkCode(nn));
+
+  let g = toGraph(nn);
+
+  return getSigma(g);
+}

@@ -3,12 +3,17 @@ import { useState } from "state/State";
 import { Models } from "state/StateTypes";
 import VisualizerNNContainer from "components/VisualizerNNContainer";
 import PlotKNN from "components/PlotKNN";
+import { NNStateProvider } from "state/NNState";
 
 export default function PlotsContainer() {
-  const [state, dispatcher] = useState();
+  const { state } = useState();
   switch (state.model) {
     case Models.NEURAL_NETWORK_FF:
-      return <VisualizerNNContainer />;
+      return (
+        <NNStateProvider>
+          <VisualizerNNContainer />
+        </NNStateProvider>
+      );
     case Models.KNN:
       return <PlotKNN />;
     default:

@@ -16,7 +16,6 @@ import {
 } from "state/StateTypes";
 import { useState } from "state/State";
 import { Actions } from "state/Actions";
-import { getSteps } from "containers/SummaryContainer";
 import logo from "logo.svg";
 
 const StyledBadge = withStyles((theme) => ({
@@ -120,8 +119,7 @@ export function getOptions(state: StateType) {
 
 export default function VisualizerOptionSelectionGrid() {
   const classes = useStyles();
-  const steps = getSteps();
-  const [state, dispatcher] = useState();
+  const { state, dispatch } = useState();
 
   const getIsRecommended = (value) =>
     [
@@ -144,25 +142,25 @@ export default function VisualizerOptionSelectionGrid() {
   const optionOnClickHandler = (type: StepperStateType, value) => {
     switch (type) {
       case StepperState.TASK:
-        dispatcher({
+        dispatch({
           type: Actions.SET_TASK,
           task: value,
         });
         break;
       case StepperState.DATASET:
-        dispatcher({
+        dispatch({
           type: Actions.SET_DATASET_CATEGORY,
           dataset_category: value,
         });
         break;
       case StepperState.MODEL:
-        dispatcher({
+        dispatch({
           type: Actions.SET_MODEL,
           model: value,
         });
         break;
       case StepperState.PREPROCESSORS:
-        dispatcher({
+        dispatch({
           type: Actions.TOGGLE_PREPROCESSOR,
           preprocessor: value,
         });
