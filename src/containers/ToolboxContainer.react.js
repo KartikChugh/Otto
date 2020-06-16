@@ -1,9 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import { Card, Grow } from "@material-ui/core";
+import { Card, CardContent, Grow } from "@material-ui/core";
 import { useState } from "state/State";
 import { StepperState, StateType, Models } from "state/StateTypes";
+import NNFFToolbox from "components/toolbox/NNFFToolbox";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,7 +28,7 @@ const getToolboxContent = (state: StateType) => {
     case Models.LINEAR_REGRESSION:
       return <div>TODO</div>;
     case Models.NEURAL_NETWORK_FF:
-      return <div>Also TODO</div>;
+      return <NNFFToolbox />;
     default:
       return <div>Same</div>;
   }
@@ -43,7 +44,7 @@ export default function ToolboxContainer() {
           Toolbox
         </Typography>
         <Card className={classes.card} variant="outlined">
-          {getToolboxContent(state)}
+          <CardContent>{getToolboxContent(state)}</CardContent>
         </Card>
       </div>
     </Grow>
