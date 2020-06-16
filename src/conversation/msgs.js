@@ -32,14 +32,12 @@ export const TaskInfo = () => {
     ];
 }
 
-// TODO: use 
 export const ModelPreface = () => {
     return [
         "Now that we have our machine learning task and dataset figured out, the next step is to select an appropriate model",
     ];
 }
 
-// TODO: use
 export const NLPModelInfo = () => {
     return [
         "Entity recognition is useful for extracting key information from text (like phone numbers, album names, and times)",
@@ -47,13 +45,12 @@ export const NLPModelInfo = () => {
     ]
 }
 
-// TODO: use
 export const RegressionModelQuestion = () => {
     return [
         "Could you describe the dependent variable in more detail?"
     ]
 }
-// TODO: use
+
 export const ClassificationModelQuestion = () => {
     return [
         "Could you describe the dataset in more detail?"
@@ -66,14 +63,12 @@ export const ModelRecommendation = (model) => {
     ]
 }
 
-// TODO: use
 export const PreprocessorRecommendation = (preprocessors) => {
     return [
-        "Based on what you've told me, I've gone ahead and setup some data preprocessors to help optimize the learning process."
+        "Based on what you've told me, I've gone ahead and setup some data preprocessors to help optimize the learning process"
     ]
 }
 
-// TODO: use
 export const NeuralNetworkPreface = () => {
     return [
         "Finally, we're ready to build and configure our neural network!",

@@ -1,4 +1,4 @@
-import { StepperState, Tasks } from "state/StateTypes";
+import { StepperState, Tasks, Models } from "state/StateTypes";
 import * as msgs from "conversation/msgs"
 
 export const responseToState = (state) => {
@@ -9,6 +9,10 @@ export const responseToState = (state) => {
             return dataStep(state);
         case StepperState.MODEL:
             return modelStep(state);
+        case StepperState.PREPROCESSORS:
+            return preprocessorsStep(state);
+        case StepperState.VISUALIZE:
+            return visualizeStep(state);
     }      
 }
 
@@ -31,4 +35,14 @@ const modelStep = (state) => {
             break;
     }
     return responses;
+}
+
+const preprocessorsStep = (state) => {
+    return msgs.PreprocessorRecommendation();
+}
+
+const visualizeStep = (state) => {
+    if (state.model === Models.NEURAL_NETWORK_FF) {
+        return msgs.NeuralNetworkPreface();
+    }
 }
