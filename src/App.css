@@ -62,6 +62,7 @@
 
 .rightColumnContainer {
   min-width: 300px;
+  overflow: hidden;
 }
 
 .visualizerContainer {
