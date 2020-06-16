@@ -67,5 +67,6 @@ function writeDelay(msg) {
     const WPM = 300;
     const length = msg.length;
     const timeRead = (length / 3.5 / WPM) * 60 * 1000;
-    return timeRead < 2500 ? timeRead : 2500;
+    //return timeRead < 2500 ? timeRead : 2500;
+    return 50; // FIXME: revert
 }
