@@ -5,6 +5,7 @@ import { deleteMessages, addResponseMessage } from "react-chat-widget";
 import { InitialState, StateType } from "state/StateTypes";
 import { ActionType, Actions } from "state/Actions";
 import { StepperStateOrder } from "state/StateTypes";
+import { handleNext } from "containers/WidgetContainer";
 
 import { initializeWidget } from "containers/WidgetContainer";
 
@@ -66,20 +67,23 @@ function reducer(state: StateType, action: ActionType): StateType {
       };
     }
     case Actions.STEPPER_HANDLE_NEXT:
-      return {
+      const nextState = {
         ...state,
         stepper_state:
           NumSteps === getActiveStep()
             ? NumSteps
             : StepperStateOrder[getActiveStep() + 1],
       };
+      handleNext(nextState);
+      return nextState;
     case Actions.STEPPER_HANDLE_PREVIOUS:
-      return {
+      const prevState = {
         ...state,
         stepper_state:
           StepperStateOrder[StepperStateOrder.indexOf(state.stepper_state) - 1],
         stepper_finish: false,
       };
+      return prevState;
     case Actions.HANDLE_STEPPER_FINISH:
       return {
         ...state,

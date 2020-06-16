@@ -1,4 +1,4 @@
-import responseTo from "conversation/Respond";
+import {responseToMessage, responseToState} from "conversation/Respond";
 const { Wit, log } = require("node-wit");
 const token = require("TOKEN.json");
 
@@ -42,8 +42,17 @@ export default class Conversation /* extends React.Component */  {
 
         // const [state, dispatch] = null;
         await this.sayMessages(
-            await responseTo(userMessage, this.wits, state, dispatch)
+            await responseToMessage(userMessage, this.wits, state, dispatch)
         ); 
+    };
+
+    handleStateAdvance = (state) => {
+        console.log(`State has been advanced!`);
+        console.log(state);
+
+        this.sayMessages(
+            responseToState(state)
+        );
     };
 
     render() {

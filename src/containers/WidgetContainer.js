@@ -20,6 +20,10 @@ export function initializeWidget() {
   convo.sayMessages(msgs.IntroQuestion());
 }
 
+export const handleNext = (state) => {
+  convo.handleStateAdvance(state);
+}
+
 function WidgetContainer() {
   const { state, dispatch } = useState();
 

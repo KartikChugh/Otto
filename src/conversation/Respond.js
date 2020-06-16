@@ -10,7 +10,7 @@ import {
     extractClassificationModel 
 } from "conversation/ConversationUtils";
 
-const responseTo = async (userMessage, wits, state, dispatch) => {
+export const responseToMessage = async (userMessage, wits, state, dispatch) => {
     
     switch (state.stepper_state) {
         case StepperState.TASK:
@@ -138,4 +138,8 @@ const architectureStep = async (userMessage, wit, state, dispatch) => {
 
 }
 
-export default responseTo;
+export const responseToState = (state) => {
+    return "Next!";
+}
+
+// export default responseToMessage;
