@@ -14,9 +14,9 @@ function App() {
   return (
     <Container className={"vh-100"} fluid>
       <StateProvider>
-        <Row className={"headerContainer"}>
+        {/* <Row className={"headerContainer"}>
           <HeaderContainer />
-        </Row>
+        </Row> */}
         <Row className={"contentContainer"}>
           <ContentContainer />
         </Row>
