@@ -2,7 +2,7 @@
   "name": "otto-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://kartikchugh.github.io/Otto",
+  "homepage": "http://kartikchugh.github.io/Otto/",
   "dependencies": {
     "@material-ui/core": "^4.10.1",
     "@material-ui/icons": "^4.9.1",
