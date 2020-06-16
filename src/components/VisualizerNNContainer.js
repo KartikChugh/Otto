@@ -99,7 +99,9 @@ const getMaxNodeCount = (network) => {
 };
 
 export default function VisualizerNNContainer() {
+  console.log("Visualizing the NN");
   const { nn_state, nn_dispatch } = useNNState();
+  console.log("NN state", nn_state);
   let nn = new FeedforwardNN(nn_state);
   // nn.loss = Losses.MULTI_CLASS;
   // console.log(networkCode(nn));

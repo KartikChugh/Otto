@@ -89,7 +89,7 @@ export type ModelsType =
 
 export type DatasetCategoryType = "Custom" | "Sample";
 
-export type SampleDatasetType = "iris";
+export type SampleDatasetType = "iris | boston";
 
 export type PreprocessorsType = "PCA" | "Normalization";
 

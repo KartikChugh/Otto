@@ -9,8 +9,15 @@ import {
     extractRegressionModel, 
     extractClassificationModel 
 } from "conversation/ConversationUtils";
+import {
+    Optimizers,
+    Losses,
+    Activations,
+    Initializers,
+  } from "nn-architecture/hyperparams";
+import { Layer } from "nn-architecture/Layer";
 
-export const responseToMessage = async (userMessage, wits, state, dispatch) => {
+export const responseToMessage = async (userMessage, wits, state, dispatch, nn_state, nn_dispatch) => {
     
     switch (state.stepper_state) {
         case StepperState.TASK:
@@ -19,6 +26,10 @@ export const responseToMessage = async (userMessage, wits, state, dispatch) => {
         //     return dataStep(userMessage, wit, state, dispatch);
         case StepperState.MODEL:
             return modelStep(userMessage, wits.model, state, dispatch);
+        case StepperState.VISUALIZE:
+            if (state.model === Models.NEURAL_NETWORK_FF) {
+                return architectureStep(userMessage, wits.nn, nn_state, nn_dispatch);
+            }
     }
 
 }
@@ -130,12 +141,28 @@ const modelStep = async (userMessage, wit, state, dispatch) => {
 
 }
 
-const architectureStep = async (userMessage, wit, state, dispatch) => {
+const architectureStep = async (userMessage, wit, nn_state, nn_dispatch) => {
 
-    const witResult = await getWitResult(wit, userMessage); 
+    //const witResult = await getWitResult(wit, userMessage); 
+    console.log("Architecture step: ", nn_state);
+    nn_dispatch({
+        layers: [
+          new Layer(3),
+        ],
+        activation: Activations.RELU,
+        outputActivation: Activations.SOFTMAX,
+        initializer: Initializers.GLOROT,
+        optimizer: Optimizers.ADAM,
+        loss: Losses.BINARY_CLASS,
+      });
+
+    // if (witResult.text.length == 4) {
+    //     return 
+    // }
+
+    //return JSON.stringify(witResult);
+
     // convert witresult to architecture change
     // relay change to architecture
 
 }
-
-// export default responseToMessage;

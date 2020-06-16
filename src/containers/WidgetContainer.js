@@ -12,6 +12,7 @@ import logo from "logo.svg";
 
 import * as msgs from "conversation/msgs";
 import Conversation from "conversation/Conversation";
+import { useNNState } from "state/NNState";
 
 const convo = new Conversation(addResponseMessage);
 
@@ -26,6 +27,7 @@ export const handleNext = (state) => {
 
 function WidgetContainer() {
   const { state, dispatch } = useState();
+  const { nn_state, nn_dispatch } = useNNState();
 
   useEffect(() => {
     toggleWidget();
@@ -33,7 +35,7 @@ function WidgetContainer() {
   }, []);
 
   const handleSubmit = (userMessage) => {
-    convo.handleUserMessage(userMessage, state, dispatch);
+    convo.handleUserMessage(userMessage, state, dispatch, nn_state, nn_dispatch);
   };
 
   // async function performResponse(userMessage) {

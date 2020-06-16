@@ -63,7 +63,7 @@ export const ModelRecommendation = (model) => {
     ]
 }
 
-export const PreprocessorRecommendation = (preprocessors) => {
+export const PreprocessorRecommendation = () => {
     return [
         "Based on what you've told me, I've gone ahead and setup some data preprocessors to help optimize the learning process"
     ]
@@ -72,7 +72,7 @@ export const PreprocessorRecommendation = (preprocessors) => {
 export const NeuralNetworkPreface = () => {
     return [
         "Finally, we're ready to build and configure our neural network!",
-        "I've made a basic feedforward network with 5 hidden layers and standard activations/initializers",
+        "I've made a basic feedforward network with 5 hidden layers and standard activations / initializers",
         "You can play with the model and customize it, or tell me what changes to make"
     ]
 }

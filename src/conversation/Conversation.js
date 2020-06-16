@@ -1,4 +1,4 @@
-import {responseToMessage} from "conversation/Respond";
+import {responseToMessage} from "conversation/RespondMessage";
 import {responseToState} from "conversation/RespondState";
 const { Wit, log } = require("node-wit");
 const token = require("TOKEN.json");
@@ -37,20 +37,20 @@ export default class Conversation /* extends React.Component */  {
         }
     };
     
-    handleUserMessage = async (userMessage, state, dispatch) => {
+    handleUserMessage = async (userMessage, state, dispatch, nn_state, nn_dispatch) => {
         document.getElementsByClassName("rcw-sender")[0].message.value = "";
-        console.log(`New message incoming! ${userMessage}`);
-        console.log(state);
+        console.log(`handleUserMessage in Conversation: ${userMessage}`);
+        console.log("State: ", state);
 
         // const [state, dispatch] = null;
         await this.sayMessages(
-            await responseToMessage(userMessage, this.wits, state, dispatch)
+            await responseToMessage(userMessage, this.wits, state, dispatch, nn_state, nn_dispatch)
         ); 
     };
 
     handleStateAdvance = (state) => {
         console.log(`State has been advanced!`);
-        console.log(state);
+        console.log("State: ", state);
 
         this.sayMessages(
             responseToState(state)
@@ -68,5 +68,5 @@ function writeDelay(msg) {
     const length = msg.length;
     const timeRead = (length / 3.5 / WPM) * 60 * 1000;
     //return timeRead < 2500 ? timeRead : 2500;
-    return 50; // FIXME: revert
+    return 100; // FIXME: revert
 }
