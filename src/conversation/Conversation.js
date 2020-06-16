@@ -1,4 +1,5 @@
-import {responseToMessage, responseToState} from "conversation/Respond";
+import {responseToMessage} from "conversation/Respond";
+import {responseToState} from "conversation/RespondState";
 const { Wit, log } = require("node-wit");
 const token = require("TOKEN.json");
 
@@ -27,6 +28,7 @@ export default class Conversation /* extends React.Component */  {
         if (!Array.isArray(messages)) {
             messages = [messages];
         }
+        messages = messages.flat(1);
         for (let message of messages) {
             if (message != null) {
                 await new Promise((r) => setTimeout(r, writeDelay(message)));

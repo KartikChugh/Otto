@@ -138,8 +138,4 @@ const architectureStep = async (userMessage, wit, state, dispatch) => {
 
 }
 
-export const responseToState = (state) => {
-    return "Next!";
-}
-
 // export default responseToMessage;
