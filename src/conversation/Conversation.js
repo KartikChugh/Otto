@@ -29,7 +29,7 @@ export default class Conversation /* extends React.Component */  {
         }
         for (let message of messages) {
             if (message != null) {
-                await new Promise((r) => setTimeout(r, readWriteDelay(message)));
+                await new Promise((r) => setTimeout(r, writeDelay(message)));
                 this.say(message);
             }
         }
@@ -61,9 +61,9 @@ export default class Conversation /* extends React.Component */  {
 
 }
 
-function readWriteDelay(msg) {
+function writeDelay(msg) {
     const WPM = 300;
     const length = msg.length;
     const timeRead = (length / 3.5 / WPM) * 60 * 1000;
-    return timeRead;
+    return timeRead < 2500 ? timeRead : 2500;
 }
