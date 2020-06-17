@@ -58,6 +58,7 @@ export const SampleDataset = Object.freeze({
 export const Preprocessors = Object.freeze({
   PCA: "PCA",
   NORMALIZATION: "Normalization",
+  TEXT_CLEANING: "Text Cleaning"
 });
 
 export const StepperState = Object.freeze({
@@ -91,7 +92,7 @@ export type DatasetCategoryType = "Custom" | "Sample";
 
 export type SampleDatasetType = "iris | boston";
 
-export type PreprocessorsType = "PCA" | "Normalization";
+export type PreprocessorsType = "PCA" | "Normalization" | "Text Cleaning";
 
 export type StepperStateType =
   | "task"
