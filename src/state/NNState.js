@@ -8,7 +8,7 @@ import {
   Initializers,
 } from "nn-architecture/hyperparams";
 import { Layer } from "nn-architecture/Layer";
-import { ActionType, Actions } from "state/Actions";
+import { NNActionType, NNActions } from "state/NNActions";
 
 const InitialState = () => ({
   layers: [
@@ -24,14 +24,28 @@ const InitialState = () => ({
   initializer: Initializers.GLOROT,
   optimizer: Optimizers.ADAM,
   loss: Losses.BINARY_CLASS,
+  selectedLayerIndex: 0,
 });
 
 const initialState = InitialState();
 const NNStateContext = createContext(initialState);
 const DispatchNNStateContext = createContext(() => null);
 
-function reducer(state, action: ActionType) {
+function reducer(state, action: NNActionType) {
   switch (action.type) {
+    case NNActions.SET_SELECTED_LAYER:
+      return {
+        ...state,
+        selectedLayerIndex: action.layer,
+      };
+    case NNActions.SET_NODES:
+      const layers = [...state.layers];
+      layers[action.layer] = new Layer(action.nodes);
+      console.log("layers", layers);
+      return {
+        ...state,
+        layers,
+      };
     default:
       return state;
   }

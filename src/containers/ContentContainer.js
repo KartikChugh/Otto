@@ -11,16 +11,14 @@ function ContentContainer() {
       <Col className="summaryContainer" lg={2}>
         <SummaryContainer />
       </Col>
-      <Col className="mainColumnContainer">
-        <NNStateProvider>
+      <NNStateProvider>
+        <Col className="mainColumnContainer">
           <MainColumnContainer />
-        </NNStateProvider>
-      </Col>
-      <Col className="rightColumnContainer" lg={3}>
-        <NNStateProvider>
+        </Col>
+        <Col className="rightColumnContainer" lg={3}>
           <RightColumnContainer />
-        </NNStateProvider>
-      </Col>
+        </Col>
+      </NNStateProvider>
     </>
   );
 }
