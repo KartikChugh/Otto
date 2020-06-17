@@ -2,7 +2,8 @@ import React from "react";
 import { Container, Row } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "react-chat-widget/lib/styles.css";
+// import "react-chat-widget/lib/styles.css";
+import 'chat.css';
 import "App.css";
 
 import { StateProvider } from "state/State";

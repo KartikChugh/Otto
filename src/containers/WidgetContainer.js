@@ -8,7 +8,7 @@ import {
   addResponseMessage,
   deleteMessages,
 } from "react-chat-widget";
-import logo from "logo.svg";
+import logo from "otto.jpeg";
 
 import * as msgs from "conversation/msgs";
 import Conversation from "conversation/Conversation";
