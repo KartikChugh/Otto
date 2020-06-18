@@ -22,6 +22,8 @@ import {
 } from "@material-ui/core";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import NumericInput from "react-numeric-input";
 import { useState } from "state/State";
 import { StepperState, StateType, Models } from "state/StateTypes";
@@ -34,12 +36,26 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     width: "100%",
   },
+  header: {
+    display: "inline-block",
+    position: "absolute",
+    width: 264,
+  },
   tab: {
     outline: "none !important",
     // minWidth: "33%",
   },
   actionTitles: {
     marginBottom: 4,
+  },
+  floatLeft: {
+    float: "left",
+    fontWeight: 500,
+  },
+  floatRight: {
+    float: "right",
+    color: "#3f51b5",
+    fontWeight: 400,
   },
   actionWidth: {
     width: 260,
@@ -103,7 +119,9 @@ function LayerOption({ layer, layerIndex, nn_dispatch }) {
   }
   return (
     <Grid className={classes.layerInputItem} item>
-      <Typography variant="h6">Layer {layerIndex + 1}</Typography>
+      <Grid style={{ "margin-top": "28px" }} item>
+        <Divider />
+      </Grid>
       <Grid item>
         <Grid direction="row" className={classes.nodesItem} container>
           <Grid item>
@@ -161,10 +179,18 @@ export default function NNFFToolbox() {
   const { nn_state, nn_dispatch } = useNNState();
   return (
     <div className={classes.root}>
-      <Typography variant="h5" className={classes.actionTitles}>
-        Build
-      </Typography>
-      <Divider />
+      <Grid container className={classes.header} direction="row">
+        <Grid item>
+          <Typography variant="h5" className={classes.floatLeft}>
+            Build
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Typography variant="h6" className={classes.floatRight}>
+            Layer {nn_state.selectedLayerIndex + 1} of {nn_state.layers.length}
+          </Typography>
+        </Grid>
+      </Grid>
       <Grid container direction="column">
         <LayerOption
           layer={nn_state.layers[nn_state.selectedLayerIndex]}
@@ -180,6 +206,7 @@ export default function NNFFToolbox() {
             onClick={() =>
               onLayerRemove(nn_state.selectedLayerIndex, nn_dispatch)
             }
+            startIcon={<RemoveCircleOutlineIcon />}
           >
             Remove layer {nn_state.selectedLayerIndex + 1}
           </Button>
@@ -190,9 +217,30 @@ export default function NNFFToolbox() {
             className={classes.button}
             variant="outlined"
             onClick={() => onLayerAdd(nn_dispatch)}
+            startIcon={<AddCircleOutlineIcon />}
           >
             Add Layer
           </Button>
+        </Grid>
+      </Grid>
+      <Grid container direction="column">
+        <Grid item>
+          <Typography className={classes.floatLeft} variant="h5">
+            Learn
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Divider />
+        </Grid>
+      </Grid>
+      <Grid container direction="column">
+        <Grid item>
+          <Typography className={classes.floatLeft} variant="h5">
+            Train
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Divider />
         </Grid>
       </Grid>
     </div>

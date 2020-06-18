@@ -8,7 +8,7 @@ import NNFFToolbox from "components/toolbox/NNFFToolbox";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "80%",
+    width: 296,
     // marginLeft: 110,
   },
   headerText: {
