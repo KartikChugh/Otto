@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 
+import ValueLabelDisplay from "components/toolbox/ValueLabelDisplay";
 import { Layer } from "nn-architecture/Layer";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -41,7 +42,10 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 4,
   },
   actionWidth: {
-    width: 240,
+    width: 260,
+  },
+  sliderWidth: {
+    width: 200,
   },
   layerInputItem: {
     marginBottom: 8,
@@ -52,17 +56,26 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "4px !important",
     textAlign: "center",
   },
+  nodesLabel: {
+    marginRight: 8,
+  },
+  nodesItem: {
+    marginTop: 24,
+    marginBottom: -8,
+  },
+  actionItem: {
+    marginTop: 16,
+  },
   button: {
-    minWidth: "32px !important",
-    width: 36,
-    outline: "none",
+    width: 260,
+    marginBottom: 8,
+    outline: "none !important",
   },
 }));
 
 const tabLabels = ["Build", "Learn", "Train"];
 
 const onNodesChanged = (layerIndex, units, nn_dispatch) => {
-  console.log("onNodesChanges", layerIndex, units);
   nn_dispatch({
     type: NNActions.SET_NODES,
     layer: layerIndex,
@@ -70,29 +83,54 @@ const onNodesChanged = (layerIndex, units, nn_dispatch) => {
   });
 };
 
+const onLayerRemove = (layerIndex, nn_dispatch) => {
+  nn_dispatch({
+    type: NNActions.REMOVE_LAYER,
+    layer: layerIndex,
+  });
+};
+
+const onLayerAdd = (nn_dispatch) => {
+  nn_dispatch({
+    type: NNActions.ADD_LAYER,
+  });
+};
+
 function LayerOption({ layer, layerIndex, nn_dispatch }) {
   const classes = useStyles();
+  if (layer == null) {
+    return null;
+  }
   return (
     <Grid className={classes.layerInputItem} item>
-      <Typography>Selection: Layer {layerIndex + 1}</Typography>
-      <Grid className={classes.actionWidth} item>
-        <Typography gutterBottom>Nodes</Typography>
-        <Slider
-          defaultValue={layer.units}
-          valueLabelDisplay="auto"
-          step={1}
-          marks
-          min={1}
-          max={10}
-          onChange={(event, units) =>
-            onNodesChanged(layerIndex, units, nn_dispatch)
-          }
-        />
-      </Grid>
+      <Typography variant="h6">Layer {layerIndex + 1}</Typography>
       <Grid item>
+        <Grid direction="row" className={classes.nodesItem} container>
+          <Grid item>
+            <Typography className={classes.nodesLabel} gutterBottom>
+              Nodes
+            </Typography>
+          </Grid>
+          <Grid className={classes.sliderWidth} item>
+            <Slider
+              value={layer.units}
+              valueLabelDisplay="on"
+              ValueLabelComponent={ValueLabelDisplay}
+              step={1}
+              marks
+              min={1}
+              max={10}
+              onChange={(event, units) =>
+                onNodesChanged(layerIndex, units, nn_dispatch)
+              }
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item className={classes.actionItem}>
         <FormControl className={classes.actionWidth}>
           <InputLabel id="demo-simple-select-label">
-            Activation Function
+            Activation Function1
           </InputLabel>
           <Select value={10} onChange={null}>
             <MenuItem value={10}>Ten</MenuItem>
@@ -101,7 +139,7 @@ function LayerOption({ layer, layerIndex, nn_dispatch }) {
           </Select>
         </FormControl>
       </Grid>
-      <Grid item>
+      <Grid item className={classes.actionItem}>
         <FormControl className={classes.actionWidth}>
           <InputLabel id="demo-simple-select-label">
             Weight Initializer
@@ -133,13 +171,26 @@ export default function NNFFToolbox() {
           layerIndex={nn_state.selectedLayerIndex}
           nn_dispatch={nn_dispatch}
         />
-        <Grid item>
-          <Button color="primary" variant="outlined">
+        <Grid className={classes.actionItem} item>
+          <Button
+            disabled={nn_state.layers.length === 1}
+            color="secondary"
+            className={classes.button}
+            variant="outlined"
+            onClick={() =>
+              onLayerRemove(nn_state.selectedLayerIndex, nn_dispatch)
+            }
+          >
             Remove layer {nn_state.selectedLayerIndex + 1}
           </Button>
         </Grid>
         <Grid item>
-          <Button color="secondary" variant="outlined">
+          <Button
+            color="primary"
+            className={classes.button}
+            variant="outlined"
+            onClick={() => onLayerAdd(nn_dispatch)}
+          >
             Add Layer
           </Button>
         </Grid>

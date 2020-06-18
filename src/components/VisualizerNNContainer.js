@@ -5,15 +5,9 @@ import { useNNState } from "state/NNState";
 import { NNActions } from "state/NNActions";
 
 class UpdateNodeProps extends React.Component {
-  componentWillReceiveProps({ sigma, nodes }) {
-    sigma.graph.nodes().forEach((n) => {
-      const updated = nodes.find((e) => e?.id === n?.id);
-      if (updated == null) {
-        return;
-      }
-      const { id, ...others } = updated;
-      Object.assign(n, others);
-    });
+  componentWillReceiveProps({ sigma, nodes, edges }) {
+    sigma.graph.clear();
+    sigma.graph.read({ nodes, edges });
     sigma.refresh();
   }
 
@@ -117,9 +111,7 @@ export default function VisualizerNNContainer() {
 
   // nn.popLayer();
   // console.log(networkCode(nn));
-  console.log(nn_state);
   const [nodes, edges] = toGraph(nn, nn_state.selectedLayerIndex);
-
   return (
     <Sigma
       graph={{ nodes, edges }}
@@ -135,12 +127,9 @@ export default function VisualizerNNContainer() {
         maxEdgeSize: 0.3,
         defaultNodeColor: "#ec5148",
         clone: true,
-        renderer: "webgl",
-        // enableHovering: true,
-        // rescaleIgnoreSize: true,
       }}
     >
-      <UpdateNodeProps nodes={nodes} />
+      <UpdateNodeProps nodes={nodes} edges={edges} />
     </Sigma>
   );
 

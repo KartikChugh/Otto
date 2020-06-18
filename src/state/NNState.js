@@ -38,14 +38,38 @@ function reducer(state, action: NNActionType) {
         ...state,
         selectedLayerIndex: action.layer,
       };
-    case NNActions.SET_NODES:
+    case NNActions.SET_NODES: {
       const layers = [...state.layers];
       layers[action.layer] = new Layer(action.nodes);
-      console.log("layers", layers);
       return {
         ...state,
         layers,
       };
+    }
+    case NNActions.REMOVE_LAYER: {
+      const layers = [...state.layers];
+      if (layers.length > 1) {
+        layers.splice(action.layer, 1);
+      }
+      let selectedLayerIndex = state.selectedLayerIndex;
+      if (selectedLayerIndex > 0) {
+        selectedLayerIndex -= 1;
+      }
+      return {
+        ...state,
+        layers,
+        selectedLayerIndex,
+      };
+    }
+    case NNActions.ADD_LAYER: {
+      const layers = [...state.layers];
+      layers.push(new Layer(1));
+      return {
+        ...state,
+        layers,
+        selectedLayerIndex: layers.length - 1,
+      };
+    }
     default:
       return state;
   }

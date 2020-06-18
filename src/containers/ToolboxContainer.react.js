@@ -5,7 +5,6 @@ import { Card, CardContent, Grow } from "@material-ui/core";
 import { useState } from "state/State";
 import { StepperState, StateType, Models } from "state/StateTypes";
 import NNFFToolbox from "components/toolbox/NNFFToolbox";
-import { useNNState } from "state/NNState";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,9 +36,7 @@ const getToolboxContent = (state: StateType) => {
 
 export default function ToolboxContainer() {
   const classes = useStyles();
-  const { state, dispatch } = useState();
-  const { nn_state, nn_dispatch } = useNNState();
-  console.log("rere?", nn_state);
+  const { state } = useState();
   return (
     <Grow in={state.stepper_state === StepperState.VISUALIZE}>
       <div className={classes.root}>
