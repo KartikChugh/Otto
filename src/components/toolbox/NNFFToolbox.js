@@ -1,6 +1,10 @@
 import React from "react";
 import { useEffect } from "react";
 
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ValueLabelDisplay from "components/toolbox/ValueLabelDisplay";
 import { Layer } from "nn-architecture/Layer";
 import { makeStyles } from "@material-ui/core/styles";
@@ -39,7 +43,8 @@ const useStyles = makeStyles((theme) => ({
   header: {
     display: "inline-block",
     position: "absolute",
-    width: 264,
+    width: 244,
+    marginTop: -16,
   },
   tab: {
     outline: "none !important",
@@ -50,12 +55,15 @@ const useStyles = makeStyles((theme) => ({
   },
   floatLeft: {
     float: "left",
-    fontWeight: 500,
+    fontWeight: 300,
+    fontSize: 20,
   },
   floatRight: {
     float: "right",
     color: "#3f51b5",
     fontWeight: 400,
+    fontSize: 16,
+    marginTop: 4,
   },
   actionWidth: {
     width: 260,
@@ -119,9 +127,9 @@ function LayerOption({ layer, layerIndex, nn_dispatch }) {
   }
   return (
     <Grid className={classes.layerInputItem} item>
-      <Grid style={{ "margin-top": "28px" }} item>
+      {/* <Grid style={{ "margin-top": "28px" }} item>
         <Divider />
-      </Grid>
+      </Grid> */}
       <Grid item>
         <Grid direction="row" className={classes.nodesItem} container>
           <Grid item>
@@ -179,70 +187,73 @@ export default function NNFFToolbox() {
   const { nn_state, nn_dispatch } = useNNState();
   return (
     <div className={classes.root}>
-      <Grid container className={classes.header} direction="row">
-        <Grid item>
-          <Typography variant="h5" className={classes.floatLeft}>
-            Build
-          </Typography>
-        </Grid>
-        <Grid item>
-          <Typography variant="h6" className={classes.floatRight}>
-            Layer {nn_state.selectedLayerIndex + 1} of {nn_state.layers.length}
-          </Typography>
-        </Grid>
-      </Grid>
-      <Grid container direction="column">
-        <LayerOption
-          layer={nn_state.layers[nn_state.selectedLayerIndex]}
-          layerIndex={nn_state.selectedLayerIndex}
-          nn_dispatch={nn_dispatch}
-        />
-        <Grid className={classes.actionItem} item>
-          <Button
-            disabled={nn_state.layers.length === 1}
-            color="secondary"
-            className={classes.button}
-            variant="outlined"
-            onClick={() =>
-              onLayerRemove(nn_state.selectedLayerIndex, nn_dispatch)
-            }
-            startIcon={<RemoveCircleOutlineIcon />}
-          >
-            Remove layer {nn_state.selectedLayerIndex + 1}
-          </Button>
-        </Grid>
-        <Grid item>
-          <Button
-            color="primary"
-            className={classes.button}
-            variant="outlined"
-            onClick={() => onLayerAdd(nn_dispatch)}
-            startIcon={<AddCircleOutlineIcon />}
-          >
-            Add Layer
-          </Button>
-        </Grid>
-      </Grid>
-      <Grid container direction="column">
-        <Grid item>
+      <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Grid container className={classes.header} direction="row">
+            <Grid item>
+              <Typography variant="h5" className={classes.floatLeft}>
+                Build
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant="h6" className={classes.floatRight}>
+                Layer {nn_state.selectedLayerIndex + 1} of{" "}
+                {nn_state.layers.length}
+              </Typography>
+            </Grid>
+          </Grid>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <Grid container direction="column">
+            <LayerOption
+              layer={nn_state.layers[nn_state.selectedLayerIndex]}
+              layerIndex={nn_state.selectedLayerIndex}
+              nn_dispatch={nn_dispatch}
+            />
+            <Grid className={classes.actionItem} item>
+              <Button
+                disabled={nn_state.layers.length === 1}
+                color="secondary"
+                className={classes.button}
+                variant="outlined"
+                onClick={() =>
+                  onLayerRemove(nn_state.selectedLayerIndex, nn_dispatch)
+                }
+              >
+                Remove layer {nn_state.selectedLayerIndex + 1}
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                color="primary"
+                className={classes.button}
+                variant="outlined"
+                onClick={() => onLayerAdd(nn_dispatch)}
+              >
+                Add Layer
+              </Button>
+            </Grid>
+          </Grid>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+      <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography className={classes.floatLeft} variant="h5">
             Learn
           </Typography>
-        </Grid>
-        <Grid item>
-          <Divider />
-        </Grid>
-      </Grid>
-      <Grid container direction="column">
-        <Grid item>
-          <Typography className={classes.floatLeft} variant="h5">
-            Train
-          </Typography>
-        </Grid>
-        <Grid item>
-          <Divider />
-        </Grid>
-      </Grid>
+        </ExpansionPanelSummary>
+      </ExpansionPanel>
+      <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Grid container direction="column">
+            <Grid item>
+              <Typography className={classes.floatLeft} variant="h5">
+                Train
+              </Typography>
+            </Grid>
+          </Grid>
+        </ExpansionPanelSummary>
+      </ExpansionPanel>
     </div>
   );
 }

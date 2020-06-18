@@ -8,7 +8,7 @@ import NNFFToolbox from "components/toolbox/NNFFToolbox";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 296,
+    width: 340,
     // marginLeft: 110,
   },
   headerText: {
@@ -20,6 +20,10 @@ const useStyles = makeStyles((theme) => ({
   card: {
     marginTop: "4px",
     height: "100%",
+    border: "none",
+  },
+  cardContent: {
+    padding: 2,
   },
 }));
 
@@ -44,7 +48,9 @@ export default function ToolboxContainer() {
           Toolbox
         </Typography>
         <Card className={classes.card} variant="outlined">
-          <CardContent>{getToolboxContent(state)}</CardContent>
+          <CardContent className={classes.cardContent}>
+            {getToolboxContent(state)}
+          </CardContent>
         </Card>
       </div>
     </Grow>
