@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useState } from "state/State";
-import { codeGen } from "codegen/codeGen";
+import { CodeGen } from "codegen/CodeGen";
 import { useNNState } from "state/NNState";
 
 function CodeContainer() {
@@ -10,7 +10,7 @@ function CodeContainer() {
 
   return (
     <textarea
-      value={codeGen(state, nn_state)}
+      value={CodeGen(state, nn_state)}
       style={{ width: "100%", height: "100%", fontSize: "11px" }}
     />
   );

@@ -1,9 +1,14 @@
-export const universal = () => {
+export const supervised = () => {
 
 return `import matplotlib.pyplot as plt 
 import numpy as np 
 from sklearn.model_selection import train_test_split`;
 
+}
+
+export const nlp = () => {
+    return `from wit import Wit
+import pandas as pd`
 }
 
 export const linear = () => {
@@ -40,4 +45,8 @@ export const normalization = () => {
 
 export const pca = () => {
     return `from sklearn.decomposition import PCA`
+}
+
+export const textCleaning = () => {
+    return `import re`
 }
