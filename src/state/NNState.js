@@ -63,11 +63,17 @@ function reducer(state, action: NNActionType) {
     }
     case NNActions.ADD_LAYER: {
       const layers = [...state.layers];
-      layers.push(new Layer(1));
+      //layers.push(new Layer(1));
+
+      const lastHiddenLayer = layers[layers.length - 2];
+      const lastHiddenSize = lastHiddenLayer.units;
+      const newLayer = new Layer(lastHiddenSize);
+      layers.splice(layers.length - 1, 0, newLayer);
+      
       return {
         ...state,
         layers,
-        selectedLayerIndex: layers.length - 1,
+        selectedLayerIndex: layers.length - 2, // FIXME: this can be incorrect in edge cases?
       };
     }
     default:

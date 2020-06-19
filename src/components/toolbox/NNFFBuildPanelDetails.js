@@ -135,7 +135,7 @@ export default function NNFFBuildPanelDetails() {
           variant="outlined"
           onClick={() => onLayerAdd(nn_dispatch)}
         >
-          Add Layer
+          Add Hidden Layer
         </Button>
       </Grid>
     </Grid>
