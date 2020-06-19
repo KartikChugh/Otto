@@ -18,9 +18,11 @@ import { useState } from "state/State";
 import VisualizerOptionSelectionGrid from "components/VisualizerOptionSelectionGrid";
 import { getOptions } from "components/VisualizerOptionSelectionGrid";
 import { getActiveStep, getSteps } from "containers/SummaryContainer";
-import { StepperState } from "state/StateTypes";
+import { StepperState, Models } from "state/StateTypes";
 import { Actions } from "state/Actions";
 import PlotsContainer from "./PlotsContainer";
+import { useModelState } from "state/ModelState";
+import { ModelActions } from "state/ModelActions";
 
 const useStyles = makeStyles((theme) => ({
   rootExplanation: {
@@ -57,6 +59,7 @@ function VisualizerContainer() {
   const classes = useStyles();
   const steps = getSteps();
   const { state, dispatch } = useState();
+  const { model_dispatch } = useModelState();
 
   const getIsSelected = (value) =>
     [
@@ -68,6 +71,16 @@ function VisualizerContainer() {
     ].includes(value);
 
   const handleNext = () => {
+    if (
+      state.stepper_state === StepperState.PREPROCESSORS &&
+      state.model === Models.KNN
+    ) {
+      console.log("huh?");
+      model_dispatch({
+        type: ModelActions.RUN_KNN,
+        dispatch: model_dispatch,
+      });
+    }
     dispatch({
       type: Actions.STEPPER_HANDLE_NEXT,
     });

@@ -58,7 +58,7 @@ export const SampleDataset = Object.freeze({
 export const Preprocessors = Object.freeze({
   PCA: "PCA",
   NORMALIZATION: "Normalization",
-  TEXT_CLEANING: "Text Cleaning"
+  TEXT_CLEANING: "Text Cleaning",
 });
 
 export const StepperState = Object.freeze({
@@ -120,7 +120,7 @@ export type StateType = {
 export const InitialState: () => StateType = () => ({
   task: Tasks.CLASSIFICATION,
   task_otto: null,
-  model: Models.NEURAL_NETWORK_FF,
+  model: Models.KNN,
   model_otto: null,
   dataset_category: DatasetCategory.CUSTOM,
   dataset_category_otto: null,
@@ -129,6 +129,6 @@ export const InitialState: () => StateType = () => ({
   preprocessors: [],
   preprocessors_otto: [],
 
-  stepper_state: StepperState.VISUALIZE,
+  stepper_state: StepperState.PREPROCESSORS,
   stepper_finish: false,
 });

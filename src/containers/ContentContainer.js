@@ -4,6 +4,7 @@ import RightColumnContainer from "containers/RightColumnContainer";
 import MainColumnContainer from "containers/MainColumnContainer";
 import SummaryContainer from "containers/SummaryContainer";
 import { NNStateProvider } from "state/NNState";
+import { ModelStateProvider } from "state/ModelState";
 
 function ContentContainer() {
   return (
@@ -12,12 +13,14 @@ function ContentContainer() {
         <SummaryContainer />
       </Col>
       <NNStateProvider>
-        <Col className="mainColumnContainer">
-          <MainColumnContainer />
-        </Col>
-        <Col className="rightColumnContainer" lg={3}>
-          <RightColumnContainer />
-        </Col>
+        <ModelStateProvider>
+          <Col className="mainColumnContainer">
+            <MainColumnContainer />
+          </Col>
+          <Col className="rightColumnContainer" lg={3}>
+            <RightColumnContainer />
+          </Col>
+        </ModelStateProvider>
       </NNStateProvider>
     </>
   );

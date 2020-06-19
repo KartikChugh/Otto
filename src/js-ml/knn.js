@@ -1,14 +1,10 @@
-import { iris } from "static/datasets/iris"; // Data
+import { iris, irisColumns } from "static/datasets/iris"; // Data
 import KNN from "ml-knn";
+import { initializeWidget } from "containers/WidgetContainer";
+import { ModelActions } from "state/ModelActions";
 
 let knn;
-const names = [
-  "sepalLength",
-  "sepalWidth",
-  "petalLength",
-  "petalWidth",
-  "type",
-]; // For header
+const names = ["Sepal Length", "Sepal Width", "Petal Length", "Petal Width"]; // For header
 
 let seperationSize; // To seperate training and test data
 
@@ -21,7 +17,18 @@ let trainingSetX = [],
   testSetX = [],
   testSetY = [];
 
-export function invoke() {
+let K, DISPATCH, typesArray;
+
+function init() {
+  X = [];
+  y = [];
+}
+
+export function invoke(k: Number, dispatch) {
+  init();
+  // Set Param
+  K = k;
+  DISPATCH = dispatch;
   data = iris;
   seperationSize = 0.7 * data.length;
   data = shuffleArray(data);
@@ -50,8 +57,8 @@ export default function dressData() {
     types.add(row.type);
   });
 
-  const typesArray = [...types]; // To save the different types of classes.
-
+  typesArray = [...types]; // To save the different types of classes.
+  console.log("FIRST", typesArray);
   data.forEach((row) => {
     let rowArray, typeNumber;
 
@@ -74,7 +81,7 @@ export default function dressData() {
 }
 
 function train() {
-  knn = new KNN(trainingSetX, trainingSetY, { k: 7 });
+  knn = new KNN(trainingSetX, trainingSetY, { k: K });
   test();
 }
 
@@ -83,8 +90,19 @@ function test() {
   const testSetLength = testSetX.length;
   const predictionError = error(result, testSetY);
   console.log(
-    `Test Set Size = ${testSetLength} and number of Misclassifications = ${predictionError}`
+    `Test Set Size = ${testSetLength} and number of Misclassifications = ${predictionError} and ${typesArray}`
   );
+  setTimeout(function () {
+    DISPATCH({
+      type: "KNN_DONE",
+      knn_result_labels: result,
+      knn_expected_labels: testSetY,
+      knn_test_data: testSetX,
+      knn_columns: irisColumns,
+      knn_labels: typesArray,
+    });
+  }, 500);
+
   //   predict();
 }
 

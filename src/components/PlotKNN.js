@@ -8,51 +8,99 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  Label,
 } from "recharts";
+import { useModelState } from "state/ModelState";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { invoke } from "js-ml/knn";
+import { modelLinear } from "codegen/regressionCode";
+import { model } from "codegen/knnCode";
 
-const data01 = [
-  { x: 100, y: 200, z: 200 },
-  { x: 120, y: 100, z: 260 },
-  { x: 170, y: 300, z: 400 },
-  { x: 140, y: 250, z: 280 },
-  { x: 150, y: 400, z: 500 },
-  { x: 110, y: 280, z: 200 },
-];
-const data02 = [
-  { x: 200, y: 260, z: 240 },
-  { x: 240, y: 290, z: 220 },
-  { x: 190, y: 290, z: 250 },
-  { x: 198, y: 250, z: 210 },
-  { x: 180, y: 280, z: 260 },
-  { x: 210, y: 220, z: 230 },
-];
+const fillColors = ["#E76F51", "#2A9D8F", "#264653"];
+const shapeTypes = ["star", "circle", "triangle"];
+
+const createPlotData = (state) => {
+  const {
+    knn_column1_index,
+    knn_column2_index,
+    knn_test_data,
+    knn_result_labels,
+  } = state;
+  const data = {};
+  console.log("bruh,", knn_test_data);
+  knn_test_data.forEach((dataRow, index) => {
+    const result_category = knn_result_labels[index];
+    if (!data.hasOwnProperty(result_category)) {
+      data[result_category] = [];
+    }
+    data[result_category].push({
+      x: dataRow[knn_column1_index],
+      y: dataRow[knn_column2_index],
+    });
+  });
+  return data;
+};
 
 export default function PlotKNN() {
+  const { model_state } = useModelState();
+  const data = createPlotData(model_state);
+  // invoke(model_state.knn_k);
+  console.log(model_state.knn_labels);
   return (
-    <ScatterChart
-      width={400}
-      height={400}
-      margin={{
-        top: 20,
-        right: 20,
-        bottom: 20,
-        left: 20,
-      }}
-    >
-      <CartesianGrid />
-      <XAxis type="number" dataKey="x" name="stature" unit="cm" />
-      <YAxis type="number" dataKey="y" name="weight" unit="kg" />
-      <ZAxis
-        type="number"
-        dataKey="z"
-        range={[60, 400]}
-        name="score"
-        unit="km"
-      />
-      <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-      <Legend />
-      <Scatter name="A school" data={data01} fill="#8884d8" shape="star" />
-      <Scatter name="B school" data={data02} fill="#82ca9d" shape="triangle" />
-    </ScatterChart>
+    <>
+      {!model_state.viz_loading ? (
+        <ScatterChart
+          width={800}
+          height={600}
+          margin={{
+            top: 20,
+            right: 20,
+            bottom: 20,
+            left: 20,
+          }}
+        >
+          <CartesianGrid />
+          <XAxis type="number" dataKey="x" name={"name"} unit="cm">
+            <Label
+              value={model_state.knn_columns[model_state.knn_column1_index]}
+              position="insideBottom"
+              offset={-12}
+            />
+          </XAxis>
+          <YAxis type="number" dataKey="y" name="weight" unit="kg">
+            <Label
+              value={model_state.knn_columns[model_state.knn_column2_index]}
+              angle="-90"
+              position="insideLeft"
+            />
+          </YAxis>
+          <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+          <Legend verticalAlign="top" height={36} />
+          {model_state.knn_labels.map((label, index) => (
+            <Scatter
+              name={label}
+              data={data[index]}
+              fill={fillColors[index]}
+              shape={shapeTypes[index]}
+            />
+          ))}
+          {/* <Scatter name="A school" data={data[0]} fill="#8884d8" shape="star" />
+          <Scatter
+            name="B school"
+            data={data[1]}
+            fill="#82ca9d"
+            shape="triangle"
+          />
+          <Scatter
+            name="C school"
+            data={data[2]}
+            fill="#aaa4d8"
+            shape="circle"
+          /> */}
+        </ScatterChart>
+      ) : (
+        <CircularProgress color="secondary" />
+      )}
+    </>
   );
 }

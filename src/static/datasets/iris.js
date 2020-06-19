@@ -1,3 +1,9 @@
+export const irisColumns = [
+  "sepalLength",
+  "sepalWidth",
+  "petalLength",
+  "petalWidth",
+];
 export const iris = [
   {
     sepalLength: 5.1,
@@ -1047,6 +1053,6 @@ export const iris = [
     sepalWidth: 3,
     petalLength: 5.1,
     petalWidth: 1.8,
-    type: "Iris-virginica ",
+    type: "Iris-virginica",
   },
 ];
