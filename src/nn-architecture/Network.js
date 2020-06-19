@@ -9,21 +9,22 @@ import { Layer } from "nn-architecture/Layer";
 export class FeedforwardNN {
   constructor(state) {
     this.layers = state.layers;
-    this.activation = state.activation;
-    this.outputActivation = state.outputActivation;
-    this.initializer = state.initializer;
+    // this.activation = state.activation;
+    // this.outputActivation = state.outputActivation;
+    // this.initializer = state.initializer;
     this.optimizer = state.optimizer;
     this.loss = state.loss;
   }
 
-  pushLayer() {
-    const layers = this.layers;
-    const lastHiddenLayer = layers[layers.length - 2];
-    const lastHiddenSize = lastHiddenLayer.units;
-    const newLayer = new Layer(lastHiddenSize);
-    layers.splice(layers.length - 1, 0, newLayer);
-  }
+  // pushLayer() {
+  //   const layers = this.layers;
+  //   const lastHiddenLayer = layers[layers.length - 2];
+  //   const lastHiddenSize = lastHiddenLayer.units;
+  //   const newLayer = new Layer(lastHiddenSize);
+  //   layers.splice(layers.length - 1, 0, newLayer);
+  // }
 
+  // TODO: implement
   popLayer() {
     const layers = this.layers;
     layers.splice(layers.length - 2, 1);
