@@ -60,10 +60,9 @@ function reducer(state, action: NNActionType) {
     }
     case NNActions.ADD_LAYER: {
       const layers = [...state.layers];
-      //layers.push(new Layer(1));
 
-      const lastHiddenLayer = layers[layers.length - 2];
-      const lastHiddenSize = lastHiddenLayer.units;
+      const lastHiddenLayer = layers?.[layers.length - 2];
+      const lastHiddenSize = lastHiddenLayer?.units ?? 5;
       const newLayer = new Layer(lastHiddenSize);
       layers.splice(layers.length - 1, 0, newLayer);
 
@@ -73,12 +72,111 @@ function reducer(state, action: NNActionType) {
         selectedLayerIndex: layers.length - 2, // FIXME: this can be incorrect in edge cases?
       };
     }
+
     case NNActions.RESET: {
       return initialState;
     }
     case NNActions.SET_HIDDEN_ACTIVATIONS: {
-      let activation = action.activation;
-      // TODO: replace all hidden layer activations
+      const newActivation = action.activation;
+      const layers = [...state.layers];
+      for (let i = 0; i < layers.length - 1; i++) {
+        const layer = layers[i];
+        layer.activation = newActivation;
+      }
+      return {
+        ...state,
+        layers,
+      }
+    }
+    case NNActions.SET_ALL_INITIALIZERS: {
+      const newInitializer = action.initializer;
+      const layers = [...state.layers];
+      for (let i = 0; i < layers.length; i++) {
+        const layer = layers[i];
+        layer.initializer = newInitializer;
+      }
+      return {
+        ...state,
+        layers,
+      }
+    }
+    case NNActions.SET_HIDDEN_NODES: {
+      const count = action.nodes;
+      const layers = [...state.layers];
+      for (let i = 1; i < layers.length - 1; i++) {
+        const layer = layers[i];
+        layer.units = count;
+      }
+      return {
+        ...state,
+        layers,
+      } 
+    }
+    case NNActions.SET_HIDDEN_LAYERS: {
+      const layerCount = action.layers;
+      const currentLayers = [...state.layers];
+      const inputLayer = currentLayers[0];
+      const outputLayer = currentLayers[currentLayers.length-1];
+
+      const activation = inputLayer.activation;
+      const initializer = inputLayer.initializer;
+      const nodeCountA = currentLayers?.[1]?.units ?? 5;
+      const nodeCountB = currentLayers?.[2]?.units ?? 3;
+      const newLayers = [];
+      newLayers.push(inputLayer);
+      for (let i = 0; i < layerCount; i++) {
+        const nodes = (i % 2) ? nodeCountA : nodeCountB;
+        const newLayer = new Layer(nodes, activation, initializer);
+        newLayers.push(newLayer);
+      }
+      newLayers.push(outputLayer);
+      return {
+        ...state,
+        layers: newLayers,
+      }
+    }
+
+    case NNActions.ADD_LAYERS: {
+      const count = action.layers;
+      const layers = [...state.layers];
+
+      const activation = layers[0].activation;
+      const initializer = layers[0].initializer;
+      console.log(layers);
+      const nodeCountA = layers?.[layers.length-3]?.units ?? 5;
+      const nodeCountB = layers?.[layers.length-2]?.units ?? 3;
+
+      const outputLayer = layers.pop();
+
+      for (let i = 0; i < count; i++) {
+        const layer = new Layer((i % 2 ? nodeCountB : nodeCountA), activation, initializer);
+        layers.push(layer);
+      }
+      layers.push(outputLayer);
+      console.log("New layers array after ADD_LAYERS: ", layers);
+      return {
+        ...state,
+        layers: layers,
+      }
+
+    }
+
+    case NNActions.REMOVE_LAYERS: {
+      const fromEnd = action.fromEnd;
+      const count = action.layers;
+      let layers = [...state.layers];
+      const inputLayer = layers.shift();
+      const outputLayer = layers.pop();
+
+      if (fromEnd) layers.reverse();
+      for (let i = 0; i < count; i++) {
+        layers.shift();
+      }
+      layers = [inputLayer, ...layers, outputLayer];
+      return {
+        ...state,
+        layers: layers,
+      }
     }
     default:
       return state;
