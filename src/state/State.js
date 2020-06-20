@@ -28,6 +28,17 @@ function reducer(state: StateType, action: ActionType): StateType {
       return { ...state, dataset_category: action.dataset_category };
     case Actions.SET_MODEL:
       return { ...state, model: action.model };
+    case Actions.TOGGLE_NLP_MODEL:
+      let currentModels = state.nlp_models;
+      if (currentModels.includes(action.model)) {
+        currentModels = currentModels.filter((val) => val !== action.model);
+      } else {
+        currentModels.push(action.model);
+      }
+      return {
+        ...state,
+        nlp_models: currentModels,
+      };
     case Actions.SET_SAMPLE_DATASET:
       return { ...state, sample_dataset: action.sample_dataset };
     case Actions.SET_TASK_OTTO:

@@ -53,7 +53,7 @@ export const DatasetCategory = Object.freeze({
 export const SampleDataset = Object.freeze({
   IRIS: "iris",
   BOSTON: "boston",
-  TWITTER: "twitter"
+  TWITTER: "twitter",
 });
 
 export const Preprocessors = Object.freeze({
@@ -107,6 +107,8 @@ export type StateType = {
   task_otto: ?TasksType,
   model: ?ModelsType,
   model_otto: ?ModelsType,
+  nlp_models: Array<?ModelsType>,
+  nlp_models_otto: Array<?ModelsType>,
   dataset_category: ?DatasetCategoryType,
   dataset_category_otto: ?DatasetCategoryType,
   sample_dataset: ?SampleDatasetType,
@@ -123,6 +125,8 @@ export const InitialState: () => StateType = () => ({
   task_otto: null,
   model: Models.KNN,
   model_otto: null,
+  nlp_models: [],
+  nlp_models_otto: [],
   dataset_category: DatasetCategory.CUSTOM,
   dataset_category_otto: null,
   sample_dataset: null,

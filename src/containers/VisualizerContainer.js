@@ -67,6 +67,7 @@ function VisualizerContainer() {
       state.dataset_category,
       state.sample_dataset,
       state.model,
+      ...state.nlp_models,
       ...state.preprocessors,
     ].includes(value);
 

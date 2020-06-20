@@ -127,6 +127,7 @@ export default function VisualizerOptionSelectionGrid() {
       state.dataset_category_otto,
       state.sample_dataset_otto,
       state.model_otto,
+      ...state.nlp_models_otto,
       ...state.preprocessors_otto,
     ].includes(value);
 
@@ -136,6 +137,7 @@ export default function VisualizerOptionSelectionGrid() {
       state.dataset_category,
       state.sample_dataset,
       state.model,
+      ...state.nlp_models,
       ...state.preprocessors,
     ].includes(value);
 
@@ -154,10 +156,17 @@ export default function VisualizerOptionSelectionGrid() {
         });
         break;
       case StepperState.MODEL:
-        dispatch({
-          type: Actions.SET_MODEL,
-          model: value,
-        });
+        if (state.task === Tasks.NATURAL_LANGUAGE) {
+          dispatch({
+            type: Actions.TOGGLE_NLP_MODEL,
+            model: value,
+          });
+        } else {
+          dispatch({
+            type: Actions.SET_MODEL,
+            model: value,
+          });
+        }
         break;
       case StepperState.PREPROCESSORS:
         dispatch({
