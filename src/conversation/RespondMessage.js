@@ -7,7 +7,8 @@ import {
     extractSubject, 
     extractSampleDataset, 
     extractRegressionModel, 
-    extractClassificationModel 
+    extractClassificationModel, 
+    extractArchitectureChange
 } from "conversation/ConversationUtils";
 import {
     Optimizers,
@@ -16,6 +17,7 @@ import {
     Initializers,
   } from "nn-architecture/hyperparams";
 import { Layer } from "nn-architecture/Layer";
+import { NNActions } from "state/NNActions";
 
 export const responseToMessage = async (userMessage, wits, state, dispatch, nn_state, nn_dispatch) => {
     
@@ -115,6 +117,7 @@ const modelStep = async (userMessage, wit, state, dispatch) => {
     console.log("Model: \n", model);
 
     // model not predefined (custom dataset)
+    // FIXME: use recommended
     if (!model) {
         switch (task) {
             case Tasks.REGRESSION:
@@ -143,26 +146,25 @@ const modelStep = async (userMessage, wit, state, dispatch) => {
 
 const architectureStep = async (userMessage, wit, nn_state, nn_dispatch) => {
 
-    //const witResult = await getWitResult(wit, userMessage); 
     console.log("Architecture step: ", nn_state);
-    nn_dispatch({
-        layers: [
-          new Layer(3),
-        ],
-        activation: Activations.RELU,
-        outputActivation: Activations.SOFTMAX,
-        initializer: Initializers.GLOROT,
-        optimizer: Optimizers.ADAM,
-        loss: Losses.BINARY_CLASS,
-      });
+    // nn_dispatch({
+    //     type: NNActions.SET_NODES,
+    //     layer: 0,
+    //     nodes: 17,
+    //   });
 
     // if (witResult.text.length == 4) {
     //     return 
-    // }
-
-    //return JSON.stringify(witResult);
+    // }  
 
     // convert witresult to architecture change
     // relay change to architecture
+
+    const witResult = await getWitResult(wit, userMessage); 
+
+    const architectureChange = extractArchitectureChange(witResult, nn_state);
+
+
+    return JSON.stringify(witResult);
 
 }

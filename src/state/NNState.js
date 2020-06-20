@@ -19,9 +19,6 @@ const InitialState = () => ({
     new Layer(5),
     new Layer(2, Activations.SOFTMAX),
   ],
-  // activation: Activations.RELU,
-  // outputActivation: Activations.SOFTMAX,
-  // initializer: Initializers.GLOROT,
   optimizer: Optimizers.ADAM,
   loss: Losses.BINARY_CLASS,
   selectedLayerIndex: 0,
@@ -75,6 +72,13 @@ function reducer(state, action: NNActionType) {
         layers,
         selectedLayerIndex: layers.length - 2, // FIXME: this can be incorrect in edge cases?
       };
+    }
+    case NNActions.RESET: {
+      return initialState;
+    }
+    case NNActions.SET_HIDDEN_ACTIVATIONS: {
+      let activation = action.activation;
+      // TODO: replace all hidden layer activations
     }
     default:
       return state;

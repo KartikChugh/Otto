@@ -1,4 +1,5 @@
 import { Tasks, Models } from "state/StateTypes"
+import { NNActions } from "state/NNActions"
 
 // TODO: refactor elsewhere?
 
@@ -16,16 +17,6 @@ const regressionEntityToModel = {
 const classificationEntityToModel = {
     "knn:knn": Models.KNN,
 }
-
-// const regressionModelToKeywords = {
-//     [Models.POISSON_REGRESSION]: ["count", "number", "event", "occurrence"],
-//     [Models.ORDINAL_REGRESSION]: ["rank", "order"],
-// }; 
-
-// const classificationModelToKeywords = {
-//     [Models.KNN]: ["few", "small", "simple", "tiny"]
-// } 
-
 
 
 export const getWitResult = async (wit, utterance) => {
@@ -70,17 +61,6 @@ export const extractRegressionModel = async (statement, wit) => {
         return Models.LINEAR_REGRESSION;
     }
     return models[0]; // returns first match
-
-    // let regressionModel = null;
-    // const kvp = Object.entries(regressionModelToKeywords);
-    // for (const [model, keywords] of kvp) {
-    //     for (const keyword of keywords) {
-    //         if (statement.includes(keyword)) {
-    //             regressionModel = model;
-    //         }
-    //     }
-    // }
-    // return regressionModel;
 }
 
 export const extractClassificationModel = async (statement, wit) => {
@@ -91,20 +71,52 @@ export const extractClassificationModel = async (statement, wit) => {
         return Models.NEURAL_NETWORK_FF;
     }
     return models[0]; // returns first match
-    
-    // let classificationModel = null;
-    // const kvp = Object.entries(classificationModelToKeywords);
-    // for (const [model, keywords] of kvp) {
-    //     for (const keyword of keywords) {
-    //         if (statement.includes(keyword)) {
-    //             classificationModel = model;
-    //         }
-    //     }
-    // }
-    // return classificationModel;
 }
 
-export const extractArchitectureChange = (witResponse) => {
+export const extractArchitectureChange = (witResponse, nn_state) => {
+    let intents = witResponse.intents;
+    let entities = witResponse.entities;
+    let intent = intents?.[0].name;
+    let count;
+    
+    switch(intent) {
+        case "reset":
+            return {type: NNActions.RESET}
+        case "activation":
+            let activation = entities?.["type:type"][0].value;
+            return activation ? {type: NNActions.SET_HIDDEN_ACTIVATIONS, activation: activation} : null;
+        case "initializer":
+            let initializer = entities?.["type:type"][0].value;
+            return initializer ? {type: NNActions.SET_ALL_INITIALIZERS, initializer: initializer} : null;
+        case "dimension":
+            count = entities?.["wit$number:number"][0].value;
+            let target = entities?.["target:target"][0].value; 
+            switch (target) {
+                case "inputs": 
+                    return count ? {type: NNActions.SET_NODES, layer: 0, nodes: count} : null;
+                case "outputs":
+                    return count ? {type: NNActions.SET_NODES, layer: nn_state.layers.length - 1, nodes: count} : null;
+                case "nodes":
+                    return count ? {type: NNActions.SET_HIDDEN_NODES, nodes: count} : null;                
+            }
+        case "layers":
+            let instruction = entities?.["instruction:instruction"][0].value;
+            let order = entities?.["order:order"][0].value ?? "last";
+            count = entities?.["wit$number:number"][0].value;
+            switch (instruction) {
+                case "use":
+                    return count ? {type: NNActions.SET_HIDDEN_LAYERS, layers: count} : null;
+                case "add":
+                    count = count ?? 1;
+                    return {type: NNActions.ADD_LAYERS, layers: count};
+                case "remove":
+                    count = count ?? 1;
+                    return {type: NNActions.REMOVE_LAYERS, layers: count, fromEnd: order === "last"}
+
+            }
+    }
+    
+
     // let architectureChange = {};
     // const intent = witResponse.intent;
     // architectureChange.intent = intent;

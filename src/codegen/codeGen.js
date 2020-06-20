@@ -106,7 +106,7 @@ export const CodeGen = (state, nn_state) => {
       sb.appendLine(knnCode.model());
       break;
     case Models.NEURAL_NETWORK_FF:
-      sb.appendLine(networkCode.model(nn_state)); // TODO: replace with NN
+      sb.appendLine(networkCode.model(nn_state));
       break;
     case Models.LINEAR_REGRESSION:
       sb.appendLine(regressionCode.modelLinear());
