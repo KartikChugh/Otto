@@ -1,11 +1,14 @@
-import { iris, irisColumns } from "static/datasets/iris"; // Data
+import {
+  iris,
+  irisColumns,
+  irisColumnsMap,
+  irisUnits,
+} from "static/datasets/iris"; // Data
 import KNN from "ml-knn";
 import { initializeWidget } from "containers/WidgetContainer";
 import { ModelActions } from "state/ModelActions";
 
 let knn;
-const names = ["Sepal Length", "Sepal Width", "Petal Length", "Petal Width"]; // For header
-
 let seperationSize; // To seperate training and test data
 
 let data = [],
@@ -98,7 +101,9 @@ function test() {
       knn_expected_labels: testSetY,
       knn_test_data: testSetX,
       knn_columns: irisColumns,
+      knn_columns_map: irisColumnsMap,
       knn_labels: typesArray,
+      knn_column_units: irisUnits,
     });
   }, 500);
 

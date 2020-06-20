@@ -4,6 +4,16 @@ export const irisColumns = [
   "petalLength",
   "petalWidth",
 ];
+
+export const irisUnits = ["cm", "cm", "cm", "cm"];
+
+export const irisColumnsMap = {
+  sepalLength: "Sepal Length",
+  sepalWidth: "Sepal Width",
+  petalLength: "Petal Length",
+  petalWidth: "Petal Width",
+};
+
 export const iris = [
   {
     sepalLength: 5.1,
