@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme) => ({
   header: {
     display: "inline-block",
     position: "absolute",
-    width: 244,
+    width: 230,
     marginTop: -16,
   },
   tab: {

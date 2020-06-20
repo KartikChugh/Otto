@@ -30,6 +30,12 @@ function reducer(state, action: ModelActionType) {
         ...state,
         knn_k: action.k,
       };
+    case ModelActions.SET_KNN_COLS:
+      return {
+        ...state,
+        knn_column1_index: action.indices[0],
+        knn_column2_index: action.indices[1],
+      };
     case ModelActions.RUN_KNN:
       invoke(state.knn_k, action.dispatch);
       return { ...state, viz_loading: true };

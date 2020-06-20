@@ -5,11 +5,11 @@ import { Card, CardContent, Grow } from "@material-ui/core";
 import { useState } from "state/State";
 import { StepperState, StateType, Models } from "state/StateTypes";
 import NNFFToolbox from "components/toolbox/NNFFToolbox";
+import KNNToolbox from "components/toolbox/KNNToolbox";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 340,
-    // marginLeft: 110,
+    width: 296,
   },
   headerText: {
     paddingLeft: theme.spacing(0),
@@ -34,7 +34,7 @@ const getToolboxContent = (state: StateType) => {
     case Models.NEURAL_NETWORK_FF:
       return <NNFFToolbox />;
     default:
-      return <div>Same</div>;
+      return <KNNToolbox />;
   }
 };
 

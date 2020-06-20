@@ -27,7 +27,6 @@ const createPlotData = (state) => {
     knn_result_labels,
   } = state;
   const data = {};
-  console.log("bruh,", knn_test_data);
   knn_test_data.forEach((dataRow, index) => {
     const result_category = knn_result_labels[index];
     if (!data.hasOwnProperty(result_category)) {
@@ -70,7 +69,7 @@ export default function PlotKNN() {
           <YAxis type="number" dataKey="y" name="weight" unit="kg">
             <Label
               value={model_state.knn_columns[model_state.knn_column2_index]}
-              angle="-90"
+              angle={-90}
               position="insideLeft"
             />
           </YAxis>
@@ -82,21 +81,9 @@ export default function PlotKNN() {
               data={data[index]}
               fill={fillColors[index]}
               shape={shapeTypes[index]}
+              key={index}
             />
           ))}
-          {/* <Scatter name="A school" data={data[0]} fill="#8884d8" shape="star" />
-          <Scatter
-            name="B school"
-            data={data[1]}
-            fill="#82ca9d"
-            shape="triangle"
-          />
-          <Scatter
-            name="C school"
-            data={data[2]}
-            fill="#aaa4d8"
-            shape="circle"
-          /> */}
         </ScatterChart>
       ) : (
         <CircularProgress color="secondary" />
