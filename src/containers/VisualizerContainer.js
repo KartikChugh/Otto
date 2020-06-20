@@ -75,7 +75,6 @@ function VisualizerContainer() {
       state.stepper_state === StepperState.PREPROCESSORS &&
       state.model === Models.KNN
     ) {
-      console.log("huh?");
       model_dispatch({
         type: ModelActions.RUN_KNN,
         dispatch: model_dispatch,

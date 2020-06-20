@@ -43,8 +43,7 @@ const createPlotData = (state) => {
 export default function PlotKNN() {
   const { model_state } = useModelState();
   const data = createPlotData(model_state);
-  // invoke(model_state.knn_k);
-  console.log(model_state.knn_labels);
+
   return (
     <>
       {!model_state.viz_loading ? (

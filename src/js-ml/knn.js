@@ -58,7 +58,6 @@ export default function dressData() {
   });
 
   typesArray = [...types]; // To save the different types of classes.
-  console.log("FIRST", typesArray);
   data.forEach((row) => {
     let rowArray, typeNumber;
 
