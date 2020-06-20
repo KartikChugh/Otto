@@ -76,21 +76,25 @@ export const extractClassificationModel = async (statement, wit) => {
 export const extractArchitectureChange = (witResponse, nn_state) => {
     let intents = witResponse.intents;
     let entities = witResponse.entities;
-    let intent = intents?.[0].name;
+    let intent = intents?.[0]?.name;
     let count;
     
     switch(intent) {
+
         case "reset":
             return {type: NNActions.RESET}
+
         case "activation":
-            let activation = entities?.["type:type"][0].value;
+            let activation = entities?.["type:type"]?.[0]?.value;
             return activation ? {type: NNActions.SET_HIDDEN_ACTIVATIONS, activation: activation} : null;
+
         case "initializer":
-            let initializer = entities?.["type:type"][0].value;
+            let initializer = entities?.["type:type"]?.[0]?.value;
             return initializer ? {type: NNActions.SET_ALL_INITIALIZERS, initializer: initializer} : null;
+
         case "dimension":
-            count = entities?.["wit$number:number"][0].value;
-            let target = entities?.["target:target"][0].value; 
+            count = entities?.["wit$number:number"]?.[0]?.value;
+            let target = entities?.["target:target"]?.[0]?.value; 
             switch (target) {
                 case "inputs": 
                     return count ? {type: NNActions.SET_NODES, layer: 0, nodes: count} : null;
@@ -99,10 +103,11 @@ export const extractArchitectureChange = (witResponse, nn_state) => {
                 case "nodes":
                     return count ? {type: NNActions.SET_HIDDEN_NODES, nodes: count} : null;                
             }
+
         case "layers":
-            let instruction = entities?.["instruction:instruction"][0].value;
-            let order = entities?.["order:order"][0].value ?? "last";
-            count = entities?.["wit$number:number"][0].value;
+            let instruction = entities?.["instruction:instruction"]?.[0]?.value;
+            let order = entities?.["order:order"]?.[0]?.value ?? "last";
+            count = entities?.["wit$number:number"]?.[0]?.value;
             switch (instruction) {
                 case "use":
                     return count ? {type: NNActions.SET_HIDDEN_LAYERS, layers: count} : null;
@@ -116,7 +121,7 @@ export const extractArchitectureChange = (witResponse, nn_state) => {
             }
     }
     
-
+    return null;
     // let architectureChange = {};
     // const intent = witResponse.intent;
     // architectureChange.intent = intent;
