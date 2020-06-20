@@ -13,6 +13,8 @@ const InitialState = () => ({
   knn_expected_labels: [],
   knn_test_data: [],
   knn_columns: [],
+  knn_columns_map: {},
+  knn_column_units: [],
   knn_column1_index: 2,
   knn_column2_index: 1,
 
@@ -47,6 +49,8 @@ function reducer(state, action: ModelActionType) {
         knn_expected_labels: action.knn_expected_labels,
         knn_test_data: action.knn_test_data,
         knn_columns: action.knn_columns,
+        knn_columns_map: action.knn_columns_map,
+        knn_column_units: action.knn_column_units,
         knn_labels: action.knn_labels,
       };
     default:

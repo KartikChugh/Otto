@@ -48,12 +48,12 @@ function reducer(state, action: NNActionType) {
     }
     case NNActions.REMOVE_LAYER: {
       const layers = [...state.layers];
-      if (layers.length > 1) {
-        layers.splice(action.layer, 1);
-      }
       let selectedLayerIndex = state.selectedLayerIndex;
-      if (selectedLayerIndex > 0) {
-        selectedLayerIndex -= 1;
+      if (layers.length > 2) {
+        layers.splice(action.layer, 1);
+        if (selectedLayerIndex > 0) {
+          selectedLayerIndex -= 1;
+        }
       }
       return {
         ...state,
@@ -69,7 +69,7 @@ function reducer(state, action: NNActionType) {
       const lastHiddenSize = lastHiddenLayer.units;
       const newLayer = new Layer(lastHiddenSize);
       layers.splice(layers.length - 1, 0, newLayer);
-      
+
       return {
         ...state,
         layers,

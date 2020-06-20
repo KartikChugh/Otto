@@ -43,6 +43,10 @@ const createPlotData = (state) => {
 export default function PlotKNN() {
   const { model_state } = useModelState();
   const data = createPlotData(model_state);
+  const columns = model_state.knn_columns;
+  const columnMap = model_state.knn_columns_map;
+  const xAxisColumn = columnMap[columns[model_state.knn_column1_index]];
+  const yAxisColumn = columnMap[columns[model_state.knn_column2_index]];
 
   return (
     <>
@@ -58,19 +62,21 @@ export default function PlotKNN() {
           }}
         >
           <CartesianGrid />
-          <XAxis type="number" dataKey="x" name={"name"} unit="cm">
-            <Label
-              value={model_state.knn_columns[model_state.knn_column1_index]}
-              position="insideBottom"
-              offset={-12}
-            />
+          <XAxis
+            type="number"
+            dataKey="x"
+            name={xAxisColumn}
+            unit={model_state.knn_column_units[model_state.knn_column1_index]}
+          >
+            <Label value={xAxisColumn} position="insideBottom" offset={-12} />
           </XAxis>
-          <YAxis type="number" dataKey="y" name="weight" unit="kg">
-            <Label
-              value={model_state.knn_columns[model_state.knn_column2_index]}
-              angle={-90}
-              position="insideLeft"
-            />
+          <YAxis
+            type="number"
+            dataKey="y"
+            name={yAxisColumn}
+            unit={model_state.knn_column_units[model_state.knn_column2_index]}
+          >
+            <Label value={yAxisColumn} angle={-90} position="insideLeft" />
           </YAxis>
           <Tooltip cursor={{ strokeDasharray: "3 3" }} />
           <Legend verticalAlign="top" height={36} />

@@ -109,7 +109,7 @@ export default function KNNToolbox() {
               >
                 {model_state.knn_columns.map((column, index) => (
                   <MenuItem key={index} value={index}>
-                    {column}
+                    {model_state.knn_columns_map[column]}
                   </MenuItem>
                 ))}
               </Select>
@@ -125,7 +125,7 @@ export default function KNNToolbox() {
               >
                 {model_state.knn_columns.map((column, index) => (
                   <MenuItem key={index} value={index}>
-                    {column}
+                    {model_state.knn_columns_map[column]}
                   </MenuItem>
                 ))}
               </Select>
