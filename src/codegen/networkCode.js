@@ -21,42 +21,21 @@ const layerCode = (state) => {
   const layers = state.layers;
   for (let i = 0; i < layers.length; i++) {
     const layer = layers[i];
-
-    let layerCode;
-    if (i === 0) {
-      layerCode = inputLayerCode(layer);
-    } else if (i === layers.length - 1) {
-      layerCode = outputLayerCode(layer, state);
-    } else {
-      layerCode = hiddenLayerCode(layer, state);
-    }
-
-    sb.appendLine(layerCode);
+    sb.appendLine(i === 0 ? inputLayerCode(layer) : hiddenAndOutputLayerCode(layer));
   }
   return sb.toString();
 };
 
 const inputLayerCode = (layer) => {
   const units = layer.units;
-
   const str = `model.add(Input(shape=(${units},)))`;
   return str;
 };
 
-const hiddenLayerCode = (layer, state) => {
+const hiddenAndOutputLayerCode = (layer) => {
   const units = layer.units;
-  const activation = state.activation;
-  const initializer = state.initializer;
-
-  const str = `model.add(Dense(${units}, activation='${activation}', kernel_initializer='${initializer}'))`;
-  return str;
-};
-
-const outputLayerCode = (layer, state) => {
-  const units = layer.units;
-  const activation = state.outputActivation;
-  const initializer = state.initializer;
-
+  const activation = layer.activation;
+  const initializer = layer.initializer;
   const str = `model.add(Dense(${units}, activation='${activation}', kernel_initializer='${initializer}'))`;
   return str;
 };
