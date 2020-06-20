@@ -13,9 +13,9 @@ export const CodeGen = (state, nn_state) => {
 
   // task-based imports
   if (state.task === Tasks.NATURAL_LANGUAGE) {
-    sb.append(importsCode.nlp());
+    sb.appendLine(importsCode.nlp());
   } else {
-    sb.append(importsCode.supervised());
+    sb.appendLine(importsCode.supervised());
   }
 
   // model-specific imports
@@ -53,8 +53,6 @@ export const CodeGen = (state, nn_state) => {
     sb.appendLine(importsCode.sklearnDatasets());
   }
 
-  sb.appendLine();
-
   // defines loadData function
   if (state.dataset_category === DatasetCategory.SAMPLE) {
     if (state.task === Tasks.NATURAL_LANGUAGE) {
@@ -66,12 +64,8 @@ export const CodeGen = (state, nn_state) => {
     sb.appendLine(sharedCode.defineLoadUnspecified());
   }
 
-  sb.appendLine();
-
   // defines params
   sb.appendLine(params(state));
-
-  sb.appendLine();
 
   // loads data
   if (state.task === Tasks.NATURAL_LANGUAGE) {
@@ -90,7 +84,7 @@ export const CodeGen = (state, nn_state) => {
 
   // splits training/testing sets
   if (state.task !== Tasks.NATURAL_LANGUAGE) {
-    sb.appendLine(sharedCode.split()); // TODO: exempt nlp
+    sb.appendLine(sharedCode.split());
   }
 
   // cleans text data
@@ -98,9 +92,13 @@ export const CodeGen = (state, nn_state) => {
     sb.appendLine(preprocessCode.textCleaning());
   }
 
-  sb.appendLine();
-
   // fits model
+  if (state.task === Tasks.NATURAL_LANGUAGE && state.nlp_models.length > 0) {
+    const isEntity = state.nlp_models.includes(Models.ENTITY_RECOGNITION);
+    const isSentiment = state.nlp_models.includes(Models.SENTIMENT_ANALYSIS);
+    sb.appendLine(nlpCode.modelNLP(isEntity, isSentiment));
+  }
+
   switch (state.model) {
     case Models.KNN:
       sb.appendLine(knnCode.model());
@@ -118,11 +116,8 @@ export const CodeGen = (state, nn_state) => {
       sb.appendLine(regressionCode.modelPoisson());
       break;
   }
-  if (state.task === Tasks.NATURAL_LANGUAGE) {
-    sb.appendLine(nlpCode.modelNLP(true, true));
-  }
 
-  return sb.toString();
+  return sb.toString().trim();
 };
 
 const componentsForModel = (model) => {
@@ -144,14 +139,15 @@ const params = (state) => {
     return preprocessCode.paramsPca(components);
   }
 
+  if (state.task === Tasks.NATURAL_LANGUAGE && state.nlp_models.length > 0) {
+    return nlpCode.params(1); // FIXME: replace with feature column
+  }
+
   switch (state.model) {
     case Models.KNN:
-      return knnCode.params(7); // TODO: replace with number of neighbors
+      return knnCode.params(7); // FIXME: replace with number of neighbors
     case Models.LINEAR_REGRESSION:
-      return regressionCode.params(5); // TODO: replace with feature column
-    case Models.ENTITY_RECOGNITION: // FIXME: array based
-    case Models.SENTIMENT_ANALYSIS:
-      return nlpCode.params(1); // TODO: replace with feature column
+      return regressionCode.params(5); // FIXME: replace with feature column
   }
 };
 
@@ -160,12 +156,13 @@ const sliceData = (state) => {
     return preprocessCode.pca();
   }
 
+  if (state.task === Tasks.NATURAL_LANGUAGE && state.nlp_models.length > 0) {
+    return nlpCode.slice();
+  }
+
   switch (state.model) {
     case Models.KNN:
       return knnCode.slice();
-    case Models.ENTITY_RECOGNITION: // FIXME: array based
-    case Models.SENTIMENT_ANALYSIS:
-      return nlpCode.slice();
     case Models.ORDINAL_REGRESSION:
     case Models.POISSON_REGRESSION:
     case Models.LINEAR_REGRESSION:
