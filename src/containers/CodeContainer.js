@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useState } from "state/State";
-import { CodeGen } from "codegen/codeGen";
+import { CodeGen } from "codegen/CodeGen";
 import { useNNState } from "state/NNState";
 
 function CodeContainer() {
