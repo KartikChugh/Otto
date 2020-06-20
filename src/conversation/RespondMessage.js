@@ -20,7 +20,6 @@ import { Layer } from "nn-architecture/Layer";
 import { NNActions } from "state/NNActions";
 
 export const responseToMessage = async (userMessage, wits, state, dispatch, nn_state, nn_dispatch) => {
-    
     switch (state.stepper_state) {
         case StepperState.TASK:
             return await taskStep(userMessage, wits.task, state, dispatch);
@@ -144,14 +143,10 @@ const modelStep = async (userMessage, wit, state, dispatch) => {
 
 }
 
+/** Model building via Otto */
 const architectureStep = async (userMessage, wit, nn_state, nn_dispatch) => {
 
     console.log("Architecture step: ", nn_state);
-    // nn_dispatch({
-    //     type: NNActions.SET_NODES,
-    //     layer: 0,
-    //     nodes: 17,
-    //   });
 
     // if (witResult.text.length == 4) {
     //     return 
@@ -163,6 +158,10 @@ const architectureStep = async (userMessage, wit, nn_state, nn_dispatch) => {
     const witResult = await getWitResult(wit, userMessage); 
 
     const architectureChange = extractArchitectureChange(witResult, nn_state);
+    if (architectureChange) {
+        nn_dispatch(architectureChange);
+    }
+    return JSON.stringify(architectureChange);
 
 
     return JSON.stringify(witResult);
