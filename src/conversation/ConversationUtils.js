@@ -31,10 +31,10 @@ export const extractSampleDataset = (statement) => {
     return [matchedTask, matchedModel, sampleDataset, matchedKeywords];
 } 
 
-export const extractTask = (witResponse) => { // TODO: threshold
+export const extractTask = (witResponse) => {
     let intents = witResponse.intents;
     let task = null;
-    if (intents.length > 0) {
+    if (intents.length > 0 && intents[0].confidence > 0.6) {
         let topIntent = intents[0];
         let topIntentName = topIntent.name;
         task = intentToTask[topIntentName];
