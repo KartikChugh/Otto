@@ -17,9 +17,9 @@ const rename = (name) => {
 
 const labelForSample = (sample, isTrait) => {
     const entityArr = [];
-    const keyword = isTrait ? "value" : body;
-    for (const entityName of sample) {
-        const matches = entities[entityName];
+    const keyword = isTrait ? "value" : "body";
+    for (const entityName in sample) {
+        const matches = sample[entityName];
         const firstMatch = matches[0];
         const value = firstMatch[keyword];
         entityArr.push(rename(entityName) + ": " + value);
@@ -28,30 +28,38 @@ const labelForSample = (sample, isTrait) => {
     return entityLabel;
 }
 
+/**
+ * Generates array of data objects: {data: "string", entities: "string", sentiments: "string"}
+ */
 export const invokeNLP = async (doEntity, doSentiment) => {
-    const texts = []
-    const entityLabels = []
-    const traitLabels = []
+    // const texts = []
+    // const entityLabels = []
+    // const traitLabels = []
 
-    tweets.forEach(async tweetData => {
+    const nlpData = []
+
+    for (let i = 0; i < 15; i++) {
+        const nlpDatapoint = {};
+        const tweetData = tweets[i];
         const text = tweetData["SentimentText"].trim().replace("\?|\.|\!|\/|\;|\:|\#|\*", "");
-        //const resp = await getWitResult(text);
+        const resp = await getWitResult(ottoNLP, text);
 
-        // if (doEntity) {
-        //     const entities = resp["entities"];
-        //     const entityLabel = labelForSample(entities, false);
-        //     entityLabels.push(entityLabel);
-        // }
+        if (doEntity) {
+            const entities = resp["entities"];
+            const entityLabel = labelForSample(entities, false);
+            //entityLabels.push(entityLabel);
+            nlpDatapoint.entities = entityLabel;
+        }
 
-        // if (doSentiment) {
-        //     const traits = resp["traits"];
-        //     const traitLabel = labelForSample(traits, true);
-        //     traitLabels.push(traitLabel);
-        // }
-        await new Promise(res => setTimeout(res, 25));
-        texts.push(text)
-    });
-    console.log(texts);
-    console.log(entityLabels);
-    console.log(traitLabels);
-} 
+        if (doSentiment) {
+            const traits = resp["traits"];
+            const traitLabel = labelForSample(traits, true);
+            //traitLabels.push(traitLabel);
+            nlpDatapoint.sentiments = traitLabel;
+        }
+        nlpDatapoint.data = text;
+        //texts.push(text);
+
+    }
+    
+}  

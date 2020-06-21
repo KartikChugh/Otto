@@ -56,7 +56,7 @@ function reducer(state, action: ModelActionType) {
         knn_labels: action.knn_labels,
       };
     case ModelActions.RUNNING: //FIXME: not working
-      alert("running!");
+      //alert("running!");
       return { ...state, viz_loading: true }; 
     // case ModelActions.RUN_NLP: 
     //   invokeNLP(action.doEntity, action.doSentiment);
