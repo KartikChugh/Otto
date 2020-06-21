@@ -3,13 +3,22 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { Card, CardContent, Grow } from "@material-ui/core";
 import { useState } from "state/State";
-import { StepperState, StateType, Models } from "state/StateTypes";
+import {
+  StepperState,
+  StateType,
+  Models,
+  DatasetCategory,
+} from "state/StateTypes";
 import NNFFToolbox from "components/toolbox/NNFFToolbox";
 import KNNToolbox from "components/toolbox/KNNToolbox";
+import DataPreview from "components/toolbox/DataPreview";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 296,
+  },
+  dataRoot: {
+    width: 350,
   },
   headerText: {
     paddingLeft: theme.spacing(0),
@@ -28,24 +37,43 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const getToolboxContent = (state: StateType) => {
-  switch (state.model) {
-    case Models.LINEAR_REGRESSION:
-      return <div>TODO</div>;
-    case Models.NEURAL_NETWORK_FF:
-      return <NNFFToolbox />;
-    default:
-      return <KNNToolbox />;
+  if (state.stepper_state === StepperState.VISUALIZE) {
+    switch (state.model) {
+      case Models.LINEAR_REGRESSION:
+        return <div>TODO</div>;
+      case Models.NEURAL_NETWORK_FF:
+        return <NNFFToolbox />;
+      case Models.KNN:
+        return <KNNToolbox />;
+      default:
+        return null;
+    }
   }
+  return <DataPreview />;
 };
 
 export default function ToolboxContainer() {
   const classes = useStyles();
   const { state } = useState();
   return (
-    <Grow in={state.stepper_state === StepperState.VISUALIZE}>
-      <div className={classes.root}>
+    <Grow
+      in={
+        state.stepper_state === StepperState.VISUALIZE ||
+        (state.dataset_category === DatasetCategory.SAMPLE &&
+          state.sample_dataset != null)
+      }
+    >
+      <div
+        className={
+          state.stepper_state === StepperState.VISUALIZE
+            ? classes.root
+            : classes.dataRoot
+        }
+      >
         <Typography className={classes.headerText} variant="h5">
-          Toolbox
+          {state.stepper_state === StepperState.VISUALIZE
+            ? "Toolbox"
+            : "Dataset Preview"}
         </Typography>
         <Card className={classes.card} variant="outlined">
           <CardContent className={classes.cardContent}>

@@ -59,6 +59,7 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
+// TODO: Conditionally return datasets
 const getSampleDatasets = (state: StateType) => {
   return [SampleDataset.IRIS, SampleDataset.BOSTON, SampleDataset.TWITTER];
 };
@@ -82,12 +83,13 @@ export default function SampleDatasetMenu({ anchorEl, handleClose, id }) {
   }
 
   function handleConfirm() {
-    console.log("called");
     handleClose();
-    dispatch({
-      type: Actions.SET_SAMPLE_DATASET,
-      sample_dataset: selectedDataset,
-    });
+    if (selectedDataset != null) {
+      dispatch({
+        type: Actions.SET_SAMPLE_DATASET,
+        sample_dataset: selectedDataset,
+      });
+    }
   }
 
   return (
