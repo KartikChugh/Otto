@@ -18,7 +18,7 @@ import { useState } from "state/State";
 import VisualizerOptionSelectionGrid from "components/VisualizerOptionSelectionGrid";
 import { getOptions } from "components/VisualizerOptionSelectionGrid";
 import { getActiveStep, getSteps } from "containers/SummaryContainer";
-import { StepperState, Models, Tasks } from "state/StateTypes";
+import { StepperState, Models, Tasks, DatasetCategory } from "state/StateTypes";
 import { Actions } from "state/Actions";
 import PlotsContainer from "./PlotsContainer";
 import { useModelState } from "state/ModelState";
@@ -102,6 +102,20 @@ function VisualizerContainer() {
     });
   };
 
+  function isNextDisabled() {
+    if (
+      state.stepper_state === StepperState.DATASET &&
+      state.dataset_category === DatasetCategory.SAMPLE &&
+      state.sample_dataset == null
+    ) {
+      return true;
+    }
+    return (
+      state.stepper_state !== StepperState.PREPROCESSORS &&
+      !getOptions(state).some((val) => getIsSelected(val.label))
+    );
+  }
+
   return (
     <Grid
       container
@@ -148,10 +162,7 @@ function VisualizerContainer() {
               </Button>
             ) : null}
             <Button
-              disabled={
-                state.stepper_state !== StepperState.PREPROCESSORS &&
-                !getOptions(state).some((val) => getIsSelected(val.label))
-              }
+              disabled={isNextDisabled()}
               variant="contained"
               color="primary"
               onClick={
