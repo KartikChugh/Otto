@@ -38,6 +38,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   layerInputItem: {
     marginBottom: 8,
+    marginTop: -16,
   },
   layerInput: {
     width: 60,
@@ -57,7 +58,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   button: {
     width: 260,
-    marginBottom: 8,
     outline: "none !important",
+  },
+  marginTOP: {
+    marginTop: 8,
   },
 }));

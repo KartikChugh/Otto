@@ -42,7 +42,7 @@ export default function NNFFToolbox() {
   const { nn_state } = useNNState();
   return (
     <div className={classes.root}>
-      <ExpansionPanel>
+      <ExpansionPanel defaultExpanded>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Grid container className={classes.header} direction="row">
             <Grid item>
@@ -61,24 +61,6 @@ export default function NNFFToolbox() {
         <ExpansionPanelDetails>
           <NNFFBuildPanelDetails />
         </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.floatLeft} variant="h5">
-            Learn
-          </Typography>
-        </ExpansionPanelSummary>
-      </ExpansionPanel>
-      <ExpansionPanel>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Grid container direction="column">
-            <Grid item>
-              <Typography className={classes.floatLeft} variant="h5">
-                Train
-              </Typography>
-            </Grid>
-          </Grid>
-        </ExpansionPanelSummary>
       </ExpansionPanel>
     </div>
   );
