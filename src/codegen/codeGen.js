@@ -94,9 +94,9 @@ export const CodeGen = (state, nn_state) => {
 
   // fits model
   if (state.task === Tasks.NATURAL_LANGUAGE && state.nlp_models.length > 0) {
-    const isEntity = state.nlp_models.includes(Models.ENTITY_RECOGNITION);
-    const isSentiment = state.nlp_models.includes(Models.SENTIMENT_ANALYSIS);
-    sb.appendLine(nlpCode.modelNLP(isEntity, isSentiment));
+    const doEntity = state.nlp_models.includes(Models.ENTITY_RECOGNITION);
+    const doSentiment = state.nlp_models.includes(Models.SENTIMENT_ANALYSIS);
+    sb.appendLine(nlpCode.modelNLP(doEntity, doSentiment));
   }
 
   switch (state.model) {

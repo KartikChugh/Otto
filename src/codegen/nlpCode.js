@@ -81,16 +81,16 @@ def traitLabelForSample(traits):
 const dataframeTrait = `'Sentiments':traitLabels,`;
 const dataframeEntity = `'Entities':entityLabels,`
 
-export const modelNLP = (isEntity, isSentiment) => {
+export const modelNLP = (doEntity, doSentiment) => {
 
 let converters = [];
-if (isEntity) converters.push(converterEntity);
-if (isSentiment) converters.push(converterTrait);
+if (doEntity) converters.push(converterEntity);
+if (doSentiment) converters.push(converterTrait);
 const converterString = converters.join('\n');
 
 let dataframeInputs = [];
-if (isEntity) dataframeInputs.push(dataframeEntity);
-if (isSentiment) dataframeInputs.push(dataframeTrait);
+if (doEntity) dataframeInputs.push(dataframeEntity);
+if (doSentiment) dataframeInputs.push(dataframeTrait);
 const dataframeString = dataframeInputs.join('\n');
 
     const nlp = 

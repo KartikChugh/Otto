@@ -148,22 +148,13 @@ const architectureStep = async (userMessage, wit, nn_state, nn_dispatch) => {
 
     console.log("Architecture step: ", nn_state);
 
-    // if (witResult.text.length == 4) {
-    //     return 
-    // }  
-
-    // convert witresult to architecture change
-    // relay change to architecture
-
     const witResult = await getWitResult(wit, userMessage); 
 
     const architectureChange = extractArchitectureChange(witResult, nn_state);
     if (architectureChange) {
         nn_dispatch(architectureChange);
     }
-    return JSON.stringify(architectureChange);
-
-
-    return JSON.stringify(witResult);
+    //return JSON.stringify(architectureChange);
+    //return JSON.stringify(witResult);
 
 }
