@@ -23,4 +23,6 @@ export type ModelActionType =
     }
   | {
       type: ModelActions.RUN_NLP,
+      doEntity: Boolean,
+      doSentiment: Boolean,
   }

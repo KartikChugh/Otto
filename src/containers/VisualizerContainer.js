@@ -81,6 +81,8 @@ function VisualizerContainer() {
       } else if (state.task === Tasks.NATURAL_LANGUAGE) {
         model_dispatch({
           type: ModelActions.RUN_NLP,
+          doEntity: state.nlp_models.includes(Models.ENTITY_RECOGNITION),
+          doSentiment: state.nlp_models.includes(Models.SENTIMENT_ANALYSIS),
           dispatch: model_dispatch,
         });
       }

@@ -9,7 +9,7 @@ export const tweets = [
     },
     {
       "ItemID": 35506,
-      "SentimentText": "@AldhyZ I don't work in Sony, I got no special connections. I work very very hard &amp; I got lucky. But its really more hard work than luck."
+      "SentimentText": "@AldhyZ I don't work in Sony, I got no special connections. I work very very hard and I got lucky. But its really more hard work than luck."
     },
     {
       "ItemID": 58108,
@@ -61,7 +61,7 @@ export const tweets = [
     },
     {
       "ItemID": 9006,
-      "SentimentText": "&quot; yer as beautiful as the joshua trees in palmdale  as innocent as the babys getting kidnapped from their homes out there ..."
+      "SentimentText": " yer as beautiful as the joshua trees in palmdale  as innocent as the babys getting kidnapped from their homes out there ..."
     },
     {
       "ItemID": 23526,
@@ -89,7 +89,7 @@ export const tweets = [
     },
     {
       "ItemID": 12091,
-      "SentimentText": "&amp;&amp;_ disz shawtyy heart braken. hesz officially gone yall. he on lokkdown 4 a yeer n tew munths wit no visitasz or kallsz"
+      "SentimentText": "andand_ disz shawtyy heart braken. hesz officially gone yall. he on lokkdown 4 a yeer n tew munths wit no visitasz or kallsz"
     },
     {
       "ItemID": 41250,
@@ -193,7 +193,7 @@ export const tweets = [
     },
     {
       "ItemID": 7195,
-      "SentimentText": "--#Imiss wen justyn used to ride his huffy to 178th&amp;sayres to get me a bacon,egg&amp;cheese, a pink lemonade &amp; a pack of blue skittles."
+      "SentimentText": "--#Imiss wen justyn used to ride his huffy to 178thandsayres to get me a bacon,eggandcheese, a pink lemonade and a pack of blue skittles."
     },
     {
       "ItemID": 87071,
@@ -221,7 +221,7 @@ export const tweets = [
     },
     {
       "ItemID": 10370,
-      "SentimentText": "&quot;People living in competition&quot;.               Hello world. I'm awake now"
+      "SentimentText": "People living in competition.               Hello world. I'm awake now"
     },
     {
       "ItemID": 88481,
@@ -253,7 +253,7 @@ export const tweets = [
     },
     {
       "ItemID": 9672,
-      "SentimentText": "&quot;Kill Bill and Kung Fu star David Carradine has been found dead in a Bangkok hotel room on Thursday.&quot;. Damn!"
+      "SentimentText": "Kill Bill and Kung Fu star David Carradine has been found dead in a Bangkok hotel room on Thursday.. Damn!"
     },
     {
       "ItemID": 15979,
@@ -293,7 +293,7 @@ export const tweets = [
     },
     {
       "ItemID": 51926,
-      "SentimentText": "@auraseeingever  *is glad ever choose to be an immortal with him* ||&quot;I Love You&quot;"
+      "SentimentText": "@auraseeingever  *is glad ever choose to be an immortal with him* ||I Love You"
     },
     {
       "ItemID": 19061,
@@ -333,7 +333,7 @@ export const tweets = [
     },
     {
       "ItemID": 56406,
-      "SentimentText": "@BCESTABLISHED06 some &quot;hoe&quot; must have really pissed u off today sweety"
+      "SentimentText": "@BCESTABLISHED06 some hoe must have really pissed u off today sweety"
     },
     {
       "ItemID": 75297,
@@ -397,11 +397,11 @@ export const tweets = [
     },
     {
       "ItemID": 61161,
-      "SentimentText": "@Bex_Smith haha i accidently hit trace cyrus aswell and i sent &quot;breeze in ppittsburg&quot; to him too hahaha"
+      "SentimentText": "@Bex_Smith haha i accidently hit trace cyrus aswell and i sent breeze in ppittsburg to him too hahaha"
     },
     {
       "ItemID": 10016,
-      "SentimentText": "&quot;I grew up on the street, not the hood... the Sesame&quot; THIS IS WHY I LOVE SCRUBS. Season 9 is going to be fail though"
+      "SentimentText": "I grew up on the street, not the hood... the Sesame THIS IS WHY I LOVE SCRUBS. Season 9 is going to be fail though"
     },
     {
       "ItemID": 20637,
@@ -481,7 +481,7 @@ export const tweets = [
     },
     {
       "ItemID": 14372,
-      "SentimentText": "...and I replied. &quot;It dropped becoz over the 2 week holidays I spend every day jamming the pennies in the piggybank!&quot;... #vindication"
+      "SentimentText": "...and I replied. It dropped becoz over the 2 week holidays I spend every day jamming the pennies in the piggybank!... #vindication"
     },
     {
       "ItemID": 46865,
@@ -525,7 +525,7 @@ export const tweets = [
     },
     {
       "ItemID": 10137,
-      "SentimentText": "&quot;Jeff, shut up. Nobody likes you.&quot;"
+      "SentimentText": "Jeff, shut up. Nobody likes you."
     },
     {
       "ItemID": 59198,
@@ -545,7 +545,7 @@ export const tweets = [
     },
     {
       "ItemID": 34490,
-      "SentimentText": "@AKAVirtualPA @rebeccamezzino I like Mr Tweet. It's like #ff, only more permanent &amp; forces you to give a reason"
+      "SentimentText": "@AKAVirtualPA @rebeccamezzino I like Mr Tweet. It's like #ff, only more permanent and forces you to give a reason"
     },
     {
       "ItemID": 53928,
@@ -625,7 +625,7 @@ export const tweets = [
     },
     {
       "ItemID": 96339,
-      "SentimentText": "@claudiaintouch Yeah! I want it too. I love that &quot;Falling Slowly&quot; song. It keeps playing in my head."
+      "SentimentText": "@claudiaintouch Yeah! I want it too. I love that Falling Slowly song. It keeps playing in my head."
     },
     {
       "ItemID": 18739,
@@ -685,7 +685,7 @@ export const tweets = [
     },
     {
       "ItemID": 37193,
-      "SentimentText": "@alikerl &quot;I need a man!....It's been a while.&quot; lol she makes me smile!!"
+      "SentimentText": "@alikerl I need a man!....It's been a while. lol she makes me smile!!"
     },
     {
       "ItemID": 8158,
@@ -725,7 +725,7 @@ export const tweets = [
     },
     {
       "ItemID": 53736,
-      "SentimentText": "@BabyHaroldK sniffle I voted til midnite U were leading Now @6AM UR  underdog Will make anipal appeal again UR SO MUCH CUTER &amp; I am sad"
+      "SentimentText": "@BabyHaroldK sniffle I voted til midnite U were leading Now @6AM UR  underdog Will make anipal appeal again UR SO MUCH CUTER and I am sad"
     },
     {
       "ItemID": 92044,
