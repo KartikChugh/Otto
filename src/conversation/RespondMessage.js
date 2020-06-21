@@ -39,13 +39,14 @@ const taskStep = async (userMessage, wit, state, dispatch) => {
 
     // extract the subject or null
     const subject = extractSubject(witResult);
-    console.log("Subject: ", subject);
+    console.log("Extracted subject: ", subject);
 
     let extractedTask = extractTask(witResult);
     console.log("Extracted task: ", extractedTask);
 
     // extract the sample dataset or null
     const effectiveSubject = (subject  && extractedTask) ? subject : userMessage;
+    console.log("Final effective subject: ", effectiveSubject);
     const [taskForSampleDataset, modelForSampleDataset, sampleDataset, matchedKeyword] = extractSampleDataset(
         effectiveSubject
     );
@@ -121,13 +122,13 @@ const taskStep = async (userMessage, wit, state, dispatch) => {
 }
 
 const modelStep = async (userMessage, wit, state, dispatch) => {
-    console.log("modelStep");
+    console.log("MODEL STEP");
 
     const task = state.task;
     let model = state.model;
 
-    console.log("Task: \n", task);
-    console.log("Model: \n", model);
+    console.log("Task: ", task);
+    console.log("Model: ", model);
 
     // model not predefined (custom dataset)
     // FIXME: use recommended

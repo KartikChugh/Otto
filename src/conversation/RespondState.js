@@ -13,10 +13,19 @@ export const responseToState = (state) => {
             return preprocessorsStep(state);
         case StepperState.VISUALIZE:
             return visualizeStep(state);
+        default:
+            break;
     }      
 }
 
 const dataStep = (state) => {
+
+    const isRecommended = state.dataset_category_otto && (state.dataset_category_otto === state.dataset_category);
+    if (isRecommended) {
+        msgs.DatasetRecommendation(state.task);
+    } else {
+        return msgs.DatasetPreface(state.task);
+    }
 
 }
 
@@ -32,6 +41,8 @@ const modelStep = (state) => {
             break;
         case Tasks.NATURAL_LANGUAGE:
             responses.push(msgs.NLPModelInfo());
+            break;
+        default:
             break;
     }
     return responses;

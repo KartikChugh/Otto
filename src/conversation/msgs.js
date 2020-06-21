@@ -1,7 +1,8 @@
 export const IntroQuestion = () => {
     return [
         "Hey there!",
-        "What would you like to do today?"
+        "My name's Otto, and I'm here to help you do some machine learning",
+        "What are you looking to do?"
     ];
 }
 
@@ -11,8 +12,8 @@ export const IntroQuestion = () => {
 
 export const TaskRecommendation = (task) => {
     return [
-        `Sounds cool!`,
-        `I'd recommend a ${task} model to help you explore that idea`
+        `Neat idea!`,
+        `I'd recommend a ${task.toLowerCase()} model to help you explore it`
     ];
 }
 
@@ -25,10 +26,27 @@ export const TaskRecommendation = (task) => {
 
 export const TaskInfo = () => {
     return [
-        "Here are some pointers to help you figure out what type of machine learning task to select",
-        "Regression is used to model numerical variables, such as stock prices or infection rates, while classification predicts categorical outcomes, like whether an image is a cat or a dog or if a candidate will win or not", 
+        "Hmm..so there's more than one way to model that. But I can definitely help you narrow it down!",
+        "Regression is used to model numerical variables, like stock prices or infection rates",
+        "while classification predicts categorical outcomes, (if an image is a cat or a dog, whether a candidate will win or not, and so on)", 
         "Natural language processing can do things like identify structures in text and figure out the tone behind an expression",
-        "Whenever you’re ready, pick the task that seems like the best fit"
+        "Whenever you’re ready, pick the task that seems like the best fit!"
+    ];
+}
+
+export const DatasetPreface = (task) => {
+    return [
+        `Alright, ${task.toLowerCase()} it is!`,
+        "Just letting you know, I have a few sample datasets you can model and visualize right from your browser",
+        "Check them out if you'd like, or select Custom to use your own data",
+    ];
+}
+
+export const DatasetRecommendation = (task) => {
+    return [
+        `Alright, ${task.toLowerCase()} it is!`,
+        "I've preselected a dataset that seems to match what you're looking for",
+        "Feel free to check out others, or select Custom you use your own data"
     ];
 }
 
