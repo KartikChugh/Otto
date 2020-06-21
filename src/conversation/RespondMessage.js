@@ -31,7 +31,7 @@ export const responseToMessage = async (userMessage, wits, state, dispatch, nn_s
 }
 
 const taskStep = async (userMessage, wit, state, dispatch) => {
-    console.log("TASK STEP");
+    console.log("RESPOND MESSAGE -- TASK STEP");
 
     // get the wit result
     const witResult = await getWitResult(wit, userMessage);
@@ -122,7 +122,7 @@ const taskStep = async (userMessage, wit, state, dispatch) => {
 }
 
 const modelStep = async (userMessage, wit, state, dispatch) => {
-    console.log("MODEL STEP");
+    console.log("RESPOND MESSAGE -- MODEL STEP");
 
     const task = state.task;
     let model = state.model;

@@ -19,10 +19,12 @@ export const responseToState = (state) => {
 }
 
 const dataStep = (state) => {
+    console.log("RESPOND STATE -- DATA STEP");
 
     const isRecommended = state.dataset_category_otto && (state.dataset_category_otto === state.dataset_category);
+    console.log("isRecommended? ", isRecommended);
     if (isRecommended) {
-        msgs.DatasetRecommendation(state.task);
+        return msgs.DatasetRecommendation(state.task);
     } else {
         return msgs.DatasetPreface(state.task);
     }
