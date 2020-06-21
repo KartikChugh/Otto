@@ -1,4 +1,4 @@
-[
+export const tweets = [
     {
       "ItemID": 11754,
       "SentimentText": "** need a neW rec. system  **"

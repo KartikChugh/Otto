@@ -18,7 +18,7 @@ import { useState } from "state/State";
 import VisualizerOptionSelectionGrid from "components/VisualizerOptionSelectionGrid";
 import { getOptions } from "components/VisualizerOptionSelectionGrid";
 import { getActiveStep, getSteps } from "containers/SummaryContainer";
-import { StepperState, Models } from "state/StateTypes";
+import { StepperState, Models, Tasks } from "state/StateTypes";
 import { Actions } from "state/Actions";
 import PlotsContainer from "./PlotsContainer";
 import { useModelState } from "state/ModelState";
@@ -72,14 +72,18 @@ function VisualizerContainer() {
     ].includes(value);
 
   const handleNext = () => {
-    if (
-      state.stepper_state === StepperState.PREPROCESSORS &&
-      state.model === Models.KNN
-    ) {
-      model_dispatch({
-        type: ModelActions.RUN_KNN,
-        dispatch: model_dispatch,
-      });
+    if (state.stepper_state === StepperState.PREPROCESSORS) {
+      if (state.model === Models.KNN) {
+        model_dispatch({
+          type: ModelActions.RUN_KNN,
+          dispatch: model_dispatch,
+        });
+      } else if (state.task === Tasks.NATURAL_LANGUAGE) {
+        model_dispatch({
+          type: ModelActions.RUN_NLP,
+          dispatch: model_dispatch,
+        });
+      }
     }
     dispatch({
       type: Actions.STEPPER_HANDLE_NEXT,

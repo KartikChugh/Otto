@@ -5,6 +5,7 @@ import { useReducer, createContext, useContext } from "react";
 
 import { ModelActionType, ModelActions } from "state/ModelActions";
 import { invoke } from "js-ml/knn";
+import { Models } from "./StateTypes";
 
 const InitialState = () => ({
   knn_k: 5,
@@ -53,6 +54,11 @@ function reducer(state, action: ModelActionType) {
         knn_column_units: action.knn_column_units,
         knn_labels: action.knn_labels,
       };
+    case ModelActions.RUN_NLP:
+      const doEntity = state.nlp_models.includes(Models.ENTITY_RECOGNITION);
+      const doSentiment = state.nlp_models.includes(Models.SENTIMENT_ANALYSIS);
+      invokeNLP(doEntity, doSentiment);
+      return { ...state, viz_loading: true };
     default:
       return state;
   }

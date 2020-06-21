@@ -3,10 +3,9 @@ import {responseToState} from "conversation/RespondState";
 const { Wit, log } = require("node-wit");
 const token = require("TOKEN.json");
 
-export default class Conversation /* extends React.Component */  {
+export default class Conversation {
 
     constructor(say) {
-        // super();
         this.say = say;
         this.ottoTask = new Wit({
             accessToken: token.task_tester,
