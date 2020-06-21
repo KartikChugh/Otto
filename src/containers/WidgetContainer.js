@@ -16,8 +16,9 @@ import { useNNState } from "state/NNState";
 
 const convo = new Conversation(addResponseMessage);
 
-export function initializeWidget() {
+export async function initializeWidget() {
   deleteMessages();
+  await new Promise((r) => setTimeout(r, 2500));
   convo.sayMessages(msgs.IntroQuestion());
 }
 

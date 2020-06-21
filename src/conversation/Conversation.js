@@ -30,8 +30,10 @@ export default class Conversation {
         messages = messages.flat(1);
         for (let message of messages) {
             if (message != null) {
-                await new Promise((r) => setTimeout(r, writeDelay(message)));
+                let d = delay(message);
+                await new Promise((r) => setTimeout(r, d/2));
                 this.say(message);
+                await new Promise((r) => setTimeout(r, d/2));
             }
         }
     };
@@ -62,10 +64,11 @@ export default class Conversation {
 
 }
 
-function writeDelay(msg) {
-    const WPM = 300;
+function delay(msg) {
+    const WPM = 225;
     const length = msg.length;
-    const timeRead = (length / 3.5 / WPM) * 60 * 1000;
-    //return timeRead < 2500 ? timeRead : 2500;
-    return 100; // FIXME: revert
+    const delayMS = (length / 3.5 / WPM) * 60 * 1000;
+    return delayMS;
+    //return delayMS < 2500 ? delayMS : 2500;
+    //return 100; 
 }
