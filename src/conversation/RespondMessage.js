@@ -31,29 +31,34 @@ export const responseToMessage = async (userMessage, wits, state, dispatch, nn_s
 }
 
 const taskStep = async (userMessage, wit, state, dispatch) => {
-    console.log("taskStep");
+    console.log("TASK STEP");
 
     // get the wit result
     const witResult = await getWitResult(wit, userMessage);
-    console.log(witResult);
+    console.log("Wit result: ", witResult);
 
     // extract the subject or null
     const subject = extractSubject(witResult);
-    console.log(subject);
+    console.log("Subject: ", subject);
+
+    let extractedTask = extractTask(witResult);
+    console.log("Extracted task: ", extractedTask);
 
     // extract the sample dataset or null
-    const effectiveSubject = subject ? subject : userMessage;
+    const effectiveSubject = (subject  && extractedTask) ? subject : userMessage;
     const [taskForSampleDataset, modelForSampleDataset, sampleDataset, matchedKeyword] = extractSampleDataset(
         effectiveSubject
     );
+    console.log("Sample data matches: ");
     console.log(taskForSampleDataset);
+    console.log(modelForSampleDataset);
     console.log(sampleDataset);
     console.log(matchedKeyword);
 
     // define the task or null
-    const task = taskForSampleDataset ?? extractTask(witResult);
-    console.log(task);
-    
+    const task = taskForSampleDataset ?? extractedTask;
+    console.log("Final task decision: ", task);
+
     if (sampleDataset) {
         // update dataset type
         dispatch({

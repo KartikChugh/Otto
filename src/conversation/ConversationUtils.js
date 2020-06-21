@@ -25,6 +25,7 @@ export const getWitResult = async (wit, utterance) => {
 }
 
 export const extractSampleDataset = (statement) => {
+    console.log("Checkng for sample data match!")
     let sampleDataset = null;
     let matchedKeyword = null;
     let matchedTask = null;
@@ -35,6 +36,7 @@ export const extractSampleDataset = (statement) => {
         const keywords = entry.keywords;
         for (const keyword of keywords) {
             if (statement.includes(keyword)) {
+                console.log("MATCH: ", keyword);
                 matchedKeyword = keyword;
                 matchedTask = entry.task;
                 matchedModel = entry.model;
