@@ -1,5 +1,6 @@
 import { Tasks, Models } from "state/StateTypes"
 import { NNActions } from "state/NNActions"
+import { datasetMetadata } from "static/datasets/metadata"
 
 // TODO: refactor elsewhere?
 
@@ -25,10 +26,24 @@ export const getWitResult = async (wit, utterance) => {
 
 export const extractSampleDataset = (statement) => {
     let sampleDataset = null;
-    let matchedKeywords = null;
+    let matchedKeyword = null;
     let matchedTask = null;
     let matchedModel = null;
-    return [matchedTask, matchedModel, sampleDataset, matchedKeywords];
+    matchingProcess:
+    for (const dataset in datasetMetadata) {
+        const entry = datasetMetadata[dataset];
+        const keywords = entry.keywords;
+        for (const keyword of keywords) {
+            if (statement.includes(keyword)) {
+                matchedKeyword = keyword;
+                matchedTask = entry.task;
+                matchedModel = entry.model;
+                sampleDataset = dataset;
+                break matchingProcess;
+            }
+        }
+    }
+    return [matchedTask, matchedModel, sampleDataset, matchedKeyword];
 } 
 
 export const extractTask = (witResponse) => {

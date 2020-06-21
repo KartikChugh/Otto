@@ -43,16 +43,17 @@ const taskStep = async (userMessage, wit, state, dispatch) => {
 
     // extract the sample dataset or null
     const effectiveSubject = subject ? subject : userMessage;
-    const [taskForSampleDataset, modelForSampleDataset, sampleDataset, matchedKeywords] = extractSampleDataset(
+    const [taskForSampleDataset, modelForSampleDataset, sampleDataset, matchedKeyword] = extractSampleDataset(
         effectiveSubject
     );
     console.log(taskForSampleDataset);
     console.log(sampleDataset);
-    console.log(matchedKeywords);
+    console.log(matchedKeyword);
 
     // define the task or null
-    const task = taskForSampleDataset ? taskForSampleDataset : extractTask(witResult);
+    const task = taskForSampleDataset ?? extractTask(witResult);
     console.log(task);
+    
     if (sampleDataset) {
         // update dataset type
         dispatch({

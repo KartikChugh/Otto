@@ -15,12 +15,12 @@ import {
   twitterColumns,
   twitterColumnsMap,
 } from "static/datasets/tweets";
-import { SampleDataset } from "state/StateTypes";
+import { SampleDataset, Tasks, Models } from "state/StateTypes";
 
 export const datasetMetadata = {
   [SampleDataset.IRIS]: {
     title: "Iris",
-    subtitle: "A small dataset of flowers",
+    subtitle: "The popular dataset featuring flower traits",
     icon: <SendIcon fontSize="small" />,
     instances: 150,
     attributes: 4,
@@ -30,20 +30,28 @@ export const datasetMetadata = {
     columnsMap: irisColumnsMap,
     data: iris,
     units: irisUnits,
+
+    keywords: ["flower", "iris", "petal"],
+    task: Tasks.CLASSIFICATION,
+    model: Models.KNN,
   },
   [SampleDataset.TWITTER]: {
     title: "Twitter",
-    subtitle: "Text data from twitter tweets",
+    subtitle: "A small sample of random tweets",
     icon: <InboxIcon fontSize="small" />,
     instances: 200,
     tags: ["Text"],
     columns: twitterColumns,
     columnsMap: twitterColumnsMap,
     data: tweets,
+
+    keywords: ["tweet", "twitter", "sentiment"],
+    task: Tasks.NATURAL_LANGUAGE,
+    model: [Models.SENTIMENT_ANALYSIS, Models.ENTITY_RECOGNITION]
   },
   [SampleDataset.BOSTON]: {
     title: "Boston",
-    subtitle: "Yum",
+    subtitle: "Prices and other Boston housing data",
     icon: <DraftsIcon fontSize="small" />,
     instances: 506,
     attributes: 13,
@@ -52,5 +60,9 @@ export const datasetMetadata = {
     columnsMap: {},
     data: [],
     units: [],
+
+    keywords: ["boston", "house", "housing", "home"],
+    task: Tasks.REGRESSION,
+    model: Models.LINEAR_REGRESSION,
   },
 };
