@@ -17,6 +17,8 @@ import {
 import { useState } from "state/State";
 import { Actions } from "state/Actions";
 import logo from "logo.svg";
+import SampleDatasetMenu from "components/SampleDatasetMenu";
+import { datasetMetadata } from "static/datasets/metadata";
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
@@ -120,6 +122,17 @@ export function getOptions(state: StateType) {
 export default function VisualizerOptionSelectionGrid() {
   const classes = useStyles();
   const { state, dispatch } = useState();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleClick = (event, type, label) => {
+    if (type === StepperState.DATASET && label === DatasetCategory.SAMPLE) {
+      setAnchorEl(event.currentTarget);
+    }
+  };
 
   const getIsRecommended = (value) =>
     [
@@ -178,19 +191,47 @@ export default function VisualizerOptionSelectionGrid() {
     }
   };
 
+  function formatLabel(label) {
+    if (label === DatasetCategory.SAMPLE) {
+      if (state.sample_dataset != null) {
+        return label + " (" + datasetMetadata[state.sample_dataset].title + ")";
+      }
+    }
+    return label;
+  }
+
   function AvatarItem(props: { avatar: any }) {
     const avatar = props.avatar;
     return (
-      <Avatar
-        alt={avatar.label}
-        src={logo}
-        className={
-          getIsSelected(avatar.label)
-            ? classes.avatarItemSelected
-            : classes.large
-        }
-        onClick={() => optionOnClickHandler(avatar.type, avatar.label)}
-      />
+      <>
+        <Avatar
+          aria-controls={avatar.label}
+          alt={avatar.label}
+          src={logo}
+          className={
+            getIsSelected(avatar.label)
+              ? classes.avatarItemSelected
+              : classes.large
+          }
+          key={avatar.label}
+          onClick={(event) => {
+            optionOnClickHandler(avatar.type, avatar.label);
+            handleClick(event, avatar.type, avatar.label);
+            console.log(
+              "target",
+              event.currentTarget,
+              event.relatedTarget,
+              event.target
+            );
+          }}
+          aria-haspopup="true"
+        />
+        <SampleDatasetMenu
+          anchorEl={anchorEl}
+          handleClose={handleClose}
+          id={avatar.label}
+        />
+      </>
     );
   }
 
@@ -210,7 +251,7 @@ export default function VisualizerOptionSelectionGrid() {
         spacing={5}
       >
         {getOptions(state).map((avatar) => (
-          <Grid item className={classes.avatarItem} key={avatar.label}>
+          <Grid item className={classes.avatarItem}>
             {getIsRecommended(avatar.label) ? (
               <Tooltip title="Recommended by Otto!" placement="top">
                 <StyledBadge
@@ -241,7 +282,7 @@ export default function VisualizerOptionSelectionGrid() {
                   : classes.avatarLabel
               }
             >
-              {avatar.label}
+              {formatLabel(avatar.label)}
             </Typography>
           </Grid>
         ))}
