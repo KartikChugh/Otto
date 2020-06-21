@@ -23,6 +23,7 @@ import { Actions } from "state/Actions";
 import PlotsContainer from "./PlotsContainer";
 import { useModelState } from "state/ModelState";
 import { ModelActions } from "state/ModelActions";
+import { invokeNLP } from "js-ml/nlp";
 
 const useStyles = makeStyles((theme) => ({
   rootExplanation: {
@@ -71,7 +72,7 @@ function VisualizerContainer() {
       ...state.preprocessors,
     ].includes(value);
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (state.stepper_state === StepperState.PREPROCESSORS) {
       if (state.model === Models.KNN) {
         model_dispatch({
@@ -79,12 +80,16 @@ function VisualizerContainer() {
           dispatch: model_dispatch,
         });
       } else if (state.task === Tasks.NATURAL_LANGUAGE) {
+        // model_dispatch({
+        //   type: ModelActions.RUN_NLP,
+        //   doEntity: state.nlp_models.includes(Models.ENTITY_RECOGNITION),
+        //   doSentiment: state.nlp_models.includes(Models.SENTIMENT_ANALYSIS),
+        //   dispatch: model_dispatch,
+        // });
         model_dispatch({
-          type: ModelActions.RUN_NLP,
-          doEntity: state.nlp_models.includes(Models.ENTITY_RECOGNITION),
-          doSentiment: state.nlp_models.includes(Models.SENTIMENT_ANALYSIS),
-          dispatch: model_dispatch,
-        });
+          type: ModelActions.RUNNING,
+        })
+        await invokeNLP(true, true);
       }
     }
     dispatch({

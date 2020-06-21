@@ -55,9 +55,12 @@ function reducer(state, action: ModelActionType) {
         knn_column_units: action.knn_column_units,
         knn_labels: action.knn_labels,
       };
-    case ModelActions.RUN_NLP:
-      invokeNLP(action.doEntity, action.doSentiment);
-      return { ...state, viz_loading: true };
+    case ModelActions.RUNNING: //FIXME: not working
+      alert("running!");
+      return { ...state, viz_loading: true }; 
+    // case ModelActions.RUN_NLP: 
+    //   invokeNLP(action.doEntity, action.doSentiment);
+    //   return { ...state, viz_loading: true };
     default:
       return state;
   }

@@ -48,7 +48,7 @@ export const invokeNLP = async (doEntity, doSentiment) => {
         //     const traitLabel = labelForSample(traits, true);
         //     traitLabels.push(traitLabel);
         // }
-        
+        await new Promise(res => setTimeout(res, 25));
         texts.push(text)
     });
     console.log(texts);

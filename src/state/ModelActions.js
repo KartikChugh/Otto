@@ -3,7 +3,8 @@ export const ModelActions = Object.freeze({
   SET_KNN_COLS: "SET_KNN_COLUMNS",
   RUN_KNN: "RUN_KNN",
   KNN_DONE: "KNN_DONE",
-  RUN_NLP: "RUN_NLP"
+  RUNNING: "RUNNING"
+  // RUN_NLP: "RUN_NLP"
 });
 
 export type ModelActionType =
@@ -22,7 +23,10 @@ export type ModelActionType =
       indices: Array<Number>,
     }
   | {
-      type: ModelActions.RUN_NLP,
-      doEntity: Boolean,
-      doSentiment: Boolean,
-  }
+      type: ModelActions.RUNNING
+    }
+  // | {
+  //     type: ModelActions.RUN_NLP,
+  //     doEntity: Boolean,
+  //     doSentiment: Boolean,
+  // }
