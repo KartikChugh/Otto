@@ -79,14 +79,27 @@ const taskStep = async (userMessage, wit, state, dispatch) => {
             sample_dataset: sampleDataset,
         });
         // update model
-        dispatch({
-            type: Actions.SET_MODEL,
-            model: modelForSampleDataset,
-        });
-        dispatch({
-            type: Actions.SET_MODEL_OTTO,
-            model: modelForSampleDataset,
-        });
+        if (task === Tasks.NATURAL_LANGUAGE) {
+            for (const nlpModel of modelForSampleDataset) {
+                dispatch({
+                    type: Actions.TOGGLE_NLP_MODEL,
+                    model: nlpModel
+                });
+                dispatch({
+                    type: Actions.TOGGLE_NLP_MODEL_OTTO,
+                    model: nlpModel
+                });
+            }
+        } else {
+            dispatch({
+                type: Actions.SET_MODEL,
+                model: modelForSampleDataset,
+            });
+            dispatch({
+                type: Actions.SET_MODEL_OTTO,
+                model: modelForSampleDataset,
+            });
+        }
     }
 
     if (task) {

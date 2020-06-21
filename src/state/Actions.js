@@ -10,6 +10,7 @@ export const Actions = Object.freeze({
   SET_TASK: "SET_TASK",
   SET_MODEL: "SET_MODEL",
   TOGGLE_NLP_MODEL: "TOGGLE_NLP_MODEL",
+  TOGGLE_NLP_MODEL_OTTO: "TOGGLE_NLP_MODEL_OTTO",
   SET_DATASET_CATEGORY: "SET_DATASET_CATEGORY",
   SET_SAMPLE_DATASET: "SET_SAMPLE_DATASET",
   SET_TASK_OTTO: "SET_TASK_OTTO",
@@ -28,6 +29,7 @@ export type ActionType =
   | { type: "SET_TASK", task: TasksType }
   | { type: "SET_MODEL", model: ModelsType }
   | { type: "TOGGLE_NLP_MODEL", model: ModelsType }
+  | { type: "TOGGLE_NLP_MODEL_OTTO", model: ModelsType }
   | { type: "SET_DATASET_CATEGORY", dataset_category: DatasetCategoryType }
   | { type: "SET_SAMPLE_DATASET", sample_dataset: SampleDatasetType }
   | { type: "SET_TASK_OTTO", task: TasksType }
