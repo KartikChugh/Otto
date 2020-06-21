@@ -10,14 +10,6 @@ import {
     extractClassificationModel, 
     extractArchitectureChange
 } from "conversation/ConversationUtils";
-import {
-    Optimizers,
-    Losses,
-    Activations,
-    Initializers,
-  } from "nn-architecture/hyperparams";
-import { Layer } from "nn-architecture/Layer";
-import { NNActions } from "state/NNActions";
 
 export const responseToMessage = async (userMessage, wits, state, dispatch, nn_state, nn_dispatch) => {
     switch (state.stepper_state) {
@@ -31,6 +23,9 @@ export const responseToMessage = async (userMessage, wits, state, dispatch, nn_s
             if (state.model === Models.NEURAL_NETWORK_FF) {
                 return architectureStep(userMessage, wits.nn, nn_state, nn_dispatch);
             }
+            break;
+        default:
+            break;
     }
 
 }
@@ -125,6 +120,8 @@ const modelStep = async (userMessage, wit, state, dispatch) => {
             case Tasks.CLASSIFICATION:
                 model = await extractClassificationModel(userMessage, wit) ||
                     Models.NEURAL_NETWORK_FF;
+                break;
+            default:
                 break;
         }
 

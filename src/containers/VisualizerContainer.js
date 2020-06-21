@@ -73,6 +73,9 @@ function VisualizerContainer() {
     ].includes(value);
 
   const handleNext = async () => {
+    dispatch({
+      type: Actions.STEPPER_HANDLE_NEXT,
+    });
     if (state.stepper_state === StepperState.PREPROCESSORS) {
       if (state.model === Models.KNN) {
         model_dispatch({
@@ -92,9 +95,7 @@ function VisualizerContainer() {
         await invokeNLP(true, true);
       }
     }
-    dispatch({
-      type: Actions.STEPPER_HANDLE_NEXT,
-    });
+    
   };
 
   const handleBack = () => {

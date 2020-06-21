@@ -57,7 +57,7 @@ export const extractRegressionModel = async (statement, wit) => {
     const witResponse = await getWitResult(wit, statement);
     let entities = Object.keys(witResponse.entities); // note that this counts matches equally
     let models = entities.map(entity => regressionEntityToModel[entity]);
-    if (models.length == 0) {
+    if (models.length === 0) {
         return Models.LINEAR_REGRESSION;
     }
     return models[0]; // returns first match
@@ -67,7 +67,7 @@ export const extractClassificationModel = async (statement, wit) => {
     const witResponse = await getWitResult(wit, statement);
     let entities = Object.keys(witResponse.entities); // note that this counts matches equally
     let models = entities.map(entity => classificationEntityToModel[entity]);
-    if (models.length == 0) {
+    if (models.length === 0) {
         return Models.NEURAL_NETWORK_FF;
     }
     return models[0]; // returns first match
@@ -101,7 +101,9 @@ export const extractArchitectureChange = (witResponse, nn_state) => {
                 case "outputs":
                     return count ? {type: NNActions.SET_NODES, layer: nn_state.layers.length - 1, nodes: count} : null;
                 case "nodes":
-                    return count ? {type: NNActions.SET_HIDDEN_NODES, nodes: count} : null;                
+                    return count ? {type: NNActions.SET_HIDDEN_NODES, nodes: count} : null;      
+                default:
+                    return null;
             }
 
         case "layers":
@@ -117,11 +119,14 @@ export const extractArchitectureChange = (witResponse, nn_state) => {
                 case "remove":
                     count = count ?? 1;
                     return {type: NNActions.REMOVE_LAYERS, layers: count, fromEnd: order === "last"}
+                default:
+                    return null;
 
             }
+        default:
+            return null;
     }
     
-    return null;
     // let architectureChange = {};
     // const intent = witResponse.intent;
     // architectureChange.intent = intent;

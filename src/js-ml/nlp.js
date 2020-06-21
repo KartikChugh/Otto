@@ -1,7 +1,7 @@
 import { tweets } from "static/datasets/tweets.js";
 import { getWitResult} from "conversation/ConversationUtils";
 import { titleCase } from "title-case";
-const { Wit, log } = require("node-wit");
+const { Wit } = require("node-wit");
 const token = require("TOKEN.json");
 
 const ottoNLP = new Wit({
@@ -58,6 +58,7 @@ export const invokeNLP = async (doEntity, doSentiment) => {
             nlpDatapoint.sentiments = traitLabel;
         }
         nlpDatapoint.data = text;
+        nlpData.push(nlpDatapoint);
         //texts.push(text);
 
     }
