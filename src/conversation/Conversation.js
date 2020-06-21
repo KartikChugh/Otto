@@ -8,7 +8,7 @@ export default class Conversation {
     constructor(say) {
         this.say = say;
         this.ottoTask = new Wit({
-            accessToken: token.task_tester,
+            accessToken: token.task,
         });
         this.ottoModel = new Wit({
             accessToken: token.model,
