@@ -11,7 +11,7 @@ function CodeContainer() {
   return (
     <textarea
       value={CodeGen(state, nn_state)}
-      style={{ width: "100%", height: "100%", fontSize: "11px" }}
+      style={{ width: "100%", height: "100%", fontSize: "11px", backgroundColor:"#44318111", color:"black", fontFamily:"monospace" }}
     />
   );
 }
