@@ -74,7 +74,7 @@ export default function PlotLinReg() {
             <Scatter name="Test Data" dataKey="scatter" fill="#E76F51" />
             <Line
               dataKey="line"
-              name="Best fit line"
+              name="Line of Best Fit (Train Data)"
               stroke="#2A9D8F"
               dot={false}
             />

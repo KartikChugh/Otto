@@ -16,9 +16,47 @@ import {
 } from "state/StateTypes";
 import { useState } from "state/State";
 import { Actions } from "state/Actions";
-import logo from "logo.svg";
 import SampleDatasetMenu from "components/SampleDatasetMenu";
 import { datasetMetadata } from "static/datasets/metadata";
+// import logo from "otto_logo_2.png";
+import algo from "art/algorithm.svg";
+import clas from "art/class.svg";
+import reg from "art/reg.svg";
+import nlp from "art/nlp.svg"
+import custom from "art/custom.svg"
+import sample from "art/sample.svg"
+import linear from "art/linear.svg"
+import ordinal from "art/ordinal.svg"
+import poisson from "art/poisson.svg"
+import knn from "art/knn.svg"
+import network from "art/network.svg"
+import sentiment from "art/sentiment.svg"
+import entity from "art/entity.svg"
+import norm from "art/norm.svg"
+import pca from "art/pca.svg"
+import clean from "art/clean.svg"
+
+
+function logoPicker(label) {
+  const map = {
+    [Tasks.REGRESSION]: reg,
+    [Tasks.CLASSIFICATION]: clas,
+    [Tasks.NATURAL_LANGUAGE]: nlp,
+    [DatasetCategory.CUSTOM]: custom,
+    [DatasetCategory.SAMPLE]: sample,
+    [Models.LINEAR_REGRESSION]: linear,
+    [Models.POISSON_REGRESSION]: poisson,
+    [Models.ORDINAL_REGRESSION]: ordinal,
+    [Models.KNN]: knn,
+    [Models.NEURAL_NETWORK_FF]: network,
+    [Models.SENTIMENT_ANALYSIS]: sentiment,
+    [Models.ENTITY_RECOGNITION]: entity,
+    [Preprocessors.PCA]: pca,
+    [Preprocessors.TEXT_CLEANING]: clean,
+    [Preprocessors.NORMALIZATION]: norm,
+  }
+  return map?.[label] ?? algo;
+}
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
@@ -207,7 +245,7 @@ export default function VisualizerOptionSelectionGrid() {
         <Avatar
           aria-controls={avatar.label}
           alt={avatar.label}
-          src={logo}
+          src={logoPicker(avatar.label)}
           className={
             getIsSelected(avatar.label)
               ? classes.avatarItemSelected

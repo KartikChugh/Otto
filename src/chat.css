@@ -1,5 +1,5 @@
 .rcw-conversation-container .rcw-header {
-    background-color: #3575b5;
+    background-color: #3675b6;
     border-radius: 10px 10px 0 0;
     color: #fff;
     display: -ms-flexbox;
@@ -34,7 +34,7 @@
     padding: 0 0 15px
 }
 .rcw-full-screen .rcw-close-button {
-    background-color: #35cce6;
+    background-color: #3675b6;
     border: 0;
     display: block;
     position: absolute;
@@ -57,7 +57,7 @@
         padding: 0 0 15px
     }
     .rcw-conversation-container .rcw-close-button {
-        background-color: #35cce6;
+        background-color: #3675b6;
         border: 0;
         display: block;
         position: absolute;
@@ -147,14 +147,14 @@
 .quick-button {
     background: none;
     border-radius: 15px;
-    border: 2px solid #35cce6;
+    border: 2px solid #3675b6;
     font-weight: 700;
     padding: 5px 10px;
     cursor: pointer;
     outline: 0
 }
 .quick-button:active {
-    background: #35cce6;
+    background: #3675b6;
     color: #fff
 }
 .loader {

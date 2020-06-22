@@ -1,12 +1,12 @@
 import React from "react";
 import "App.css";
 import Navbar from "react-bootstrap/Navbar";
-import logo from "logo.svg";
+import logo from "otto_logo_clear.png";
 
 function HeaderContainer() {
   return (
     <>
-      <Navbar style={{ width: "100%" }} bg="dark" variant="dark">
+      <Navbar style={{ width: "100%", backgroundColor: "#382B73" }} variant="dark">
         <Navbar.Brand href="#home">
           <img
             alt=""
@@ -15,7 +15,7 @@ function HeaderContainer() {
             height="30"
             className="d-inline-block align-top"
           />{" "}
-          React Bootstrap
+          OttoML
         </Navbar.Brand>
       </Navbar>
     </>
