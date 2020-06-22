@@ -21,6 +21,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
 import { useModelState } from "state/ModelState";
 import { model } from "codegen/knnCode";
+import { invokeKNN } from "js-ml/knn";
 
 export const useStyles = makeStyles((theme) => ({
   sliderWidth: {
@@ -63,10 +64,7 @@ export default function KNNToolbox() {
         type: ModelActions.SET_KNN_K,
         knn_k: kVal,
       });
-      model_dispatch({
-        type: ModelActions.RUN_KNN,
-        dispatch: model_dispatch,
-      });
+      invokeKNN(kVal, model_dispatch);
     }
   }
 

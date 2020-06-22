@@ -5,13 +5,15 @@ import { datasetMetadata } from "static/datasets/metadata";
 import { SampleDataset } from "state/StateTypes";
 import { shuffleArray } from "js-ml/knn";
 
-export function invokeLinReg(dispatch, model_state) {
+export function invokeLinReg(dispatch, indVar, setAxes = false) {
   dispatch({
     type: ModelActions.RUNNING,
   });
   const datas = datasetMetadata[SampleDataset.BOSTON];
   let data = datas.data;
-  data = dressData(data, datas.depVar, datas.indVar, datas.columns);
+  const trainAgainst =
+    indVar != null ? datas.columns.indexOf(indVar) : datas.indVar;
+  data = dressData(data, datas.depVar, trainAgainst, datas.columns);
   data = shuffleArray(data);
 
   const separationSize = 0.7 * data.length;
@@ -21,15 +23,20 @@ export function invokeLinReg(dispatch, model_state) {
   const result = regression.linear(train);
   const testResult = test.map((point) => result.predict(point[0]));
 
-  console.log(test, testResult);
+  console.log(result);
 
-  dispatch({
+  const dispatchObject = {
     type: ModelActions.LINREG_DONE,
     linreg_test_result: testResult,
     linreg_test_set: test,
-    linreg_x_name: datas.columns[datas.indVar],
-    linreg_y_name: datas.columns[datas.depVar],
-  });
+    linreg_columns: datas.columns,
+  };
+  if (setAxes) {
+    dispatchObject["linreg_x_name"] = datas.columns[datas.indVar];
+    dispatchObject["linreg_y_name"] = datas.columns[datas.depVar];
+  }
+
+  dispatch(dispatchObject);
 }
 
 function dressData(data, depVar, indVar, columns) {

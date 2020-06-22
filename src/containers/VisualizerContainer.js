@@ -87,7 +87,7 @@ function VisualizerContainer() {
           model_dispatch
         );
       } else if (state.model === Models.LINEAR_REGRESSION) {
-        invokeLinReg(model_dispatch, model_state);
+        invokeLinReg(model_dispatch, null, true);
       }
     }
   };

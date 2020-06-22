@@ -17,9 +17,13 @@ import {
 
 import { useModelState } from "state/ModelState";
 
+function compareX(a, b) {
+  return a.x - b.x;
+}
+
 export default function PlotLinReg() {
   const { model_state } = useModelState();
-
+  console.log("what", model_state.linreg_x_name);
   const { linreg_test_result, linreg_test_set } = model_state;
 
   const data = [];
@@ -32,6 +36,7 @@ export default function PlotLinReg() {
       });
     }
   });
+  data.sort(compareX);
 
   return (
     <>

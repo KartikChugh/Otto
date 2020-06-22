@@ -22,6 +22,7 @@ const InitialState = () => ({
   linreg_test_set: [],
   linreg_x_name: "",
   linreg_y_name: "",
+  linreg_columns: [],
 
   viz_loading: false,
 });
@@ -31,6 +32,7 @@ const ModelStateContext = createContext(initialState);
 const DispatchModelStateContext = createContext(() => null);
 
 function reducer(state, action: ModelActionType) {
+  console.log("SA", state, action);
   switch (action.type) {
     case ModelActions.SET_KNN_K:
       return {
@@ -55,15 +57,24 @@ function reducer(state, action: ModelActionType) {
         knn_column_units: action.knn_column_units,
         knn_labels: action.knn_labels,
       };
-    case ModelActions.LINREG_DONE:
+    case ModelActions.LINREG_SET_IND_VAR:
       return {
+        ...state,
+        linreg_x_name: action.linreg_x_name,
+      };
+    case ModelActions.LINREG_DONE:
+      const newState = {
         ...state,
         viz_loading: false,
         linreg_test_result: action.linreg_test_result,
         linreg_test_set: action.linreg_test_set,
-        linreg_x_name: action.linreg_x_name,
-        linreg_y_name: action.linreg_y_name,
+        linreg_columns: action.linreg_columns,
       };
+      if (action.linreg_x_name) {
+        newState["linreg_x_name"] = action.linreg_x_name;
+        newState["linreg_y_name"] = action.linreg_y_name;
+      }
+      return newState;
     case ModelActions.RUNNING:
       return { ...state, viz_loading: true };
     default:

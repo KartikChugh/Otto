@@ -10,7 +10,7 @@ function MainColumnContainer() {
       <Grid item className="visualizerContainer">
         <VisualizerContainer />
       </Grid>
-      <Grid item className="outerContainer codeContainer">
+      <Grid item className="codeContainer">
         <CodeContainer />
       </Grid>
     </Grid>

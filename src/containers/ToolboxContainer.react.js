@@ -12,6 +12,7 @@ import {
 import NNFFToolbox from "components/toolbox/NNFFToolbox";
 import KNNToolbox from "components/toolbox/KNNToolbox";
 import DataPreview from "components/toolbox/DataPreview";
+import LinRegToolbox from "components/toolbox/LinRegToolbox";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +41,7 @@ const getToolboxContent = (state: StateType) => {
   if (state.stepper_state === StepperState.VISUALIZE) {
     switch (state.model) {
       case Models.LINEAR_REGRESSION:
-        return <div>TODO</div>;
+        return <LinRegToolbox />;
       case Models.NEURAL_NETWORK_FF:
         return <NNFFToolbox />;
       case Models.KNN:
