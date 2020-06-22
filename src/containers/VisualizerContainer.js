@@ -22,8 +22,9 @@ import { StepperState, Models, Tasks, DatasetCategory } from "state/StateTypes";
 import { Actions } from "state/Actions";
 import PlotsContainer from "./PlotsContainer";
 import { useModelState } from "state/ModelState";
-import { ModelActions } from "state/ModelActions";
 import { invokeNLP } from "js-ml/nlp";
+import { invokeKNN } from "js-ml/knn";
+import { invokeLinReg } from "js-ml/linReg";
 
 const useStyles = makeStyles((theme) => ({
   rootExplanation: {
@@ -60,7 +61,7 @@ function VisualizerContainer() {
   const classes = useStyles();
   const steps = getSteps();
   const { state, dispatch } = useState();
-  const { model_dispatch } = useModelState();
+  const { model_state, model_dispatch } = useModelState();
 
   const getIsSelected = (value) =>
     [
@@ -78,24 +79,17 @@ function VisualizerContainer() {
     });
     if (state.stepper_state === StepperState.PREPROCESSORS) {
       if (state.model === Models.KNN) {
-        model_dispatch({
-          type: ModelActions.RUN_KNN,
-          dispatch: model_dispatch,
-        });
+        invokeKNN(state.knn_k, model_dispatch);
       } else if (state.task === Tasks.NATURAL_LANGUAGE) {
-        // model_dispatch({
-        //   type: ModelActions.RUN_NLP,
-        //   doEntity: state.nlp_models.includes(Models.ENTITY_RECOGNITION),
-        //   doSentiment: state.nlp_models.includes(Models.SENTIMENT_ANALYSIS),
-        //   dispatch: model_dispatch,
-        // });
-        model_dispatch({
-          type: ModelActions.RUNNING,
-        })
-        await invokeNLP(true, true);
+        await invokeNLP(
+          state.nlp_models.includes(Models.ENTITY_RECOGNITION),
+          state.nlp_models.includes(Models.SENTIMENT_ANALYSIS),
+          model_dispatch
+        );
+      } else if (state.model === Models.LINEAR_REGRESSION) {
+        invokeLinReg(model_dispatch, model_state);
       }
     }
-    
   };
 
   const handleBack = () => {

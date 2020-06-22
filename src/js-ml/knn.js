@@ -27,7 +27,10 @@ function init() {
   y = [];
 }
 
-export function invoke(k: Number, dispatch) {
+export function invokeKNN(k: Number, dispatch) {
+  dispatch({
+    type: ModelActions.RUNNING,
+  });
   init();
   // Set Param
   K = k;
@@ -96,7 +99,7 @@ function test() {
   );
   setTimeout(function () {
     DISPATCH({
-      type: "KNN_DONE",
+      type: ModelActions.KNN_DONE,
       knn_result_labels: result,
       knn_expected_labels: testSetY,
       knn_test_data: testSetX,
@@ -141,7 +144,7 @@ function predict() {
  * Randomize array element order in-place.
  * Using Durstenfeld shuffle algorithm.
  */
-function shuffleArray(array) {
+export function shuffleArray(array) {
   for (var i = array.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
     var temp = array[i];

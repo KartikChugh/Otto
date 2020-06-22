@@ -250,8 +250,8 @@ export default function VisualizerOptionSelectionGrid() {
         alignItems="center"
         spacing={5}
       >
-        {getOptions(state).map((avatar) => (
-          <Grid item className={classes.avatarItem}>
+        {getOptions(state).map((avatar, index) => (
+          <Grid item className={classes.avatarItem} key={index}>
             {getIsRecommended(avatar.label) ? (
               <Tooltip title="Recommended by Otto!" placement="top">
                 <StyledBadge

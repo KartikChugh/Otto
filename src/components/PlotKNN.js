@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
   Label,
+  ResponsiveContainer,
 } from "recharts";
 import { useModelState } from "state/ModelState";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -51,45 +52,49 @@ export default function PlotKNN() {
   return (
     <>
       {!model_state.viz_loading ? (
-        <ScatterChart
-          width={800}
-          height={600}
-          margin={{
-            top: 20,
-            right: 20,
-            bottom: 20,
-            left: 20,
-          }}
+        <ResponsiveContainer
+          className="graph-wrapper"
+          width="100%"
+          height="90%"
         >
-          <CartesianGrid />
-          <XAxis
-            type="number"
-            dataKey="x"
-            name={xAxisColumn}
-            unit={model_state.knn_column_units[model_state.knn_column1_index]}
+          <ScatterChart
+            margin={{
+              top: 20,
+              right: 20,
+              bottom: 20,
+              left: 20,
+            }}
           >
-            <Label value={xAxisColumn} position="insideBottom" offset={-12} />
-          </XAxis>
-          <YAxis
-            type="number"
-            dataKey="y"
-            name={yAxisColumn}
-            unit={model_state.knn_column_units[model_state.knn_column2_index]}
-          >
-            <Label value={yAxisColumn} angle={-90} position="insideLeft" />
-          </YAxis>
-          <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-          <Legend verticalAlign="top" height={36} />
-          {model_state.knn_labels.map((label, index) => (
-            <Scatter
-              name={label}
-              data={data[index]}
-              fill={fillColors[index]}
-              shape={shapeTypes[index]}
-              key={index}
-            />
-          ))}
-        </ScatterChart>
+            <CartesianGrid />
+            <XAxis
+              type="number"
+              dataKey="x"
+              name={xAxisColumn}
+              unit={model_state.knn_column_units[model_state.knn_column1_index]}
+            >
+              <Label value={xAxisColumn} position="insideBottom" offset={-12} />
+            </XAxis>
+            <YAxis
+              type="number"
+              dataKey="y"
+              name={yAxisColumn}
+              unit={model_state.knn_column_units[model_state.knn_column2_index]}
+            >
+              <Label value={yAxisColumn} angle={-90} position="insideLeft" />
+            </YAxis>
+            <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+            <Legend verticalAlign="top" height={36} />
+            {model_state.knn_labels.map((label, index) => (
+              <Scatter
+                name={label}
+                data={data[index]}
+                fill={fillColors[index]}
+                shape={shapeTypes[index]}
+                key={index}
+              />
+            ))}
+          </ScatterChart>
+        </ResponsiveContainer>
       ) : (
         <CircularProgress color="secondary" />
       )}

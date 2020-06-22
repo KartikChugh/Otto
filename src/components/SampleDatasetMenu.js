@@ -101,19 +101,16 @@ export default function SampleDatasetMenu({ anchorEl, handleClose, id }) {
       onClose={handleClose}
       style={style}
     >
-      {getSampleDatasets(state).map((dataset) => (
+      {getSampleDatasets(state).map((dataset, index) => (
         <StyledMenuItem
           selected={state.sample_dataset === dataset}
           onClick={() => handleItemClick(dataset)}
+          key={index}
         >
           <ListItemIcon>{datasetMetadata[dataset].icon}</ListItemIcon>
           <ListItemText
             primary={datasetMetadata[dataset].title}
-            secondary={
-              <div className={classes.subtext}>
-                {datasetMetadata[dataset].subtitle}
-              </div>
-            }
+            secondary={datasetMetadata[dataset].subtitle}
           />
         </StyledMenuItem>
       ))}

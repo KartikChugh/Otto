@@ -1,9 +1,9 @@
 export const ModelActions = Object.freeze({
   SET_KNN_K: "SET_KNN_K",
   SET_KNN_COLS: "SET_KNN_COLUMNS",
-  RUN_KNN: "RUN_KNN",
   KNN_DONE: "KNN_DONE",
-  RUNNING: "RUNNING"
+  LINREG_DONE: "LINREG_DONE",
+  RUNNING: "RUNNING",
   // RUN_NLP: "RUN_NLP"
 });
 
@@ -13,9 +13,6 @@ export type ModelActionType =
       k: Number,
     }
   | {
-      type: ModelActions.RUN_KK,
-    }
-  | {
       type: ModelActions.KNN_DONE,
     }
   | {
@@ -23,10 +20,13 @@ export type ModelActionType =
       indices: Array<Number>,
     }
   | {
-      type: ModelActions.RUNNING
+      type: ModelActions.LINREG_DONE,
     }
-  // | {
-  //     type: ModelActions.RUN_NLP,
-  //     doEntity: Boolean,
-  //     doSentiment: Boolean,
-  // }
+  | {
+      type: ModelActions.RUNNING,
+    };
+// | {
+//     type: ModelActions.RUN_NLP,
+//     doEntity: Boolean,
+//     doSentiment: Boolean,
+// }

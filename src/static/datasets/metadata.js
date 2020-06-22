@@ -15,6 +15,12 @@ import {
   twitterColumns,
   twitterColumnsMap,
 } from "static/datasets/tweets";
+import {
+  boston,
+  bostonColumns,
+  bostonDepVar,
+  bostonDefaultIndVar,
+} from "static/datasets/boston";
 import { SampleDataset, Tasks, Models } from "state/StateTypes";
 
 export const datasetMetadata = {
@@ -47,7 +53,7 @@ export const datasetMetadata = {
 
     keywords: ["tweet", "twitter", "sentiment"],
     task: Tasks.NATURAL_LANGUAGE,
-    model: [Models.SENTIMENT_ANALYSIS, Models.ENTITY_RECOGNITION]
+    model: [Models.SENTIMENT_ANALYSIS, Models.ENTITY_RECOGNITION],
   },
   [SampleDataset.BOSTON]: {
     title: "Boston",
@@ -56,10 +62,11 @@ export const datasetMetadata = {
     instances: 506,
     attributes: 13,
     tags: ["Numeric", "Categorical"],
-    columns: [],
-    columnsMap: {},
-    data: [],
-    units: [],
+    columns: bostonColumns,
+    columnsMap: { ...bostonColumns },
+    data: boston,
+    depVar: bostonDepVar,
+    indVar: bostonDefaultIndVar,
 
     keywords: ["boston", "house", "housing", "home"],
     task: Tasks.REGRESSION,

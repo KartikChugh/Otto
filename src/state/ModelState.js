@@ -4,9 +4,7 @@ import React from "react";
 import { useReducer, createContext, useContext } from "react";
 
 import { ModelActionType, ModelActions } from "state/ModelActions";
-import { invoke } from "js-ml/knn";
-import { invokeNLP } from "js-ml/nlp"
-import { Models } from "./StateTypes";
+import { MapRounded } from "@material-ui/icons";
 
 const InitialState = () => ({
   knn_k: 5,
@@ -19,6 +17,11 @@ const InitialState = () => ({
   knn_column_units: [],
   knn_column1_index: 2,
   knn_column2_index: 1,
+
+  linreg_test_result: [],
+  linreg_test_set: [],
+  linreg_x_name: "",
+  linreg_y_name: "",
 
   viz_loading: false,
 });
@@ -40,9 +43,6 @@ function reducer(state, action: ModelActionType) {
         knn_column1_index: action.indices[0],
         knn_column2_index: action.indices[1],
       };
-    case ModelActions.RUN_KNN:
-      invoke(state.knn_k, action.dispatch);
-      return { ...state, viz_loading: true };
     case ModelActions.KNN_DONE:
       return {
         ...state,
@@ -55,12 +55,17 @@ function reducer(state, action: ModelActionType) {
         knn_column_units: action.knn_column_units,
         knn_labels: action.knn_labels,
       };
-    case ModelActions.RUNNING: //FIXME: not working
-      //alert("running!");
-      return { ...state, viz_loading: true }; 
-    // case ModelActions.RUN_NLP: 
-    //   invokeNLP(action.doEntity, action.doSentiment);
-    //   return { ...state, viz_loading: true };
+    case ModelActions.LINREG_DONE:
+      return {
+        ...state,
+        viz_loading: false,
+        linreg_test_result: action.linreg_test_result,
+        linreg_test_set: action.linreg_test_set,
+        linreg_x_name: action.linreg_x_name,
+        linreg_y_name: action.linreg_y_name,
+      };
+    case ModelActions.RUNNING:
+      return { ...state, viz_loading: true };
     default:
       return state;
   }
