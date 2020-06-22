@@ -1,7 +1,7 @@
 import React from "react";
 import "App.css";
 import Navbar from "react-bootstrap/Navbar";
-import logo from "otto_logo_clear.png";
+import logo from "art/otto_logo_clear.png";
 
 function HeaderContainer() {
   return (
