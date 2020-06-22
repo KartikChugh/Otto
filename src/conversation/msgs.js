@@ -64,7 +64,7 @@ export const AdvanceFromDataset = (datasetCategory, sampleDataset) => {
 export const ModelPreface = (task) => {
     let str = task === Tasks.NATURAL_LANGUAGE ? "the appropriate models" : "an appropriate model";
     return [
-        `Now that we have our ML task and dataset figured out, the next step is to select ${str}`,
+        `Now that we have our ML task and dataset sorted out, the next step is to select ${str}`,
     ];
 }
 
@@ -80,6 +80,7 @@ export const NLPModelInfo = () => {
     return [
         "Entity recognition is useful for extracting key information from text (celebrity names, album titles, and times)",
         "while sentiment analysis can pick up on implied information, like expressions of thanks or how positive/negative a statement is",
+        "You can combine both for a comprehensive analysis too!"
     ]
 }
 
@@ -101,16 +102,23 @@ export const ModelRecommendation = (model) => {
     ]
 }
 
+export const AdvanceFromModel = (task) => {
+    return [
+        `Okay, we've got our ${task.toLowerCase()} model figured out`,
+    ]
+}
+
 export const PreprocessorRecommendation = () => {
     return [
-        "Based on everything you've told me so far, I've gone ahead and setup some data preprocessors to help optimize the learning process"
+        "Based on everything you've told me so far, I've gone ahead and setup some data preprocessors to help optimize the learning process",
+        "(As always, you can tweak them if you know what you're doing!)"
     ]
 }
 
 export const NeuralNetworkPreface = () => {
     return [
         "Finally, we're ready to build and configure our neural network!",
-        "I've made a basic feedforward network with 5 hidden layers and standard activations / initializers",
+        "I've made a basic feedforward NN with 5 hidden layers and standard activations / initializers",
         "You can play with the model and customize it, or tell me what changes to make"
     ]
 }

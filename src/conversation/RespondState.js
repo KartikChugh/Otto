@@ -1,5 +1,6 @@
-import { StepperState, Tasks, Models } from "state/StateTypes";
+import { StepperState, Tasks, Models, Preprocessors } from "state/StateTypes";
 import * as msgs from "conversation/msgs"
+import { Actions } from "state/Actions";
 
 export const responseToState = (state) => {
     switch (state.stepper_state) {
@@ -71,7 +72,54 @@ const modelStep = (state) => {
 }
 
 const preprocessorsStep = (state) => {
-    return msgs.PreprocessorRecommendation();
+    return [
+        msgs.AdvanceFromModel(state.task),
+        msgs.PreprocessorRecommendation()
+    ];
+}
+
+/** Note: this is called from the reducer */
+export const preprocessorsModifier = (state) => {
+
+    // dispatch({
+    //     type: Actions.SET_MODEL,
+    //     model: Models.KNN,
+    // })
+    if (state.task === Tasks.NATURAL_LANGUAGE) {
+        state.preprocessors = [Preprocessors.TEXT_CLEANING];
+        state.preprocessors_otto = state.preprocessors;
+        // dispatch({
+        //     type: Actions.CLEAR_PREPROCESSORS_INCLUDING_OTTO,
+        // });
+        // dispatch({
+        //     type: Actions.TOGGLE_PREPROCESSOR,
+        //     preprocessor: Preprocessors.TEXT_CLEANING,
+        // });
+        // dispatch({
+        //     type: Actions.TOGGLE_PREPROCESSOR_OTTO,
+        //     preprocessor: Preprocessors.TEXT_CLEANING,
+        // });
+        
+    } else {
+        switch (state.model) {
+            case Models.LINEAR_REGRESSION:
+            case Models.POISSON_REGRESSION:
+            case Models.ORDINAL_REGRESSION:
+                state.preprocessors = [Preprocessors.NORMALIZATION, Preprocessors.PCA];
+                break;
+            case Models.KNN:
+                state.preprocessors = [Preprocessors.NORMALIZATION];
+                break;
+            case Models.NEURAL_NETWORK_FF:
+                state.preprocessors = [Preprocessors.NORMALIZATION, Preprocessors.PCA];
+                break;
+            default:
+                break;
+        }
+        state.preprocessors_otto = state.preprocessors;
+    }
+    return state;
+    
 }
 
 const visualizeStep = (state) => {

@@ -2,10 +2,11 @@ import React from "react";
 import { useReducer, createContext, useContext } from "react";
 
 import { deleteMessages, addResponseMessage } from "react-chat-widget";
-import { InitialState, StateType } from "state/StateTypes";
+import { InitialState, StateType, StepperState } from "state/StateTypes";
 import { ActionType, Actions } from "state/Actions";
 import { StepperStateOrder } from "state/StateTypes";
 import { handleNext } from "containers/WidgetContainer";
+import { preprocessorsModifier } from "conversation/RespondState";
 
 import { initializeWidget } from "containers/WidgetContainer";
 
@@ -96,13 +97,16 @@ function reducer(state: StateType, action: ActionType): StateType {
       };
     }
     case Actions.STEPPER_HANDLE_NEXT:
-      const nextState = {
+      let nextState = {
         ...state,
         stepper_state:
           NumSteps === getActiveStep()
             ? NumSteps
             : StepperStateOrder[getActiveStep() + 1],
       };
+      if (nextState.stepper_state === StepperState.PREPROCESSORS) {
+        nextState = preprocessorsModifier(nextState);
+      } 
       handleNext(nextState);
       return nextState;
     case Actions.STEPPER_HANDLE_PREVIOUS:

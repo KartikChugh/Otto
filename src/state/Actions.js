@@ -17,6 +17,7 @@ export const Actions = Object.freeze({
   SET_MODEL_OTTO: "SET_MODEL_OTTO",
   SET_DATASET_CATEGORY_OTTO: "SET_DATASET_CATEGORY_OTTO",
   SET_SAMPLE_DATASET_OTTO: "SET_SAMPLE_DATASET_OTTO",
+  // CLEAR_PREPROCESSORS_INCLUDING_OTTO: "CLEAR_PREPROCESSORS_INCLUDING_OTTO",
   TOGGLE_PREPROCESSOR: "TOGGLE_PREPROCESSOR",
   TOGGLE_PREPROCESSOR_OTTO: "TOGGLE_PREPROCESSOR_OTTO",
   STEPPER_HANDLE_NEXT: "STEPPER_HANDLE_NEXT",
@@ -39,6 +40,7 @@ export type ActionType =
       dataset_category: DatasetCategoryType,
     }
   | { type: "SET_SAMPLE_DATASET_OTTO", sample_dataset: SampleDatasetType }
+  // | { type: "CLEAR_PREPROCESSORS_INCLUDING_OTTO" }
   | { type: "TOGGLE_PREPROCESSOR", preprocessor: PreprocessorsType }
   | { type: "TOGGLE_PREPROCESSOR_OTTO", preprocessor: PreprocessorsType }
   | { type: "STEPPER_HANDLE_NEXT" }
