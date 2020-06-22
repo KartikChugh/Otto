@@ -9,7 +9,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { Card } from "@material-ui/core";
 import { useState } from "state/State";
-import { StepperStateOrder, StateType } from "state/StateTypes";
+import { StepperStateOrder, StateType, Tasks } from "state/StateTypes";
 import { Actions } from "state/Actions";
 
 const useStyles = makeStyles((theme) => ({
@@ -89,7 +89,11 @@ export default function VerticalLinearStepper() {
         option = state.dataset_category;
         break;
       case 2:
-        option = state.model;
+        if (state.task === Tasks.NATURAL_LANGUAGE) {
+          option = state.nlp_models.join(", ");
+        } else {
+          option = state.model;
+        }
         break;
       case 3:
         option = state.preprocessors.join(", ");
