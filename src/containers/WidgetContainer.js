@@ -8,7 +8,8 @@ import {
   addResponseMessage,
   deleteMessages,
 } from "react-chat-widget";
-import logo from "otto.jpeg";
+import logo from "otto_logo_clear.png";
+import logo2 from "otto_logo_2.png";
 
 import * as msgs from "conversation/msgs";
 import Conversation from "conversation/Conversation";
@@ -55,7 +56,8 @@ function WidgetContainer() {
       launcher={() => null}
       subtitle=""
       title="Otto"
-      titleAvatar={logo}
+      // titleAvatar={logo}
+      profileAvatar={logo2}
     />
   );
 }
