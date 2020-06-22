@@ -27,7 +27,12 @@ function reducer(state: StateType, action: ActionType): StateType {
     case Actions.SET_DATASET_CATEGORY:
       return { ...state, dataset_category: action.dataset_category };
     case Actions.SET_MODEL:
-      return { ...state, model: action.model };
+      return { 
+        ...state, 
+        model: action.model, 
+        nlp_models: [], 
+        nlp_models_otto: []
+      };
     case Actions.TOGGLE_NLP_MODEL:
       let currentModels = state.nlp_models;
       if (currentModels.includes(action.model)) {
@@ -37,6 +42,8 @@ function reducer(state: StateType, action: ActionType): StateType {
       }
       return {
         ...state,
+        model: null,
+        model_otto: null,
         nlp_models: currentModels,
       };
     case Actions.TOGGLE_NLP_MODEL_OTTO:
