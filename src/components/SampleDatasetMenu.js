@@ -59,9 +59,19 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-// TODO: Conditionally return datasets
 const getSampleDatasets = (state: StateType) => {
-  return [SampleDataset.IRIS, SampleDataset.BOSTON, SampleDataset.TWITTER];
+  const stateTask = state.task;
+  const sets = [];
+  for (const dataset in datasetMetadata) {
+    const entry = datasetMetadata[dataset];
+    const entryTask = entry.task;
+    if (entryTask === stateTask) {
+      sets.unshift(dataset);
+    } else {
+      //sets.push(dataset);
+    }
+  }
+  return sets;
 };
 
 export default function SampleDatasetMenu({ anchorEl, handleClose, id }) {
