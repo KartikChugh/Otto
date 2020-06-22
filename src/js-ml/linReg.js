@@ -23,8 +23,6 @@ export function invokeLinReg(dispatch, indVar, setAxes = false) {
   const result = regression.linear(train);
   const testResult = test.map((point) => result.predict(point[0]));
 
-  console.log(result);
-
   const dispatchObject = {
     type: ModelActions.LINREG_DONE,
     linreg_test_result: testResult,

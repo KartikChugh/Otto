@@ -78,7 +78,6 @@ export default function SampleDatasetMenu({ anchorEl, handleClose, id }) {
   }
 
   function handleItemClick(dataset) {
-    console.log("huh", dataset);
     selectedDataset = dataset;
   }
 

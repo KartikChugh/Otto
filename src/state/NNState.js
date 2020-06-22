@@ -160,7 +160,6 @@ function reducer(state, action: NNActionType) {
 
       const activation = layers[0].activation;
       const initializer = layers[0].initializer;
-      console.log(layers);
       const nodeCountA = layers?.[layers.length - 3]?.units ?? 5;
       const nodeCountB = layers?.[layers.length - 2]?.units ?? 3;
 
@@ -175,7 +174,6 @@ function reducer(state, action: NNActionType) {
         layers.push(layer);
       }
       layers.push(outputLayer);
-      console.log("New layers array after ADD_LAYERS: ", layers);
       return {
         ...state,
         layers: layers,

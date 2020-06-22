@@ -217,12 +217,6 @@ export default function VisualizerOptionSelectionGrid() {
           onClick={(event) => {
             optionOnClickHandler(avatar.type, avatar.label);
             handleClick(event, avatar.type, avatar.label);
-            console.log(
-              "target",
-              event.currentTarget,
-              event.relatedTarget,
-              event.target
-            );
           }}
           aria-haspopup="true"
         />

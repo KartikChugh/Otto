@@ -62,7 +62,6 @@ export default function LinRegToolbox() {
       type: ModelActions.LINREG_SET_IND_VAR,
       linreg_x_name: indVar,
     });
-    console.log("just calling", indVar);
     invokeLinReg(model_dispatch, indVar, false);
   }
 
