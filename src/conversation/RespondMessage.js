@@ -126,13 +126,12 @@ const modelStep = async (userMessage, wit, state, dispatch) => {
 
     const task = state.task;
     let model = state.model;
+    let nlp_models = state.nlp_models;
 
-    console.log("Task: ", task);
-    console.log("Model: ", model);
+    console.log("Task rn: ", task);
+    console.log("Model rn: ", model, nlp_models);
 
-    // model not predefined (custom dataset)
-    // FIXME: use recommended
-    if (!model) {
+    if (state.task !== Tasks.NATURAL_LANGUAGE) {
         switch (task) {
             case Tasks.REGRESSION:
                 model = await extractRegressionModel(userMessage, wit);
@@ -144,7 +143,7 @@ const modelStep = async (userMessage, wit, state, dispatch) => {
             default:
                 break;
         }
-
+    
         dispatch({
             type: Actions.SET_MODEL,
             model: model,
@@ -153,10 +152,9 @@ const modelStep = async (userMessage, wit, state, dispatch) => {
             type: Actions.SET_MODEL_OTTO,
             model: model,
         });
-
+        return msgs.ModelRecommendation(model);
     }
-
-    return msgs.ModelRecommendation(model);
+   
 
 }
 
