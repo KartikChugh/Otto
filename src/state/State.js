@@ -68,6 +68,8 @@ function reducer(state: StateType, action: ActionType): StateType {
       return { ...state, model_otto: action.model };
     case Actions.SET_SAMPLE_DATASET_OTTO:
       return { ...state, sample_dataset_otto: action.sample_dataset };
+    // case Actions.CLEAR_PREPROCESSORS_INCLUDING_OTTO:
+    //   return { ...state, preprocessors: [], preprocessors_otto: [] };
     case Actions.TOGGLE_PREPROCESSOR: {
       let currentPreprocessors = state.preprocessors;
       if (currentPreprocessors.includes(action.preprocessor)) {
