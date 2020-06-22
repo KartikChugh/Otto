@@ -1,7 +1,10 @@
+import { DatasetCategory, Tasks } from "state/StateTypes";
+import { titleCase } from "title-case";
+
 export const IntroQuestion = () => {
     return [
         "Hey there!",
-        "My name's Otto, and I'm here to help you do some machine learning",
+        "My name's Otto, and I'm here to help you with machine learning",
         "What are you looking to do today?"
     ];
 }
@@ -13,7 +16,7 @@ export const IntroQuestion = () => {
 export const TaskRecommendation = (task) => {
     return [
         `Neat idea!`,
-        `I'd recommend a ${task.toLowerCase()} model to help you explore it`
+        `I recommend a ${task.toLowerCase()} model to help you explore it`
     ];
 }
 
@@ -34,56 +37,73 @@ export const TaskInfo = () => {
     ];
 }
 
-export const DatasetPreface = (task) => {
+export const AdvanceFromTask = (task) => {
+    return `Alright, ${task.toLowerCase()} it is!`
+}
+
+export const DatasetPreface = () => {
     return [
-        `Alright, ${task.toLowerCase()} it is!`,
         "Just letting you know, I have a few sample datasets you can model and visualize right from your browser",
-        "Check them out if you'd like, or select Custom to use your own data",
+        "Check them out if you'd like, or select “Custom” to use your own data",
     ];
 }
 
-export const DatasetRecommendation = (task) => {
+export const DatasetPreRecommendation = () => {
     return [
-        `Alright, ${task.toLowerCase()} it is!`,
         "I've preselected a dataset that seems to match what you're looking for",
-        "Feel free to check out others, or select Custom you use your own data"
+        "Feel free to check out other sample datasets, or select “Custom” to use your own"
     ];
 }
 
-export const ModelPreface = () => {
+export const AdvanceFromDataset = (datasetCategory, sampleDataset) => {
+    const isCustom = (datasetCategory === DatasetCategory.CUSTOM);
+    let str = isCustom ? `Going with custom data, then!` : `Going with the ${titleCase(sampleDataset)} dataset, then!`;
+    return `${str}`
+}
+
+export const ModelPreface = (task) => {
+    let str = task === Tasks.NATURAL_LANGUAGE ? "the appropriate models" : "an appropriate model";
     return [
-        "Now that we have our machine learning task and dataset figured out, the next step is to select an appropriate model",
+        `Now that we have our ML task and dataset figured out, the next step is to select ${str}`,
     ];
+}
+
+export const ModelPreRecommendation = (model, nlp_models) => {
+    if (nlp_models) {
+        let str = (nlp_models.length === 2) ? "combining both analyses" : `${nlp_models[0].toLowerCase()}`
+        return `I think ${str} is the way to go`
+    }
+    return `I think a ${model.toLowerCase()} algorithm is the way to go`
 }
 
 export const NLPModelInfo = () => {
     return [
-        "Entity recognition is useful for extracting key information from text (like phone numbers, album names, and times)",
-        "While sentiment analysis classifies expressions by their polarity (positive, negative, or neutral)",
+        "Entity recognition is useful for extracting key information from text (celebrity names, album titles, and times)",
+        "while sentiment analysis can pick up on implied information, like expressions of thanks or how positive/negative a statement is",
     ]
 }
 
 export const RegressionModelQuestion = () => {
     return [
-        "Could you describe the dependent variable in more detail?"
+        "What can you tell me about the dependent variable you're trying to model?"
     ]
 }
 
 export const ClassificationModelQuestion = () => {
     return [
-        "Could you describe the dataset in more detail?"
+        "What can you tell me about the dataset you're trying to model?"
     ]
 }
 
 export const ModelRecommendation = (model) => {
     return [
-        `In that case, I think a ${model} model would be perfect`
+        `In that case, I think a ${model.toLowerCase()} model would be perfect`
     ]
 }
 
 export const PreprocessorRecommendation = () => {
     return [
-        "Based on what you've told me, I've gone ahead and setup some data preprocessors to help optimize the learning process"
+        "Based on everything you've told me so far, I've gone ahead and setup some data preprocessors to help optimize the learning process"
     ]
 }
 
