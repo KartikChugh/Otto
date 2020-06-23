@@ -12,10 +12,9 @@ function MainColumnContainer() {
   const { state } = useState();
   const getIsCodeShown = () => getActiveStep(state) > 1;
   const getIsToolboxShown = () =>
-    state.stepper_state === StepperState.VISUALIZE ||
-    (state.stepper_state === StepperState.DATASET &&
-      state.dataset_category === DatasetCategory.SAMPLE &&
-      state.sample_dataset != null);
+    state.stepper_state === StepperState.DATASET &&
+    state.dataset_category === DatasetCategory.SAMPLE &&
+    state.sample_dataset != null;
   return (
     <Grid container style={{ height: "100%" }}>
       <Grid item className="visualizerContainer">
