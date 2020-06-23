@@ -27,8 +27,8 @@ function reducer(state: StateType, action: ActionType): StateType {
       return {
         ...state,
         task: action.task,
-        sample_dataset: null,
-        dataset_category: null,
+        // sample_dataset: null,
+        // dataset_category: null,
       };
     case Actions.SET_DATASET_CATEGORY:
       return { ...state, dataset_category: action.dataset_category };
