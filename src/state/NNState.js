@@ -13,7 +13,7 @@ import PlotsContainer from "containers/PlotsContainer";
 
 const InitialState = () => ({
   layers: [
-    new Layer(3),
+    new Layer(3, Activations.LINEAR),
     new Layer(6),
     new Layer(5),
     new Layer(6),
@@ -97,7 +97,7 @@ function reducer(state, action: NNActionType) {
     case NNActions.SET_HIDDEN_ACTIVATIONS: {
       const newActivation = action.activation;
       const layers = [...state.layers];
-      for (let i = 0; i < layers.length - 1; i++) {
+      for (let i = 1; i < layers.length - 1; i++) {
         const layer = layers[i];
         layer.activation = newActivation;
       }
