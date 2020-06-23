@@ -52,6 +52,7 @@ const modelStep = (state) => {
     if (isRecommendedSupervised) {
         responses.push(msgs.ModelPreRecommendation(state.model));
     } else if (isRecommendedNLP) {
+        responses.push(msgs.NLPModelInfo());
         responses.push(msgs.ModelPreRecommendation(null, state.nlp_models));
     } else {
         switch (state.task) {
