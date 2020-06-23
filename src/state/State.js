@@ -5,7 +5,7 @@ import { deleteMessages, addResponseMessage } from "react-chat-widget";
 import { InitialState, StateType, StepperState } from "state/StateTypes";
 import { ActionType, Actions } from "state/Actions";
 import { StepperStateOrder } from "state/StateTypes";
-import { handleNext } from "containers/WidgetContainer";
+import { handleNext, handlePrev } from "containers/WidgetContainer";
 import { preprocessorsModifier } from "conversation/RespondState";
 
 import { initializeWidget } from "containers/WidgetContainer";
@@ -106,38 +106,39 @@ function reducer(state: StateType, action: ActionType): StateType {
       };
     }
     case Actions.STEPPER_HANDLE_NEXT:
-      let nextState = {
+      let newStateForNext = {
         ...state,
         stepper_state:
           NumSteps === getActiveStep()
             ? NumSteps
             : StepperStateOrder[getActiveStep() + 1],
       };
-      if (nextState.stepper_state === StepperState.PREPROCESSORS) {
-        nextState = preprocessorsModifier(nextState);
+      if (newStateForNext.stepper_state === StepperState.PREPROCESSORS) {
+        newStateForNext = preprocessorsModifier(newStateForNext);
       }
-      handleNext(nextState);
-      return nextState;
+      handleNext(newStateForNext);
+      return newStateForNext;
     case Actions.STEPPER_HANDLE_PREVIOUS:
-      const prevState = {
+      const newStateForPrev = {
         ...state,
         stepper_state:
           StepperStateOrder[StepperStateOrder.indexOf(state.stepper_state) - 1],
         stepper_finish: false,
       };
       if (state.stepper_state === StepperState.DATASET) {
-        prevState.dataset_category = null;
-        prevState.sample_dataset = null;
-        prevState.dataset_category_otto = null;
-        prevState.sample_dataset_otto = null;
+        newStateForPrev.dataset_category = null;
+        newStateForPrev.sample_dataset = null;
+        newStateForPrev.dataset_category_otto = null;
+        newStateForPrev.sample_dataset_otto = null;
       } else if (state.stepper_state === StepperState.MODEL) {
-        prevState.model = null;
-        prevState.model_otto = null;
+        newStateForPrev.model = null;
+        newStateForPrev.model_otto = null;
       } else if (state.stepper_state === StepperState.PREPROCESSORS) {
-        prevState.preprocessors = [];
-        prevState.preprocessors_otto = [];
+        newStateForPrev.preprocessors = [];
+        newStateForPrev.preprocessors_otto = [];
       }
-      return prevState;
+      handlePrev(newStateForPrev);
+      return newStateForPrev;
     case Actions.HANDLE_STEPPER_FINISH:
       return {
         ...state,

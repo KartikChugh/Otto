@@ -23,7 +23,12 @@ export async function initializeWidget() {
 }
 
 export const handleNext = (state) => {
+  deleteMessages();
   convo.handleStateAdvance(state);
+}
+
+export const handlePrev = (state) => {
+  deleteMessages();
 }
 
 function WidgetContainer() {
