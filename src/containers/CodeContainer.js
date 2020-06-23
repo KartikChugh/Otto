@@ -31,6 +31,7 @@ const updated =
 		language={"python"}
     showLineNumbers={false}
     theme={atomOneLight}
+    highlight={""}
 		wrapLines
   />
 
