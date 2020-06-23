@@ -1,11 +1,13 @@
 import { DatasetCategory, Tasks } from "state/StateTypes";
 import { titleCase } from "title-case";
+import * as msgsExample from "conversation/msgsExample";
 
 export const IntroQuestion = () => {
     return [
         "Hey there!",
         "My name's Otto, and I'm here to help you with machine learning",
-        "What are you looking to do today?"
+        "What are you looking to do today?",
+        `${msgsExample.Task}`
     ];
 }
 
@@ -86,13 +88,15 @@ export const NLPModelInfo = () => {
 
 export const RegressionModelQuestion = () => {
     return [
-        "What can you tell me about the dependent variable you're trying to model?"
+        "What can you tell me about the dependent variable you're trying to model?",
+        `${msgsExample.ModelRegression}`
     ]
 }
 
 export const ClassificationModelQuestion = () => {
     return [
-        "What can you tell me about the dataset you're trying to model?"
+        "What can you tell me about the dataset you're trying to model?",
+        `${msgsExample.ModelClassification}`
     ]
 }
 
@@ -117,9 +121,12 @@ export const PreprocessorRecommendation = () => {
 
 export const NeuralNetworkPreface = () => {
     return [
-        "Finally, we're ready to build and configure our neural network!",
-        "I've made a basic feedforward NN with 5 hidden layers and standard activations / initializers",
-        "You can play with the model and customize it, or tell me what changes to make"
+        "Finally, we're ready to design our neural network!",
+        "I've setup a basic feedforward NN for classification",
+        "You can play with the model and customize it, or tell me what changes to make",
+        msgsExample.NeuralNetworkArch,
+        msgsExample.NeuralNetworkHyper,
+        msgsExample.NeuralNetworkReset
     ]
 }
 
