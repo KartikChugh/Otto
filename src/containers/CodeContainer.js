@@ -12,7 +12,7 @@ function CodeContainer({ getIsShown }) {
   const { state } = useState();
   const { nn_state } = useNNState();
 
-  const old =  
+//   const old =  
 //   <textarea
 //   value={CodeGen(state, nn_state)}
 //   style={{
