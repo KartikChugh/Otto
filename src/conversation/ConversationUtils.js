@@ -1,6 +1,7 @@
 import { Tasks, Models } from "state/StateTypes"
 import { NNActions } from "state/NNActions"
 import { datasetMetadata } from "static/datasets/metadata"
+import { Initializers } from "nn-architecture/hyperparams"
 
 // TODO: refactor elsewhere?
 
@@ -102,11 +103,12 @@ export const extractArchitectureChange = (witResponse, nn_state) => {
             return {type: NNActions.RESET}
 
         case "activation":
-            let activation = entities?.["type:type"]?.[0]?.value;
+            let activation = entities?.["type:type"]?.[0]?.value?.toLowerCase();
             return activation ? {type: NNActions.SET_HIDDEN_ACTIVATIONS, activation: activation} : null;
 
         case "initializer":
-            let initializer = entities?.["type:type"]?.[0]?.value;
+            let initializer = entities?.["type:type"]?.[0]?.value?.toLowerCase();
+            if (Object.keys(Initializers).includes(initializer.toUpperCase())) initializer += "_uniform";
             return initializer ? {type: NNActions.SET_ALL_INITIALIZERS, initializer: initializer} : null;
 
         case "dimension":
