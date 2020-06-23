@@ -19,11 +19,17 @@ const useStyles = makeStyles((theme) => ({
     width: 296,
   },
   dataRoot: {
-    width: 350,
+    width: "96%",
   },
   headerText: {
     paddingLeft: theme.spacing(0),
     paddingTop: theme.spacing(7),
+    paddingBottom: theme.spacing(1),
+    fontWeight: "600",
+  },
+  dataHeaderText: {
+    paddingLeft: theme.spacing(0),
+    paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(1),
     fontWeight: "600",
   },
@@ -50,20 +56,17 @@ const getToolboxContent = (state: StateType) => {
         return null;
     }
   }
-  return <DataPreview />;
+  if (state.stepper_state === StepperState.DATASET) {
+    return <DataPreview />;
+  }
+  return null;
 };
 
-export default function ToolboxContainer() {
+export default function ToolboxContainer({ getIsShown }) {
   const classes = useStyles();
   const { state } = useState();
   return (
-    <Grow
-      in={
-        state.stepper_state === StepperState.VISUALIZE ||
-        (state.dataset_category === DatasetCategory.SAMPLE &&
-          state.sample_dataset != null)
-      }
-    >
+    <Grow in={getIsShown()}>
       <div
         className={
           state.stepper_state === StepperState.VISUALIZE
@@ -71,10 +74,19 @@ export default function ToolboxContainer() {
             : classes.dataRoot
         }
       >
-        <Typography className={classes.headerText} variant="h5">
+        <Typography
+          className={
+            state.stepper_state === StepperState.VISUALIZE
+              ? classes.headerText
+              : classes.dataHeaderText
+          }
+          variant="h5"
+        >
           {state.stepper_state === StepperState.VISUALIZE
             ? "Toolbox"
-            : "Dataset Preview"}
+            : state.stepper_state === StepperState.DATASET
+            ? "Dataset Preview"
+            : null}
         </Typography>
         <Card className={classes.card} variant="outlined">
           <CardContent className={classes.cardContent}>

@@ -110,7 +110,7 @@
     background-color: #f4f7f9;
     border-radius: 10px;
     padding: 15px;
-    max-width: 215px;
+    max-width: 315px;
     text-align: left
 }
 .rcw-message-text p {
@@ -200,8 +200,7 @@
 }
 .rcw-messages-container {
     background-color: #fff;
-    height: 40vh;
-    max-height: 410px;
+    height: 76vh;
     overflow-y: scroll;
     padding-top: 10px;
     -webkit-overflow-scrolling: touch
@@ -479,7 +478,8 @@
     -ms-flex-direction: column;
     flex-direction: column;
     margin: 0 20px 20px 0;
-    max-width: 320px;
+    width: 380px;
+    max-width: 380px;
     position: fixed;
     right: 0;
     width: 90vw;

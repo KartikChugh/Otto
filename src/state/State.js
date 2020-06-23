@@ -24,15 +24,20 @@ function reducer(state: StateType, action: ActionType): StateType {
 
   switch (action.type) {
     case Actions.SET_TASK:
-      return { ...state, task: action.task };
+      return {
+        ...state,
+        task: action.task,
+        sample_dataset: null,
+        dataset_category: null,
+      };
     case Actions.SET_DATASET_CATEGORY:
       return { ...state, dataset_category: action.dataset_category };
     case Actions.SET_MODEL:
-      return { 
-        ...state, 
-        model: action.model, 
-        nlp_models: [], 
-        nlp_models_otto: []
+      return {
+        ...state,
+        model: action.model,
+        nlp_models: [],
+        nlp_models_otto: [],
       };
     case Actions.TOGGLE_NLP_MODEL:
       let currentModels = state.nlp_models;
@@ -50,7 +55,9 @@ function reducer(state: StateType, action: ActionType): StateType {
     case Actions.TOGGLE_NLP_MODEL_OTTO:
       let currentModelsOtto = state.nlp_models_otto;
       if (currentModelsOtto.includes(action.model)) {
-        currentModelsOtto = currentModelsOtto.filter((val) => val !== action.model);
+        currentModelsOtto = currentModelsOtto.filter(
+          (val) => val !== action.model
+        );
       } else {
         currentModelsOtto.push(action.model);
       }
@@ -108,7 +115,7 @@ function reducer(state: StateType, action: ActionType): StateType {
       };
       if (nextState.stepper_state === StepperState.PREPROCESSORS) {
         nextState = preprocessorsModifier(nextState);
-      } 
+      }
       handleNext(nextState);
       return nextState;
     case Actions.STEPPER_HANDLE_PREVIOUS:

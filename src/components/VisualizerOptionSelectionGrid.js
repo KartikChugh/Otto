@@ -22,20 +22,19 @@ import { datasetMetadata } from "static/datasets/metadata";
 import algo from "art/algorithm.svg";
 import clas from "art/class.svg";
 import reg from "art/reg.svg";
-import nlp from "art/nlp.svg"
-import custom from "art/custom.svg"
-import sample from "art/sample.svg"
-import linear from "art/linear.svg"
-import ordinal from "art/ordinal.svg"
-import poisson from "art/poisson.svg"
-import knn from "art/knn.svg"
-import network from "art/network.svg"
-import sentiment from "art/sentiment.svg"
-import entity from "art/entity.svg"
-import norm from "art/norm.svg"
-import pca from "art/pca.svg"
-import clean from "art/clean.svg"
-
+import nlp from "art/nlp.svg";
+import custom from "art/custom.svg";
+import sample from "art/sample.svg";
+import linear from "art/linear.svg";
+import ordinal from "art/ordinal.svg";
+import poisson from "art/poisson.svg";
+import knn from "art/knn.svg";
+import network from "art/network.svg";
+import sentiment from "art/sentiment.svg";
+import entity from "art/entity.svg";
+import norm from "art/norm.svg";
+import pca from "art/pca.svg";
+import clean from "art/clean.svg";
 
 function logoPicker(label) {
   const map = {
@@ -54,7 +53,7 @@ function logoPicker(label) {
     [Preprocessors.PCA]: pca,
     [Preprocessors.TEXT_CLEANING]: clean,
     [Preprocessors.NORMALIZATION]: norm,
-  }
+  };
   return map?.[label] ?? algo;
 }
 
@@ -78,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 42,
     fontWeight: 300,
     marginTop: 8,
+    marginBottom: 32,
   },
   subtitle: {
     marginTop: 20,
@@ -87,6 +87,7 @@ const useStyles = makeStyles((theme) => ({
   large: {
     width: theme.spacing(14),
     height: theme.spacing(14),
+    cursor: "pointer",
   },
   avatarItem: {
     textAlign: "-webkit-center",
@@ -98,13 +99,16 @@ const useStyles = makeStyles((theme) => ({
     boxShadow:
       "0px 5px 5px -3px rgba(0,0,0,0.2), 0px 0px 6px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)",
     border: "solid 1px #3f51b5",
+    cursor: "pointer",
   },
   avatarLabel: {
     marginTop: 20,
+    cursor: "pointer",
   },
   avatarLabelSelected: {
     marginTop: 20,
     fontWeight: 500,
+    cursor: "default",
   },
   recommend: {
     width: 30,
@@ -161,6 +165,19 @@ export default function VisualizerOptionSelectionGrid() {
   const classes = useStyles();
   const { state, dispatch } = useState();
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  function getTitle() {
+    switch (state.stepper_state) {
+      case StepperState.TASK:
+        return "Select a Machine Learning task";
+      case StepperState.DATASET:
+        return "Choose a dataset";
+      case StepperState.MODEL:
+        return "Select an ML Model";
+      case StepperState.PREPROCESSORS:
+        return "Choose data preprocessor(s)";
+    }
+  }
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -270,10 +287,7 @@ export default function VisualizerOptionSelectionGrid() {
   return (
     <>
       <Typography className={classes.titleInner} color="textPrimary">
-        Let's get started!
-      </Typography>
-      <Typography variant="h6" className={classes.subtitle}>
-        Chat with Otto to get a {state.stepper_state} recommendation.
+        {getTitle()}
       </Typography>
       <Grid
         container
@@ -313,6 +327,10 @@ export default function VisualizerOptionSelectionGrid() {
                   ? classes.avatarLabelSelected
                   : classes.avatarLabel
               }
+              onClick={(event) => {
+                optionOnClickHandler(avatar.type, avatar.label);
+                handleClick(event, avatar.type, avatar.label);
+              }}
             >
               {formatLabel(avatar.label)}
             </Typography>

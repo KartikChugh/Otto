@@ -63,7 +63,7 @@ export const datasetMetadata = {
     attributes: 13,
     tags: ["Numeric", "Categorical"],
     columns: bostonColumns,
-    columnsMap: { ...bostonColumns },
+    columnsMap: null,
     data: boston,
     depVar: bostonDepVar,
     indVar: bostonDefaultIndVar,

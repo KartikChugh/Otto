@@ -46,6 +46,12 @@
   flex-shrink: 0;
 }
 
+.appLogo {
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 24px;
+}
+
 .contentContainer {
   height: calc(100% - 60px);
   min-height: 1000px;
@@ -66,7 +72,7 @@
 }
 
 .visualizerContainer {
-  height: 65%;
+  height: 59%;
   width: 100%;
   padding-left: 20px;
   padding-right: 20px;
@@ -74,7 +80,7 @@
 }
 
 .codeContainer {
-  height: 35%;
+  height: 40%;
   width: 100%;
 }
 
@@ -83,5 +89,5 @@
 }
 
 .ottoContainer {
-  height: 40%;
+  height: 100%;
 }

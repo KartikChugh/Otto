@@ -116,7 +116,7 @@ export default function VisualizerNNContainer() {
     <Sigma
       graph={{ nodes, edges }}
       style={{
-        height: "95%",
+        height: "100%",
         transform: "translate(-50%, -10px)",
       }}
       onClickNode={(event) => onClickNodeFunc(event, nn_dispatch)}

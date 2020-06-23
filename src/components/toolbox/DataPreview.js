@@ -35,18 +35,23 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     flexWrap: "wrap",
     listStyle: "none",
-    padding: theme.spacing(0.5),
-    marginTop: -12,
+    // padding: theme.spacing(0.5),
+    // marginTop: -12,
     border: "none",
+    width: "100%",
   },
   chip: {
     margin: theme.spacing(0.5),
   },
   table: {
-    maxWidth: 350,
+    width: "97%",
+    margin: 12,
   },
   noPadding: {
     padding: 0,
+  },
+  fullWidth: {
+    width: "100%",
   },
 }));
 
@@ -105,18 +110,19 @@ export default function DataPreview() {
             </div>
           </Grid>
           {/* Table */}
-          <Grid item className={classes.actionItem}>
-            <TableContainer component={Paper}>
-              <Table
-                className={classes.table}
-                size="small"
-                aria-label="a dense table"
-              >
+          <Grid item className={classes.fullWidth}>
+            <TableContainer component={Paper} className={classes.table}>
+              <Table size="small" aria-label="a dense table">
                 <TableHead>
                   <TableRow>
                     {metadata.columns.map((column, index) => (
                       <TableCell>
-                        {getFormatted(metadata.columnsMap[column], index)}
+                        {getFormatted(
+                          metadata.columnsMap
+                            ? metadata.columnsMap[column]
+                            : column,
+                          index
+                        )}
                       </TableCell>
                     ))}
                   </TableRow>

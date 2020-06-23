@@ -1,6 +1,6 @@
 import React from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import {
   Grid,
   CardContent,
@@ -8,17 +8,29 @@ import {
   Typography,
   Card,
   Button,
+  Breadcrumbs,
+  IconButton,
+  LinearProgress,
 } from "@material-ui/core";
 import {
   NavigateNextRounded,
   NavigateBeforeRounded,
+  NavigateNext,
+  ArrowBack,
+  ArrowForward,
 } from "@material-ui/icons/";
 
 import { useState } from "state/State";
 import VisualizerOptionSelectionGrid from "components/VisualizerOptionSelectionGrid";
 import { getOptions } from "components/VisualizerOptionSelectionGrid";
 import { getActiveStep, getSteps } from "containers/SummaryContainer";
-import { StepperState, Models, Tasks, DatasetCategory } from "state/StateTypes";
+import {
+  StepperState,
+  Models,
+  Tasks,
+  DatasetCategory,
+  StepperStateOrder,
+} from "state/StateTypes";
 import { Actions } from "state/Actions";
 import PlotsContainer from "./PlotsContainer";
 import { useModelState } from "state/ModelState";
@@ -40,6 +52,8 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     paddingTop: theme.spacing(1),
     position: "relative",
+    border: "none",
+    boxShadow: "none",
   },
   title: {
     fontSize: "2vw",
@@ -53,15 +67,50 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
   },
   visualizerHeight: {
-    height: "calc(100% - 100px)",
+    height: "calc(100% - 92px)",
+  },
+  // next and back buttons
+  button: {
+    transition: "all 0.4s",
+    border: "1px solid rgba(14,19,24,.2)",
+    outline: "none !important",
+    "&:hover": {
+      backgroundColor: "white",
+      boxShadow: "0 0 0 2px #00c4cc, inset 0 0 0 2px #ffffff",
+      borderColor: "white",
+    },
+  },
+  buttonDisabled: {
+    border: "1px solid white",
+    outline: "none !important",
   },
 }));
+
+const BorderLinearProgress = withStyles((theme) => ({
+  root: {
+    height: 10,
+    borderRadius: 5,
+    margin: "0px 28px 0px 28px",
+  },
+  colorPrimary: {
+    backgroundColor:
+      theme.palette.grey[theme.palette.type === "light" ? 200 : 700],
+  },
+  bar: {
+    borderRadius: 5,
+    backgroundImage: "linear-gradient(to right, #00c3cc, #7c2ae8)",
+  },
+}))(LinearProgress);
 
 function VisualizerContainer() {
   const classes = useStyles();
   const steps = getSteps();
   const { state, dispatch } = useState();
-  const { model_state, model_dispatch } = useModelState();
+  const { model_dispatch } = useModelState();
+
+  function getProgressBarValue() {
+    return (100 * (getActiveStep(state) + 1)) / StepperStateOrder.length;
+  }
 
   const getIsSelected = (value) =>
     [
@@ -126,17 +175,84 @@ function VisualizerContainer() {
       alignItems="center"
       className={classes.fullHeight}
     >
-      <Grid item className={classes.fullWidth}>
-        <Card className={classes.rootExplanation}>
-          <CardContent>
-            <Typography className={classes.title} color="primary">
-              Build a machine learning pipeline with Otto
-            </Typography>
-          </CardContent>
-        </Card>
+      {/* Nav Bar */}
+      <Grid
+        container
+        direction="row"
+        style={{
+          height: "82px",
+          padding: "16px 28px 16px 28px",
+          justifyContent: "center",
+        }}
+      >
+        <Grid item style={{ float: "left", width: "50px" }}>
+          {getActiveStep(state) > 0 ? (
+            <IconButton
+              onClick={handleBack}
+              className={classes.button}
+              style={{ float: "left" }}
+              component="span"
+            >
+              <ArrowBack />
+            </IconButton>
+          ) : null}
+        </Grid>
+        <Grid
+          item
+          style={{ margin: "0 auto", alignSelf: "center", width: "510px" }}
+        >
+          <Breadcrumbs
+            separator={<NavigateNext fontSize="small" />}
+            aria-label="breadcrumb"
+          >
+            {StepperStateOrder.map((step, index) => {
+              if (getActiveStep(state) === index) {
+                return (
+                  <Typography color="textPrimary" style={{ fontSize: "18px" }}>
+                    {String(index + 1) + ". " + getSteps()[index]}
+                  </Typography>
+                );
+              } else if (getActiveStep(state) > index) {
+                return (
+                  <Typography
+                    color="textSecondary"
+                    style={{ fontSize: "18px" }}
+                  >
+                    {getSteps()[index]}
+                  </Typography>
+                );
+              }
+              return null;
+            })}
+          </Breadcrumbs>
+        </Grid>
+        <Grid item style={{ float: "right" }}>
+          <IconButton
+            disabled={isNextDisabled()}
+            variant="contained"
+            onClick={
+              getActiveStep(state) === steps.length - 1
+                ? handleFinish
+                : handleNext
+            }
+            className={
+              isNextDisabled() ? classes.buttonDisabled : classes.button
+            }
+            style={{ float: "right" }}
+          >
+            <ArrowForward />
+          </IconButton>
+        </Grid>
+      </Grid>
+      {/* Progress Bar */}
+      <Grid item style={{ width: "100%" }}>
+        <BorderLinearProgress
+          variant="determinate"
+          value={getProgressBarValue()}
+        />
       </Grid>
       <Grid className={`${classes.fullWidth} ${classes.visualizerHeight}`} item>
-        <Card className={classes.rootActions} variant="outlined">
+        <Card className={classes.rootActions}>
           <CardContent className={classes.fullHeight}>
             {state.stepper_state === StepperState.VISUALIZE ? (
               <PlotsContainer />
@@ -144,43 +260,6 @@ function VisualizerContainer() {
               <VisualizerOptionSelectionGrid />
             )}
           </CardContent>
-          <CardActions
-            style={{
-              position: "absolute",
-              bottom: "2px",
-              display: "inline-block",
-              width: "100%",
-              left: 0,
-            }}
-          >
-            {getActiveStep(state) > 0 ? (
-              <Button
-                onClick={handleBack}
-                className={classes.button}
-                style={{ float: "left" }}
-                startIcon={<NavigateBeforeRounded />}
-              >
-                {steps[getActiveStep(state) - 1]}
-              </Button>
-            ) : null}
-            <Button
-              disabled={isNextDisabled()}
-              variant="contained"
-              color="primary"
-              onClick={
-                getActiveStep(state) === steps.length - 1
-                  ? handleFinish
-                  : handleNext
-              }
-              className={classes.button}
-              style={{ float: "right" }}
-              endIcon={<NavigateNextRounded />}
-            >
-              {getActiveStep(state) === steps.length - 1
-                ? "Finish"
-                : steps[getActiveStep(state) + 1]}
-            </Button>
-          </CardActions>
         </Card>
       </Grid>
     </Grid>
