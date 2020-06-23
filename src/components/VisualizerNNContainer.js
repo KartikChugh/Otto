@@ -3,6 +3,7 @@ import { Sigma, RandomizeNodePositions, RelativeSize } from "react-sigma";
 import { FeedforwardNN } from "nn-architecture/Network";
 import { useNNState } from "state/NNState";
 import { NNActions } from "state/NNActions";
+import { Activations, Initializers } from "nn-architecture/hyperparams";
 
 class UpdateNodeProps extends React.Component {
   componentWillReceiveProps({ sigma, nodes, edges }) {
@@ -22,14 +23,33 @@ const onClickNodeFunc = (event, dispatch) => {
   });
 };
 
-// export const getSigma = (data, dispatch) => {
-//   console.log(data);
-//   return (
+const activationToColorMap = Object.freeze({
+  [Activations.RELU]: "#3493fa",
+  [Activations.SIGMOID]: "#844864",
+  [Activations.TANH]: "#5D5DE1",
+  [Activations.SOFTMAX]: "#e06aa6",
+  [Activations.LINEAR]: "#f3bb43",
+});
 
-//   );
-// };
+const initializerToColorMap = Object.freeze({
+  [Initializers.GLOROT]: "#999",
+  [Initializers.RANDOM]: "#dd55cc",
+  [Initializers.HE]: "#dd9955",
+  [Initializers.LECUN]: "#55bb55"
+});
 
-export const toGraph = (network, coloredLayer) => {
+
+const determineLayerColor = (layer) => {
+  let color = activationToColorMap?.[layer.activation] ?? "#777";
+  return color;
+}
+
+const determineEdgeColor = (layer) => {
+  let color = initializerToColorMap?.[layer.initializer] ?? determineLayerColor(layer);
+  return color;
+}
+
+const toGraph = (network, selectedLayer) => {
   const layers = network.layers;
 
   let maxNodeCount = getMaxNodeCount(network);
@@ -43,7 +63,9 @@ export const toGraph = (network, coloredLayer) => {
     const nodeCount = layer.units;
 
     const x = i * 0.2;
-    const color = i === coloredLayer ? "#e63946" : "#007ea7";
+    //const color = i === selectedLayer ? "#e63946" : "#007ea7";
+    const color = determineLayerColor(layer);
+    const edgeColor = determineEdgeColor(layer);
 
     const vgap = 0.15 - nodeCount / 200;
     const renderHeight = (nodeCount - 1) * vgap;
@@ -55,15 +77,13 @@ export const toGraph = (network, coloredLayer) => {
       let y = initY + j * vgap;
       let id = i + "," + j;
       let size = 1;
-
       let node = { x, y, size, id, color, writable: true };
       nodes.push(node);
       thisLayerNodes.push(node);
     }
 
     if (prevLayerNodes.length > 0) {
-      // TODO check this??
-      connect(prevLayerNodes, thisLayerNodes, edges);
+      connect(prevLayerNodes, thisLayerNodes, edges, edgeColor);
     }
 
     prevLayerNodes = thisLayerNodes;
@@ -71,7 +91,7 @@ export const toGraph = (network, coloredLayer) => {
   return [nodes, edges];
 };
 
-const connect = (prevLayerNodes, thisLayerNodes, edges) => {
+const connect = (prevLayerNodes, thisLayerNodes, edges, edgeColor) => {
   for (let i = 0; i < prevLayerNodes.length; i++) {
     let prevNode = prevLayerNodes[i];
     let source = prevNode.id;
@@ -79,11 +99,12 @@ const connect = (prevLayerNodes, thisLayerNodes, edges) => {
     for (let j = 0; j < thisLayerNodes.length; j++) {
       let thisNode = thisLayerNodes[j];
 
-      let id = "e_" + prevNode.id + "," + thisNode.id;
+      let id = "e_" + prevNode.id + ";" + thisNode.id;
       let target = thisNode.id;
-      let size = 1 - (prevLayerNodes.length * thisLayerNodes.length) / 100;
+      //let size = 1 - (prevLayerNodes.length * thisLayerNodes.length)/50;
+      let size = 1;
 
-      let edge = { id: id, source: source, target: target, size: size };
+      let edge = { id: id, source: source, target: target, size: size, color: edgeColor };
       edges.push(edge);
     }
   }
@@ -102,15 +123,6 @@ const getMaxNodeCount = (network) => {
 export default function VisualizerNNContainer() {
   const { nn_state, nn_dispatch } = useNNState();
   const nn = new FeedforwardNN(nn_state);
-  // nn.loss = Losses.MULTI_CLASS;
-  // console.log(networkCode(nn));
-
-  // nn.pushLayer();
-  // nn.pushLayer();
-  // console.log(networkCode(nn));
-
-  // nn.popLayer();
-  // console.log(networkCode(nn));
   const [nodes, edges] = toGraph(nn, nn_state.selectedLayerIndex);
   return (
     <Sigma
@@ -125,7 +137,7 @@ export default function VisualizerNNContainer() {
       settings={{
         maxNodeSize: 10,
         maxEdgeSize: 0.3,
-        defaultNodeColor: "#ec5148",
+        defaultNodeColor: "#777",
         clone: true,
       }}
     >
