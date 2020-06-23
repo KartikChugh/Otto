@@ -35,6 +35,8 @@ export const CodeGen = (state, nn_state) => {
     case Models.POISSON_REGRESSION:
       sb.appendLine(importsCode.poisson());
       break;
+    default:
+      break;
   }
 
   // preprocessor imports
@@ -115,6 +117,8 @@ export const CodeGen = (state, nn_state) => {
     case Models.POISSON_REGRESSION:
       sb.appendLine(regressionCode.modelPoisson());
       break;
+    default:
+      break;
   }
 
   return sb.toString().trim();
@@ -130,6 +134,8 @@ const componentsForModel = (model) => {
     case Models.POISSON_REGRESSION:
     case Models.LINEAR_REGRESSION:
       return 1;
+    default:
+      break;
   }
 };
 
@@ -146,8 +152,12 @@ const params = (state) => {
   switch (state.model) {
     case Models.KNN:
       return knnCode.params(7); // FIXME: replace with number of neighbors
+    case Models.ORDINAL_REGRESSION:
+    case Models.POISSON_REGRESSION:
     case Models.LINEAR_REGRESSION:
       return regressionCode.params(5); // FIXME: replace with feature column
+    default:
+      break;
   }
 };
 
@@ -167,5 +177,7 @@ const sliceData = (state) => {
     case Models.POISSON_REGRESSION:
     case Models.LINEAR_REGRESSION:
       return regressionCode.slice();
+    default:
+      break;
   }
 };
