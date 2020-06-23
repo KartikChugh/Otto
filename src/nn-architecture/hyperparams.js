@@ -12,6 +12,7 @@ export const Activations = Object.freeze({
   SIGMOID: "sigmoid",
   TANH: "tanh",
   SOFTMAX: "softmax",
+  LINEAR: "linear",
 });
 
 export const Initializers = Object.freeze({
