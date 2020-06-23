@@ -125,6 +125,18 @@ function reducer(state: StateType, action: ActionType): StateType {
           StepperStateOrder[StepperStateOrder.indexOf(state.stepper_state) - 1],
         stepper_finish: false,
       };
+      if (state.stepper_state === StepperState.DATASET) {
+        prevState.dataset_category = null;
+        prevState.sample_dataset = null;
+        prevState.dataset_category_otto = null;
+        prevState.sample_dataset_otto = null;
+      } else if (state.stepper_state === StepperState.MODEL) {
+        prevState.model = null;
+        prevState.model_otto = null;
+      } else if (state.stepper_state === StepperState.PREPROCESSORS) {
+        prevState.preprocessors = [];
+        prevState.preprocessors_otto = [];
+      }
       return prevState;
     case Actions.HANDLE_STEPPER_FINISH:
       return {
