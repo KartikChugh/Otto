@@ -21,11 +21,9 @@ y_pred = regr.predict(X_test)
 # The coefficients
 print('Coefficients: \n', regr.coef_)
 # The mean squared error
-print('Mean squared error: %.2f'
-        % mean_squared_error(y_test, y_pred))
+print('Mean squared error: %.2f' % mean_squared_error(y_test, y_pred))
 # The coefficient of determination: 1 is perfect prediction
-print('Coefficient of determination: %.2f'
-        % r2_score(y_test, y_pred))
+print('Coefficient of determination: %.2f' % r2_score(y_test, y_pred))
 
 # Plot outputs
 plt.scatter(X_test, y_test,  color='black')
@@ -51,8 +49,7 @@ y_pred = regr.predict(X_test)
 # The coefficients
 print('Coefficients: \n', regr.coef_)
 # The mean poisson deviance
-print('Mean poisson deviance: %.2f'
-        % mean_poisson_deviance(y_test, y_pred))
+print('Mean poisson deviance: %.2f' % mean_poisson_deviance(y_test, y_pred))
 
 # Plot outputs
 plt.scatter(X_test, y_test,  color='black')
@@ -78,8 +75,7 @@ y_pred = regr.predict(X_test)
 # The coefficients
 print('Coefficients: \n', regr.coef_)
 # The accuracy
-print('Accuracy: %.2f'
-        % accuracy_score(y_test, y_pred))
+print('Accuracy: %.2f' % accuracy_score(y_test, y_pred))
 
 # Plot outputs
 plt.scatter(X_test, y_test,  color='black')
