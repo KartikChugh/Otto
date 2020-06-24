@@ -72,11 +72,11 @@ export default function PlotLinReg() {
             </YAxis>
             <Tooltip cursor={{ strokeDasharray: "3 3" }} />
             <Legend verticalAlign="top" height={36} />
-            <Scatter name="Test Data" dataKey="scatter" fill="#E76F51" />
+            <Scatter name="Test Data" dataKey="scatter" fill="#e06aa6" />
             <Line
               dataKey="line"
               name="Line of Best Fit (Train Data)"
-              stroke="#2A9D8F"
+              stroke="#5D5DE1"
               dot={false}
             />
           </ComposedChart>

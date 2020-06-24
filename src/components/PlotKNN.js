@@ -18,7 +18,7 @@ import { modelLinear } from "codegen/regressionCode";
 import { model } from "codegen/knnCode";
 import LoadingComponent from "./LoadingComponent";
 
-const fillColors = ["#E76F51", "#2A9D8F", "#264653"];
+const fillColors = ["#3493fa", "#f3bb43", "#e06aa6"];
 const shapeTypes = ["star", "circle", "triangle"];
 
 const createPlotData = (state) => {
