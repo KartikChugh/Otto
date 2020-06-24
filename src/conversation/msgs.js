@@ -129,3 +129,9 @@ export const NeuralNetworkPreface = () => {
     msgsExample.NeuralNetworkReset,
   ];
 };
+
+export const Finish = () => {
+  return [
+    "You're done! Now you can copy your code into a Python environment, like Google Colab, or hit the Reset button to build a new pipeline.",
+  ]
+}
