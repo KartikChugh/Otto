@@ -194,15 +194,15 @@ export default function VisualizerOptionSelectionGrid() {
   function getTitle() {
     switch (state.stepper_state) {
       case StepperState.TASK:
-        return "Select a Machine Learning task";
+        return "Select a Machine Learning Task";
       case StepperState.DATASET:
-        return "Choose a dataset";
+        return "Choose a Dataset";
       case StepperState.MODEL:
         return state.task === Tasks.NATURAL_LANGUAGE
           ? "Select ML Model(s)"
           : "Select an ML Model";
       case StepperState.PREPROCESSORS:
-        return "Choose data preprocessor(s)";
+        return "Choose Data Preprocessor(s)";
     }
   }
 
