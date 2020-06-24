@@ -16,15 +16,34 @@ import { useNNState } from "state/NNState";
 
 const convo = new Conversation(addResponseMessage);
 
+const delay = (msg) => {
+  const WPM = 225;
+  return (msg.length / 3.5 / WPM) * 60 * 1000;
+}
+
+const sayMessages = async (messages) => {
+  if (!Array.isArray(messages)) messages = [messages];
+  messages = messages.flat(1);
+  for (let message of messages) {
+      if (message != null) {
+          let d = delay(message);
+          await new Promise((r) => setTimeout(r, d/2));
+          addResponseMessage(message);
+          await new Promise((r) => setTimeout(r, d/2));
+      }
+  }
+}
+
 export async function initializeWidget() {
   deleteMessages();
   await new Promise((r) => setTimeout(r, 2500));
-  convo.sayMessages(msgs.IntroQuestion());
+  sayMessages(msgs.IntroQuestion());
 }
 
 export const handleNext = (state) => {
   deleteMessages();
-  convo.handleStateAdvance(state);
+  const msgs = convo.handleStateAdvance(state);
+  sayMessages(msgs);
 }
 
 export const handlePrev = (state) => {
@@ -40,19 +59,10 @@ function WidgetContainer() {
     initializeWidget();
   }, []);
 
-  const handleSubmit = (userMessage) => {
-    convo.handleUserMessage(userMessage, state, dispatch, nn_state, nn_dispatch);
+  const handleSubmit = async (userMessage) => {
+    const msgs = await convo.handleUserMessage(userMessage, state, dispatch, nn_state, nn_dispatch);
+    sayMessages(msgs);
   };
-
-  // async function performResponse(userMessage) {
-  //   const responses = await convo.respondTo(userMessage);
-  //   await new Promise((r) => setTimeout(r, readWriteDelay(userMessage)));
-  //   for (const i in responses) {
-  //     const response = responses[i];
-  //     await new Promise((r) => setTimeout(r, readWriteDelay(response)));
-  //     addResponseMessage(response);
-  //   }
-  // }
 
   return (
     <Widget
@@ -60,8 +70,9 @@ function WidgetContainer() {
       launcher={() => null}
       subtitle=""
       title="Otto"
-      // titleAvatar={logo}
-      profileAvatar={logo}
+      titleAvatar={logo}
+      showTimeStamp={false}
+      //profileAvatar={logo}
     />
   );
 }
