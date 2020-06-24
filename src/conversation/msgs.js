@@ -94,14 +94,14 @@ export const NLPModelInfo = () => {
 export const RegressionModelQuestion = () => {
   return [
     "What can you tell me about your Dependent Variable?",
-    `${msgsExample.ModelRegression}`,
+    msgsExample.ModelRegression,
   ];
 };
 
 export const ClassificationModelQuestion = () => {
   return [
     "What can you tell me about your dataset?",
-    `${msgsExample.ModelClassification}`,
+    msgsExample.ModelClassification,
   ];
 };
 
@@ -121,7 +121,7 @@ export const PreprocessorRecommendation = () => {
 
 export const NeuralNetworkPreface = () => {
   return [
-    "Ready to design your neural network? Here's a basic feedforward NN for classification",
+    "Ready to design your neural network? Here's a basic model for classification",
     "You can play with the model and customize it, or tell me what changes to make",
     msgsExample.NeuralNetworkArch,
     msgsExample.NeuralNetworkHyper,
