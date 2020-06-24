@@ -38,7 +38,7 @@ Below is a step-by-step breakdown intended for the technical reader.
 
 One of the biggest obstacles faced by those just getting started with ML is the abundance of jargon, from “loss functions” to “contour boundaries“ — beginners can't be expected to decide what model to use based on cryptic terminology, let alone develop one from scratch! Otto narrows down your options by inferring the high-level task at hand from a simple objective statement.
 
-![taskInference](demo/taskInference.gif)
+![taskInference](img/taskInference.gif)
 
 Task inference is powered by a Wit application (**Otto-Task**) trained on 300 such statements (e.g. “I want to detect loan applications as fraudulent”, “help me forecast stock prices”, or “let's summarize an article into a paragraph”) derived from real-world machine learning research. **Otto-Task** attempts to categorize the _task_ intent as regression, classification, or natural language processing, and additionally extracts a _subject_ entity embodying a streamlined form of the objective in order to filter out extraneous words. 
 
@@ -48,7 +48,7 @@ The subject is parsed for keyword matches (“tweets”, “housing”, etc) aga
 
 Users are recommended a specific sample dataset matching their subject, or otherwise offered to preview and choose one themselves. Sample data allows beginners to prototype models quickly and easily, without the complexity of finding a dataset and figuring out the relevant features among dozens. Users may also opt to with their own data, which they can include later on in the generated code. 
 
-![samplePreview](demo/samplePreview.gif)
+![samplePreview](img/samplePreview.gif)
 
 ### Model
 
@@ -89,7 +89,7 @@ The visualization stage activates for neural network design, or to render any mo
 
 Satisfy your curious mind with our fun, interactive network builder! 
 
-![nn](demo/nn.gif)
+![nn](img/nn.gif)
 
 Otto preconfigures a standard model architecture with [research-based](http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf) activations and initializers, but users are free to tinker with it layer by layer as they wish. Additionally, Otto can make network redesigns en masse with the aid of a dedicated Wit model (**Otto-Net**) that translates user instructions into architecture changes.
 
@@ -97,15 +97,15 @@ Otto preconfigures a standard model architecture with [research-based](http://pr
 
 Instantly explore how parameters affect KNN clusters and regression slopes!
 
-![linreg](demo/linreg.gif)
+![linreg](img/linreg.gif)
 
-![knn](demo/knn.gif)
+![knn](img/knn.gif)
 
 ### Code Display
 
 All done! With your data sorted out, preprocessors set, and model configured, Otto gives you a nice view of your work. 
 
-![codegen](demo/codeGen.gif)
+![codegen](img/codeGen.gif)
 
 ## Future Plans
 
