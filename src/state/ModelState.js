@@ -87,9 +87,9 @@ function reducer(state, action: ModelActionType) {
         newState["linreg_y_name"] = action.linreg_y_name;
       }
       addResponseMessage(
-        `Linear Regression run (70-30 train-test split) \n &#8226; Independant variable ${
+        `Linear Regression run (70-30 train-test split) \n &#8226; Independent variable ${
           action.linreg_y_name ?? state.linreg_y_name
-        } \n &#8226; Dependant variable ${
+        } \n &#8226; Dependent variable ${
           action.linreg_x_name ?? state.linreg_x_name
         }` + `\n &#8226; R2 value: ${action.linreg_r2}`
       );

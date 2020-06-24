@@ -77,7 +77,7 @@ export default function LinRegToolbox() {
         <Grid item className={classes.actionItem}>
           <FormControl className={classes.actionWidth}>
             <InputLabel id="demo-simple-select-label">
-              Independant Variable
+              Independent Variable
             </InputLabel>
             <Select
               value={indVar !== "" ? indVar : ""}
