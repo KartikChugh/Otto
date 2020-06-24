@@ -24,7 +24,7 @@ To demo some of Otto's main features, try out the following:
 
 - **Select: _Regression > Sample Dataset_** to preview sample datasets for regression, and discover the strongest predictors using different best fit lines
 
-- **Say: _Detect fraudulent credit card activity_** and select the Custom Dataset option to experience Otto's model recommendation system and interactive neural network designer.
+- **Say: _Detect fraudulent credit card activity_ and select the _ustom Dataset option** to experience Otto's model recommendation system and interactive neural network designer.
 
 - **Say: _I'd like to interpret the mood of a tweet_** to send live queries to Wit-enabled natural language models for sentiment analysis
 
