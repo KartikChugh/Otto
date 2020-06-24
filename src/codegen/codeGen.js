@@ -6,9 +6,10 @@ import * as preprocessCode from "codegen/preprocessCode";
 import { Models, DatasetCategory, Preprocessors, Tasks } from "state/StateTypes";
 import * as networkCode from "codegen/networkCode";
 import * as nlpCode from "codegen/nlpCode";
+import { datasetMetadata } from "static/datasets/metadata";
 const StringBuilder = require("string-builder");
 
-export const CodeGen = (state, nn_state) => {
+export const CodeGen = (state, nn_state, model_state) => {
   const sb = new StringBuilder();
 
   // task-based imports
@@ -58,16 +59,17 @@ export const CodeGen = (state, nn_state) => {
   // defines loadData function
   if (state.dataset_category === DatasetCategory.SAMPLE) {
     if (state.task === Tasks.NATURAL_LANGUAGE) {
-      sb.appendLine(sharedCode.defineLoadDatasetNLP()); // FIXME: names of datasets
+      sb.appendLine(sharedCode.defineLoadDatasetNLP(datasetMetadata?.[state.sample_dataset]?.url)); 
+      sb.appendLine();
     } else {
-      sb.appendLine(sharedCode.defineLoadDataset()); // FIXME: names of datasets
+      sb.appendLine(sharedCode.defineLoadDataset(state.sample_dataset)); 
     }
   } else {
     sb.appendLine(sharedCode.defineLoadUnspecified());
   }
 
   // defines params
-  sb.appendLine(params(state));
+  sb.appendLine(params(state, model_state));
 
   // loads data
   if (state.task === Tasks.NATURAL_LANGUAGE) {
@@ -139,23 +141,23 @@ const componentsForModel = (model) => {
   }
 };
 
-const params = (state) => {
+const params = (state, model_state) => {
   if (state.preprocessors.includes(Preprocessors.PCA)) {
     const components = componentsForModel(state.model);
     return preprocessCode.paramsPca(components);
   }
 
   if (state.task === Tasks.NATURAL_LANGUAGE && state.nlp_models.length > 0) {
-    return nlpCode.params(1); // FIXME: replace with feature column
+    return nlpCode.params(state.sample_dataset?.column ?? 0); 
   }
 
   switch (state.model) {
     case Models.KNN:
-      return knnCode.params(7); // FIXME: replace with number of neighbors
+      return knnCode.params(model_state.knn_k ?? 5); 
     case Models.ORDINAL_REGRESSION:
     case Models.POISSON_REGRESSION:
     case Models.LINEAR_REGRESSION:
-      return regressionCode.params(5); // FIXME: replace with feature column
+      return regressionCode.params(model_state.linreg_columns?.indexOf(model_state.linreg_x_name) ?? 5); 
     default:
       break;
   }

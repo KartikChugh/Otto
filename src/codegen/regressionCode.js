@@ -19,7 +19,7 @@ regr.fit(X_train, y_train)
 y_pred = regr.predict(X_test)
 
 # The coefficients
-print('Coefficients: \n', regr.coef_)
+print('Coefficients: ', regr.coef_)
 # The mean squared error
 print('Mean squared error: %.2f' % mean_squared_error(y_test, y_pred))
 # The coefficient of determination: 1 is perfect prediction
@@ -47,7 +47,7 @@ regr.fit(X_train, y_train)
 y_pred = regr.predict(X_test)
 
 # The coefficients
-print('Coefficients: \n', regr.coef_)
+print('Coefficients: ', regr.coef_)
 # The mean poisson deviance
 print('Mean poisson deviance: %.2f' % mean_poisson_deviance(y_test, y_pred))
 
@@ -73,7 +73,7 @@ regr.fit(X_train, y_train)
 y_pred = regr.predict(X_test)
 
 # The coefficients
-print('Coefficients: \n', regr.coef_)
+print('Coefficients: ', regr.coef_)
 # The accuracy
 print('Accuracy: %.2f' % accuracy_score(y_test, y_pred))
 

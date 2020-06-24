@@ -86,6 +86,9 @@ export const datasetMetadata = {
     columns: twitterColumns,
     columnsMap: twitterColumnsMap,
     data: tweets,
+    column: 1,
+
+    url: "https://github.com/KartikChugh/Otto/blob/master/src/static/datasets/tweets.csv",
 
     keywords: ["tweet", "twitter", "sentiment"],
     task: Tasks.NATURAL_LANGUAGE,
@@ -134,6 +137,9 @@ export const datasetMetadata = {
     columns: imdbColumns,
     columnsMap: imdbColumnsMap,
     data: imdb,
+    column: 0,
+
+    url: "https://github.com/KartikChugh/Otto/blob/master/src/static/datasets/imdb.csv",
 
     keywords: ["imdb", "movies", "sentiment", "reviews"],
     task: Tasks.NATURAL_LANGUAGE,

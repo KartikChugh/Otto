@@ -17,6 +17,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useState } from "state/State";
 import { CodeGen } from "codegen/codeGen";
 import { useNNState } from "state/NNState";
+import { useModelState } from "state/ModelState";
 
 const useStyles = makeStyles((theme) => ({
   titleInner: {
@@ -30,10 +31,11 @@ export default function StepperFinish() {
   const classes = useStyles();
   const { state } = useState();
   const { nn_state } = useNNState();
+  const {model_state} = useModelState();
   const [codeCopied, setCodeCopied] = React.useState(false);
 
   const copyToClipboard = (setCopied = true) => {
-    navigator.clipboard.writeText(CodeGen(state, nn_state));
+    navigator.clipboard.writeText(CodeGen(state, nn_state, model_state));
     setCodeCopied(setCopied);
   };
 
