@@ -108,7 +108,7 @@ function test() {
       knn_labels: typesArray,
       knn_column_units: irisUnits,
     });
-  }, 500);
+  }, 800);
 
   //   predict();
 }

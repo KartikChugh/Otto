@@ -13,6 +13,7 @@ import {
   TaskToModelsMap,
   StateType,
   Preprocessors,
+  SampleDataset,
 } from "state/StateTypes";
 import { useState } from "state/State";
 import { Actions } from "state/Actions";
@@ -139,6 +140,10 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
     marginLeft: theme.spacing(1),
   },
+  datasetMenu: {
+    width: "100%",
+    maxWidth: 220,
+  },
 }));
 
 export function getOptions(state: StateType) {
@@ -185,7 +190,6 @@ export function getOptions(state: StateType) {
 export default function VisualizerOptionSelectionGrid() {
   const classes = useStyles();
   const { state, dispatch } = useState();
-  const [anchorEl, setAnchorEl] = React.useState(null);
 
   function getTitle() {
     switch (state.stepper_state) {
@@ -199,16 +203,6 @@ export default function VisualizerOptionSelectionGrid() {
         return "Choose data preprocessor(s)";
     }
   }
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleClick = (event, type, label) => {
-    if (type === StepperState.DATASET && label === DatasetCategory.SAMPLE) {
-      setAnchorEl(event.currentTarget);
-    }
-  };
 
   const getIsRecommended = (value) =>
     [
@@ -292,11 +286,6 @@ export default function VisualizerOptionSelectionGrid() {
           key={avatar.label}
           aria-haspopup="true"
         />
-        <SampleDatasetMenu
-          anchorEl={anchorEl}
-          handleClose={handleClose}
-          id={avatar.label}
-        />
       </>
     );
   }
@@ -312,6 +301,7 @@ export default function VisualizerOptionSelectionGrid() {
         justify="center"
         alignItems="center"
         spacing={5}
+        style={{ marginLeft: "76px" }}
       >
         {getOptions(state).map((avatar, index) => (
           <Grid
@@ -322,10 +312,7 @@ export default function VisualizerOptionSelectionGrid() {
                 : classes.avatarItemCard
             }
             key={index}
-            onClick={(event) => {
-              optionOnClickHandler(avatar.type, avatar.label);
-              handleClick(event, avatar.type, avatar.label);
-            }}
+            onClick={(event) => optionOnClickHandler(avatar.type, avatar.label)}
           >
             {getIsRecommended(avatar.label) ? (
               <Tooltip title="Recommended by Otto!" placement="top">
@@ -361,6 +348,12 @@ export default function VisualizerOptionSelectionGrid() {
             </Typography>
           </Grid>
         ))}
+        <Grid item className={classes.datasetMenu}>
+          {state.stepper_state === StepperState.DATASET &&
+          state.dataset_category === DatasetCategory.SAMPLE ? (
+            <SampleDatasetMenu />
+          ) : null}
+        </Grid>
       </Grid>
     </>
   );

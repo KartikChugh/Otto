@@ -2,7 +2,12 @@ import React from "react";
 import { useReducer, createContext, useContext } from "react";
 
 import { deleteMessages, addResponseMessage } from "react-chat-widget";
-import { InitialState, StateType, StepperState } from "state/StateTypes";
+import {
+  InitialState,
+  StateType,
+  StepperState,
+  DatasetCategory,
+} from "state/StateTypes";
 import { ActionType, Actions } from "state/Actions";
 import { StepperStateOrder } from "state/StateTypes";
 import { handleNext, handlePrev } from "containers/WidgetContainer";
@@ -30,8 +35,14 @@ function reducer(state: StateType, action: ActionType): StateType {
         // sample_dataset: null,
         // dataset_category: null,
       };
-    case Actions.SET_DATASET_CATEGORY:
-      return { ...state, dataset_category: action.dataset_category };
+    case Actions.SET_DATASET_CATEGORY: {
+      const newState = { ...state, dataset_category: action.dataset_category };
+      if (action.dataset_category === DatasetCategory.CUSTOM) {
+        newState.sample_dataset = null;
+        newState.sample_dataset_view = null;
+      }
+      return newState;
+    }
     case Actions.SET_MODEL:
       return {
         ...state,
@@ -69,6 +80,11 @@ function reducer(state: StateType, action: ActionType): StateType {
     }
     case Actions.SET_SAMPLE_DATASET:
       return { ...state, sample_dataset: action.sample_dataset };
+    case Actions.SET_SAMPLE_DATASET_VIEW:
+      return {
+        ...state,
+        sample_dataset_view: action.sample_dataset,
+      };
     case Actions.SET_TASK_OTTO:
       return { ...state, task_otto: action.task };
     case Actions.SET_DATASET_CATEGORY_OTTO:

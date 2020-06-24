@@ -5,6 +5,7 @@ import { useReducer, createContext, useContext } from "react";
 
 import { ModelActionType, ModelActions } from "state/ModelActions";
 import { MapRounded } from "@material-ui/icons";
+import { addResponseMessage } from "react-chat-widget";
 
 const InitialState = () => ({
   knn_k: 5,
@@ -75,6 +76,13 @@ function reducer(state, action: ModelActionType) {
         newState["linreg_x_name"] = action.linreg_x_name;
         newState["linreg_y_name"] = action.linreg_y_name;
       }
+      addResponseMessage(
+        `Linear Regression run \n &#8226; Independant variable ${
+          action.linreg_y_name ?? state.linreg_y_name
+        } \n &#8226; Dependant variable ${
+          action.linreg_x_name ?? state.linreg_x_name
+        }` + `\n &#8226; R2 value: ${action.linreg_r2}`
+      );
       return newState;
     case ModelActions.NLP_DONE:
       return {

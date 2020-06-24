@@ -28,13 +28,15 @@ export function invokeLinReg(dispatch, indVar, setAxes = false) {
     linreg_test_result: testResult,
     linreg_test_set: test,
     linreg_columns: datas.columns,
+    linreg_r2: result.r2,
   };
   if (setAxes) {
     dispatchObject["linreg_x_name"] = datas.columns[datas.indVar];
     dispatchObject["linreg_y_name"] = datas.columns[datas.depVar];
   }
-
-  dispatch(dispatchObject);
+  setTimeout(function () {
+    dispatch(dispatchObject);
+  }, 800);
 }
 
 function dressData(data, depVar, indVar, columns) {

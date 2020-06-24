@@ -53,6 +53,10 @@ export default function LinRegToolbox() {
   const { model_state, model_dispatch } = useModelState();
   const [indVar, setIndVar] = useState(model_state.linreg_x_name);
 
+  React.useEffect(() => {
+    setIndVar(model_state.linreg_x_name);
+  }, [model_state.linreg_x_name]);
+
   function shouldRetrain() {
     return model_state.linreg_x_name !== indVar;
   }
@@ -86,18 +90,17 @@ export default function LinRegToolbox() {
             </Select>
           </FormControl>
         </Grid>
-        {shouldRetrain() && (
-          <Grid item>
-            <Button
-              color="primary"
-              className={classes.button}
-              variant="outlined"
-              onClick={onUpdatePlot}
-            >
-              {"Re-Train Model"}
-            </Button>
-          </Grid>
-        )}
+        <Grid item>
+          <Button
+            color="primary"
+            className={classes.button}
+            variant="outlined"
+            onClick={onUpdatePlot}
+            disabled={!shouldRetrain()}
+          >
+            {"Re-Train Model"}
+          </Button>
+        </Grid>
       </Grid>
     </Card>
   );
