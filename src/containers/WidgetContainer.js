@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { useState } from "state/State";
+import { useState, StateContext } from "state/State";
 
 import {
   Widget,
@@ -16,34 +16,17 @@ import { useNNState } from "state/NNState";
 
 const convo = new Conversation(addResponseMessage);
 
-const delay = (msg) => {
-  const WPM = 225;
-  return (msg.length / 3.5 / WPM) * 60 * 1000;
-};
-
-const sayMessages = async (messages) => {
-  if (!Array.isArray(messages)) messages = [messages];
-  messages = messages.flat(1);
-  for (let message of messages) {
-    if (message != null) {
-      let d = delay(message);
-      await new Promise((r) => setTimeout(r, d / 2));
-      addResponseMessage(message);
-      await new Promise((r) => setTimeout(r, d / 2));
-    }
-  }
-};
-
-export async function initializeWidget() {
+export async function initializeWidget(state) {
   deleteMessages();
   await new Promise((r) => setTimeout(r, 2500));
-  sayMessages(msgs.IntroQuestion());
+  convo.sayMessages(msgs.IntroQuestion(), state.stepper_state);
 }
 
 export const handleNext = (state) => {
+  const stepperStateOriginal = state.stepper_state;
   deleteMessages();
   const msgs = convo.handleStateAdvance(state);
-  sayMessages(msgs);
+  convo.sayMessages(msgs, stepperStateOriginal);
 };
 
 export const handlePrev = (state) => {
@@ -52,14 +35,17 @@ export const handlePrev = (state) => {
 
 function WidgetContainer() {
   const { state, dispatch } = useState();
+  convo.state = state;
   const { nn_state, nn_dispatch } = useNNState();
 
   useEffect(() => {
     toggleWidget();
-    initializeWidget();
+    initializeWidget(state);
   }, []);
 
   const handleSubmit = async (userMessage) => {
+    const stepperStateOriginal = state.stepper_state;
+    console.log("aaaa", stepperStateOriginal);
     const msgs = await convo.handleUserMessage(
       userMessage,
       state,
@@ -67,7 +53,7 @@ function WidgetContainer() {
       nn_state,
       nn_dispatch
     );
-    sayMessages(msgs);
+    convo.sayMessages(msgs, stepperStateOriginal);
   };
 
   return (

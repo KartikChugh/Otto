@@ -5,7 +5,8 @@ const token = require("TOKEN.json");
 
 export default class Conversation {
 
-    constructor(say) {
+    constructor(addResponseMessage) {
+        this.addResponseMessage = addResponseMessage;
         this.ottoTask = new Wit({
             accessToken: token.task,
         });
@@ -21,6 +22,26 @@ export default class Conversation {
             nn: this.ottoNN,
         };
     }   
+
+    delay = (msg) => {
+        const WPM = 300;
+        return (msg.length / 3.5 / WPM) * 60 * 1000;
+    };
+
+    sayMessages = async (messages, stepperStateOriginal) => {
+        if (!Array.isArray(messages)) messages = [messages];
+        messages = messages.flat(1);
+        for (let message of messages) {
+          if (message != null) {
+            let d = this.delay(message);
+            await new Promise((r) => setTimeout(r, d / 2));
+            if (!stepperStateOriginal || (stepperStateOriginal && stepperStateOriginal === this.state.stepper_state)) {
+                this.addResponseMessage(message);
+                await new Promise((r) => setTimeout(r, d / 2));
+            }
+          }
+        }
+    };
     
     handleUserMessage = async (userMessage, state, dispatch, nn_state, nn_dispatch) => {
         document.getElementsByClassName("rcw-sender")[0].message.value = "";
