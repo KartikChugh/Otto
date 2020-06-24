@@ -1,5 +1,5 @@
 # Otto: Your friendly machine learning assistant.
-<img src="logo.png" width="100%">
+<img src="logo.png" width="90%">
 
 ## Build machine learning pipelines through natural language conversation
 Otto is an intelligent chat application, designed to help aspiring machine learning engineers _go from idea to implementation with zero domain knowledge_. Our website features easy model selection, powerful visualization tools, and an intuitive natural language experience guiding you every step of the way. A collection of Wit backend apps service Otto's conversational abilities and machine learning tools throughout.
@@ -42,13 +42,22 @@ In the case of a natural language task, users can combine multiple models togeth
 
 #### Supported models:
 
+| Model Name          | Task             | Description                                                       |
+|---------------------|------------------|-------------------------------------------------------------------|
+| K-Nearest Neighbors | Classification   | Draws class regions by looking at surrounding data                |
+| Neural Network      | Classification   | Deep learning model suitable for complex datasets                 |
+| Linear              | Regression       | Ordinary linear relationship between variables                    |
+| Poisson             | Regression       | Models count data, which tends to follow a Poisson distribution   |
+| Ordinal             | Regression       | Learns rankings (e.g. "on a scale of 1-5")                        |
+| Sentiment Analysis  | Natural Language | Detects polarity, expressions of thanks, and greetings/goodbyes   |
+| Entity Recognition  | Natural Language | Extracts structures such as people, times & locations, and works of art |
 
 ### Preprocessors
 
 What good is a fancy model if it takes ages to train? In this step, Otto swoops in with handpicked preprocessors for the user's data and model selections, abstracting away the intricacies of feature engineering and dimensionality reduction. As always, users can override the recommendations.
 
 #### Supported preprocessors:
-| Name                         | Description                                                    |
+| Preprocessor Name            | Description                                                    |
 |------------------------------|----------------------------------------------------------------|
 | Principal Component Analysis | Performs dimensionality reduction and/or feature selection     |
 | Normalization                | Scales data to have mean centered at 0 and unit variance       |
