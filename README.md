@@ -12,7 +12,7 @@ Otto is an intelligent chat application, designed to help aspiring machine learn
 
 - **Powerful machine learning tools.** A range of machine learning capabilities are supported, including models for regression, classification and natural language processing, as well as preprocessors tailored to your problem. Play with neural networks, explore data visualizations, and generate ready-made Python code right in your browser!
 
-- **Educational experience.** Users are walked through each stage of the process and can ask Otto questions to learn more along the way. Annotated code blocks provide eager learners a high-level understanding of their end-to-end pipeline.
+- **Educational experience.** Users are walked through each stage of the process and are provided with explanations of terminology. Annotated code blocks provide eager learners a high-level understanding of their end-to-end pipeline.
 
 ***
 
@@ -90,5 +90,8 @@ Otto preconfigures a standard model architecture with [research-based](http://pr
 #### Model Visualization (Sample)
 
 Instantly explore how parameters affect KNN clusters and regression slopes!
+
+## Future
+- Ask Otto questions along the way
 
 
