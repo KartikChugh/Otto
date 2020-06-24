@@ -90,7 +90,7 @@
 .rcw-client .rcw-message-text {
     background-color: #c6e5f5; 
     border-radius: 10px;
-    padding: 6px 8px 6px 10px;
+    padding: 8px 12px 8px 12px;
     max-width: 315px;
     text-align: left
 }
@@ -109,7 +109,7 @@
 .rcw-response .rcw-message-text {
     background-color: #f4f7f9;
     border-radius: 10px;
-    padding: 6px 8px 0px 10px;
+    padding: 10px 12px 2px 12px;
     white-space: pre-line;
     margin-bottom: -16px;
     height: 100%;

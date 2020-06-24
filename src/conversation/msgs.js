@@ -6,8 +6,8 @@ export const IntroQuestion = () => {
   return [
     "Hey there!",
     "My name's Otto, and I'm here to help you with machine learning",
-    "What are you looking to do today?",
     `${msgsExample.Task}`,
+    "What are you looking to do today?",
   ];
 };
 
