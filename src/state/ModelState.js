@@ -95,6 +95,11 @@ function reducer(state, action: ModelActionType) {
       );
       return newState;
     case ModelActions.NLP_DONE:
+      if (action.results[0] > 0) {
+        addResponseMessage(
+          `NLP Models Run \n &#8226; Total queries to wit: ${action.results[1]} \n &#8226; Correctly classified sentiment: ${action.results[0]}`
+        );
+      }
       return {
         ...state,
         viz_loading: false,

@@ -41,8 +41,9 @@ export const invokeNLP = async (doEntity, doSentiment, metadata, dispatch) => {
   });
   const textData = metadata.data;
   const nlpData = [];
-
-  for (let i = 0; i < 10; i++) {
+  let correctResults = 0;
+  const numQueries = 10;
+  for (let i = 0; i < numQueries; i++) {
     const nlpDatapoint = {};
     const text = textData[i][metadata.columns[0]]
       .trim()
@@ -66,8 +67,20 @@ export const invokeNLP = async (doEntity, doSentiment, metadata, dispatch) => {
       const traitLabel = labelForSample(traits, true);
       //traitLabels.push(traitLabel);
       if (traitLabel.toLowerCase().indexOf("negative") !== -1) {
+        if (
+          textData[i].hasOwnProperty("sentiment") &&
+          textData[i].sentiment.toLowerCase() === "negative"
+        ) {
+          correctResults += 1;
+        }
         nlpDatapoint.sentiments = "Negative";
       } else if (traitLabel.toLowerCase().indexOf("positive") !== -1) {
+        if (
+          textData[i].hasOwnProperty("sentiment") &&
+          textData[i].sentiment.toLowerCase() === "positive"
+        ) {
+          correctResults += 1;
+        }
         nlpDatapoint.sentiments = "Positive";
       } else {
         nlpDatapoint.sentiments = "Neutral";
@@ -80,5 +93,6 @@ export const invokeNLP = async (doEntity, doSentiment, metadata, dispatch) => {
   dispatch({
     type: ModelActions.NLP_DONE,
     datas: nlpData,
+    results: [correctResults, numQueries],
   });
 };
