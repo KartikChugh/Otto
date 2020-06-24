@@ -121,7 +121,7 @@ export const datasetMetadata = {
     depVar: diabetesDepVar,
     indVar: diabetesDefaultIndVar,
 
-    keywords: ["diabetes", "disease", "progression"],
+    keywords: ["diabetes", "disease", "progression", "health", "bmi"],
     task: Tasks.REGRESSION,
     model: Models.LINEAR_REGRESSION,
   },

@@ -18,6 +18,7 @@ export const IntroQuestion = () => {
 export const TaskRecommendation = (task) => {
   return [
     `Neat idea! I recommend a ${task.toLowerCase()} model to help you explore it`,
+    `When you're ready to move on, click the arrow at the top right`
   ];
 };
 
