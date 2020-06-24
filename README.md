@@ -46,6 +46,8 @@ The subject is parsed for keyword matches (“tweets”, “housing”, etc) aga
 
 Users are recommended a specific sample dataset matching their subject, or otherwise offered to preview and choose one themselves. Sample data allows beginners to prototype models quickly and easily, without the complexity of finding a dataset and figuring out the relevant features among dozens. Users may also opt to with their own data, which they can include later on in the generated code. 
 
+![samplePreview](demo/samplePreview.gif)
+
 ### Model
 
 If the user opted for custom data, Otto leverages Wit to perform the key step of selecting a classifier or regressor. A Wit client (**Otto-Model**) parses a brief user description of their data for key phrases indicating the desirability of a particular model. **Otto-Model** includes around 15 phrases and synonyms per model and performs fuzzy string matching, making it an effective and scalable technique for model recommendation.
@@ -85,6 +87,8 @@ The visualization stage activates for neural network design, or to render any mo
 
 Satisfy your curious mind with our fun, interactive network builder! 
 
+![nn](demo/nn.gif)
+
 Otto preconfigures a standard model architecture with [research-based](http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf) activations and initializers, but users are free to tinker with it layer by layer as they wish. Additionally, Otto can make network redesigns en masse with the aid of a dedicated Wit model (**Otto-Net**) that translates user instructions into architecture changes.
 
 #### Model Visualization (Sample)
@@ -94,6 +98,12 @@ Instantly explore how parameters affect KNN clusters and regression slopes!
 ![linreg](demo/linreg.gif)
 
 ![knn](demo/knn.gif)
+
+### Code Display
+
+All done! With your data sorted out, preprocessors set, and model configured, Otto gives you a nice view of your work. 
+
+![codegen](demo/codeGen.gif)
 
 ## Future
 - Ask Otto questions along the way
