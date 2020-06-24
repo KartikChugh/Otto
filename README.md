@@ -69,7 +69,9 @@ The visualization stage activates for neural networks, or any model built using 
 
 #### Neural Network
 
-Satisfy your curious mind with our fun, interactive network builder! Otto preconfigures model architecture 
+Satisfy your curious mind with our fun, interactive network builder! 
+
+Otto preconfigures a standard model architecture with [research-based](http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf) activations and initializers, but users are free to tinker with it as they wish. 
 
 #### Linear Regression
 
