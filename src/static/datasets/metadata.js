@@ -21,6 +21,18 @@ import {
   bostonDepVar,
   bostonDefaultIndVar,
 } from "static/datasets/boston";
+import {
+  diabetes,
+  diabetesColumns,
+  diabetesDepVar,
+  diabetesDefaultIndVar,
+} from "static/datasets/diabetes";
+import {
+  wine,
+  wineColumns,
+  wineColumnsMap,
+  wineUnits,
+} from "static/datasets/wine";
 import { imdb, imdbColumns, imdbColumnsMap } from "static/datasets/imdb";
 import { SampleDataset, Tasks, Models } from "state/StateTypes";
 
@@ -39,6 +51,23 @@ export const datasetMetadata = {
     units: irisUnits,
 
     keywords: ["flower", "iris", "petal"],
+    task: Tasks.CLASSIFICATION,
+    model: Models.KNN,
+  },
+  [SampleDataset.WINE]: {
+    title: "Wine",
+    subtitle: "The popular dataset featuring flower traits",
+    icon: <SendIcon fontSize="small" />,
+    instances: wine.length,
+    attributes: 13,
+    classes: 3,
+    tags: ["Numeric"],
+    columns: wineColumns,
+    columnsMap: wineColumnsMap,
+    data: wine,
+    units: null,
+
+    keywords: ["wine", "alcohol", "chemical"],
     task: Tasks.CLASSIFICATION,
     model: Models.KNN,
   },
@@ -70,6 +99,23 @@ export const datasetMetadata = {
     indVar: bostonDefaultIndVar,
 
     keywords: ["boston", "house", "housing", "home"],
+    task: Tasks.REGRESSION,
+    model: Models.LINEAR_REGRESSION,
+  },
+  [SampleDataset.DIABETES]: {
+    title: "Diabetes",
+    subtitle: "Prices and other Boston housing data",
+    icon: <DraftsIcon fontSize="small" />,
+    instances: diabetes.length,
+    attributes: 10,
+    tags: ["Numeric"],
+    columns: diabetesColumns,
+    columnsMap: null,
+    data: diabetes,
+    depVar: diabetesDepVar,
+    indVar: diabetesDefaultIndVar,
+
+    keywords: ["diabetes", "disease", "progression"],
     task: Tasks.REGRESSION,
     model: Models.LINEAR_REGRESSION,
   },

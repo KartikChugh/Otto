@@ -39,7 +39,6 @@ function reducer(state: StateType, action: ActionType): StateType {
       const newState = { ...state, dataset_category: action.dataset_category };
       if (action.dataset_category === DatasetCategory.CUSTOM) {
         newState.sample_dataset = null;
-        newState.sample_dataset_view = null;
       }
       return newState;
     }
@@ -80,11 +79,6 @@ function reducer(state: StateType, action: ActionType): StateType {
     }
     case Actions.SET_SAMPLE_DATASET:
       return { ...state, sample_dataset: action.sample_dataset };
-    case Actions.SET_SAMPLE_DATASET_VIEW:
-      return {
-        ...state,
-        sample_dataset_view: action.sample_dataset,
-      };
     case Actions.SET_TASK_OTTO:
       return { ...state, task_otto: action.task };
     case Actions.SET_DATASET_CATEGORY_OTTO:

@@ -35,6 +35,7 @@ const ModelStateContext = createContext(initialState);
 const DispatchModelStateContext = createContext(() => null);
 
 function reducer(state, action: ModelActionType) {
+  console.log("sa", state, action);
   switch (action.type) {
     case ModelActions.SET_KNN_K:
       return {
@@ -48,6 +49,16 @@ function reducer(state, action: ModelActionType) {
         knn_column2_index: action.indices[1],
       };
     case ModelActions.KNN_DONE:
+      const metrics = action.knn_accuracy;
+      addResponseMessage(
+        `KNN run (70-30 train-test split) \n &#8226; K = ${
+          state.knn_k
+        } \n &#8226; Train set ${metrics[0]}, Test set ${
+          metrics[1]
+        } \n &#8226; Accuracy: ${(1 - metrics[2] / metrics[1]).toFixed(2)} (${
+          metrics[2]
+        }/${metrics[1]} misclassified)`
+      );
       return {
         ...state,
         viz_loading: false,
@@ -77,7 +88,7 @@ function reducer(state, action: ModelActionType) {
         newState["linreg_y_name"] = action.linreg_y_name;
       }
       addResponseMessage(
-        `Linear Regression run \n &#8226; Independant variable ${
+        `Linear Regression run (70-30 train-test split) \n &#8226; Independant variable ${
           action.linreg_y_name ?? state.linreg_y_name
         } \n &#8226; Dependant variable ${
           action.linreg_x_name ?? state.linreg_x_name

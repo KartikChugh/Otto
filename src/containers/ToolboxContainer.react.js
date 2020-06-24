@@ -86,9 +86,8 @@ export default function ToolboxContainer({ getIsShown }) {
           {state.stepper_state === StepperState.VISUALIZE
             ? "Toolbox"
             : state.stepper_state === StepperState.DATASET &&
-              state.sample_dataset_view != null
-            ? "Dataset Preview - " +
-              datasetMetadata[state.sample_dataset_view].title
+              state.sample_dataset != null
+            ? "Dataset Preview - " + datasetMetadata[state.sample_dataset].title
             : null}
         </Typography>
         <Card className={classes.card} variant="outlined">

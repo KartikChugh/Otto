@@ -1,16 +1,11 @@
-import {
-  iris,
-  irisColumns,
-  irisColumnsMap,
-  irisUnits,
-} from "static/datasets/iris"; // Data
+import { datasetMetadata } from "static/datasets/metadata";
 import KNN from "ml-knn";
-import { initializeWidget } from "containers/WidgetContainer";
 import { ModelActions } from "state/ModelActions";
 
 let knn;
 let seperationSize; // To seperate training and test data
 
+let dataInfo = {};
 let data = [],
   X = [],
   y = [];
@@ -25,9 +20,11 @@ let K, DISPATCH, typesArray;
 function init() {
   X = [];
   y = [];
+  dataInfo = {};
 }
 
-export function invokeKNN(k: Number, dispatch) {
+export function invokeKNN(k: Number, sampleDataset, dispatch) {
+  console.log("knn invoked with k", k);
   dispatch({
     type: ModelActions.RUNNING,
   });
@@ -35,7 +32,8 @@ export function invokeKNN(k: Number, dispatch) {
   // Set Param
   K = k;
   DISPATCH = dispatch;
-  data = iris;
+  dataInfo = datasetMetadata[sampleDataset];
+  data = dataInfo.data;
   seperationSize = 0.7 * data.length;
   data = shuffleArray(data);
   dressData();
@@ -67,9 +65,13 @@ export default function dressData() {
   data.forEach((row) => {
     let rowArray, typeNumber;
 
-    rowArray = Object.keys(row)
-      .map((key) => parseFloat(row[key]))
-      .slice(0, 4);
+    rowArray = Object.keys(row).map((key) => parseFloat(row[key]));
+
+    if (dataInfo.title === "Iris") {
+      rowArray = rowArray.slice(0, 4);
+    } else {
+      rowArray = rowArray.slice(1);
+    }
 
     typeNumber = typesArray.indexOf(row.type); // Convert type(String) to type(Number)
 
@@ -103,12 +105,13 @@ function test() {
       knn_result_labels: result,
       knn_expected_labels: testSetY,
       knn_test_data: testSetX,
-      knn_columns: irisColumns,
-      knn_columns_map: irisColumnsMap,
+      knn_columns: dataInfo.columns,
+      knn_columns_map: dataInfo.columnsMap,
       knn_labels: typesArray,
-      knn_column_units: irisUnits,
+      knn_column_units: dataInfo.units,
+      knn_accuracy: [trainingSetX.length, testSetLength, predictionError],
     });
-  }, 800);
+  }, 700);
 
   //   predict();
 }

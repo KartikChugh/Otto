@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const chipData = (state: StateType) => {
-  const metadata = datasetMetadata[state.sample_dataset_view];
+  const metadata = datasetMetadata[state.sample_dataset];
   const chips = ["Instances: " + String(metadata.instances)];
   if (metadata.attributes) {
     chips.push("Attributes: " + String(metadata.attributes));
@@ -72,10 +72,10 @@ export default function DataPreview() {
   const { state } = useState();
   const classes = useStyles();
 
-  if (state.sample_dataset_view == null) {
+  if (state.sample_dataset == null) {
     return null;
   }
-  const metadata = datasetMetadata[state.sample_dataset_view];
+  const metadata = datasetMetadata[state.sample_dataset];
   console.log("meta", metadata);
   function getFormatted(label, index) {
     if (metadata.units) {

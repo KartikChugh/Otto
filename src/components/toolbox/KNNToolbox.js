@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 
 import ValueLabelDisplay from "components/toolbox/ValueLabelDisplay";
 import {
@@ -22,6 +21,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useModelState } from "state/ModelState";
 import { model } from "codegen/knnCode";
 import { invokeKNN } from "js-ml/knn";
+import { useState } from "state/State";
 
 export const useStyles = makeStyles((theme) => ({
   sliderWidth: {
@@ -50,10 +50,11 @@ export const useStyles = makeStyles((theme) => ({
 
 export default function KNNToolbox() {
   const classes = useStyles();
+  const { state } = useState();
   const { model_state, model_dispatch } = useModelState();
-  const [kVal, setKVal] = useState(model_state.knn_k);
-  const [col1, setCol1] = useState(model_state.knn_column1_index);
-  const [col2, setCol2] = useState(model_state.knn_column2_index);
+  const [kVal, setKVal] = React.useState(model_state.knn_k);
+  const [col1, setCol1] = React.useState(model_state.knn_column1_index);
+  const [col2, setCol2] = React.useState(model_state.knn_column2_index);
 
   function onUpdatePlot() {
     model_dispatch({
@@ -63,9 +64,10 @@ export default function KNNToolbox() {
     if (kVal !== model_state.knn_k) {
       model_dispatch({
         type: ModelActions.SET_KNN_K,
-        knn_k: kVal,
+        k: kVal,
       });
-      invokeKNN(kVal, model_dispatch);
+      console.log("invoking knn with k", kVal);
+      invokeKNN(kVal, state.sample_dataset, model_dispatch);
     }
   }
 

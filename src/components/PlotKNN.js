@@ -71,7 +71,11 @@ export default function PlotKNN() {
               type="number"
               dataKey="x"
               name={xAxisColumn}
-              unit={model_state.knn_column_units[model_state.knn_column1_index]}
+              unit={
+                model_state.knn_column_units
+                  ? model_state.knn_column_units[model_state.knn_column1_index]
+                  : ""
+              }
             >
               <Label value={xAxisColumn} position="insideBottom" offset={-12} />
             </XAxis>
@@ -79,7 +83,11 @@ export default function PlotKNN() {
               type="number"
               dataKey="y"
               name={yAxisColumn}
-              unit={model_state.knn_column_units[model_state.knn_column2_index]}
+              unit={
+                model_state.knn_column_units
+                  ? model_state.knn_column_units[model_state.knn_column2_index]
+                  : ""
+              }
             >
               <Label value={yAxisColumn} angle={-90} position="insideLeft" />
             </YAxis>

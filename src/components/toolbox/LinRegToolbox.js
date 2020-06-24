@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 
 import ValueLabelDisplay from "components/toolbox/ValueLabelDisplay";
 import {
@@ -21,6 +20,7 @@ import { ModelActionType, ModelActions } from "state/ModelActions";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
 import { useModelState } from "state/ModelState";
+import { useState } from "state/State";
 import { model } from "codegen/knnCode";
 import { invokeLinReg } from "js-ml/linReg";
 
@@ -50,8 +50,9 @@ export const useStyles = makeStyles((theme) => ({
 
 export default function LinRegToolbox() {
   const classes = useStyles();
+  const { state } = useState();
   const { model_state, model_dispatch } = useModelState();
-  const [indVar, setIndVar] = useState(model_state.linreg_x_name);
+  const [indVar, setIndVar] = React.useState(model_state.linreg_x_name);
 
   React.useEffect(() => {
     setIndVar(model_state.linreg_x_name);
@@ -66,7 +67,7 @@ export default function LinRegToolbox() {
       type: ModelActions.LINREG_SET_IND_VAR,
       linreg_x_name: indVar,
     });
-    invokeLinReg(model_dispatch, indVar, false);
+    invokeLinReg(model_dispatch, state.sample_dataset, indVar, false);
   }
 
   return (

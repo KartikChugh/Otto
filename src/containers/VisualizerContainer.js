@@ -188,7 +188,7 @@ function VisualizerContainer() {
   const classes = useStyles();
   const steps = getSteps();
   const { state, dispatch } = useState();
-  const { model_dispatch } = useModelState();
+  const { model_state, model_dispatch } = useModelState();
 
   function getProgressBarValue() {
     return (100 * (getActiveStep(state) + 1)) / StepperStateOrder.length;
@@ -210,7 +210,7 @@ function VisualizerContainer() {
     });
     if (state.stepper_state === StepperState.PREPROCESSORS) {
       if (state.model === Models.KNN) {
-        invokeKNN(state.knn_k, model_dispatch);
+        invokeKNN(model_state.knn_k, state.sample_dataset, model_dispatch);
       } else if (state.task === Tasks.NATURAL_LANGUAGE) {
         await invokeNLP(
           state.nlp_models.includes(Models.ENTITY_RECOGNITION),
@@ -219,7 +219,7 @@ function VisualizerContainer() {
           model_dispatch
         );
       } else if (state.model === Models.LINEAR_REGRESSION) {
-        invokeLinReg(model_dispatch, null, true);
+        invokeLinReg(model_dispatch, state.sample_dataset, null, true);
       }
     }
   };

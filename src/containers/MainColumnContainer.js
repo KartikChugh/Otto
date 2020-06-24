@@ -14,7 +14,7 @@ function MainColumnContainer() {
   const getIsToolboxShown = () =>
     state.stepper_state === StepperState.DATASET &&
     state.dataset_category === DatasetCategory.SAMPLE &&
-    state.sample_dataset_view != null;
+    state.sample_dataset != null;
   return (
     <Grid container style={{ height: "100%" }}>
       <Grid item className="visualizerContainer">

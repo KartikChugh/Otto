@@ -51,8 +51,15 @@ export const DatasetCategory = Object.freeze({
 });
 
 export const SampleDataset = Object.freeze({
+  // KNN
   IRIS: "iris",
+  WINE: "wine",
+
+  // LIN REG
   BOSTON: "boston",
+  DIABETES: "diabetes",
+
+  // NLP
   TWITTER: "twitter",
   IMDB: "imdb",
 });
@@ -113,7 +120,6 @@ export type StateType = {
   dataset_category: ?DatasetCategoryType,
   dataset_category_otto: ?DatasetCategoryType,
   sample_dataset: ?SampleDatasetType,
-  sample_dataset_view: ?SampleDatasetType,
   sample_dataset_otto: ?SampleDatasetType,
   preprocessors: Array<PreprocessorsType>,
   preprocessors_otto: Array<PreprocessorsType>,
@@ -132,7 +138,6 @@ export type StateType = {
 //   dataset_category: DatasetCategory.CUSTOM,
 //   dataset_category_otto: null,
 //   sample_dataset: null,
-// sample_dataset_view: null,
 //   sample_dataset_otto: null,
 //   preprocessors: [],
 //   preprocessors_otto: [],
@@ -151,7 +156,6 @@ export type StateType = {
 //   dataset_category: DatasetCategory.CUSTOM,
 //   dataset_category_otto: null,
 //   sample_dataset: null,
-// sample_dataset_view: null,
 //   sample_dataset_otto: null,
 //   preprocessors: [],
 //   preprocessors_otto: [],
@@ -170,7 +174,6 @@ export type StateType = {
 //   dataset_category: DatasetCategory.CUSTOM,
 //   dataset_category_otto: null,
 //   sample_dataset: null,
-// sample_dataset_view: null,
 //   sample_dataset_otto: null,
 //   preprocessors: [],
 //   preprocessors_otto: [],
@@ -189,7 +192,6 @@ export const InitialState: () => StateType = () => ({
   dataset_category: null,
   dataset_category_otto: null,
   sample_dataset: null,
-  sample_dataset_view: null,
   sample_dataset_otto: null,
   preprocessors: [],
   preprocessors_otto: [],

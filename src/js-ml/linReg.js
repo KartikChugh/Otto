@@ -2,14 +2,13 @@
 import regression from "regression";
 import { ModelActions } from "state/ModelActions";
 import { datasetMetadata } from "static/datasets/metadata";
-import { SampleDataset } from "state/StateTypes";
 import { shuffleArray } from "js-ml/knn";
 
-export function invokeLinReg(dispatch, indVar, setAxes = false) {
+export function invokeLinReg(dispatch, sampleDataset, indVar, setAxes = false) {
   dispatch({
     type: ModelActions.RUNNING,
   });
-  const datas = datasetMetadata[SampleDataset.BOSTON];
+  const datas = datasetMetadata[sampleDataset];
   let data = datas.data;
   const trainAgainst =
     indVar != null ? datas.columns.indexOf(indVar) : datas.indVar;
@@ -36,7 +35,7 @@ export function invokeLinReg(dispatch, indVar, setAxes = false) {
   }
   setTimeout(function () {
     dispatch(dispatchObject);
-  }, 800);
+  }, 700);
 }
 
 function dressData(data, depVar, indVar, columns) {

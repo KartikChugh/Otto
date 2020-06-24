@@ -16,17 +16,6 @@ import { Actions } from "state/Actions";
 import { SampleDataset, StateType } from "state/StateTypes";
 import { datasetMetadata } from "static/datasets/metadata";
 
-const useStyles = makeStyles((theme) => ({
-  button: {
-    marginTop: 4,
-  },
-  buttonInner: {
-    width: "100%",
-    padding: 0,
-    outline: "none!important",
-  },
-}));
-
 const getSampleDatasets = (state: StateType) => {
   const stateTask = state.task;
   const sets = [];
@@ -35,8 +24,6 @@ const getSampleDatasets = (state: StateType) => {
     const entryTask = entry.task;
     if (entryTask === stateTask) {
       sets.unshift(dataset);
-    } else {
-      //sets.push(dataset);
     }
   }
   return sets;
@@ -44,19 +31,11 @@ const getSampleDatasets = (state: StateType) => {
 
 export default function SampleDatasetMenu() {
   const { state, dispatch } = useState();
-  const classes = useStyles();
 
-  function handleItemClick(dataset) {
-    dispatch({
-      type: Actions.SET_SAMPLE_DATASET_VIEW,
-      sample_dataset: dataset,
-    });
-  }
-
-  function handleConfirm() {
+  function handleConfirm(dataset) {
     dispatch({
       type: Actions.SET_SAMPLE_DATASET,
-      sample_dataset: state.sample_dataset_view,
+      sample_dataset: dataset,
     });
   }
 
@@ -64,8 +43,8 @@ export default function SampleDatasetMenu() {
     <List component="nav">
       {getSampleDatasets(state).map((dataset, index) => (
         <ListItem
-          selected={state.sample_dataset_view === dataset}
-          onClick={() => handleItemClick(dataset)}
+          selected={state.sample_dataset === dataset}
+          onClick={() => handleConfirm(dataset)}
           key={index}
           button
           style={{
@@ -77,23 +56,9 @@ export default function SampleDatasetMenu() {
           <ListItemIcon style={{ minWidth: "30px" }}>
             {datasetMetadata[dataset].icon}
           </ListItemIcon>
-          <ListItemText
-            primary={datasetMetadata[dataset].title}
-            // secondary={datasetMetadata[dataset].subtitle}
-          />
+          <ListItemText primary={datasetMetadata[dataset].title} />
         </ListItem>
       ))}
-      <div className={classes.button}>
-        <Button
-          color="primary"
-          variant="outlined"
-          className={classes.buttonInner}
-          onClick={handleConfirm}
-          disabled={state.sample_dataset_view === state.sample_dataset}
-        >
-          Confirm
-        </Button>
-      </div>
     </List>
   );
 }
