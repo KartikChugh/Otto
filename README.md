@@ -107,7 +107,15 @@ All done! With your data sorted out, preprocessors set, and model configured, Ot
 
 ![codegen](demo/codeGen.gif)
 
-## Future
-- Ask Otto questions along the way
+## Future Plans
+
+Otto's modular design makes it readibly extensible, and its use of Wit means its natural language capabilities can be extended to even more domains. Here are just a few things planned for Otto:
+
+- **More models**: logistic regression, support vector machines, decision trees
+- **New tasks**: data generation (e.g. GANs), speech recognition
+- **Smarter NLP**: being able to ask Otto to explain machine learning concepts or describe the difference between options
 
 ## About
+
+
+
