@@ -81,7 +81,26 @@
 
 .codeContainer {
   height: 40%;
+  max-height: 484px;
+  padding-left: 48px;
+  overflow-y: auto;
   width: 100%;
+}
+
+.codeContainer::-webkit-scrollbar
+{
+  width: 12px;  /* for vertical scrollbars */
+  height: 12px; /* for horizontal scrollbars */
+}
+
+.codeContainer::-webkit-scrollbar-track
+{
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.codeContainer::-webkit-scrollbar-thumb
+{
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .toolboxContainer {

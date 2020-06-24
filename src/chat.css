@@ -7,7 +7,7 @@
     -ms-flex-direction: column;
     flex-direction: column;
     text-align: center;
-    padding: 15px 0 15px
+    padding: 0
 }
 .rcw-conversation-container .rcw-title {
     font-size: 24px;
@@ -90,8 +90,8 @@
 .rcw-client .rcw-message-text {
     background-color: #c6e5f5; 
     border-radius: 10px;
-    padding: 15px;
-    max-width: 215px;
+    padding: 6px 8px 6px 10px;
+    max-width: 315px;
     text-align: left
 }
 .rcw-client .rcw-timestamp {
@@ -109,7 +109,10 @@
 .rcw-response .rcw-message-text {
     background-color: #f4f7f9;
     border-radius: 10px;
-    padding: 15px;
+    padding: 6px 8px 0px 10px;
+    white-space: pre-line;
+    margin-bottom: -16px;
+    height: 100%;
     max-width: 315px;
     text-align: left
 }
@@ -201,10 +204,26 @@
 .rcw-messages-container {
     background-color: #fff;
     height: 76vh;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding-top: 10px;
-    -webkit-overflow-scrolling: touch
 }
+
+.rcw-messages-container::-webkit-scrollbar
+{
+  width: 12px;  /* for vertical scrollbars */
+  height: 12px; /* for horizontal scrollbars */
+}
+
+.rcw-messages-container::-webkit-scrollbar-track
+{
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.rcw-messages-container::-webkit-scrollbar-thumb
+{
+  background: rgba(0, 0, 0, 0.5);
+}
+
 .rcw-full-screen .rcw-messages-container {
     height: 100%;
     max-height: none

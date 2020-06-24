@@ -43,7 +43,7 @@ export default function PlotLinReg() {
         <ResponsiveContainer
           className="graph-wrapper"
           width="100%"
-          height="90%"
+          height="100%"
         >
           <ComposedChart
             data={data}
