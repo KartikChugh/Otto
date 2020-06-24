@@ -35,7 +35,6 @@ const ModelStateContext = createContext(initialState);
 const DispatchModelStateContext = createContext(() => null);
 
 function reducer(state, action: ModelActionType) {
-  console.log("sa", state, action);
   switch (action.type) {
     case ModelActions.SET_KNN_K:
       return {

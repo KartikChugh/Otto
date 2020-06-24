@@ -66,7 +66,6 @@ export default function KNNToolbox() {
         type: ModelActions.SET_KNN_K,
         k: kVal,
       });
-      console.log("invoking knn with k", kVal);
       invokeKNN(kVal, state.sample_dataset, model_dispatch);
     }
   }

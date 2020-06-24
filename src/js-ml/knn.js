@@ -24,7 +24,6 @@ function init() {
 }
 
 export function invokeKNN(k: Number, sampleDataset, dispatch) {
-  console.log("knn invoked with k", k);
   dispatch({
     type: ModelActions.RUNNING,
   });
@@ -96,9 +95,6 @@ function test() {
   const result = knn.predict(testSetX);
   const testSetLength = testSetX.length;
   const predictionError = error(result, testSetY);
-  console.log(
-    `Test Set Size = ${testSetLength} and number of Misclassifications = ${predictionError} and ${typesArray}`
-  );
   setTimeout(function () {
     DISPATCH({
       type: ModelActions.KNN_DONE,
@@ -112,8 +108,6 @@ function test() {
       knn_accuracy: [trainingSetX.length, testSetLength, predictionError],
     });
   }, 700);
-
-  //   predict();
 }
 
 function error(predicted, expected) {
@@ -124,22 +118,6 @@ function error(predicted, expected) {
     }
   }
   return misclassifications;
-}
-
-function predict() {
-  let temp = [];
-
-  //   prompt.get(
-  //     ["Sepal Length", "Sepal Width", "Petal Length", "Petal Width"],
-  //     function (err, result) {
-  //       if (!err) {
-  //         for (var key in result) {
-  //           temp.push(parseFloat(result[key]));
-  //         }
-  //         console.log(`With ${temp} -- type =  ${knn.predict(temp)}`);
-  //       }
-  //     }
-  //   );
 }
 
 /**

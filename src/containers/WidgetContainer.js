@@ -45,7 +45,6 @@ function WidgetContainer() {
 
   const handleSubmit = async (userMessage) => {
     const stepperStateOriginal = state.stepper_state;
-    console.log("aaaa", stepperStateOriginal);
     const msgs = await convo.handleUserMessage(
       userMessage,
       state,

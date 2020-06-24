@@ -20,7 +20,6 @@ export const wineColumnsMap = wineColumns.reduce(
   (map, obj) => ((map[obj] = obj), map),
   {}
 );
-console.log("wine", wineColumnsMap);
 
 export const wine = [
   {

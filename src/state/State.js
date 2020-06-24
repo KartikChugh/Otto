@@ -14,6 +14,7 @@ import { handleNext, handlePrev } from "containers/WidgetContainer";
 import { preprocessorsModifier } from "conversation/RespondState";
 
 import { initializeWidget } from "containers/WidgetContainer";
+import { datasetMetadata } from "static/datasets/metadata";
 
 // See https://www.basefactor.com/global-state-with-react for details
 const initialState = InitialState();
@@ -26,7 +27,6 @@ function reducer(state: StateType, action: ActionType): StateType {
   const getActiveStep = () => {
     return StepperStateOrder.indexOf(state.stepper_state);
   };
-  console.log("sa", state, action);
   switch (action.type) {
     case Actions.SET_TASK:
       return {
@@ -78,7 +78,13 @@ function reducer(state: StateType, action: ActionType): StateType {
       };
     }
     case Actions.SET_SAMPLE_DATASET:
-      return { ...state, sample_dataset: action.sample_dataset };
+      const dataInfo = datasetMetadata[action.sample_dataset];
+      return {
+        ...state,
+        sample_dataset: action.sample_dataset,
+        model: dataInfo.model,
+        model_otto: dataInfo.model,
+      };
     case Actions.SET_TASK_OTTO:
       return { ...state, task_otto: action.task };
     case Actions.SET_DATASET_CATEGORY_OTTO:
@@ -143,9 +149,6 @@ function reducer(state: StateType, action: ActionType): StateType {
         newStateForPrev.sample_dataset = null;
         newStateForPrev.dataset_category_otto = null;
         newStateForPrev.sample_dataset_otto = null;
-      } else if (state.stepper_state === StepperState.MODEL) {
-        newStateForPrev.model = null;
-        newStateForPrev.model_otto = null;
       } else if (state.stepper_state === StepperState.PREPROCESSORS) {
         newStateForPrev.preprocessors = [];
         newStateForPrev.preprocessors_otto = [];

@@ -76,7 +76,6 @@ export default function DataPreview() {
     return null;
   }
   const metadata = datasetMetadata[state.sample_dataset];
-  console.log("meta", metadata);
   function getFormatted(label, index) {
     if (metadata.units) {
       return label + " (" + metadata.units[index] + ")";
@@ -105,7 +104,7 @@ export default function DataPreview() {
             <TableHead>
               <TableRow>
                 {metadata.columns.map((column, index) => (
-                  <TableCell>
+                  <TableCell key={index}>
                     {getFormatted(
                       metadata.columnsMap
                         ? metadata.columnsMap[column]
@@ -119,8 +118,8 @@ export default function DataPreview() {
             <TableBody>
               {metadata.data.slice(0, 5).map((row, index) => (
                 <TableRow key={index}>
-                  {metadata.columns.map((column) => (
-                    <TableCell component="th" scope="row">
+                  {metadata.columns.map((column, index) => (
+                    <TableCell key={index} component="th" scope="row">
                       {row[column]}
                     </TableCell>
                   ))}

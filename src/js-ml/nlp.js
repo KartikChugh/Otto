@@ -77,7 +77,6 @@ export const invokeNLP = async (doEntity, doSentiment, metadata, dispatch) => {
     nlpData.push(nlpDatapoint);
     //texts.push(text);
   }
-  console.log("woot;", nlpData);
   dispatch({
     type: ModelActions.NLP_DONE,
     datas: nlpData,
