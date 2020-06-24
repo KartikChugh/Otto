@@ -90,12 +90,12 @@
   height: 100%;
   overflow-y: auto;
   margin-right: 48px;
+  border-radius: 12px;
 }
 
 .codeOverflow::-webkit-scrollbar
 {
   width: 12px;  /* for vertical scrollbars */
-  height: 12px; /* for horizontal scrollbars */
 }
 
 .codeOverflow::-webkit-scrollbar-track
