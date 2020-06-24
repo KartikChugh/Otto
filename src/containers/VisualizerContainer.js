@@ -30,6 +30,7 @@ import {
   Tasks,
   DatasetCategory,
   StepperStateOrder,
+  Preprocessors,
 } from "state/StateTypes";
 import { Actions } from "state/Actions";
 import PlotsContainer from "./PlotsContainer";
@@ -105,6 +106,67 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
   },
 }));
+
+const taskFormatter = (task) =>
+  task === Tasks.NATURAL_LANGUAGE ? "NLP" : task;
+
+const datasetFormatter = (category, sample) => {
+  if (category === DatasetCategory.CUSTOM) {
+    return category;
+  }
+  return category + " (" + sample + ")";
+};
+
+const modelFormatter = (model) => {
+  switch (model) {
+    case Models.KNN:
+      return "KNN";
+    case Models.NEURAL_NETWORK_FF:
+      return "Neural Net";
+    case Models.LINEAR_REGRESSION:
+      return "Linear Reg.";
+    case Models.ORDINAL_REGRESSION:
+      return "Ordinal Reg.";
+    case Models.POISSON_REGRESSION:
+      return "Poisson Reg.";
+    default:
+      return null;
+  }
+};
+
+const nlpModelFormatter = (models) => {
+  if (models.length === 1) {
+    return models;
+  }
+  const newModels = models.map((model) => {
+    if (model === Models.ENTITY_RECOGNITION) {
+      return "Entity Recog.";
+    }
+    if (model === Models.SENTIMENT_ANALYSIS) {
+      return "Sentiment";
+    }
+  });
+  return newModels;
+};
+
+const preprocessorFormatter = (preprocessors) => {
+  if (preprocessors.length === 1) {
+    return preprocessors;
+  }
+  const newPre = preprocessors.map((pre) => {
+    switch (pre) {
+      case Preprocessors.TEXT_CLEANING:
+        return "Text Clean";
+      case Preprocessors.NORMALIZATION:
+        return "Normalize";
+      case Preprocessors.PCA:
+        return "PCA";
+      default:
+        return null;
+    }
+  });
+  return newPre;
+};
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -188,6 +250,31 @@ function VisualizerContainer() {
     );
   }
 
+  const SelectedOptionLabel = (index) => {
+    let option = null;
+    switch (index) {
+      case 0:
+        option = taskFormatter(state.task);
+        break;
+      case 1:
+        option = datasetFormatter(state.dataset_category, state.sample_dataset);
+        break;
+      case 2:
+        if (state.task === Tasks.NATURAL_LANGUAGE) {
+          option = nlpModelFormatter(state.nlp_models).join(", ");
+        } else {
+          option = modelFormatter(state.model);
+        }
+        break;
+      case 3:
+        option = preprocessorFormatter(state.preprocessors).join(", ");
+        break;
+      default:
+        break;
+    }
+    return option;
+  };
+
   return (
     <Grid
       container
@@ -220,7 +307,7 @@ function VisualizerContainer() {
         </Grid>
         <Grid
           item
-          style={{ margin: "0 auto", alignSelf: "center", width: "510px" }}
+          style={{ margin: "0 auto", alignSelf: "center", width: "600px" }}
         >
           <Breadcrumbs
             separator={<NavigateNext fontSize="small" />}
@@ -239,7 +326,7 @@ function VisualizerContainer() {
                     color="textSecondary"
                     style={{ fontSize: "18px" }}
                   >
-                    {getSteps()[index]}
+                    {SelectedOptionLabel(index)}
                   </Typography>
                 );
               }
