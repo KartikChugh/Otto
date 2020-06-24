@@ -2,7 +2,7 @@
 <img src="logo.png" width="90%">
 
 ## Build machine learning pipelines through natural language conversation
-Otto is an intelligent chat application, designed to help aspiring machine learning engineers _go from idea to implementation with zero domain knowledge_. Our website features easy model selection, insightful visualizations, and an intuitive natural language experience guiding you every step of the way. A collection of four Wit backend apps service Otto's conversational abilities and machine learning tools throughout.
+Otto is an intelligent chat application, designed to help aspiring machine learning engineers _go from idea to implementation with zero domain knowledge_. Our website features easy model selection, insightful visualizations, and an intuitive natural language experience guiding you every step of the way. A collection of four Wit backend apps service Otto's conversational abilities and machine learning tools.
 
 ***
 
@@ -12,7 +12,7 @@ Otto is an intelligent chat application, designed to help aspiring machine learn
 
 - **Powerful machine learning tools.** A range of machine learning capabilities are supported, including models for regression, classification and natural language processing, as well as preprocessors tailored to your problem. Play with neural networks, explore data visualizations, and generate ready-made Python code right in your browser!
 
-- **Educational experience.** Users are walked through each stage of the process and are provided with explanations of terminology. Annotated code blocks provide eager learners a high-level understanding of their end-to-end pipeline.
+- **Educational experience.** Users are walked through each stage of the process, with Otto explaining terminology when needed. Annotated code blocks provide eager learners a high-level understanding of their end-to-end pipeline.
 
 ***
 
@@ -32,7 +32,7 @@ and feel free to get creative! Come up with your own ML goals and see where Otto
 
 ## Stages
 
-Below is a technical description intended for those interested in a step-by-step breakdown.
+Below is a step-by-step breakdown intended for the technical reader.
 
 ### Task 
 
