@@ -124,6 +124,14 @@ function reducer(state: StateType, action: ActionType): StateType {
     }
     case Actions.SET_SAMPLE_DATASET:
       const dataInfo = datasetMetadata[action.sample_dataset];
+      if (dataInfo.model.constructor === Array) {
+        return {
+          ...state,
+          sample_dataset: action.sample_dataset,
+          nlp_models: dataInfo.model,
+          nlp_models_otto: dataInfo.model,
+        };
+      }
       return {
         ...state,
         sample_dataset: action.sample_dataset,
