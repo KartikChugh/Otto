@@ -93,6 +93,8 @@ Instantly explore how parameters affect KNN clusters and regression slopes!
 
 ![linreg](demo/linreg.gif)
 
+![knn](demo/knn.gif)
+
 ## Future
 - Ask Otto questions along the way
 
