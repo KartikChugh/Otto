@@ -38,7 +38,7 @@ If the user opted for custom data, Otto leverages Wit to perform the key step of
 
 A characterization of the classification dataset as “simple” or having “just a few columns”, would make the K-Nearest Neighbors algorithm a good choice, while a description of the regression data as “crime rates” or “annual consumer rankings” would suggest a Poisson or ordinal model, respectively. If no phrase is flagged, Otto will default to the most general model available: a Neural Network for classification, or a linear fit for regression. 
 
-In the case of a natural language task, users can combine multiple models together for a more comprehensive analysis. Otto will recommend both sentiment analysis and entity recognition models, but provides users with information about both in case they'd like to adjust this.
+In the case of a natural language task, users can combine multiple models together for a more comprehensive analysis. Otto will recommend both sentiment analysis and entity recognition models, but provides users with information about both in case they'd like to adjust this. Our NLP models are built on a Wit application (**Otto-NLP**) configured to identify [built-in traits and entities](https://wit.ai/docs/built-in-entities/20180601).
 
 #### Supported models:
 
@@ -65,4 +65,12 @@ What good is a fancy model if it takes ages to train? In this step, Otto swoops 
 
 ### Visualization
 
+The visualization stage activates for neural networks, or any model built using sample data. 
 
+#### Neural Network
+
+Satisfy your curious mind with our fun, interactive network builder! Otto preconfigures model architecture 
+
+#### Linear Regression
+
+#### K-Nearest Neighbors
