@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 42,
     fontWeight: 300,
     marginTop: 84,
-    marginBottom: 52,
+    marginBottom: 84,
   },
   subtitle: {
     marginTop: 20,
@@ -89,9 +89,27 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(14),
     cursor: "pointer",
   },
-  avatarItem: {
+  avatarItemCard: {
+    transition: "all 0.2s",
     textAlign: "-webkit-center",
     width: 188,
+    border: "1px solid white",
+    marginLeft: 8,
+    marginRight: 8,
+    cursor: "pointer",
+    borderRadius: 8,
+    "&:hover": {
+      border: "1px solid rgba(0, 0, 0, 0.12)",
+    },
+  },
+  avatarItemCardSelected: {
+    boxShadow: "0px 0px 12px 4px rgba(0, 0, 0, 0.15)",
+    textAlign: "-webkit-center",
+    width: 188,
+    marginLeft: 8,
+    marginRight: 8,
+    borderRadius: 8,
+    cursor: "pointer",
   },
   avatarItemSelected: {
     width: theme.spacing(14),
@@ -102,13 +120,16 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
   },
   avatarLabel: {
-    marginTop: 20,
+    marginTop: 28,
     cursor: "pointer",
+    fontSize: 18,
+    height: 46,
   },
   avatarLabelSelected: {
-    marginTop: 20,
+    fontSize: 18,
+    marginTop: 28,
     fontWeight: 500,
-    cursor: "default",
+    height: 46,
   },
   recommend: {
     width: 30,
@@ -269,10 +290,6 @@ export default function VisualizerOptionSelectionGrid() {
               : classes.large
           }
           key={avatar.label}
-          onClick={(event) => {
-            optionOnClickHandler(avatar.type, avatar.label);
-            handleClick(event, avatar.type, avatar.label);
-          }}
           aria-haspopup="true"
         />
         <SampleDatasetMenu
@@ -297,7 +314,19 @@ export default function VisualizerOptionSelectionGrid() {
         spacing={5}
       >
         {getOptions(state).map((avatar, index) => (
-          <Grid item className={classes.avatarItem} key={index}>
+          <Grid
+            item
+            className={
+              getIsSelected(avatar.label)
+                ? classes.avatarItemCardSelected
+                : classes.avatarItemCard
+            }
+            key={index}
+            onClick={(event) => {
+              optionOnClickHandler(avatar.type, avatar.label);
+              handleClick(event, avatar.type, avatar.label);
+            }}
+          >
             {getIsRecommended(avatar.label) ? (
               <Tooltip title="Recommended by Otto!" placement="top">
                 <StyledBadge
@@ -327,10 +356,6 @@ export default function VisualizerOptionSelectionGrid() {
                   ? classes.avatarLabelSelected
                   : classes.avatarLabel
               }
-              onClick={(event) => {
-                optionOnClickHandler(avatar.type, avatar.label);
-                handleClick(event, avatar.type, avatar.label);
-              }}
             >
               {formatLabel(avatar.label)}
             </Typography>
