@@ -1,4 +1,4 @@
-export const Task = `I can assist with goals like: \n &#8226; I want to estimate median home values \n &#8226; Label news as real or fake \n &#8226; Analyze the tone of a tweet`;
+export const Task = `I can assist with goals like: \n &#8226; I want to estimate median home values \n &#8226; Predict the likelihood of re-election \n &#8226; Analyze the tone of a customer review \n &#8226; Label news as real or fake`;
 
 export const ModelRegression = `Details like \n &#8226; it's the rate of GDP growth \n &#8226; sales counts for a department store \n &#8226; real customer reviews \n will let me help you!`;
 

@@ -23,7 +23,7 @@ export default class Conversation {
   }
 
   delay = (msg) => {
-    const WPM = 400;
+    const WPM = 420;
     return (msg.length / 3.5 / WPM) * 60 * 1000;
   };
 
