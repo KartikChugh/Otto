@@ -79,6 +79,14 @@
   padding-bottom: 20px;
 }
 
+.finishContainer {
+  height: 100%;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
 .codeContainer {
   height: 40%;
   max-height: 484px;
@@ -91,19 +99,29 @@
   overflow-y: auto;
   margin-right: 48px;
   border-radius: 12px;
+  text-align: left;
 }
 
-.codeOverflow::-webkit-scrollbar
+.codeOverflowFinish {
+  height: 80%;
+  overflow-y: auto;
+  margin-right: -12px;
+  margin-left: 12px;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.codeOverflow::-webkit-scrollbar, .codeOverflowFinish::-webkit-scrollbar
 {
   width: 12px;  /* for vertical scrollbars */
 }
 
-.codeOverflow::-webkit-scrollbar-track
+.codeOverflow::-webkit-scrollbar-track, .codeOverflowFinish::-webkit-scrollbar-track
 {
   background: rgba(0, 0, 0, 0.1);
 }
 
-.codeOverflow::-webkit-scrollbar-thumb
+.codeOverflow::-webkit-scrollbar-thumb, .codeOverflowFinish::-webkit-scrollbar-thumb
 {
   background: rgba(0, 0, 0, 0.5);
 }

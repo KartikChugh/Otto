@@ -17,6 +17,8 @@ import {
 
 import { useModelState } from "state/ModelState";
 import LoadingComponent from "./LoadingComponent";
+import { useState } from "state/State";
+import { SampleDataset } from "state/StateTypes";
 
 function compareX(a, b) {
   return a.x - b.x;
@@ -25,6 +27,7 @@ function compareX(a, b) {
 export default function PlotLinReg() {
   const { model_state } = useModelState();
   const { linreg_test_result, linreg_test_set } = model_state;
+  const { state } = useState();
 
   const data = [];
   linreg_test_set.map((point, index) => {
@@ -63,7 +66,11 @@ export default function PlotLinReg() {
                 offset={-12}
               />
             </XAxis>
-            <YAxis unit="k$" name={model_state.linreg_y_name} type="number">
+            <YAxis
+              unit={state.sample_dataset === SampleDataset.BOSTON ? "k$" : ""}
+              name={model_state.linreg_y_name}
+              type="number"
+            >
               <Label
                 value={model_state.linreg_y_name}
                 angle={-90}

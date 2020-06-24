@@ -60,6 +60,16 @@ const useStyles = makeStyles((theme) => ({
     border: "none",
     boxShadow: "none",
   },
+  rootActionsFinish: {
+    width: "100%",
+    height: "100%",
+    maxHeight: 900,
+    textAlign: "center",
+    paddingTop: theme.spacing(1),
+    position: "relative",
+    border: "none",
+    boxShadow: "none",
+  },
   title: {
     fontSize: "2vw",
     fontWeight: 300,
@@ -319,7 +329,7 @@ function VisualizerContainer() {
           style={{
             margin: "0 auto",
             alignSelf: "center",
-            width: `${state.stepper_finish ? "156px" : "600px"}`,
+            width: `${state.stepper_finish ? "130px" : "540px"}`,
           }}
         >
           <Breadcrumbs
@@ -390,7 +400,13 @@ function VisualizerContainer() {
         />
       </Grid>
       <Grid className={`${classes.fullWidth} ${classes.visualizerHeight}`} item>
-        <Card className={classes.rootActions}>
+        <Card
+          className={
+            state.stepper_finish
+              ? classes.rootActionsFinish
+              : classes.rootActions
+          }
+        >
           <CardContent
             className={`${classes.fullHeight} ${
               state.stepper_state === StepperState.VISUALIZE

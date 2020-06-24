@@ -142,7 +142,7 @@ const useStyles = makeStyles((theme) => ({
   },
   datasetMenu: {
     width: "100%",
-    maxWidth: 220,
+    maxWidth: 190,
   },
 }));
 
@@ -198,7 +198,9 @@ export default function VisualizerOptionSelectionGrid() {
       case StepperState.DATASET:
         return "Choose a dataset";
       case StepperState.MODEL:
-        return (state.task === Tasks.NATURAL_LANGUAGE) ? "Select ML Model(s)" : "Select an ML Model";
+        return state.task === Tasks.NATURAL_LANGUAGE
+          ? "Select ML Model(s)"
+          : "Select an ML Model";
       case StepperState.PREPROCESSORS:
         return "Choose data preprocessor(s)";
     }
@@ -301,7 +303,12 @@ export default function VisualizerOptionSelectionGrid() {
         justify="center"
         alignItems="center"
         spacing={5}
-        style={{ marginLeft: "76px" }}
+        style={
+          state.stepper_state === StepperState.DATASET &&
+          state.dataset_category === DatasetCategory.SAMPLE
+            ? { marginLeft: "76px" }
+            : {}
+        }
       >
         {getOptions(state).map((avatar, index) => (
           <Grid
@@ -348,12 +355,12 @@ export default function VisualizerOptionSelectionGrid() {
             </Typography>
           </Grid>
         ))}
-        <Grid item className={classes.datasetMenu}>
-          {state.stepper_state === StepperState.DATASET &&
-          state.dataset_category === DatasetCategory.SAMPLE ? (
+        {state.stepper_state === StepperState.DATASET &&
+        state.dataset_category === DatasetCategory.SAMPLE ? (
+          <Grid item className={classes.datasetMenu}>
             <SampleDatasetMenu />
-          ) : null}
-        </Grid>
+          </Grid>
+        ) : null}
       </Grid>
     </>
   );

@@ -13,7 +13,9 @@ function CodeContainer({ getIsShown }) {
 
   return (
     <Grow in={getIsShown()}>
-      <div className="codeOverflow">
+      <div
+        className={state.stepper_finish ? "codeOverflowFinish" : "codeOverflow"}
+      >
         <SyntaxHighlighter language="python" style={monokaiSublime}>
           {CodeGen(state, nn_state)}
         </SyntaxHighlighter>

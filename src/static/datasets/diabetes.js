@@ -12,8 +12,8 @@ export const diabetesColumns = [
   "Y",
 ];
 
-export const diabetesDepVar = diabetesColumns.indexOf("BMI");
-export const diabetesDefaultIndVar = diabetesColumns.indexOf("Y");
+export const diabetesDepVar = diabetesColumns.indexOf("Y");
+export const diabetesDefaultIndVar = diabetesColumns.indexOf("BMI");
 
 export const diabetes = [
   {
