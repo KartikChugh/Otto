@@ -64,6 +64,7 @@ const toGraph = (network, selectedLayer) => {
 
     const x = i * 0.2;
     //const color = i === selectedLayer ? "#e63946" : "#007ea7";
+    const size = i === selectedLayer ? 130 : 100;
     const color = determineLayerColor(layer);
     const edgeColor = determineEdgeColor(layer);
 
@@ -76,7 +77,7 @@ const toGraph = (network, selectedLayer) => {
     for (let j = 0; j < nodeCount; j++) {
       let y = initY + j * vgap;
       let id = i + "," + j;
-      let size = 1;
+      
       let node = { x, y, size, id, color, writable: true };
       nodes.push(node);
       thisLayerNodes.push(node);
@@ -135,7 +136,7 @@ export default function VisualizerNNContainer() {
       //onOverNode={this.onOverNodeFunc}
       //onOutNode={this.onOutNodeFunc}
       settings={{
-        maxNodeSize: 10,
+        maxNodeSize: 15,
         maxEdgeSize: 0.3,
         defaultNodeColor: "#777",
         clone: true,
