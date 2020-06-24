@@ -1,5 +1,5 @@
 # Otto: Your friendly machine learning assistant.
-<img src="logo.png" width="100%">
+<img src="logo.png" width="90%">
 
 ## Build machine learning pipelines through natural language conversation
 Otto is an intelligent chat application, designed to help aspiring machine learning engineers _go from idea to implementation with zero domain knowledge_. Our website features easy model selection, powerful visualization tools, and an intuitive natural language experience guiding you every step of the way. A collection of Wit backend apps service Otto's conversational abilities and machine learning tools throughout.
@@ -38,12 +38,39 @@ If the user opted for custom data, Otto leverages Wit to perform the key step of
 
 A characterization of the classification dataset as “simple” or having “just a few columns”, would make the K-Nearest Neighbors algorithm a good choice, while a description of the regression data as “crime rates” or “annual consumer rankings” would suggest a Poisson or ordinal model, respectively. If no phrase is flagged, Otto will default to the most general model available: a Neural Network for classification, or a linear fit for regression. 
 
-In the case of a natural language task, users can combine multiple models together for a more comprehensive analysis. Otto will recommend both sentiment analysis and entity recognition models, but provides users with information about both in case they'd like to adjust this.
+In the case of a natural language task, users can combine multiple models together for a more comprehensive analysis. Otto will recommend both sentiment analysis and entity recognition models, but provides users with information about both in case they'd like to adjust this. Our NLP models are built on a Wit application (**Otto-NLP**) configured to identify [built-in traits and entities](https://wit.ai/docs/built-in-entities/20180601).
+
+#### Supported models:
+
+| Model Name          | Task             | Description                                                       |
+|---------------------|------------------|-------------------------------------------------------------------|
+| K-Nearest Neighbors | Classification   | Draws class regions by looking at surrounding data                |
+| Neural Network      | Classification   | Deep learning model suitable for complex datasets                 |
+| Linear              | Regression       | Ordinary linear relationship between variables                    |
+| Poisson             | Regression       | Models count data, which tends to follow a Poisson distribution   |
+| Ordinal             | Regression       | Learns rankings (e.g. "on a scale of 1-5")                        |
+| Sentiment Analysis  | Natural Language | Detects polarity, expressions of thanks, and greetings/goodbyes   |
+| Entity Recognition  | Natural Language | Extracts structures such as people, times & locations, and works of art |
 
 ### Preprocessors
 
 What good is a fancy model if it takes ages to train? In this step, Otto swoops in with handpicked preprocessors for the user's data and model selections, abstracting away the intricacies of feature engineering and dimensionality reduction. As always, users can override the recommendations.
 
+#### Supported preprocessors:
+| Preprocessor Name            | Description                                                    |
+|------------------------------|----------------------------------------------------------------|
+| Principal Component Analysis | Performs dimensionality reduction and/or feature selection     |
+| Normalization                | Scales data to have mean centered at 0 and unit variance       |
+| Text Cleaning                | Removes emojis, noisy symbols, and leading/trailing whitespace |
+
 ### Visualization
 
+The visualization stage activates for neural networks, or any model built using sample data. 
 
+#### Neural Network
+
+Satisfy your curious mind with our fun, interactive network builder! Otto preconfigures model architecture 
+
+#### Linear Regression
+
+#### K-Nearest Neighbors

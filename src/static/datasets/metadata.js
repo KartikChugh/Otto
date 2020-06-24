@@ -3,6 +3,12 @@ import React from "react";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import DraftsIcon from "@material-ui/icons/Drafts";
 import SendIcon from "@material-ui/icons/Send";
+import TwitterIcon from '@material-ui/icons/Twitter';
+import FilterVintageRoundedIcon from '@material-ui/icons/FilterVintageRounded';
+import HouseRoundedIcon from '@material-ui/icons/HouseRounded';
+import LocalBarRoundedIcon from '@material-ui/icons/LocalBarRounded';
+import MovieFilterRoundedIcon from '@material-ui/icons/MovieFilterRounded';
+import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
 
 import {
   irisColumns,
@@ -40,7 +46,7 @@ export const datasetMetadata = {
   [SampleDataset.IRIS]: {
     title: "Iris",
     subtitle: "The popular dataset featuring flower traits",
-    icon: <SendIcon fontSize="small" />,
+    icon: <FilterVintageRoundedIcon fontSize="small" />,
     instances: 150,
     attributes: 4,
     classes: 3,
@@ -57,7 +63,7 @@ export const datasetMetadata = {
   [SampleDataset.WINE]: {
     title: "Wine",
     subtitle: "The popular dataset featuring flower traits",
-    icon: <SendIcon fontSize="small" />,
+    icon: <LocalBarRoundedIcon fontSize="small" />,
     instances: wine.length,
     attributes: 13,
     classes: 3,
@@ -74,7 +80,7 @@ export const datasetMetadata = {
   [SampleDataset.TWITTER]: {
     title: "Twitter",
     subtitle: "A small sample of random tweets",
-    icon: <InboxIcon fontSize="small" />,
+    icon: <TwitterIcon fontSize="small" />,
     instances: 200,
     tags: ["Text"],
     columns: twitterColumns,
@@ -88,7 +94,7 @@ export const datasetMetadata = {
   [SampleDataset.BOSTON]: {
     title: "Boston",
     subtitle: "Prices and other Boston housing data",
-    icon: <DraftsIcon fontSize="small" />,
+    icon: <HouseRoundedIcon fontSize="small" />,
     instances: 506,
     attributes: 13,
     tags: ["Numeric", "Categorical"],
@@ -105,7 +111,7 @@ export const datasetMetadata = {
   [SampleDataset.DIABETES]: {
     title: "Diabetes",
     subtitle: "Prices and other Boston housing data",
-    icon: <DraftsIcon fontSize="small" />,
+    icon: <FavoriteRoundedIcon fontSize="small" />,
     instances: diabetes.length,
     attributes: 10,
     tags: ["Numeric"],
@@ -122,7 +128,7 @@ export const datasetMetadata = {
   [SampleDataset.IMDB]: {
     title: "IMDB Reviews",
     subtitle: "A small sample of reviews from IMDB",
-    icon: <InboxIcon fontSize="small" />,
+    icon: <MovieFilterRoundedIcon fontSize="small" />,
     instances: imdb.length,
     tags: ["Text"],
     columns: imdbColumns,
