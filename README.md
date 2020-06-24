@@ -20,13 +20,13 @@ Otto is an intelligent chat application, designed to help aspiring machine learn
 
 To demo some of Otto's main features, try out the following:
 
-- **Say: _I want to label flower species by petal length_** to watch Otto prefill your pipeline and render a nearest neighbors classification on the popular Iris dataset.
+- **Say:** _I want to label flower species by petal length_ to watch Otto prefill your pipeline and render a nearest neighbors classification on the popular Iris dataset.
 
-- **Select: _Regression > Sample Dataset_** to preview sample datasets for regression, and discover the strongest predictors using different best fit lines
+- **Select:** _Regression > Sample Dataset_ to preview sample datasets for regression, and discover the strongest predictors using different best fit lines
 
-- **Say: _Detect fraudulent credit card activity_ and select the Custom Dataset option** to experience Otto's model recommendation system and interactive neural network designer.
+- **Say:** _Detect fraudulent credit card activity_ and select the Custom Dataset option to experience Otto's model recommendation system and interactive neural network designer.
 
-- **Say: _I'd like to interpret the mood of a review_** to query Wit-powered natural language models for live results.
+- **Say:** _I'd like to interpret the mood of a review_ to query Wit-powered natural language models for live results.
 
 and feel free to get creative! Come up with your own ML goals and see where Otto takes you.
 
