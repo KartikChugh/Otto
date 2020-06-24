@@ -25,7 +25,7 @@ import { invokeKNN } from "js-ml/knn";
 
 export const useStyles = makeStyles((theme) => ({
   sliderWidth: {
-    width: 236,
+    width: 230,
   },
   nodesLabel: {
     marginRight: 12,
@@ -33,6 +33,7 @@ export const useStyles = makeStyles((theme) => ({
   nodesItem: {
     marginTop: 0,
     marginBottom: 8,
+    marginLeft: 32,
   },
   actionItem: {
     marginBottom: 16,

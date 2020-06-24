@@ -110,6 +110,8 @@
 
 .toolboxContainer {
   height: 40%;
+  margin-left: 39px;
+    text-align: right;
 }
 
 .ottoContainer {

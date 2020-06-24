@@ -66,7 +66,7 @@ export default function LinRegToolbox() {
   }
 
   return (
-    <Card>
+    <Card style={{ border: "none", boxShadow: "none" }}>
       <Grid direction="column" container>
         {/* Column 1 */}
         <Grid item className={classes.actionItem}>
