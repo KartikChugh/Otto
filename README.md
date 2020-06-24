@@ -117,5 +117,6 @@ Otto's modular design makes it readibly extensible, and its use of Wit means its
 
 ## About
 
+<img src="img/a.jpg" height="200px"> <img src="img/b.jpg" height="200px">
 
 
