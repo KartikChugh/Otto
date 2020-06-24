@@ -40,9 +40,19 @@ A characterization of the classification dataset as “simple” or having “ju
 
 In the case of a natural language task, users can combine multiple models together for a more comprehensive analysis. Otto will recommend both sentiment analysis and entity recognition models, but provides users with information about both in case they'd like to adjust this.
 
+#### Supported models:
+
+
 ### Preprocessors
 
 What good is a fancy model if it takes ages to train? In this step, Otto swoops in with handpicked preprocessors for the user's data and model selections, abstracting away the intricacies of feature engineering and dimensionality reduction. As always, users can override the recommendations.
+
+#### Supported preprocessors:
+| Name                         | Description                                                    |
+|------------------------------|----------------------------------------------------------------|
+| Principal Component Analysis | Performs dimensionality reduction and/or feature selection     |
+| Normalization                | Scales data to have mean centered at 0 and unit variance       |
+| Text Cleaning                | Removes emojis, noisy symbols, and leading/trailing whitespace |
 
 ### Visualization
 
