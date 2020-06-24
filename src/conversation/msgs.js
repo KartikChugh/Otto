@@ -78,9 +78,9 @@ export const ModelPreRecommendation = (model, nlp_models) => {
       nlp_models.length === 2
         ? "combining both analyses"
         : `${nlp_models[0].toLowerCase()}`;
-    return `I think ${str} is the way to go`;
+    return `Now let's select an appropriate model - I think ${str} is the way to go`;
   }
-  return `I think a ${model.toLowerCase()} algorithm is the way to go`;
+  return `Now let's select an appropriate model - I think a ${model.toLowerCase()} algorithm is the way to go`;
 };
 
 export const NLPModelInfo = () => {
@@ -93,7 +93,7 @@ export const NLPModelInfo = () => {
 
 export const RegressionModelQuestion = () => {
   return [
-    "What can you tell me about your Dependent Variable?",
+    "What can you tell me about your dependent variable?",
     msgsExample.ModelRegression,
   ];
 };
@@ -106,7 +106,7 @@ export const ClassificationModelQuestion = () => {
 };
 
 export const ModelRecommendation = (model) => {
-  return [`A ${model.toLowerCase()} model fits well to that case`];
+  return [`A ${model.toLowerCase()} model fits well here`];
 };
 
 export const AdvanceFromModel = (model) => {
@@ -115,7 +115,7 @@ export const AdvanceFromModel = (model) => {
 
 export const PreprocessorRecommendation = () => {
   return [
-    "Based on your inputs, I have setup some data preprocessors to tune the input data, but feel free to tweak them",
+    "I've Otto-matically setup some data preprocessors to optimize learning, but feel free to adjust them",
   ];
 };
 

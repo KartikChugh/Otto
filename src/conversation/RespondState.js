@@ -57,14 +57,13 @@ const modelStep = (state) => {
     state.nlp_models_otto.length === state.nlp_models.length;
   console.log("isRecommended? ", isRecommendedSupervised, isRecommendedNLP);
 
-  responses.push(msgs.ModelPreface(state.task));
-
   if (isRecommendedSupervised) {
     responses.push(msgs.ModelPreRecommendation(state.model));
   } else if (isRecommendedNLP) {
     responses.push(msgs.NLPModelInfo());
     responses.push(msgs.ModelPreRecommendation(null, state.nlp_models));
   } else {
+    responses.push(msgs.ModelPreface(state.task));
     switch (state.task) {
       case Tasks.CLASSIFICATION:
         responses.push(msgs.ClassificationModelQuestion());
