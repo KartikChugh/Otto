@@ -91,7 +91,7 @@ Otto preconfigures a standard model architecture with [research-based](http://pr
 
 Instantly explore how parameters affect KNN clusters and regression slopes!
 
-
+![linreg](demo/linreg.gif)
 
 ## Future
 - Ask Otto questions along the way
