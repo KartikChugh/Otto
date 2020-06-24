@@ -13,6 +13,7 @@ import NNFFToolbox from "components/toolbox/NNFFToolbox";
 import KNNToolbox from "components/toolbox/KNNToolbox";
 import DataPreview from "components/toolbox/DataPreview";
 import LinRegToolbox from "components/toolbox/LinRegToolbox";
+import { datasetMetadata } from "static/datasets/metadata";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -84,8 +85,9 @@ export default function ToolboxContainer({ getIsShown }) {
         >
           {state.stepper_state === StepperState.VISUALIZE
             ? "Toolbox"
-            : state.stepper_state === StepperState.DATASET
-            ? "Dataset Preview"
+            : state.stepper_state === StepperState.DATASET &&
+              state.sample_dataset != null
+            ? "Dataset Preview - " + datasetMetadata[state.sample_dataset].title
             : null}
         </Typography>
         <Card className={classes.card} variant="outlined">

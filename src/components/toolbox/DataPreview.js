@@ -85,64 +85,51 @@ export default function DataPreview() {
   }
 
   return (
-    <ExpansionPanel defaultExpanded>
-      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography variant="h5">
-          {datasetMetadata[state.sample_dataset].title}
-        </Typography>
-      </ExpansionPanelSummary>
-      <ExpansionPanelDetails className={classes.noPadding}>
-        <Grid direction="column" container className={classes.noPadding}>
-          {/* Data Attributes */}
-          <Grid item>
-            <div className={classes.root}>
-              {chipData(state).map((data, index) => {
-                return (
-                  <li key={index}>
-                    <Chip
-                      label={data}
-                      color="primary"
-                      className={classes.chip}
-                    />
-                  </li>
-                );
-              })}
-            </div>
-          </Grid>
-          {/* Table */}
-          <Grid item className={classes.fullWidth}>
-            <TableContainer component={Paper} className={classes.table}>
-              <Table size="small" aria-label="a dense table">
-                <TableHead>
-                  <TableRow>
-                    {metadata.columns.map((column, index) => (
-                      <TableCell>
-                        {getFormatted(
-                          metadata.columnsMap
-                            ? metadata.columnsMap[column]
-                            : column,
-                          index
-                        )}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {metadata.data.slice(0, 5).map((row, index) => (
-                    <TableRow key={index}>
-                      {metadata.columns.map((column) => (
-                        <TableCell component="th" scope="row">
-                          {row[column]}
-                        </TableCell>
-                      ))}
-                    </TableRow>
+    <Grid direction="column" container className={classes.noPadding}>
+      {/* Data Attributes */}
+      <Grid item>
+        <div className={classes.root}>
+          {chipData(state).map((data, index) => {
+            return (
+              <li key={index}>
+                <Chip label={data} color="primary" className={classes.chip} />
+              </li>
+            );
+          })}
+        </div>
+      </Grid>
+      {/* Table */}
+      <Grid item className={classes.fullWidth}>
+        <TableContainer component={Paper} className={classes.table}>
+          <Table size="small" aria-label="a dense table">
+            <TableHead>
+              <TableRow>
+                {metadata.columns.map((column, index) => (
+                  <TableCell>
+                    {getFormatted(
+                      metadata.columnsMap
+                        ? metadata.columnsMap[column]
+                        : column,
+                      index
+                    )}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {metadata.data.slice(0, 5).map((row, index) => (
+                <TableRow key={index}>
+                  {metadata.columns.map((column) => (
+                    <TableCell component="th" scope="row">
+                      {row[column]}
+                    </TableCell>
                   ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Grid>
-        </Grid>
-      </ExpansionPanelDetails>
-    </ExpansionPanel>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Grid>
+    </Grid>
   );
 }

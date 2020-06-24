@@ -76,8 +76,8 @@ const useStyles = makeStyles((theme) => ({
   titleInner: {
     fontSize: 42,
     fontWeight: 300,
-    marginTop: 8,
-    marginBottom: 32,
+    marginTop: 84,
+    marginBottom: 52,
   },
   subtitle: {
     marginTop: 20,
