@@ -69,14 +69,16 @@ What good is a fancy model if it takes ages to train? In this step, Otto swoops 
 
 ### Visualization
 
-The visualization stage activates for neural networks, or any model built using sample data. 
+The visualization stage activates for neural network design, or to render any models built on sample data.
 
 #### Neural Network
 
 Satisfy your curious mind with our fun, interactive network builder! 
 
-Otto preconfigures a standard model architecture with [research-based](http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf) activations and initializers, but users are free to tinker with each layer as they wish. Additionally, Otto can make network changes en masse upon user instruction, with the aid of a dedicated Wit application (**Otto-Net**).
+Otto preconfigures a standard model architecture with [research-based](http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf) activations and initializers, but users are free to tinker with it layer by layer as they wish. Additionally, Otto can make network redesigns en masse with the aid of a dedicated Wit model (**Otto-Net**) that translates user instructions into architecture changes.
 
-#### Linear Regression
+#### Model Visualization (Sample)
 
-#### K-Nearest Neighbors
+Instantly explore KNN clusters and regression slopes with ease!
+
+
