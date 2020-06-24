@@ -16,6 +16,10 @@ Otto is an intelligent chat application, designed to help aspiring machine learn
 
 ***
 
+## Quick Start
+
+TODO
+
 ## Stages
 
 Below is a technical description intended for those interested in a step-by-step breakdown.
@@ -34,11 +38,11 @@ Users are recommended a specific sample dataset matching their subject, or other
 
 ### Model
 
-If the user opted for custom data, Otto leverages Wit to perform the key step of selecting a classifier or regressor. A Wit app (**Otto-Model**) parses a brief user description of their data for key phrases indicating the desirability of a particular model. The app includes around 15 phrases and synonyms per model and performs fuzzy string matching, making it an effective and scalable technique for model recommendation.
+If the user opted for custom data, Otto leverages Wit to perform the key step of selecting a classifier or regressor. A Wit client (**Otto-Model**) parses a brief user description of their data for key phrases indicating the desirability of a particular model. **Otto-Model** includes around 15 phrases and synonyms per model and performs fuzzy string matching, making it an effective and scalable technique for model recommendation.
 
 A characterization of the classification dataset as “simple” or having “just a few columns”, would make the K-Nearest Neighbors algorithm a good choice, while a description of the regression data as “crime rates” or “annual consumer rankings” would suggest a Poisson or ordinal model, respectively. If no phrase is flagged, Otto will default to the most general model available: a Neural Network for classification, or a linear fit for regression. 
 
-In the case of a natural language task, users can combine multiple models together for a more comprehensive analysis. Otto will recommend both sentiment analysis and entity recognition models, but provides users with information about both in case they'd like to adjust this. Our NLP models are built on a Wit application (**Otto-NLP**) configured to identify [built-in traits and entities](https://wit.ai/docs/built-in-entities/20180601).
+In the case of a natural language task, users can combine multiple models together for a more comprehensive analysis. Otto will recommend both sentiment analysis and entity recognition models, but provides users with information about both in case they'd like to adjust this. Our NLP models are built on a Wit backend (**Otto-NLP**) configured to identify [built-in traits and entities](https://wit.ai/docs/built-in-entities/20180601).
 
 #### Supported models:
 
@@ -54,7 +58,7 @@ In the case of a natural language task, users can combine multiple models togeth
 
 ### Preprocessors
 
-What good is a fancy model if it takes ages to train? In this step, Otto swoops in with handpicked preprocessors for the user's data and model selections, abstracting away the intricacies of feature engineering and dimensionality reduction. As always, users can override the recommendations.
+What good is a fancy model if it takes ages to train? In this step, Otto swoops in with handpicked preprocessors for the user's data and model selections, abstracting away the intricacies of feature engineering and dimensionality reduction — machine learning techniques that optimize the data for efficient learning. As always, users can override the recommendations.
 
 #### Supported preprocessors:
 | Preprocessor Name            | Description                                                    |
@@ -71,7 +75,7 @@ The visualization stage activates for neural networks, or any model built using 
 
 Satisfy your curious mind with our fun, interactive network builder! 
 
-Otto preconfigures a standard model architecture with [research-based](http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf) activations and initializers, but users are free to tinker with it as they wish. 
+Otto preconfigures a standard model architecture with [research-based](http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf) activations and initializers, but users are free to tinker with each layer as they wish. Additionally, Otto can make network changes en masse upon user instruction, with the aid of a dedicated Wit application (**Otto-Netbuilder**).
 
 #### Linear Regression
 
