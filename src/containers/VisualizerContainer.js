@@ -77,15 +77,32 @@ const useStyles = makeStyles((theme) => ({
     transition: "all 0.4s",
     border: "1px solid rgba(14,19,24,.2)",
     outline: "none !important",
+    // backgroundColor: "blue",
     "&:hover": {
       backgroundColor: "white",
       boxShadow: "0 0 0 2px #00c4cc, inset 0 0 0 2px #ffffff",
       borderColor: "white",
     },
   },
-  buttonDisabled: {
+  nextButton: {
+    transition: "all 0.4s",
+    border: "1px solid rgba(14,19,24,.2)",
+    outline: "none !important",
+    backgroundImage: "linear-gradient(45deg, #7b2be8, #3284d7)",
+    "&:hover": {
+      backgroundColor: "white",
+      boxShadow: "0 0 0 2px #00c4cc, inset 0 0 0 2px #ffffff",
+      borderColor: "white",
+    },
+  },
+  nextButtonDisabled: {
     border: "1px solid white",
     outline: "none !important",
+    backgroundColor: "white",
+    transition: "all 0.4s",
+  },
+  arrow: {
+    color: "white",
   },
 }));
 
@@ -240,11 +257,15 @@ function VisualizerContainer() {
                 : handleNext
             }
             className={
-              isNextDisabled() ? classes.buttonDisabled : classes.button
+              isNextDisabled() ? classes.nextButtonDisabled : classes.nextButton
             }
             style={{ float: "right" }}
           >
-            <ArrowForward />
+            <ArrowForward
+              className={
+                isNextDisabled() ? classes.arrowDisabled : classes.arrow
+              }
+            />
           </IconButton>
         </Grid>
       </Grid>
