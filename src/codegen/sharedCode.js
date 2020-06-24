@@ -1,15 +1,18 @@
 export const defineLoadDataset = (dataset) => {
-    return `def loadData():
+    return `
+def loadData():
     return datasets.load_${dataset}(return_X_y=True)`;
 }
 
 export const defineLoadDatasetNLP = (dataset) => {
-    return `def loadData():
+    return `
+def loadData():
     return pd.read_csv("${dataset}", encoding="latin-1")`
 }
 
 export const defineLoadUnspecified = () => {
-    return `## Replace with your own dataset! Return X, y sets for supervised, or just your data for NLP
+    return `
+# Replace with your own dataset! Return X, y sets for class/reg, or just one dataset for NLP
 def loadData():
     return None, None
     `

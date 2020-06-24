@@ -1,5 +1,5 @@
 export const params = (neighbors) => {
-    return `NEIGHBORS = ${neighbors}`;
+    return `K_NEIGHBORS = ${neighbors}`;
 }
 
 export const slice = () => {
@@ -10,7 +10,7 @@ export const model = () => {
 
     const knn = 
 `# we create an instance of Neighbours Classifier and fit the data.
-clf = neighbors.KNeighborsClassifier(NEIGHBORS)
+clf = neighbors.KNeighborsClassifier(K_NEIGHBORS)
 clf.fit(X, y)
 
 # Plot the decision boundary. For that, we will assign a color to each
@@ -30,7 +30,7 @@ plt.contourf(xx, yy, Z, cmap=cmap, alpha=0.7)
 plt.scatter(X[:, 0], X[:, 1], c=y, cmap=cmap, edgecolor='k', s=20)
 plt.xlim(xx.min(), xx.max())
 plt.ylim(yy.min(), yy.max())
-plt.title("Classification (k = %i)" % (NEIGHBORS))
+plt.title("Classification (k = %i)" % (K_NEIGHBORS))
 
 plt.show()
 `;
