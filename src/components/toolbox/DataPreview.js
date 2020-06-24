@@ -76,7 +76,7 @@ export default function DataPreview() {
     return null;
   }
   const metadata = datasetMetadata[state.sample_dataset];
-
+  console.log("meta", metadata);
   function getFormatted(label, index) {
     if (metadata.units) {
       return label + " (" + metadata.units[index] + ")";

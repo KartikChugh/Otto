@@ -24,6 +24,8 @@ const InitialState = () => ({
   linreg_y_name: "",
   linreg_columns: [],
 
+  nlp_datas: [],
+
   viz_loading: false,
 });
 
@@ -74,6 +76,12 @@ function reducer(state, action: ModelActionType) {
         newState["linreg_y_name"] = action.linreg_y_name;
       }
       return newState;
+    case ModelActions.NLP_DONE:
+      return {
+        ...state,
+        viz_loading: false,
+        nlp_datas: action.datas,
+      };
     case ModelActions.RUNNING:
       return { ...state, viz_loading: true };
     default:

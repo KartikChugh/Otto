@@ -45,7 +45,7 @@ function CodeContainer({ getIsShown }) {
 
   return (
     <Grow in={getIsShown()}>
-      <div style={{}}>{updated}</div>
+      <div className="codeOverflow">{updated}</div>
     </Grow>
   );
 }

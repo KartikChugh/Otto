@@ -16,6 +16,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { invoke } from "js-ml/knn";
 import { modelLinear } from "codegen/regressionCode";
 import { model } from "codegen/knnCode";
+import LoadingComponent from "./LoadingComponent";
 
 const fillColors = ["#E76F51", "#2A9D8F", "#264653"];
 const shapeTypes = ["star", "circle", "triangle"];
@@ -96,7 +97,7 @@ export default function PlotKNN() {
           </ScatterChart>
         </ResponsiveContainer>
       ) : (
-        <CircularProgress color="secondary" />
+        <LoadingComponent />
       )}
     </>
   );

@@ -1,6 +1,7 @@
 import { tweets } from "static/datasets/tweets.js";
 import { getWitResult } from "conversation/ConversationUtils";
 import { titleCase } from "title-case";
+import { ModelActions } from "state/ModelActions";
 const { Wit } = require("node-wit");
 const token = require("TOKEN.json");
 
@@ -31,17 +32,19 @@ const labelForSample = (sample, isTrait) => {
 /**
  * Generates array of data objects: {data: "string", entities: "string", sentiments: "string"}
  */
-export const invokeNLP = async (doEntity, doSentiment, dispatch) => {
+export const invokeNLP = async (doEntity, doSentiment, metadata, dispatch) => {
   // const texts = []
   // const entityLabels = []
   // const traitLabels = []
-
+  dispatch({
+    type: ModelActions.RUNNING,
+  });
+  const textData = metadata.data;
   const nlpData = [];
 
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 10; i++) {
     const nlpDatapoint = {};
-    const tweetData = tweets[i];
-    const text = tweetData["SentimentText"]
+    const text = textData[i][metadata.columns[0]]
       .trim()
       .replace("?|.|!|/|;|:|#|*", "");
     const resp = await getWitResult(ottoNLP, text);
@@ -50,17 +53,33 @@ export const invokeNLP = async (doEntity, doSentiment, dispatch) => {
       const entities = resp["entities"];
       const entityLabel = labelForSample(entities, false);
       //entityLabels.push(entityLabel);
-      nlpDatapoint.entities = entityLabel;
+      let entityTypeMap = [];
+      if (entityLabel !== "") {
+        const entityStrings = entityLabel.split(",");
+        entityTypeMap = entityStrings.map((entString) => entString.split(":"));
+      }
+      nlpDatapoint.entities = entityTypeMap;
     }
 
     if (doSentiment) {
       const traits = resp["traits"];
       const traitLabel = labelForSample(traits, true);
       //traitLabels.push(traitLabel);
-      nlpDatapoint.sentiments = traitLabel;
+      if (traitLabel.toLowerCase().indexOf("negative") !== -1) {
+        nlpDatapoint.sentiments = "Negative";
+      } else if (traitLabel.toLowerCase().indexOf("positive") !== -1) {
+        nlpDatapoint.sentiments = "Positive";
+      } else {
+        nlpDatapoint.sentiments = "Neutral";
+      }
     }
     nlpDatapoint.data = text;
     nlpData.push(nlpDatapoint);
     //texts.push(text);
   }
+  console.log("woot;", nlpData);
+  dispatch({
+    type: ModelActions.NLP_DONE,
+    datas: nlpData,
+  });
 };

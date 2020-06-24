@@ -4,6 +4,7 @@ export const ModelActions = Object.freeze({
   KNN_DONE: "KNN_DONE",
   LINREG_SET_IND_VAR: "LINREG_SET_IND_VAR",
   LINREG_DONE: "LINREG_DONE",
+  NLP_DONE: "NLP_DONE",
   RUNNING: "RUNNING",
   // RUN_NLP: "RUN_NLP"
 });
@@ -26,6 +27,10 @@ export type ModelActionType =
     }
   | {
       type: ModelActions.LINREG_DONE,
+    }
+  | {
+      type: ModelActions.NLP_DONE,
+      datas: Array<any>,
     }
   | {
       type: ModelActions.RUNNING,

@@ -37,6 +37,7 @@ import { useModelState } from "state/ModelState";
 import { invokeNLP } from "js-ml/nlp";
 import { invokeKNN } from "js-ml/knn";
 import { invokeLinReg } from "js-ml/linReg";
+import { datasetMetadata } from "static/datasets/metadata";
 
 const useStyles = makeStyles((theme) => ({
   rootExplanation: {
@@ -49,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
   rootActions: {
     width: "100%",
     height: "100%",
+    maxHeight: 640,
     textAlign: "center",
     paddingTop: theme.spacing(1),
     position: "relative",
@@ -66,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
   fullHeight: {
     height: "100%",
   },
+  rightMargin: { marginRight: 24 },
   visualizerHeight: {
     height: "calc(100% - 92px)",
   },
@@ -133,6 +136,7 @@ function VisualizerContainer() {
         await invokeNLP(
           state.nlp_models.includes(Models.ENTITY_RECOGNITION),
           state.nlp_models.includes(Models.SENTIMENT_ANALYSIS),
+          datasetMetadata[state.sample_dataset],
           model_dispatch
         );
       } else if (state.model === Models.LINEAR_REGRESSION) {
@@ -253,7 +257,13 @@ function VisualizerContainer() {
       </Grid>
       <Grid className={`${classes.fullWidth} ${classes.visualizerHeight}`} item>
         <Card className={classes.rootActions}>
-          <CardContent className={classes.fullHeight}>
+          <CardContent
+            className={`${classes.fullHeight} ${
+              state.stepper_state === StepperState.VISUALIZE
+                ? classes.rightMargin
+                : null
+            }`}
+          >
             {state.stepper_state === StepperState.VISUALIZE ? (
               <PlotsContainer />
             ) : (

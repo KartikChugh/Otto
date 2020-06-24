@@ -54,6 +54,7 @@ export const SampleDataset = Object.freeze({
   IRIS: "iris",
   BOSTON: "boston",
   TWITTER: "twitter",
+  IMDB: "imdb",
 });
 
 export const Preprocessors = Object.freeze({

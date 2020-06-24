@@ -6,8 +6,23 @@ export const twitterColumnsMap = {
 
 export const tweets = [
   {
-    ItemID: 11754,
-    SentimentText: "** need a neW rec. system  **",
+    ItemID: 75297,
+    SentimentText:
+      "@btnalv They are beautiful Bettina, just like you  Get well soon.",
+  },
+  {
+    ItemID: 453,
+    SentimentText:
+      "my aunties dog is getting put down.  hes my dogs brother aswell",
+  },
+  {
+    ItemID: 74456,
+    SentimentText: "@annetteknight Hey there - great to see you on twitter!",
+  },
+  {
+    ItemID: 51209,
+    SentimentText:
+      "@athanaelucev Thanks so much Athanae!  Well, you can go in my place then!",
   },
   {
     ItemID: 91423,
@@ -151,11 +166,6 @@ export const tweets = [
     ItemID: 69544,
     SentimentText:
       "@andibeth82 ok sweet! and whenever u want, I am stuck in bed all weekend",
-  },
-  {
-    ItemID: 453,
-    SentimentText:
-      "my aunties dog is getting put down  hes my dogs brother aswell",
   },
   {
     ItemID: 4412,
@@ -388,11 +398,6 @@ export const tweets = [
     ItemID: 56406,
     SentimentText:
       "@BCESTABLISHED06 some hoe must have really pissed u off today sweety",
-  },
-  {
-    ItemID: 75297,
-    SentimentText:
-      "@btnalv They are beautiful Bettina, just like you  Get well soon.",
   },
   {
     ItemID: 26190,
@@ -866,17 +871,8 @@ export const tweets = [
     SentimentText: "...yeah, the sun is shining....",
   },
   {
-    ItemID: 74456,
-    SentimentText: "@annetteknight Hey they're - great to see you on twitter!",
-  },
-  {
     ItemID: 70179,
     SentimentText: "@BravoTV NOOO real housewives of atlanta is awful",
-  },
-  {
-    ItemID: 51209,
-    SentimentText:
-      "@athanaelucev Thanks so much Athanae!  Well, you can go in my place then!",
   },
   {
     ItemID: 41642,

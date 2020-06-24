@@ -16,6 +16,7 @@ import {
 } from "recharts";
 
 import { useModelState } from "state/ModelState";
+import LoadingComponent from "./LoadingComponent";
 
 function compareX(a, b) {
   return a.x - b.x;
@@ -81,7 +82,7 @@ export default function PlotLinReg() {
           </ComposedChart>
         </ResponsiveContainer>
       ) : (
-        <CircularProgress color="secondary" />
+        <LoadingComponent />
       )}
     </>
   );

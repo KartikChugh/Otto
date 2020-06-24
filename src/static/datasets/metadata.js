@@ -21,6 +21,7 @@ import {
   bostonDepVar,
   bostonDefaultIndVar,
 } from "static/datasets/boston";
+import { imdb, imdbColumns, imdbColumnsMap } from "static/datasets/imdb";
 import { SampleDataset, Tasks, Models } from "state/StateTypes";
 
 export const datasetMetadata = {
@@ -71,5 +72,19 @@ export const datasetMetadata = {
     keywords: ["boston", "house", "housing", "home"],
     task: Tasks.REGRESSION,
     model: Models.LINEAR_REGRESSION,
+  },
+  [SampleDataset.IMDB]: {
+    title: "IMDB Reviews",
+    subtitle: "A small sample of reviews from IMDB",
+    icon: <InboxIcon fontSize="small" />,
+    instances: imdb.length,
+    tags: ["Text"],
+    columns: imdbColumns,
+    columnsMap: imdbColumnsMap,
+    data: imdb,
+
+    keywords: ["imdb", "movies", "sentiment", "reviews"],
+    task: Tasks.NATURAL_LANGUAGE,
+    model: [Models.SENTIMENT_ANALYSIS, Models.ENTITY_RECOGNITION],
   },
 };
