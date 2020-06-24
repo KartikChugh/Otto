@@ -12,7 +12,7 @@ Otto is an intelligent chat application, designed to help aspiring machine learn
 
 - **Powerful machine learning tools.** A range of machine learning capabilities are supported, including models for regression, classification and natural language processing, as well as preprocessors tailored to your problem. Play with neural networks, explore data visualizations, and generate ready-made Python code right in your browser!
 
-- **Educational experience.** Users are walked through each stage of the process and can ask Otto questions to learn more along the way. Generated code blocks are annotated to provide eager learners a high-level understanding of their end-to-end pipeline.
+- **Educational experience.** Users are walked through each stage of the process and can ask Otto questions to learn more along the way. Annotated code blocks provide eager learners a high-level understanding of their end-to-end pipeline.
 
 ***
 
@@ -34,8 +34,16 @@ Users are recommended a specific sample dataset matching their subject, or other
 
 ### Model
 
-If the user opted for custom data, Otto leverages Wit to perform the key step of selecting a classifier or regressor. For the former, Otto asks the user for details regarding their dataset, while for the latter, Otto asks for information about the dependent variable being modeled. A Wit app (**Otto-Model**) parses the user's response for key phrases indicating the desirability of a particular model. The app includes around 15 phrases per model and performs fuzzy string matching, making it an effective and easily scalable technique for identifying
+If the user opted for custom data, Otto leverages Wit to perform the key step of selecting a classifier or regressor. A Wit app (**Otto-Model**) parses a brief user description of their data for key phrases indicating the desirability of a particular model. The app includes around 15 phrases and synonyms per model and performs fuzzy string matching, making it an effective and scalable technique for model recommendation.
 
-A characterization of the classification dataset as “simple” or having “just a few columns”, would make the K-Nearest Neighbors algorithm a good choice, while a description of the regression data as “crime rates” or “annual consumer rankings” would suggest a Poisson or ordinal regressor, respectively. If no phrase is flagged
+A characterization of the classification dataset as “simple” or having “just a few columns”, would make the K-Nearest Neighbors algorithm a good choice, while a description of the regression data as “crime rates” or “annual consumer rankings” would suggest a Poisson or ordinal model, respectively. If no phrase is flagged, Otto will default to the most general model available: a Neural Network for classification, or a linear fit for regression. 
+
+In the case of a natural language task, users can combine multiple models together for a more comprehensive analysis. Otto will recommend both sentiment analysis and entity recognition models, but provides users with information about both in case they'd like to adjust this.
+
+### Preprocessors
+
+What good is a fancy model if it takes ages to train? In this step, Otto swoops in with handpicked preprocessors for the user's data and model selections, abstracting away the intricacies of feature engineering and dimensionality reduction. As always, users can override the recommendations.
+
+### Visualization
 
 
