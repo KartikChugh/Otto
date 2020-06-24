@@ -20,6 +20,7 @@ import { invokeLinReg } from "js-ml/linReg";
 
 import { initializeWidget } from "containers/WidgetContainer";
 import { datasetMetadata } from "static/datasets/metadata";
+import { Finish } from "conversation/msgs";
 
 // See https://www.basefactor.com/global-state-with-react for details
 const initialState = InitialState();
@@ -27,6 +28,10 @@ const initialState = InitialState();
 export const StateContext = createContext(initialState);
 export const DispatchStateContext = createContext(() => null);
 const NumSteps = StepperStateOrder.length;
+
+const ottoFinishMessages = () => {
+  addResponseMessage(Finish()[0]);
+};
 
 const getIfStepperFinish = (state: StateType) => {
   if (state.stepper_state === StepperState.PREPROCESSORS) {
@@ -179,6 +184,7 @@ function reducer(state: StateType, action: ActionType): StateType {
     case Actions.STEPPER_HANDLE_NEXT: {
       if (getIfStepperFinish(state)) {
         deleteMessages();
+        ottoFinishMessages();
         return {
           ...state,
           stepper_finish: true,
@@ -222,6 +228,7 @@ function reducer(state: StateType, action: ActionType): StateType {
     }
     case Actions.HANDLE_STEPPER_FINISH:
       deleteMessages();
+      ottoFinishMessages();
       return {
         ...state,
         stepper_finish: true,
