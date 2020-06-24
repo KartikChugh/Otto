@@ -7,11 +7,16 @@ import {
   StateType,
   StepperState,
   DatasetCategory,
+  StepperStateOrder,
+  Models,
+  Tasks,
 } from "state/StateTypes";
 import { ActionType, Actions } from "state/Actions";
-import { StepperStateOrder } from "state/StateTypes";
 import { handleNext, handlePrev } from "containers/WidgetContainer";
 import { preprocessorsModifier } from "conversation/RespondState";
+import { invokeKNN } from "js-ml/knn";
+import { invokeNLP } from "js-ml/nlp";
+import { invokeLinReg } from "js-ml/linReg";
 
 import { initializeWidget } from "containers/WidgetContainer";
 import { datasetMetadata } from "static/datasets/metadata";
@@ -22,6 +27,46 @@ const initialState = InitialState();
 export const StateContext = createContext(initialState);
 export const DispatchStateContext = createContext(() => null);
 const NumSteps = StepperStateOrder.length;
+
+const getIfStepperFinish = (state: StateType) => {
+  if (state.stepper_state === StepperState.PREPROCESSORS) {
+    if (
+      [Models.ORDINAL_REGRESSION, Models.POISSON_REGRESSION].includes(
+        state.model
+      )
+    ) {
+      return true;
+    }
+    if (
+      state.dataset_category === DatasetCategory.CUSTOM &&
+      state.model !== Models.NEURAL_NETWORK_FF
+    ) {
+      return true;
+    }
+  }
+  return false;
+};
+
+const invokeViz = async (state, action) => {
+  if (state.stepper_state === StepperState.PREPROCESSORS) {
+    if (state.model === Models.KNN) {
+      invokeKNN(
+        action.model_state.knn_k,
+        state.sample_dataset,
+        action.model_dispatch
+      );
+    } else if (state.task === Tasks.NATURAL_LANGUAGE) {
+      await invokeNLP(
+        state.nlp_models.includes(Models.ENTITY_RECOGNITION),
+        state.nlp_models.includes(Models.SENTIMENT_ANALYSIS),
+        datasetMetadata[state.sample_dataset],
+        action.model_dispatch
+      );
+    } else if (state.model === Models.LINEAR_REGRESSION) {
+      invokeLinReg(action.model_dispatch, state.sample_dataset, null, true);
+    }
+  }
+};
 
 function reducer(state: StateType, action: ActionType): StateType {
   const getActiveStep = () => {
@@ -124,6 +169,14 @@ function reducer(state: StateType, action: ActionType): StateType {
       };
     }
     case Actions.STEPPER_HANDLE_NEXT: {
+      if (getIfStepperFinish(state)) {
+        deleteMessages();
+        return {
+          ...state,
+          stepper_finish: true,
+        };
+      }
+      invokeViz(state, action);
       let newStateForNext = {
         ...state,
         stepper_state:
@@ -138,6 +191,9 @@ function reducer(state: StateType, action: ActionType): StateType {
       return newStateForNext;
     }
     case Actions.STEPPER_HANDLE_PREVIOUS: {
+      if (state.stepper_finish) {
+        return { ...state, stepper_finish: false };
+      }
       const newStateForPrev = {
         ...state,
         stepper_state:
@@ -157,6 +213,7 @@ function reducer(state: StateType, action: ActionType): StateType {
       return newStateForPrev;
     }
     case Actions.HANDLE_STEPPER_FINISH:
+      deleteMessages();
       return {
         ...state,
         stepper_finish: true,

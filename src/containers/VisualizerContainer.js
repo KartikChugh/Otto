@@ -18,6 +18,7 @@ import {
   NavigateNext,
   ArrowBack,
   ArrowForward,
+  SatelliteSharp,
 } from "@material-ui/icons/";
 
 import { useState } from "state/State";
@@ -39,6 +40,7 @@ import { invokeNLP } from "js-ml/nlp";
 import { invokeKNN } from "js-ml/knn";
 import { invokeLinReg } from "js-ml/linReg";
 import { datasetMetadata } from "static/datasets/metadata";
+import StepperFinish from "components/StepperFinish";
 
 const useStyles = makeStyles((theme) => ({
   rootExplanation: {
@@ -191,6 +193,9 @@ function VisualizerContainer() {
   const { model_state, model_dispatch } = useModelState();
 
   function getProgressBarValue() {
+    if (state.stepper_finish) {
+      return 200;
+    }
     return (100 * (getActiveStep(state) + 1)) / StepperStateOrder.length;
   }
 
@@ -207,21 +212,9 @@ function VisualizerContainer() {
   const handleNext = async () => {
     dispatch({
       type: Actions.STEPPER_HANDLE_NEXT,
+      model_state,
+      model_dispatch,
     });
-    if (state.stepper_state === StepperState.PREPROCESSORS) {
-      if (state.model === Models.KNN) {
-        invokeKNN(model_state.knn_k, state.sample_dataset, model_dispatch);
-      } else if (state.task === Tasks.NATURAL_LANGUAGE) {
-        await invokeNLP(
-          state.nlp_models.includes(Models.ENTITY_RECOGNITION),
-          state.nlp_models.includes(Models.SENTIMENT_ANALYSIS),
-          datasetMetadata[state.sample_dataset],
-          model_dispatch
-        );
-      } else if (state.model === Models.LINEAR_REGRESSION) {
-        invokeLinReg(model_dispatch, state.sample_dataset, null, true);
-      }
-    }
   };
 
   const handleBack = () => {
@@ -243,6 +236,9 @@ function VisualizerContainer() {
       state.sample_dataset == null
     ) {
       return true;
+    }
+    if (state.stepper_state === StepperState.VISUALIZE) {
+      return false;
     }
     return (
       state.stepper_state !== StepperState.PREPROCESSORS &&
@@ -269,11 +265,24 @@ function VisualizerContainer() {
       case 3:
         option = preprocessorFormatter(state.preprocessors).join(", ");
         break;
+      case 4:
+        option = "Visualize";
+        break;
       default:
         break;
     }
     return option;
   };
+
+  function getVizContent() {
+    if (state.stepper_finish) {
+      return <StepperFinish />;
+    }
+    if (state.stepper_state === StepperState.VISUALIZE) {
+      return <PlotsContainer />;
+    }
+    return <VisualizerOptionSelectionGrid />;
+  }
 
   return (
     <Grid
@@ -307,20 +316,27 @@ function VisualizerContainer() {
         </Grid>
         <Grid
           item
-          style={{ margin: "0 auto", alignSelf: "center", width: "600px" }}
+          style={{
+            margin: "0 auto",
+            alignSelf: "center",
+            width: `${state.stepper_finish ? "156px" : "600px"}`,
+          }}
         >
           <Breadcrumbs
             separator={<NavigateNext fontSize="small" />}
             aria-label="breadcrumb"
           >
             {StepperStateOrder.map((step, index) => {
-              if (getActiveStep(state) === index) {
+              if (getActiveStep(state) === index && !state.stepper_finish) {
                 return (
                   <Typography color="textPrimary" style={{ fontSize: "18px" }}>
                     {String(index + 1) + ". " + getSteps()[index]}
                   </Typography>
                 );
-              } else if (getActiveStep(state) > index) {
+              } else if (
+                getActiveStep(state) > index &&
+                !state.stepper_finish
+              ) {
                 return (
                   <Typography
                     color="textSecondary"
@@ -332,28 +348,38 @@ function VisualizerContainer() {
               }
               return null;
             })}
+            {state.stepper_finish && (
+              <Typography color="textPrimary" style={{ fontSize: "18px" }}>
+                Code Gen!
+              </Typography>
+            )}
+            }
           </Breadcrumbs>
         </Grid>
         <Grid item style={{ float: "right" }}>
-          <IconButton
-            disabled={isNextDisabled()}
-            variant="contained"
-            onClick={
-              getActiveStep(state) === steps.length - 1
-                ? handleFinish
-                : handleNext
-            }
-            className={
-              isNextDisabled() ? classes.nextButtonDisabled : classes.nextButton
-            }
-            style={{ float: "right" }}
-          >
-            <ArrowForward
-              className={
-                isNextDisabled() ? classes.arrowDisabled : classes.arrow
+          {!state.stepper_finish && (
+            <IconButton
+              disabled={isNextDisabled()}
+              variant="contained"
+              onClick={
+                getActiveStep(state) === steps.length - 1
+                  ? handleFinish
+                  : handleNext
               }
-            />
-          </IconButton>
+              className={
+                isNextDisabled()
+                  ? classes.nextButtonDisabled
+                  : classes.nextButton
+              }
+              style={{ float: "right" }}
+            >
+              <ArrowForward
+                className={
+                  isNextDisabled() ? classes.arrowDisabled : classes.arrow
+                }
+              />
+            </IconButton>
+          )}
         </Grid>
       </Grid>
       {/* Progress Bar */}
@@ -372,11 +398,7 @@ function VisualizerContainer() {
                 : null
             }`}
           >
-            {state.stepper_state === StepperState.VISUALIZE ? (
-              <PlotsContainer />
-            ) : (
-              <VisualizerOptionSelectionGrid />
-            )}
+            {getVizContent()}
           </CardContent>
         </Card>
       </Grid>

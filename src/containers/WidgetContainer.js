@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { useState, StateContext } from "state/State";
+import { useState } from "state/State";
 
 import {
   Widget,
