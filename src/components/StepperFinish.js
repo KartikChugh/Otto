@@ -37,8 +37,9 @@ export default function StepperFinish() {
     setCodeCopied(setCopied);
   };
 
-  const openInCollab = () => {
-    copyToClipboard(false);
+  const openInCollab = async () => {
+    copyToClipboard(true);
+    await new Promise((r) => setTimeout(r, 1200));
     window
       .open("https://colab.research.google.com/#create=true", "_blank")
       .focus();
@@ -71,7 +72,7 @@ export default function StepperFinish() {
           </Tooltip>
         </Grid>
         <Grid item>
-          <Tooltip title="Open in Google Collab" placement="top">
+          <Tooltip title="Launch Google Collab" placement="top">
             <IconButton onClick={openInCollab} color="primary" component="span">
               <ExitToAppIcon />
             </IconButton>

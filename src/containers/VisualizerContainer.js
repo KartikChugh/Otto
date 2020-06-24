@@ -360,7 +360,7 @@ function VisualizerContainer() {
             })}
             {state.stepper_finish && (
               <Typography color="textPrimary" style={{ fontSize: "18px" }}>
-                Code Gen!
+                Code Display
               </Typography>
             )}
             }

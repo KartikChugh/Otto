@@ -52,7 +52,7 @@ export const DatasetPreface = () => {
 
 export const DatasetPreRecommendation = () => {
   return [
-    "I have selected a dataset that best matches your need",
+    "I have selected a dataset that best matches your goal",
     "Feel free to check out other datasets, or select “Custom” to use your own",
   ];
 };
@@ -116,7 +116,7 @@ export const AdvanceFromModel = (model) => {
 
 export const PreprocessorRecommendation = () => {
   return [
-    "I've Otto-matically setup some data preprocessors to optimize learning, but feel free to adjust them",
+    "I've setup some data preprocessors to optimize learning, but feel free to adjust them",
   ];
 };
 
