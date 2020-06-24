@@ -198,7 +198,7 @@ export default function VisualizerOptionSelectionGrid() {
       case StepperState.DATASET:
         return "Choose a dataset";
       case StepperState.MODEL:
-        return "Select an ML Model";
+        return (state.task === Tasks.NATURAL_LANGUAGE) ? "Select ML Model(s)" : "Select an ML Model";
       case StepperState.PREPROCESSORS:
         return "Choose data preprocessor(s)";
     }
