@@ -21,7 +21,7 @@ function reducer(state: StateType, action: ActionType): StateType {
   const getActiveStep = () => {
     return StepperStateOrder.indexOf(state.stepper_state);
   };
-
+  console.log("sa", state, action);
   switch (action.type) {
     case Actions.SET_TASK:
       return {
@@ -39,7 +39,7 @@ function reducer(state: StateType, action: ActionType): StateType {
         nlp_models: [],
         nlp_models_otto: [],
       };
-    case Actions.TOGGLE_NLP_MODEL:
+    case Actions.TOGGLE_NLP_MODEL: {
       let currentModels = state.nlp_models;
       if (currentModels.includes(action.model)) {
         currentModels = currentModels.filter((val) => val !== action.model);
@@ -52,7 +52,8 @@ function reducer(state: StateType, action: ActionType): StateType {
         model_otto: null,
         nlp_models: currentModels,
       };
-    case Actions.TOGGLE_NLP_MODEL_OTTO:
+    }
+    case Actions.TOGGLE_NLP_MODEL_OTTO: {
       let currentModelsOtto = state.nlp_models_otto;
       if (currentModelsOtto.includes(action.model)) {
         currentModelsOtto = currentModelsOtto.filter(
@@ -65,6 +66,7 @@ function reducer(state: StateType, action: ActionType): StateType {
         ...state,
         nlp_models_otto: currentModelsOtto,
       };
+    }
     case Actions.SET_SAMPLE_DATASET:
       return { ...state, sample_dataset: action.sample_dataset };
     case Actions.SET_TASK_OTTO:
@@ -105,7 +107,7 @@ function reducer(state: StateType, action: ActionType): StateType {
         preprocessors_otto: currentPreprocessors,
       };
     }
-    case Actions.STEPPER_HANDLE_NEXT:
+    case Actions.STEPPER_HANDLE_NEXT: {
       let newStateForNext = {
         ...state,
         stepper_state:
@@ -118,7 +120,8 @@ function reducer(state: StateType, action: ActionType): StateType {
       }
       handleNext(newStateForNext);
       return newStateForNext;
-    case Actions.STEPPER_HANDLE_PREVIOUS:
+    }
+    case Actions.STEPPER_HANDLE_PREVIOUS: {
       const newStateForPrev = {
         ...state,
         stepper_state:
@@ -139,6 +142,7 @@ function reducer(state: StateType, action: ActionType): StateType {
       }
       handlePrev(newStateForPrev);
       return newStateForPrev;
+    }
     case Actions.HANDLE_STEPPER_FINISH:
       return {
         ...state,
