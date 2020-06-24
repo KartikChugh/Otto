@@ -38,6 +38,8 @@ Below is a step-by-step breakdown intended for the technical reader.
 
 One of the biggest obstacles faced by those just getting started with ML is the abundance of jargon, from “loss functions” to “contour boundaries“ — beginners can't be expected to decide what model to use based on cryptic terminology, let alone develop one from scratch! Otto narrows down your options by inferring the high-level task at hand from a simple objective statement.
 
+![taskInference](demo/taskInference.gif)
+
 Task inference is powered by a Wit application (**Otto-Task**) trained on 300 such statements (e.g. “I want to detect loan applications as fraudulent”, “help me forecast stock prices”, or “let's summarize an article into a paragraph”) derived from real-world machine learning research. **Otto-Task** attempts to categorize the _task_ intent as regression, classification, or natural language processing, and additionally extracts a _subject_ entity embodying a streamlined form of the objective in order to filter out extraneous words. 
 
 The subject is parsed for keyword matches (“tweets”, “housing”, etc) against our database of sample datasets. If a relevant dataset is found, Otto pulls the optimal task, model, and preprocessors for the dataset and pre-selects them for the user throughout the pipeline-building process. Otherwise, Otto issues a task recommendation based on the recognized intent. And if no intent was identified, the user is provided with some tips to help them pick the best task themselves.
@@ -105,7 +107,15 @@ All done! With your data sorted out, preprocessors set, and model configured, Ot
 
 ![codegen](demo/codeGen.gif)
 
-## Future
-- Ask Otto questions along the way
+## Future Plans
+
+Otto's modular design makes it readibly extensible, and its use of Wit means its natural language capabilities can be extended to even more domains. Here are just a few things planned for Otto:
+
+- **More models**: logistic regression, support vector machines, decision trees
+- **New tasks**: data generation (e.g. GANs), speech recognition
+- **Smarter NLP**: being able to ask Otto to explain machine learning concepts or describe the difference between options
 
 ## About
+
+
+
