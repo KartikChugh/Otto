@@ -137,4 +137,4 @@ Sanuj is Software Engineer at Facebook who loves building interactive React-base
 
 ### Why Otto the Owl?
 
-There's the alliteration, the portrait of the wise owl that comes to mind, but the real reason might lie in the subtle usage of OttoML...
+There's the alliteration, the portrait of the wise owl that comes to mind, the subtle use of [OttoML](https://en.wikipedia.org/wiki/Automated_machine_learning)..
