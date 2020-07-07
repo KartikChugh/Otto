@@ -117,13 +117,15 @@ Otto's modular design makes it readibly extensible, and its use of Wit means its
 
 ## About
 
+### Contributors
+
 <p align="center">
 <img src="img/a.jpg" height="200px">
 </p>
 
 **Kartik Chugh**
 
-Kartik is an incoming Sophomore at the University of Virginia, currently an AI intern at Amazon Alexa. An avid open-source contributor, he is passionate about API design and developing only the coolest machine learning tools
+Kartik is an incoming second-year at the University of Virginia and currently an intern at Amazon Alexa. An avid open-source contributor, he is passionate about API design and developing only the coolest machine learning tools!
 
 <p align="center">
  <img src="img/b.jpg" height="200px">
@@ -131,6 +133,8 @@ Kartik is an incoming Sophomore at the University of Virginia, currently an AI i
 
 **Sanuj Bhatia**
 
-Sanuj hopes he has a good chance at the hackathon, it might have something to do with him being a Software Engineer at Facebook. He loves building interactive React-based applications, and likes to introduce and then fix bugs for maximum impact.
+Sanuj is Software Engineer at Facebook who loves building interactive React-based applications. When possible, he likes to introduce and then fix bugs for maximum impact.
 
-_Why Otto? There's all that alliteration, a portrait of the wise owl comes to mind, but the real reason might lie in the subtle usage of Otto-ML._
+### Why Otto the Owl?
+
+There's the alliteration, the portrait of the wise owl that comes to mind, but the real reason might lie in the subtle usage of OttoML...
