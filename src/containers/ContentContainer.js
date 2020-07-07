@@ -7,15 +7,14 @@ import SummaryContainer from "containers/SummaryContainer";
 function ContentContainer() {
   return (
     <>
-      <Col className="summaryContainer" lg={2}>
-        <SummaryContainer />
-      </Col>
-      <Col className="mainColumnContainer">
-        <MainColumnContainer />
-      </Col>
-      <Col className="rightColumnContainer" lg={3}>
+      <Col className="summaryContainer" lg={1}>
+        {/* <SummaryContainer /> */}
         <RightColumnContainer />
       </Col>
+      <Col className="mainColumnContainer" lg={6}>
+        <MainColumnContainer />
+      </Col>
+      <Col className="rightColumnContainer" lg={1}></Col>
     </>
   );
 }

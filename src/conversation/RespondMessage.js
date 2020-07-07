@@ -10,14 +10,6 @@ import {
     extractClassificationModel, 
     extractArchitectureChange
 } from "conversation/ConversationUtils";
-import {
-    Optimizers,
-    Losses,
-    Activations,
-    Initializers,
-  } from "nn-architecture/hyperparams";
-import { Layer } from "nn-architecture/Layer";
-import { NNActions } from "state/NNActions";
 
 export const responseToMessage = async (userMessage, wits, state, dispatch, nn_state, nn_dispatch) => {
     switch (state.stepper_state) {
@@ -31,33 +23,43 @@ export const responseToMessage = async (userMessage, wits, state, dispatch, nn_s
             if (state.model === Models.NEURAL_NETWORK_FF) {
                 return architectureStep(userMessage, wits.nn, nn_state, nn_dispatch);
             }
+            break;
+        default:
+            break;
     }
 
 }
 
 const taskStep = async (userMessage, wit, state, dispatch) => {
-    console.log("taskStep");
+    console.log("RESPOND MESSAGE -- TASK STEP");
 
     // get the wit result
     const witResult = await getWitResult(wit, userMessage);
-    console.log(witResult);
+    console.log("Wit result: ", witResult);
 
     // extract the subject or null
     const subject = extractSubject(witResult);
-    console.log(subject);
+    console.log("Extracted subject: ", subject);
+
+    let extractedTask = extractTask(witResult);
+    console.log("Extracted task: ", extractedTask);
 
     // extract the sample dataset or null
-    const effectiveSubject = subject ? subject : userMessage;
-    const [taskForSampleDataset, modelForSampleDataset, sampleDataset, matchedKeywords] = extractSampleDataset(
+    const effectiveSubject = (subject  && extractedTask) ? subject : userMessage;
+    console.log("Final effective subject: ", effectiveSubject);
+    const [taskForSampleDataset, modelForSampleDataset, sampleDataset, matchedKeyword] = extractSampleDataset(
         effectiveSubject
     );
+    console.log("Sample data matches: ");
     console.log(taskForSampleDataset);
+    console.log(modelForSampleDataset);
     console.log(sampleDataset);
-    console.log(matchedKeywords);
+    console.log(matchedKeyword);
 
     // define the task or null
-    const task = taskForSampleDataset ? taskForSampleDataset : extractTask(witResult);
-    console.log(task);
+    const task = taskForSampleDataset ?? extractedTask;
+    console.log("Final task decision: ", task);
+
     if (sampleDataset) {
         // update dataset type
         dispatch({
@@ -78,14 +80,27 @@ const taskStep = async (userMessage, wit, state, dispatch) => {
             sample_dataset: sampleDataset,
         });
         // update model
-        dispatch({
-            type: Actions.SET_MODEL,
-            model: modelForSampleDataset,
-        });
-        dispatch({
-            type: Actions.SET_MODEL_OTTO,
-            model: modelForSampleDataset,
-        });
+        if (task === Tasks.NATURAL_LANGUAGE) {
+            for (const nlpModel of modelForSampleDataset) {
+                dispatch({
+                    type: Actions.TOGGLE_NLP_MODEL,
+                    model: nlpModel
+                });
+                dispatch({
+                    type: Actions.TOGGLE_NLP_MODEL_OTTO,
+                    model: nlpModel
+                });
+            }
+        } else {
+            dispatch({
+                type: Actions.SET_MODEL,
+                model: modelForSampleDataset,
+            });
+            dispatch({
+                type: Actions.SET_MODEL_OTTO,
+                model: modelForSampleDataset,
+            });
+        }
     }
 
     if (task) {
@@ -107,17 +122,16 @@ const taskStep = async (userMessage, wit, state, dispatch) => {
 }
 
 const modelStep = async (userMessage, wit, state, dispatch) => {
-    console.log("modelStep");
+    console.log("RESPOND MESSAGE -- MODEL STEP");
 
     const task = state.task;
     let model = state.model;
+    let nlp_models = state.nlp_models;
 
-    console.log("Task: \n", task);
-    console.log("Model: \n", model);
+    console.log("Task rn: ", task);
+    console.log("Model rn: ", model, nlp_models);
 
-    // model not predefined (custom dataset)
-    // FIXME: use recommended
-    if (!model) {
+    if (state.task !== Tasks.NATURAL_LANGUAGE) {
         switch (task) {
             case Tasks.REGRESSION:
                 model = await extractRegressionModel(userMessage, wit);
@@ -126,8 +140,10 @@ const modelStep = async (userMessage, wit, state, dispatch) => {
                 model = await extractClassificationModel(userMessage, wit) ||
                     Models.NEURAL_NETWORK_FF;
                 break;
+            default:
+                break;
         }
-
+    
         dispatch({
             type: Actions.SET_MODEL,
             model: model,
@@ -136,10 +152,9 @@ const modelStep = async (userMessage, wit, state, dispatch) => {
             type: Actions.SET_MODEL_OTTO,
             model: model,
         });
-
+        return msgs.ModelRecommendation(model);
     }
-
-    return msgs.ModelRecommendation(model);
+   
 
 }
 

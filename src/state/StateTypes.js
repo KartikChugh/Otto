@@ -9,7 +9,7 @@ export const Models = Object.freeze({
   POISSON_REGRESSION: "Poisson Regression",
   ORDINAL_REGRESSION: "Ordinal Regression",
   KNN: "K-Nearest Neighbors",
-  NEURAL_NETWORK_FF: "Feedforward Neural Network",
+  NEURAL_NETWORK_FF: "Deep Neural Network",
   SENTIMENT_ANALYSIS: "Sentiment Analysis",
   ENTITY_RECOGNITION: "Entity Recognition",
 });
@@ -51,13 +51,21 @@ export const DatasetCategory = Object.freeze({
 });
 
 export const SampleDataset = Object.freeze({
+  // KNN
   IRIS: "iris",
+  WINE: "wine",
+
+  // LIN REG
   BOSTON: "boston",
+  DIABETES: "diabetes",
+
+  // NLP
   TWITTER: "twitter",
+  IMDB: "imdb",
 });
 
 export const Preprocessors = Object.freeze({
-  PCA: "PCA",
+  PCA: "Component Analysis",
   NORMALIZATION: "Normalization",
   TEXT_CLEANING: "Text Cleaning",
 });
@@ -85,7 +93,7 @@ export type ModelsType =
   | "Poisson Regression"
   | "Ordinal Regression"
   | "K-Nearest Neighbors"
-  | "Feedforward Neural Network"
+  | "Deep Neural Network"
   | "Sentiment Analysis"
   | "Entity Recognition";
 
@@ -121,9 +129,9 @@ export type StateType = {
 };
 
 // export const InitialState: () => StateType = () => ({
-//   task: Tasks.CLASSIFICATION,
+//   task: Tasks.REGRESSION,
 //   task_otto: null,
-//   model: Models.KNN,
+//   model: Models.LINEAR_REGRESSION,
 //   model_otto: null,
 //   nlp_models: [],
 //   nlp_models_otto: [],
@@ -138,38 +146,56 @@ export type StateType = {
 //   stepper_finish: false,
 // });
 
-export const InitialState: () => StateType = () => ({
-  task: Tasks.NATURAL_LANGUAGE,
-  task_otto: null,
-  model: null,
-  model_otto: null,
-  nlp_models: [],
-  nlp_models_otto: [],
-  dataset_category: DatasetCategory.CUSTOM,
-  dataset_category_otto: null,
-  sample_dataset: null,
-  sample_dataset_otto: null,
-  preprocessors: [],
-  preprocessors_otto: [],
-
-  stepper_state: StepperState.MODEL,
-  stepper_finish: false,
-});
-
 // export const InitialState: () => StateType = () => ({
-//   task: null,
+//   task: Tasks.NATURAL_LANGUAGE,
 //   task_otto: null,
 //   model: null,
 //   model_otto: null,
 //   nlp_models: [],
 //   nlp_models_otto: [],
-//   dataset_category: null,
+//   dataset_category: DatasetCategory.CUSTOM,
 //   dataset_category_otto: null,
 //   sample_dataset: null,
 //   sample_dataset_otto: null,
 //   preprocessors: [],
 //   preprocessors_otto: [],
 
-//   stepper_state: StepperStateOrder[0],
+//   stepper_state: StepperState.MODEL,
 //   stepper_finish: false,
 // });
+
+// export const InitialState: () => StateType = () => ({
+//   task: Tasks.CLASSIFICATION,
+//   task_otto: null,
+//   model: Models.NEURAL_NETWORK_FF,
+//   model_otto: null,
+//   nlp_models: [],
+//   nlp_models_otto: [],
+//   dataset_category: DatasetCategory.CUSTOM,
+//   dataset_category_otto: null,
+//   sample_dataset: null,
+//   sample_dataset_otto: null,
+//   preprocessors: [],
+//   preprocessors_otto: [],
+
+//   stepper_state: StepperState.VISUALIZE,
+//   stepper_finish: false,
+// });
+
+export const InitialState: () => StateType = () => ({
+  task: null,
+  task_otto: null,
+  model: null,
+  model_otto: null,
+  nlp_models: [],
+  nlp_models_otto: [],
+  dataset_category: null,
+  dataset_category_otto: null,
+  sample_dataset: null,
+  sample_dataset_otto: null,
+  preprocessors: [],
+  preprocessors_otto: [],
+
+  stepper_state: StepperStateOrder[0],
+  stepper_finish: false,
+});

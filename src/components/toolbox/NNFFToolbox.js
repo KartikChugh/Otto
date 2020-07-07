@@ -42,44 +42,14 @@ export default function NNFFToolbox() {
   const { nn_state } = useNNState();
   return (
     <div className={classes.root}>
-      <ExpansionPanel>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Grid container className={classes.header} direction="row">
-            <Grid item>
-              <Typography variant="h5" className={classes.floatLeft}>
-                Build
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="h6" className={classes.floatRight}>
-                Layer {nn_state.selectedLayerIndex + 1} of{" "}
-                {nn_state.layers.length}
-              </Typography>
-            </Grid>
-          </Grid>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <NNFFBuildPanelDetails />
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.floatLeft} variant="h5">
-            Learn
+      <Grid container className={classes.header} direction="row">
+        <Grid item>
+          <Typography variant="h6" className={classes.floatRight}>
+            Layer {nn_state.selectedLayerIndex + 1} of {nn_state.layers.length}
           </Typography>
-        </ExpansionPanelSummary>
-      </ExpansionPanel>
-      <ExpansionPanel>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Grid container direction="column">
-            <Grid item>
-              <Typography className={classes.floatLeft} variant="h5">
-                Train
-              </Typography>
-            </Grid>
-          </Grid>
-        </ExpansionPanelSummary>
-      </ExpansionPanel>
+          <NNFFBuildPanelDetails />
+        </Grid>
+      </Grid>
     </div>
   );
 }

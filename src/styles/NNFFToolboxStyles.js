@@ -6,8 +6,8 @@ export const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   header: {
-    display: "inline-block",
     position: "absolute",
+    marginLeft: 36,
     width: 230,
     marginTop: -16,
   },
@@ -27,8 +27,9 @@ export const useStyles = makeStyles((theme) => ({
     float: "right",
     color: "#3f51b5",
     fontWeight: 400,
-    fontSize: 16,
-    marginTop: 4,
+    fontSize: 20,
+    marginTop: 8,
+    marginBottom: 18,
   },
   actionWidth: {
     width: 260,
@@ -38,6 +39,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   layerInputItem: {
     marginBottom: 8,
+    marginTop: -16,
   },
   layerInput: {
     width: 60,
@@ -57,7 +59,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   button: {
     width: 260,
-    marginBottom: 8,
     outline: "none !important",
+  },
+  marginTOP: {
+    marginTop: 8,
   },
 }));

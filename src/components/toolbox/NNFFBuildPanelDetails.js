@@ -18,6 +18,7 @@ import {
   Typography,
   Slider,
 } from "@material-ui/core";
+import { Activations, Initializers } from "nn-architecture/hyperparams";
 import { useStyles } from "styles/NNFFToolboxStyles";
 import { NNActions } from "state/NNActions";
 import { useNNState } from "state/NNState";
@@ -40,6 +41,22 @@ const onLayerRemove = (layerIndex, nn_dispatch) => {
 const onLayerAdd = (nn_dispatch) => {
   nn_dispatch({
     type: NNActions.ADD_LAYER,
+  });
+};
+
+const onLayerActivationChange = (event, layerIndex, nn_dispatch) => {
+  nn_dispatch({
+    type: NNActions.SET_LAYER_ACTIVATION,
+    layer: layerIndex,
+    activation: event.target.value,
+  });
+};
+
+const onLayerInitializerChange = (event, layerIndex, nn_dispatch) => {
+  nn_dispatch({
+    type: NNActions.SET_LAYER_INITIALIZER,
+    layer: layerIndex,
+    initializer: event.target.value,
   });
 };
 
@@ -78,25 +95,31 @@ function LayerOption({ layer, layerIndex, nn_dispatch }) {
       </Grid>
       <Grid item className={classes.actionItem}>
         <FormControl className={classes.actionWidth}>
-          <InputLabel id="demo-simple-select-label">
-            Activation Function1
-          </InputLabel>
-          <Select value={10} onChange={null}>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+          <InputLabel>Activation Function</InputLabel>
+          <Select
+            value={layer.activation}
+            onChange={(event) =>
+              onLayerActivationChange(event, layerIndex, nn_dispatch)
+            }
+          >
+            {Object.keys(Activations).map((key) => (
+              <MenuItem value={Activations[key]}>{Activations[key]}</MenuItem>
+            ))}
           </Select>
         </FormControl>
       </Grid>
       <Grid item className={classes.actionItem}>
         <FormControl className={classes.actionWidth}>
-          <InputLabel id="demo-simple-select-label">
-            Weight Initializer
-          </InputLabel>
-          <Select value={10} onChange={null}>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+          <InputLabel>Weight Initializer</InputLabel>
+          <Select
+            value={layer.initializer}
+            onChange={(event) =>
+              onLayerInitializerChange(event, layerIndex, nn_dispatch)
+            }
+          >
+            {Object.keys(Initializers).map((key) => (
+              <MenuItem value={Initializers[key]}>{Initializers[key]}</MenuItem>
+            ))}
           </Select>
         </FormControl>
       </Grid>
@@ -131,7 +154,7 @@ export default function NNFFBuildPanelDetails() {
       <Grid item>
         <Button
           color="primary"
-          className={classes.button}
+          className={`${classes.button} ${classes.marginTOP}`}
           variant="outlined"
           onClick={() => onLayerAdd(nn_dispatch)}
         >

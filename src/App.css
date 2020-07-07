@@ -46,6 +46,12 @@
   flex-shrink: 0;
 }
 
+.appLogo {
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 24px;
+}
+
 .contentContainer {
   height: calc(100% - 60px);
   min-height: 1000px;
@@ -57,7 +63,7 @@
 }
 
 .mainColumnContainer {
-  min-width: 300px;
+  min-width: 790px;
 }
 
 .rightColumnContainer {
@@ -66,7 +72,15 @@
 }
 
 .visualizerContainer {
-  height: 65%;
+  height: 59%;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+.finishContainer {
+  height: 100%;
   width: 100%;
   padding-left: 20px;
   padding-right: 20px;
@@ -74,14 +88,50 @@
 }
 
 .codeContainer {
-  height: 35%;
+  height: 40%;
+  max-height: 484px;
+  padding-left: 48px;
   width: 100%;
+}
+
+.codeOverflow {
+  height: 100%;
+  overflow-y: auto;
+  margin-right: 48px;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.codeOverflowFinish {
+  height: 80%;
+  overflow-y: auto;
+  margin-right: -12px;
+  margin-left: 12px;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.codeOverflow::-webkit-scrollbar, .codeOverflowFinish::-webkit-scrollbar
+{
+  width: 12px;  /* for vertical scrollbars */
+}
+
+.codeOverflow::-webkit-scrollbar-track, .codeOverflowFinish::-webkit-scrollbar-track
+{
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.codeOverflow::-webkit-scrollbar-thumb, .codeOverflowFinish::-webkit-scrollbar-thumb
+{
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .toolboxContainer {
   height: 40%;
+  margin-left: 39px;
+    text-align: right;
 }
 
 .ottoContainer {
-  height: 40%;
+  height: 100%;
 }

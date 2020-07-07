@@ -3,17 +3,34 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { Card, CardContent, Grow } from "@material-ui/core";
 import { useState } from "state/State";
-import { StepperState, StateType, Models } from "state/StateTypes";
+import {
+  StepperState,
+  StateType,
+  Models,
+  DatasetCategory,
+} from "state/StateTypes";
 import NNFFToolbox from "components/toolbox/NNFFToolbox";
 import KNNToolbox from "components/toolbox/KNNToolbox";
+import DataPreview from "components/toolbox/DataPreview";
+import LinRegToolbox from "components/toolbox/LinRegToolbox";
+import { datasetMetadata } from "static/datasets/metadata";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 296,
   },
+  dataRoot: {
+    width: "96%",
+  },
   headerText: {
     paddingLeft: theme.spacing(0),
     paddingTop: theme.spacing(7),
+    paddingBottom: theme.spacing(1),
+    fontWeight: "600",
+  },
+  dataHeaderText: {
+    paddingLeft: theme.spacing(0),
+    paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(1),
     fontWeight: "600",
   },
@@ -28,24 +45,50 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const getToolboxContent = (state: StateType) => {
-  switch (state.model) {
-    case Models.LINEAR_REGRESSION:
-      return <div>TODO</div>;
-    case Models.NEURAL_NETWORK_FF:
-      return <NNFFToolbox />;
-    default:
-      return <KNNToolbox />;
+  if (state.stepper_state === StepperState.VISUALIZE) {
+    switch (state.model) {
+      case Models.LINEAR_REGRESSION:
+        return <LinRegToolbox />;
+      case Models.NEURAL_NETWORK_FF:
+        return <NNFFToolbox />;
+      case Models.KNN:
+        return <KNNToolbox />;
+      default:
+        return null;
+    }
   }
+  if (state.stepper_state === StepperState.DATASET) {
+    return <DataPreview />;
+  }
+  return null;
 };
 
-export default function ToolboxContainer() {
+export default function ToolboxContainer({ getIsShown }) {
   const classes = useStyles();
   const { state } = useState();
   return (
-    <Grow in={state.stepper_state === StepperState.VISUALIZE}>
-      <div className={classes.root}>
-        <Typography className={classes.headerText} variant="h5">
-          Toolbox
+    <Grow in={getIsShown()}>
+      <div
+        className={
+          state.stepper_state === StepperState.VISUALIZE
+            ? classes.root
+            : classes.dataRoot
+        }
+      >
+        <Typography
+          className={
+            state.stepper_state === StepperState.VISUALIZE
+              ? classes.headerText
+              : classes.dataHeaderText
+          }
+          variant="h5"
+        >
+          {state.stepper_state === StepperState.VISUALIZE
+            ? "Toolbox"
+            : state.stepper_state === StepperState.DATASET &&
+              state.sample_dataset != null
+            ? "Dataset Preview - " + datasetMetadata[state.sample_dataset].title
+            : null}
         </Typography>
         <Card className={classes.card} variant="outlined">
           <CardContent className={classes.cardContent}>

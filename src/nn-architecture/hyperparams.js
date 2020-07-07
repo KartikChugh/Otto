@@ -1,27 +1,28 @@
 export const Optimizers = Object.freeze({
-    ADAM: "adam",
+  ADAM: "adam",
 });
 
 export const Losses = Object.freeze({
-    BINARY_CLASS: "binary_crossentropy",
-    MULTI_CLASS: "categorical_crossentropy",
+  BINARY_CLASS: "binary_crossentropy",
+  MULTI_CLASS: "categorical_crossentropy",
 });
 
 export const Activations = Object.freeze({
-    RELU: "relu",
-    SIGMOID: "sigmoid",
-    TANH: "tanh",
-    SOFTMAX: "softmax",
+  RELU: "relu",
+  SIGMOID: "sigmoid",
+  TANH: "tanh",
+  SOFTMAX: "softmax",
+  LINEAR: "linear",
 });
 
 export const Initializers = Object.freeze({
-    GLOROT: "glorot_uniform",
-    RANDOM: "random_uniform",
-    HE: "he_uniform",
-    LECUN: "lecun_uniform",
+  GLOROT: "glorot_uniform",
+  RANDOM: "random_uniform",
+  HE: "he_uniform",
+  LECUN: "lecun_uniform",
 });
 
 export const Layers = Object.freeze({
-    INPUT: "Input",
-    DENSE: "Dense"
+  INPUT: "Input",
+  DENSE: "Dense",
 });

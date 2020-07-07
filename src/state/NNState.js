@@ -9,10 +9,11 @@ import {
 } from "nn-architecture/hyperparams";
 import { Layer } from "nn-architecture/Layer";
 import { NNActionType, NNActions } from "state/NNActions";
+import PlotsContainer from "containers/PlotsContainer";
 
 const InitialState = () => ({
   layers: [
-    new Layer(3),
+    new Layer(3, Activations.LINEAR),
     new Layer(6),
     new Layer(5),
     new Layer(6),
@@ -35,6 +36,23 @@ function reducer(state, action: NNActionType) {
         ...state,
         selectedLayerIndex: action.layer,
       };
+    case NNActions.SET_LAYER_ACTIVATION: {
+      const layers = [...state.layers];
+      layers[action.layer].activation = action.activation;
+      return {
+        ...state,
+        layers,
+      };
+    }
+    case NNActions.SET_LAYER_INITIALIZER: {
+      const layers = [...state.layers];
+      layers[action.layer].initializer = action.initializer;
+      return {
+        ...state,
+        layers,
+      };
+    }
+
     case NNActions.SET_NODES: {
       const layers = [...state.layers];
       layers[action.layer] = new Layer(action.nodes);
@@ -79,14 +97,14 @@ function reducer(state, action: NNActionType) {
     case NNActions.SET_HIDDEN_ACTIVATIONS: {
       const newActivation = action.activation;
       const layers = [...state.layers];
-      for (let i = 0; i < layers.length - 1; i++) {
+      for (let i = 1; i < layers.length - 1; i++) {
         const layer = layers[i];
         layer.activation = newActivation;
       }
       return {
         ...state,
         layers,
-      }
+      };
     }
     case NNActions.SET_ALL_INITIALIZERS: {
       const newInitializer = action.initializer;
@@ -98,7 +116,7 @@ function reducer(state, action: NNActionType) {
       return {
         ...state,
         layers,
-      }
+      };
     }
     case NNActions.SET_HIDDEN_NODES: {
       const count = action.nodes;
@@ -110,13 +128,13 @@ function reducer(state, action: NNActionType) {
       return {
         ...state,
         layers,
-      } 
+      };
     }
     case NNActions.SET_HIDDEN_LAYERS: {
       const layerCount = action.layers;
       const currentLayers = [...state.layers];
       const inputLayer = currentLayers[0];
-      const outputLayer = currentLayers[currentLayers.length-1];
+      const outputLayer = currentLayers[currentLayers.length - 1];
 
       const activation = inputLayer.activation;
       const initializer = inputLayer.initializer;
@@ -125,7 +143,7 @@ function reducer(state, action: NNActionType) {
       const newLayers = [];
       newLayers.push(inputLayer);
       for (let i = 0; i < layerCount; i++) {
-        const nodes = (i % 2) ? nodeCountA : nodeCountB;
+        const nodes = i % 2 ? nodeCountA : nodeCountB;
         const newLayer = new Layer(nodes, activation, initializer);
         newLayers.push(newLayer);
       }
@@ -133,7 +151,7 @@ function reducer(state, action: NNActionType) {
       return {
         ...state,
         layers: newLayers,
-      }
+      };
     }
 
     case NNActions.ADD_LAYERS: {
@@ -142,23 +160,24 @@ function reducer(state, action: NNActionType) {
 
       const activation = layers[0].activation;
       const initializer = layers[0].initializer;
-      console.log(layers);
-      const nodeCountA = layers?.[layers.length-3]?.units ?? 5;
-      const nodeCountB = layers?.[layers.length-2]?.units ?? 3;
+      const nodeCountA = layers?.[layers.length - 3]?.units ?? 5;
+      const nodeCountB = layers?.[layers.length - 2]?.units ?? 3;
 
       const outputLayer = layers.pop();
 
       for (let i = 0; i < count; i++) {
-        const layer = new Layer((i % 2 ? nodeCountB : nodeCountA), activation, initializer);
+        const layer = new Layer(
+          i % 2 ? nodeCountB : nodeCountA,
+          activation,
+          initializer
+        );
         layers.push(layer);
       }
       layers.push(outputLayer);
-      console.log("New layers array after ADD_LAYERS: ", layers);
       return {
         ...state,
         layers: layers,
-      }
-
+      };
     }
 
     case NNActions.REMOVE_LAYERS: {
@@ -176,7 +195,7 @@ function reducer(state, action: NNActionType) {
       return {
         ...state,
         layers: layers,
-      }
+      };
     }
     default:
       return state;

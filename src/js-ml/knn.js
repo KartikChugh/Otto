@@ -1,16 +1,11 @@
-import {
-  iris,
-  irisColumns,
-  irisColumnsMap,
-  irisUnits,
-} from "static/datasets/iris"; // Data
+import { datasetMetadata } from "static/datasets/metadata";
 import KNN from "ml-knn";
-import { initializeWidget } from "containers/WidgetContainer";
 import { ModelActions } from "state/ModelActions";
 
 let knn;
 let seperationSize; // To seperate training and test data
 
+let dataInfo = {};
 let data = [],
   X = [],
   y = [];
@@ -25,14 +20,19 @@ let K, DISPATCH, typesArray;
 function init() {
   X = [];
   y = [];
+  dataInfo = {};
 }
 
-export function invoke(k: Number, dispatch) {
+export function invokeKNN(k: Number, sampleDataset, dispatch) {
+  dispatch({
+    type: ModelActions.RUNNING,
+  });
   init();
   // Set Param
   K = k;
   DISPATCH = dispatch;
-  data = iris;
+  dataInfo = datasetMetadata[sampleDataset];
+  data = dataInfo.data;
   seperationSize = 0.7 * data.length;
   data = shuffleArray(data);
   dressData();
@@ -64,9 +64,13 @@ export default function dressData() {
   data.forEach((row) => {
     let rowArray, typeNumber;
 
-    rowArray = Object.keys(row)
-      .map((key) => parseFloat(row[key]))
-      .slice(0, 4);
+    rowArray = Object.keys(row).map((key) => parseFloat(row[key]));
+
+    if (dataInfo.title === "Iris") {
+      rowArray = rowArray.slice(0, 4);
+    } else {
+      rowArray = rowArray.slice(1);
+    }
 
     typeNumber = typesArray.indexOf(row.type); // Convert type(String) to type(Number)
 
@@ -91,23 +95,19 @@ function test() {
   const result = knn.predict(testSetX);
   const testSetLength = testSetX.length;
   const predictionError = error(result, testSetY);
-  console.log(
-    `Test Set Size = ${testSetLength} and number of Misclassifications = ${predictionError} and ${typesArray}`
-  );
   setTimeout(function () {
     DISPATCH({
-      type: "KNN_DONE",
+      type: ModelActions.KNN_DONE,
       knn_result_labels: result,
       knn_expected_labels: testSetY,
       knn_test_data: testSetX,
-      knn_columns: irisColumns,
-      knn_columns_map: irisColumnsMap,
+      knn_columns: dataInfo.columns,
+      knn_columns_map: dataInfo.columnsMap,
       knn_labels: typesArray,
-      knn_column_units: irisUnits,
+      knn_column_units: dataInfo.units,
+      knn_accuracy: [trainingSetX.length, testSetLength, predictionError],
     });
-  }, 500);
-
-  //   predict();
+  }, 700);
 }
 
 function error(predicted, expected) {
@@ -120,28 +120,12 @@ function error(predicted, expected) {
   return misclassifications;
 }
 
-function predict() {
-  let temp = [];
-
-  //   prompt.get(
-  //     ["Sepal Length", "Sepal Width", "Petal Length", "Petal Width"],
-  //     function (err, result) {
-  //       if (!err) {
-  //         for (var key in result) {
-  //           temp.push(parseFloat(result[key]));
-  //         }
-  //         console.log(`With ${temp} -- type =  ${knn.predict(temp)}`);
-  //       }
-  //     }
-  //   );
-}
-
 /**
  * https://stackoverflow.com/a/12646864
  * Randomize array element order in-place.
  * Using Durstenfeld shuffle algorithm.
  */
-function shuffleArray(array) {
+export function shuffleArray(array) {
   for (var i = array.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
     var temp = array[i];

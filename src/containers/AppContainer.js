@@ -19,9 +19,9 @@ function App() {
       <StateProvider>
         <NNStateProvider>
           <ModelStateProvider>
-            {/* <Row className={"headerContainer"}>
-          <HeaderContainer />
-        </Row> */}
+            <Row className={"headerContainer"}>
+              <HeaderContainer />
+            </Row>
             <Row className={"contentContainer"}>
               <ContentContainer />
             </Row>

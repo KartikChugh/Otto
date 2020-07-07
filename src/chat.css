@@ -1,5 +1,5 @@
 .rcw-conversation-container .rcw-header {
-    background-color: #000000;
+    background-color: #473080;
     border-radius: 10px 10px 0 0;
     color: #fff;
     display: -ms-flexbox;
@@ -7,7 +7,7 @@
     -ms-flex-direction: column;
     flex-direction: column;
     text-align: center;
-    padding: 15px 0 25px
+    padding: 0
 }
 .rcw-conversation-container .rcw-title {
     font-size: 24px;
@@ -34,7 +34,7 @@
     padding: 0 0 15px
 }
 .rcw-full-screen .rcw-close-button {
-    background-color: #35cce6;
+    background-color: #473080;
     border: 0;
     display: block;
     position: absolute;
@@ -57,7 +57,7 @@
         padding: 0 0 15px
     }
     .rcw-conversation-container .rcw-close-button {
-        background-color: #35cce6;
+        background-color: #473080;
         border: 0;
         display: block;
         position: absolute;
@@ -88,10 +88,10 @@
     margin-left: auto
 }
 .rcw-client .rcw-message-text {
-    background-color: #a3eaf7;
+    background-color: #c6e5f5; 
     border-radius: 10px;
-    padding: 15px;
-    max-width: 215px;
+    padding: 8px 12px 8px 12px;
+    max-width: 315px;
     text-align: left
 }
 .rcw-client .rcw-timestamp {
@@ -109,8 +109,11 @@
 .rcw-response .rcw-message-text {
     background-color: #f4f7f9;
     border-radius: 10px;
-    padding: 15px;
-    max-width: 215px;
+    padding: 10px 12px 2px 12px;
+    white-space: pre-line;
+    margin-bottom: -16px;
+    height: 100%;
+    max-width: 315px;
     text-align: left
 }
 .rcw-message-text p {
@@ -147,7 +150,7 @@
 .quick-button {
     background: none;
     border-radius: 15px;
-    border: 2px solid #35cce6;
+    border: 2px solid #473080;
     font-weight: 700;
     padding: 5px 10px;
     cursor: pointer;
@@ -200,12 +203,27 @@
 }
 .rcw-messages-container {
     background-color: #fff;
-    height: 40vh;
-    max-height: 410px;
-    overflow-y: scroll;
+    height: 76vh;
+    overflow-y: auto;
     padding-top: 10px;
-    -webkit-overflow-scrolling: touch
 }
+
+.rcw-messages-container::-webkit-scrollbar
+{
+  width: 12px;  /* for vertical scrollbars */
+  height: 12px; /* for horizontal scrollbars */
+}
+
+.rcw-messages-container::-webkit-scrollbar-track
+{
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.rcw-messages-container::-webkit-scrollbar-thumb
+{
+  background: rgba(0, 0, 0, 0.5);
+}
+
 .rcw-full-screen .rcw-messages-container {
     height: 100%;
     max-height: none
@@ -479,7 +497,8 @@
     -ms-flex-direction: column;
     flex-direction: column;
     margin: 0 20px 20px 0;
-    max-width: 320px;
+    width: 380px;
+    max-width: 380px;
     position: fixed;
     right: 0;
     width: 90vw;

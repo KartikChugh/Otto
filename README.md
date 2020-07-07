@@ -1,70 +1,140 @@
-run `npm install` on fresh clone
+# Otto: Your friendly machine learning assistant.
+<img src="logo.png" width="90%">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Build machine learning pipelines through natural language conversation
+Otto is an intelligent chat application, designed to help aspiring machine learning engineers _go from idea to implementation with zero domain knowledge_. Our website features easy model selection, insightful visualizations, and an intuitive natural language experience guiding you every step of the way. A collection of four Wit backend apps service Otto's conversational abilities and machine learning tools.
 
-## Available Scripts
+***
 
-In the project directory, you can run:
+## Highlights
 
-### `npm start`
+- **Beginner-friendly design.** Otto is made for novices, as it assumes no prior knowledge of machine learning. Users simply describe their end goals to obtain intelligent recommendations, or can choose from sample datasets to harness our models in an instant.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Powerful machine learning tools.** A range of machine learning capabilities are supported, including models for regression, classification and natural language processing, as well as preprocessors tailored to your problem. Play with neural networks, explore data visualizations, and generate ready-made Python code right in your browser!
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- **Educational experience.** Users are walked through each stage of the process, with Otto explaining terminology when needed. Annotated code blocks provide eager learners a high-level understanding of their end-to-end pipeline.
 
-### `npm test`
+***
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Quick Start
 
-### `npm run build`
+To demo some of Otto's main features, try out the following:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Say: _I want to label flower species by petal length_** to watch Otto prefill your pipeline and render a nearest neighbors classification on the popular Iris dataset.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- **Select: _Regression > Sample Dataset_** to preview sample datasets for regression, and discover the strongest predictors using different best fit lines
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Say: _Detect fraudulent credit card activity_** and select the Custom Dataset option to experience Otto's model recommendation system and interactive neural network designer.
 
-### `npm run eject`
+- **Say: _I'd like to interpret the mood of a review_** to query Wit-powered natural language models for live results.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+and feel free to get creative! Come up with your own ML goals and see where Otto takes you.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Stages
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Below is a step-by-step breakdown intended for the technical reader.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Task 
 
-## Learn More
+One of the biggest obstacles faced by those just getting started with ML is the abundance of jargon, from “loss functions” to “contour boundaries“ — beginners can't be expected to decide what model to use based on cryptic terminology, let alone develop one from scratch! Otto narrows down your options by inferring the high-level task at hand from a simple objective statement.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![taskInference](img/taskInference.gif)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Task inference is powered by a Wit application (**Otto-Task**) trained on 300 such statements (e.g. “I want to detect loan applications as fraudulent”, “help me forecast stock prices”, or “let's summarize an article into a paragraph”) derived from real-world machine learning research. **Otto-Task** attempts to categorize the _task_ intent as regression, classification, or natural language processing, and additionally extracts a _subject_ entity embodying a streamlined form of the objective in order to filter out extraneous words. 
 
-### Code Splitting
+The subject is parsed for keyword matches (“tweets”, “housing”, etc) against our database of sample datasets. If a relevant dataset is found, Otto pulls the optimal task, model, and preprocessors for the dataset and pre-selects them for the user throughout the pipeline-building process. Otherwise, Otto issues a task recommendation based on the recognized intent. And if no intent was identified, the user is provided with some tips to help them pick the best task themselves.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+### Dataset
 
-### Analyzing the Bundle Size
+Users are recommended a specific sample dataset matching their subject, or otherwise offered to preview and choose one themselves. Sample data allows beginners to prototype models quickly and easily, without the complexity of finding a dataset and figuring out the relevant features among dozens. Users may also opt to with their own data, which they can include later on in the generated code. 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+![samplePreview](img/samplePreview.gif)
 
-### Making a Progressive Web App
+### Model
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+If the user opted for custom data, Otto leverages Wit to perform the key step of selecting a classifier or regressor. A Wit client (**Otto-Model**) parses a brief user description of their data for key phrases indicating the desirability of a particular model. **Otto-Model** includes around 15 phrases and synonyms per model and performs fuzzy string matching, making it an effective and scalable technique for model recommendation.
 
-### Advanced Configuration
+A characterization of the classification dataset as “simple” or having “just a few columns”, would make the K-Nearest Neighbors algorithm a good choice, while a description of the regression data as “crime rates” or “annual consumer rankings” would suggest a Poisson or ordinal model, respectively. If no phrase is flagged, Otto will default to the most general model available: a Neural Network for classification, or a linear fit for regression. 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+In the case of a natural language task, users can combine multiple models together for a more comprehensive analysis. Otto will recommend both sentiment analysis and entity recognition models, but provides users with information about both in case they'd like to adjust this. Our NLP models are built on a Wit backend (**Otto-NLP**) configured to identify [built-in traits and entities](https://wit.ai/docs/built-in-entities/20180601).
 
-### Deployment
+#### Supported models:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+| Model Name          | Task             | Description                                                       |
+|---------------------|------------------|-------------------------------------------------------------------|
+| K-Nearest Neighbors | Classification   | Draws class regions by looking at surrounding data                |
+| Neural Network      | Classification   | Deep learning model suitable for complex datasets                 |
+| Linear              | Regression       | Ordinary linear relationship between variables                    |
+| Poisson             | Regression       | Models count data, which tends to follow a Poisson distribution   |
+| Ordinal             | Regression       | Learns rankings (e.g. "on a scale of 1-5")                        |
+| Sentiment Analysis  | Natural Language | Detects polarity, expressions of thanks, and greetings/goodbyes   |
+| Entity Recognition  | Natural Language | Extracts structures such as people, times & locations, and works of art |
 
-### `npm run build` fails to minify
+### Preprocessors
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+What good is a fancy model if it takes ages to train? In this step, Otto swoops in with handpicked preprocessors for the user's data and model selections, abstracting away the intricacies of feature engineering and dimensionality reduction — machine learning techniques that optimize the data for efficient learning. As always, users can override the recommendations.
+
+#### Supported preprocessors:
+| Preprocessor Name            | Description                                                    |
+|------------------------------|----------------------------------------------------------------|
+| Principal Component Analysis | Performs dimensionality reduction and/or feature selection     |
+| Normalization                | Scales data to have mean centered at 0 and unit variance       |
+| Text Cleaning                | Removes emojis, noisy symbols, and leading/trailing whitespace |
+
+### Visualization
+
+The visualization stage activates for neural network design, or to render any models built on sample data.
+
+#### Neural Network
+
+Satisfy your curious mind with our fun, interactive network builder! 
+
+![nn](img/nn.gif)
+
+Otto preconfigures a standard model architecture with [research-based](http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf) activations and initializers, but users are free to tinker with it layer by layer as they wish. Additionally, Otto can make network redesigns en masse with the aid of a dedicated Wit model (**Otto-Net**) that translates user instructions into architecture changes.
+
+#### Model Visualization (Sample)
+
+Instantly explore how parameters affect KNN clusters and regression slopes!
+
+![linreg](img/linreg.gif)
+
+![knn](img/knn.gif)
+
+### Code Display
+
+All done! With your data sorted out, preprocessors set, and model configured, Otto gives you a nice view of your work. 
+
+![codegen](img/codeGen.gif)
+
+## Future Plans
+
+Otto's modular design makes it readibly extensible, and its use of Wit means its natural language capabilities can be extended to even more domains. Here are just a few things planned for Otto:
+
+- **More models**: logistic regression, support vector machines, decision trees
+- **New tasks**: data generation (e.g. GANs), speech recognition
+- **Smarter NLP**: being able to ask Otto to explain machine learning concepts or describe the difference between options
+
+## About
+
+### Contributors
+
+<p align="center">
+<img src="img/a.jpg" height="200px">
+</p>
+
+**Kartik Chugh**
+
+Kartik is an incoming second-year at the University of Virginia and currently an intern at Amazon Alexa. An avid open-source contributor, he is passionate about API design and developing only the coolest machine learning tools!
+
+<p align="center">
+ <img src="img/b.jpg" height="200px">
+ </p>
+
+**Sanuj Bhatia**
+
+Sanuj is Software Engineer at Facebook who loves building interactive React-based applications. When possible, he likes to introduce and then fix bugs for maximum impact.
+
+### Why Otto the Owl?
+
+There's the alliteration, the portrait of the wise owl that comes to mind, the subtle use of [OttoML](https://en.wikipedia.org/wiki/Automated_machine_learning)..

@@ -1,5 +1,7 @@
 import { Tasks, Models } from "state/StateTypes"
 import { NNActions } from "state/NNActions"
+import { datasetMetadata } from "static/datasets/metadata"
+import { Initializers } from "nn-architecture/hyperparams"
 
 // TODO: refactor elsewhere?
 
@@ -24,17 +26,33 @@ export const getWitResult = async (wit, utterance) => {
 }
 
 export const extractSampleDataset = (statement) => {
+    console.log("Checkng for sample data match!")
     let sampleDataset = null;
-    let matchedKeywords = null;
+    let matchedKeyword = null;
     let matchedTask = null;
     let matchedModel = null;
-    return [matchedTask, matchedModel, sampleDataset, matchedKeywords];
+    matchingProcess:
+    for (const dataset in datasetMetadata) {
+        const entry = datasetMetadata[dataset];
+        const keywords = entry.keywords;
+        for (const keyword of keywords) {
+            if (statement.includes(keyword)) {
+                console.log("MATCH: ", keyword);
+                matchedKeyword = keyword;
+                matchedTask = entry.task;
+                matchedModel = entry.model;
+                sampleDataset = dataset;
+                break matchingProcess;
+            }
+        }
+    }
+    return [matchedTask, matchedModel, sampleDataset, matchedKeyword];
 } 
 
-export const extractTask = (witResponse) => { // TODO: threshold
+export const extractTask = (witResponse) => {
     let intents = witResponse.intents;
     let task = null;
-    if (intents.length > 0) {
+    if (intents.length > 0 && intents[0].confidence > 0.6) {
         let topIntent = intents[0];
         let topIntentName = topIntent.name;
         task = intentToTask[topIntentName];
@@ -57,7 +75,7 @@ export const extractRegressionModel = async (statement, wit) => {
     const witResponse = await getWitResult(wit, statement);
     let entities = Object.keys(witResponse.entities); // note that this counts matches equally
     let models = entities.map(entity => regressionEntityToModel[entity]);
-    if (models.length == 0) {
+    if (models.length === 0) {
         return Models.LINEAR_REGRESSION;
     }
     return models[0]; // returns first match
@@ -67,7 +85,7 @@ export const extractClassificationModel = async (statement, wit) => {
     const witResponse = await getWitResult(wit, statement);
     let entities = Object.keys(witResponse.entities); // note that this counts matches equally
     let models = entities.map(entity => classificationEntityToModel[entity]);
-    if (models.length == 0) {
+    if (models.length === 0) {
         return Models.NEURAL_NETWORK_FF;
     }
     return models[0]; // returns first match
@@ -85,11 +103,12 @@ export const extractArchitectureChange = (witResponse, nn_state) => {
             return {type: NNActions.RESET}
 
         case "activation":
-            let activation = entities?.["type:type"]?.[0]?.value;
+            let activation = entities?.["type:type"]?.[0]?.value?.toLowerCase();
             return activation ? {type: NNActions.SET_HIDDEN_ACTIVATIONS, activation: activation} : null;
 
         case "initializer":
-            let initializer = entities?.["type:type"]?.[0]?.value;
+            let initializer = entities?.["type:type"]?.[0]?.value?.toLowerCase();
+            if (Object.keys(Initializers).includes(initializer.toUpperCase())) initializer += "_uniform";
             return initializer ? {type: NNActions.SET_ALL_INITIALIZERS, initializer: initializer} : null;
 
         case "dimension":
@@ -101,7 +120,9 @@ export const extractArchitectureChange = (witResponse, nn_state) => {
                 case "outputs":
                     return count ? {type: NNActions.SET_NODES, layer: nn_state.layers.length - 1, nodes: count} : null;
                 case "nodes":
-                    return count ? {type: NNActions.SET_HIDDEN_NODES, nodes: count} : null;                
+                    return count ? {type: NNActions.SET_HIDDEN_NODES, nodes: count} : null;      
+                default:
+                    return null;
             }
 
         case "layers":
@@ -117,11 +138,14 @@ export const extractArchitectureChange = (witResponse, nn_state) => {
                 case "remove":
                     count = count ?? 1;
                     return {type: NNActions.REMOVE_LAYERS, layers: count, fromEnd: order === "last"}
+                default:
+                    return null;
 
             }
+        default:
+            return null;
     }
     
-    return null;
     // let architectureChange = {};
     // const intent = witResponse.intent;
     // architectureChange.intent = intent;

@@ -13,12 +13,50 @@ import {
   TaskToModelsMap,
   StateType,
   Preprocessors,
+  SampleDataset,
 } from "state/StateTypes";
 import { useState } from "state/State";
 import { Actions } from "state/Actions";
-import logo from "logo.svg";
 import SampleDatasetMenu from "components/SampleDatasetMenu";
 import { datasetMetadata } from "static/datasets/metadata";
+// import logo from "otto_logo_2.png";
+import algo from "art/algorithm.svg";
+import clas from "art/class.svg";
+import reg from "art/reg.svg";
+import nlp from "art/nlp.svg";
+import custom from "art/custom.svg";
+import sample from "art/sample.svg";
+import linear from "art/linear.svg";
+import ordinal from "art/ordinal.svg";
+import poisson from "art/poisson.svg";
+import knn from "art/knn.svg";
+import network from "art/network.svg";
+import sentiment from "art/sentiment.svg";
+import entity from "art/entity.svg";
+import norm from "art/norm.svg";
+import pca from "art/pca.svg";
+import clean from "art/clean.svg";
+
+function logoPicker(label) {
+  const map = {
+    [Tasks.REGRESSION]: reg,
+    [Tasks.CLASSIFICATION]: clas,
+    [Tasks.NATURAL_LANGUAGE]: nlp,
+    [DatasetCategory.CUSTOM]: custom,
+    [DatasetCategory.SAMPLE]: sample,
+    [Models.LINEAR_REGRESSION]: linear,
+    [Models.POISSON_REGRESSION]: poisson,
+    [Models.ORDINAL_REGRESSION]: ordinal,
+    [Models.KNN]: knn,
+    [Models.NEURAL_NETWORK_FF]: network,
+    [Models.SENTIMENT_ANALYSIS]: sentiment,
+    [Models.ENTITY_RECOGNITION]: entity,
+    [Preprocessors.PCA]: pca,
+    [Preprocessors.TEXT_CLEANING]: clean,
+    [Preprocessors.NORMALIZATION]: norm,
+  };
+  return map?.[label] ?? algo;
+}
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
@@ -39,7 +77,8 @@ const useStyles = makeStyles((theme) => ({
   titleInner: {
     fontSize: 42,
     fontWeight: 300,
-    marginTop: 8,
+    marginTop: 84,
+    marginBottom: 84,
   },
   subtitle: {
     marginTop: 20,
@@ -49,10 +88,29 @@ const useStyles = makeStyles((theme) => ({
   large: {
     width: theme.spacing(14),
     height: theme.spacing(14),
+    cursor: "pointer",
   },
-  avatarItem: {
+  avatarItemCard: {
+    transition: "all 0.2s",
     textAlign: "-webkit-center",
     width: 188,
+    border: "1px solid white",
+    marginLeft: 8,
+    marginRight: 8,
+    cursor: "pointer",
+    borderRadius: 8,
+    "&:hover": {
+      border: "1px solid rgba(0, 0, 0, 0.12)",
+    },
+  },
+  avatarItemCardSelected: {
+    boxShadow: "0px 0px 12px 4px rgba(0, 0, 0, 0.15)",
+    textAlign: "-webkit-center",
+    width: 188,
+    marginLeft: 8,
+    marginRight: 8,
+    borderRadius: 8,
+    cursor: "pointer",
   },
   avatarItemSelected: {
     width: theme.spacing(14),
@@ -60,13 +118,19 @@ const useStyles = makeStyles((theme) => ({
     boxShadow:
       "0px 5px 5px -3px rgba(0,0,0,0.2), 0px 0px 6px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)",
     border: "solid 1px #3f51b5",
+    cursor: "pointer",
   },
   avatarLabel: {
-    marginTop: 20,
+    marginTop: 28,
+    cursor: "pointer",
+    fontSize: 18,
+    height: 46,
   },
   avatarLabelSelected: {
-    marginTop: 20,
+    fontSize: 18,
+    marginTop: 28,
     fontWeight: 500,
+    height: 46,
   },
   recommend: {
     width: 30,
@@ -75,6 +139,10 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
     marginRight: theme.spacing(1),
     marginLeft: theme.spacing(1),
+  },
+  datasetMenu: {
+    width: "100%",
+    maxWidth: 190,
   },
 }));
 
@@ -122,17 +190,21 @@ export function getOptions(state: StateType) {
 export default function VisualizerOptionSelectionGrid() {
   const classes = useStyles();
   const { state, dispatch } = useState();
-  const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleClick = (event, type, label) => {
-    if (type === StepperState.DATASET && label === DatasetCategory.SAMPLE) {
-      setAnchorEl(event.currentTarget);
+  function getTitle() {
+    switch (state.stepper_state) {
+      case StepperState.TASK:
+        return "Select a Machine Learning Task";
+      case StepperState.DATASET:
+        return "Choose a Dataset";
+      case StepperState.MODEL:
+        return state.task === Tasks.NATURAL_LANGUAGE
+          ? "Select ML Model(s)"
+          : "Select an ML Model";
+      case StepperState.PREPROCESSORS:
+        return "Choose Data Preprocessor(s)";
     }
-  };
+  }
 
   const getIsRecommended = (value) =>
     [
@@ -207,29 +279,14 @@ export default function VisualizerOptionSelectionGrid() {
         <Avatar
           aria-controls={avatar.label}
           alt={avatar.label}
-          src={logo}
+          src={logoPicker(avatar.label)}
           className={
             getIsSelected(avatar.label)
               ? classes.avatarItemSelected
               : classes.large
           }
           key={avatar.label}
-          onClick={(event) => {
-            optionOnClickHandler(avatar.type, avatar.label);
-            handleClick(event, avatar.type, avatar.label);
-            console.log(
-              "target",
-              event.currentTarget,
-              event.relatedTarget,
-              event.target
-            );
-          }}
           aria-haspopup="true"
-        />
-        <SampleDatasetMenu
-          anchorEl={anchorEl}
-          handleClose={handleClose}
-          id={avatar.label}
         />
       </>
     );
@@ -238,10 +295,7 @@ export default function VisualizerOptionSelectionGrid() {
   return (
     <>
       <Typography className={classes.titleInner} color="textPrimary">
-        Let's get started!
-      </Typography>
-      <Typography variant="h6" className={classes.subtitle}>
-        Chat with Otto to get a {state.stepper_state} recommendation.
+        {getTitle()}
       </Typography>
       <Grid
         container
@@ -249,9 +303,24 @@ export default function VisualizerOptionSelectionGrid() {
         justify="center"
         alignItems="center"
         spacing={5}
+        style={
+          state.stepper_state === StepperState.DATASET &&
+          state.dataset_category === DatasetCategory.SAMPLE
+            ? { marginLeft: "76px" }
+            : {}
+        }
       >
-        {getOptions(state).map((avatar) => (
-          <Grid item className={classes.avatarItem}>
+        {getOptions(state).map((avatar, index) => (
+          <Grid
+            item
+            className={
+              getIsSelected(avatar.label)
+                ? classes.avatarItemCardSelected
+                : classes.avatarItemCard
+            }
+            key={index}
+            onClick={(event) => optionOnClickHandler(avatar.type, avatar.label)}
+          >
             {getIsRecommended(avatar.label) ? (
               <Tooltip title="Recommended by Otto!" placement="top">
                 <StyledBadge
@@ -286,6 +355,12 @@ export default function VisualizerOptionSelectionGrid() {
             </Typography>
           </Grid>
         ))}
+        {state.stepper_state === StepperState.DATASET &&
+        state.dataset_category === DatasetCategory.SAMPLE ? (
+          <Grid item className={classes.datasetMenu}>
+            <SampleDatasetMenu />
+          </Grid>
+        ) : null}
       </Grid>
     </>
   );

@@ -3,15 +3,17 @@ const StringBuilder = require("string-builder");
 
 export const model = (state) => {
   const sb = new StringBuilder();
-
+  sb.appendLine("# Build model")
   sb.appendLine("model = Sequential()");
   sb.append(layerCode(state));
 
   sb.appendLine(
     `model.compile(optimizer='${state.optimizer}', loss='${state.loss}')`
   );
-
+  sb.appendLine("# Fit model to dataset")
   sb.appendLine("model.fit(X_train, y_train, batch_size=32, epochs=100)");
+  sb.appendLine("# Evaluate model!");
+  sb.appendLine("model.evaluate(X_test, y_test, batch_size=32");
 
   return sb.toString();
 };

@@ -9,13 +9,13 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { Card } from "@material-ui/core";
 import { useState } from "state/State";
-import { StepperStateOrder, StateType } from "state/StateTypes";
+import { StepperStateOrder, StateType, Tasks } from "state/StateTypes";
 import { Actions } from "state/Actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "80%",
-    marginLeft: 110,
+    marginLeft: 90,
   },
   stepLabel: {
     fontSize: 19,
@@ -55,9 +55,9 @@ export function getSteps() {
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return "Identify the machine learning task that describes your goal";
+      return "Identify the machine learning task matching your goal";
     case 1:
-      return "Choose from provided datasets, or use your own";
+      return "Choose from provided datasets or use your own";
     case 2:
       return "Select the model best equipped to unlock insights from your data";
     case 3:
@@ -65,7 +65,7 @@ function getStepContent(step) {
     case 4:
       return "Fine tune and visualize your model";
     default:
-      return "Unknown step";
+      return "OttoML";
   }
 }
 
@@ -89,7 +89,11 @@ export default function VerticalLinearStepper() {
         option = state.dataset_category;
         break;
       case 2:
-        option = state.model;
+        if (state.task === Tasks.NATURAL_LANGUAGE) {
+          option = state.nlp_models.join(", ");
+        } else {
+          option = state.model;
+        }
         break;
       case 3:
         option = state.preprocessors.join(", ");

@@ -8,7 +8,7 @@ import {
   addResponseMessage,
   deleteMessages,
 } from "react-chat-widget";
-import logo from "otto.jpeg";
+import logo from "art/otto_logo_3.png";
 
 import * as msgs from "conversation/msgs";
 import Conversation from "conversation/Conversation";
@@ -16,37 +16,44 @@ import { useNNState } from "state/NNState";
 
 const convo = new Conversation(addResponseMessage);
 
-export function initializeWidget() {
+export async function initializeWidget(state) {
   deleteMessages();
-  convo.sayMessages(msgs.IntroQuestion());
+  await new Promise((r) => setTimeout(r, 2500));
+  convo.sayMessages(msgs.IntroQuestion(), state.stepper_state);
 }
 
 export const handleNext = (state) => {
-  convo.handleStateAdvance(state);
-}
+  const stepperStateOriginal = state.stepper_state;
+  deleteMessages();
+  const msgs = convo.handleStateAdvance(state);
+  convo.sayMessages(msgs, stepperStateOriginal);
+};
+
+export const handlePrev = (state) => {
+  deleteMessages();
+};
 
 function WidgetContainer() {
   const { state, dispatch } = useState();
+  convo.state = state;
   const { nn_state, nn_dispatch } = useNNState();
 
   useEffect(() => {
     toggleWidget();
-    initializeWidget();
+    initializeWidget(state);
   }, []);
 
-  const handleSubmit = (userMessage) => {
-    convo.handleUserMessage(userMessage, state, dispatch, nn_state, nn_dispatch);
+  const handleSubmit = async (userMessage) => {
+    const stepperStateOriginal = state.stepper_state;
+    const msgs = await convo.handleUserMessage(
+      userMessage,
+      state,
+      dispatch,
+      nn_state,
+      nn_dispatch
+    );
+    convo.sayMessages(msgs, stepperStateOriginal);
   };
-
-  // async function performResponse(userMessage) {
-  //   const responses = await convo.respondTo(userMessage);
-  //   await new Promise((r) => setTimeout(r, readWriteDelay(userMessage)));
-  //   for (const i in responses) {
-  //     const response = responses[i];
-  //     await new Promise((r) => setTimeout(r, readWriteDelay(response)));
-  //     addResponseMessage(response);
-  //   }
-  // }
 
   return (
     <Widget
@@ -55,6 +62,8 @@ function WidgetContainer() {
       subtitle=""
       title="Otto"
       titleAvatar={logo}
+      showTimeStamp={false}
+      //profileAvatar={logo}
     />
   );
 }
