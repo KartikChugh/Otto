@@ -7,7 +7,8 @@ from sklearn.model_selection import train_test_split`;
 }
 
 export const nlp = () => {
-    return `from wit import Wit
+    return `#!pip install wit #Uncomment this to install
+from wit import Wit
 import pandas as pd`
 }
 
