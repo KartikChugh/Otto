@@ -7,7 +7,7 @@ export const pca = () => {
 }
 
 export const textCleaning = () => {
-    return `data.str.strip()
+    return `data = data.str.strip().str.slice(0,200)
 data = data.replace('\\?|\\.|\\!|\\/|\\;|\\:|\\#', '', regex=True)`
 }
 
