@@ -81,6 +81,16 @@ def traitLabelForSample(traits):
 const dataframeTrait = `'Sentiments':traitLabels,`;
 const dataframeEntity = `'Entities':entityLabels,`
 
+const analysisTrait = `
+    traits = resp.get('traits')
+    traitLabel = traitLabelForSample(traits)
+    traitLabels.append(traitLabel)`;
+
+const analysisEntity = `
+    entities = resp.get('entities')
+    entityLabel = entityLabelForSample(entities)
+    entityLabels.append(entityLabel)`;
+
 export const modelNLP = (doEntity, doSentiment) => {
 
 let converters = [];
@@ -92,6 +102,11 @@ let dataframeInputs = [];
 if (doEntity) dataframeInputs.push(dataframeEntity);
 if (doSentiment) dataframeInputs.push(dataframeTrait);
 const dataframeString = dataframeInputs.join('\n');
+
+let analysis = [];
+if (doEntity) analysis.push(analysisEntity);
+if (doSentiment) analysis.push(analysisTrait);
+const analysisString = analysis.join("\n");
 
     const nlp = 
 `client = Wit("GUNUX2F3ZIXVVLK3DCRY6NXH2OLGOG6I")
@@ -115,20 +130,11 @@ traitLabels = []
 for i, row in data.iteritems():
     text = str(row)
     resp = client.message(text)
+${analysisString}
 
-    entities = resp.get('entities')
-    traits = resp.get('traits')
-    entityLabel = entityLabelForSample(entities)
-    traitLabel = traitLabelForSample(traits)
-
-    entityLabels.append(entityLabel)
-    traitLabels.append(traitLabel)
     texts.append(text)
 
-labeled = pd.DataFrame(
-{'Text':texts,
-${dataframeString}
-})
+labeled = pd.DataFrame({'Text':texts,${dataframeString}})
 
 labeled.head(DATA_COUNT)
 `
