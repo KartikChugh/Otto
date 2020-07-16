@@ -148,7 +148,7 @@ const params = (state, model_state) => {
   }
 
   if (state.task === Tasks.NATURAL_LANGUAGE && state.nlp_models.length > 0) {
-    return nlpCode.params(state.sample_dataset?.column ?? 0); 
+    return nlpCode.params(datasetMetadata?.[state.sample_dataset]?.column ?? 0); 
   }
 
   switch (state.model) {
