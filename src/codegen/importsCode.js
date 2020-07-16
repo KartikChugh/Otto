@@ -23,7 +23,8 @@ from sklearn.metrics import mean_poisson_deviance`;
 }
 
 export const ordinal = () => {
-    return `import mord
+    return `#!pip install mord #Uncomment this to install
+import mord
 from sklearn.metrics import accuracy_score`;
 }
 
