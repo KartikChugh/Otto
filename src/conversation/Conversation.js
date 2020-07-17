@@ -24,7 +24,8 @@ export default class Conversation {
 
   delay = (msg) => {
     const WPM = 420;
-    return (msg.length / 3.5 / WPM) * 60 * 1000;
+    const ms = (msg.length / 3.5 / WPM) * 60 * 1000;
+    return ms < 5000 ? ms : 5000;
   };
 
   sayMessages = async (messages, stepperStateOriginal) => {
