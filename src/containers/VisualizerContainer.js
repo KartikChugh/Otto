@@ -134,13 +134,13 @@ const modelFormatter = (model) => {
     case Models.KNN:
       return "KNN";
     case Models.NEURAL_NETWORK_FF:
-      return "Neural Net";
+      return "Neural";
     case Models.LINEAR_REGRESSION:
-      return "Linear Reg.";
+      return "Linear";
     case Models.ORDINAL_REGRESSION:
-      return "Ordinal Reg.";
+      return "Ordinal";
     case Models.POISSON_REGRESSION:
-      return "Poisson Reg.";
+      return "Poisson";
     default:
       return null;
   }
@@ -152,7 +152,7 @@ const nlpModelFormatter = (models) => {
   }
   const newModels = models.map((model) => {
     if (model === Models.ENTITY_RECOGNITION) {
-      return "Entity Recog.";
+      return "Entity";
     }
     if (model === Models.SENTIMENT_ANALYSIS) {
       return "Sentiment";
@@ -168,9 +168,9 @@ const preprocessorFormatter = (preprocessors) => {
   const newPre = preprocessors.map((pre) => {
     switch (pre) {
       case Preprocessors.TEXT_CLEANING:
-        return "Text Clean";
+        return "Clean";
       case Preprocessors.NORMALIZATION:
-        return "Normalize";
+        return "Norm";
       case Preprocessors.PCA:
         return "PCA";
       default:
@@ -339,7 +339,7 @@ function VisualizerContainer() {
             {StepperStateOrder.map((step, index) => {
               if (getActiveStep(state) === index && !state.stepper_finish) {
                 return (
-                  <Typography color="textPrimary" style={{ fontSize: "18px" }}>
+                  <Typography color="textPrimary" style={{ fontSize: "16px" }}>
                     {String(index + 1) + ". " + getSteps()[index]}
                   </Typography>
                 );
@@ -350,7 +350,7 @@ function VisualizerContainer() {
                 return (
                   <Typography
                     color="textSecondary"
-                    style={{ fontSize: "18px" }}
+                    style={{ fontSize: "16px" }}
                   >
                     {SelectedOptionLabel(index)}
                   </Typography>
