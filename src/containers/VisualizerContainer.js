@@ -126,7 +126,7 @@ const datasetFormatter = (category, sample) => {
   if (category === DatasetCategory.CUSTOM) {
     return category;
   }
-  return category + " (" + sample + ")";
+  return datasetMetadata?.[sample]?.title ?? category;
 };
 
 const modelFormatter = (model) => {

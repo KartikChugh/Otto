@@ -129,7 +129,7 @@ export const datasetMetadata = {
     model: Models.LINEAR_REGRESSION,
   },
   [SampleDataset.IMDB]: {
-    title: "IMDB Reviews",
+    title: "IMDB",
     subtitle: "A small sample of reviews from IMDB",
     icon: <MovieFilterRoundedIcon fontSize="small" />,
     instances: imdb.length,
