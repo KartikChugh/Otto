@@ -6,7 +6,7 @@ Otto is an intelligent chat application, designed to help aspiring machine learn
 
 ### _UPDATE: Otto is a winner at the Facebook AI Challenge!_
 
-We're excited to share that Otto has received a **third-place prize** at the 2020 Facebook AI Challenge series for its innovative use of the [Wit.ai](https://wit.ai/) platform. Congratulations to the other winners, and to everyone who participated! **Check out our submission [here](https://devpost.com/software/otto-v05m26)**.
+We're excited to share that Otto has received a **third-place prize** at the 2020 Facebook AI Challenge series for its innovative use of the [Wit.ai](https://wit.ai/) platform. Congratulations to the other winners, and to everyone who participated! **[Check out our submission.](https://devpost.com/software/otto-v05m26)**.
 
 ***
 
