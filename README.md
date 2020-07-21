@@ -123,17 +123,11 @@ Otto's modular design makes it readibly extensible, and its use of Wit means its
 
 ### Creators
 
-<p align="center">
-<img src="img/a.jpg" height="200px">
-</p>
+<img src="media/social_kartik.png" height="250px"> &nbsp; <img src="media/social_sanuj.png" height="250px">
 
 **Kartik Chugh**
 
 Kartik is a second-year at the University of Virginia and currently an intern at Amazon's Alexa team. An avid open-source contributor, he is passionate about API design and developing cool machine learning tools! 
-
-<p align="center">
- <img src="img/b.jpg" height="200px">
- </p>
 
 **Sanuj Bhatia**
 
