@@ -1,14 +1,18 @@
 # Otto: Your friendly machine learning assistant.
-<img src="logo.png" width="90%">
+<a href="https://ottoml.online/"><img src="logo.png" width="80%"></a>
 
 ## Build machine learning pipelines through natural language conversation
-Otto is an intelligent chat application, designed to help aspiring machine learning engineers _go from idea to implementation with zero domain knowledge_. Our website features easy model selection, insightful visualizations, and an intuitive natural language experience guiding you every step of the way. A collection of four Wit backend apps service Otto's conversational abilities and machine learning tools.
+Otto is an intelligent chat application, designed to help aspiring machine learning engineers _go from idea to implementation with zero domain knowledge_. [Our website](https://ottoml.online/) features easy model selection, insightful visualizations, and an intuitive natural language experience guiding you every step of the way. 
+
+### UPDATE: Otto is a winner at the Facebook AI Challenge!
+
+We're excited to share that Otto has received a **third-place prize** at the 2020 Facebook AI Challenge series for its innovative use of the [Wit.ai](https://wit.ai/) platform. Congratulations to the other winners, and to everyone who participated! **Check out our submission [here](https://devpost.com/software/otto-v05m26)**.
 
 ***
 
 ## Highlights
 
-- **Beginner-friendly design.** Otto is made for novices, as it assumes no prior knowledge of machine learning. Users simply describe their end goals to obtain intelligent recommendations, or can choose from sample datasets to harness our models in an instant.
+- **Beginner-friendly design.** Otto is made for novices, as it assumes minimal familiarity with machine learning. Users simply describe their end goals to obtain intelligent recommendations, or can choose from sample datasets to harness our models in an instant.
 
 - **Powerful machine learning tools.** A range of machine learning capabilities are supported, including models for regression, classification and natural language processing, as well as preprocessors tailored to your problem. Play with neural networks, explore data visualizations, and generate ready-made Python code right in your browser!
 
@@ -18,21 +22,21 @@ Otto is an intelligent chat application, designed to help aspiring machine learn
 
 ## Quick Start
 
-To demo some of Otto's main features, try out the following:
+To demo some of Otto's core features, try out the following:
 
-- **Say: _I want to label flower species by petal length_** to watch Otto prefill your pipeline and render a nearest neighbors classification on the popular Iris dataset.
+- **Say: _I want to label flower species by petal length_** to watch Otto prefill your pipeline options and visualize a nearest neighbors classification for the popular Iris dataset.
 
-- **Select: _Regression > Sample Dataset_** to preview sample datasets for regression, and discover the strongest predictors using different best fit lines
+- **Select: _Regression > Sample Dataset_** to preview sample datasets for regression, and discover the strongest predictors using different best fit lines.
 
 - **Say: _Detect fraudulent credit card activity_** and select the Custom Dataset option to experience Otto's model recommendation system and interactive neural network designer.
 
 - **Say: _I'd like to interpret the mood of a review_** to query Wit-powered natural language models for live results.
 
-and feel free to get creative! Come up with your own ML goals and see where Otto takes you.
+And feel free to get creative! Come up with your own machine learning goals and see where Otto takes you.
 
 ## Stages
 
-Below is a step-by-step breakdown intended for the technical reader.
+Below is a step-by-step breakdown of how Otto works.
 
 ### Task 
 
@@ -91,7 +95,7 @@ Satisfy your curious mind with our fun, interactive network builder!
 
 ![nn](media/nn_hd.gif)
 
-Otto preconfigures a standard model architecture with [research-based](http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf) activations and initializers, but users are free to tinker with it layer by layer as they wish. Additionally, Otto can make network redesigns en masse with the aid of a dedicated Wit model (**Otto-Net**) that translates user instructions into architecture changes.
+Otto preconfigures a standard model architecture with [research-based](http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf) activations and initializers, but users are free to tinker with it layer by layer as they wish. Additionally, Otto can perform instant redesigns with the aid of a dedicated Wit model (**Otto-Net**) that translates user instructions into architecture changes.
 
 #### Model Visualization (Sample)
 
@@ -103,7 +107,7 @@ Instantly explore how parameters affect KNN clusters and regression slopes!
 
 ### Code Display
 
-All done! With your data sorted out, preprocessors set, and model configured, Otto gives you a nice view of your work. 
+All done! With your data sorted out, preprocessors set, and model configured, Otto gives you a nice view of your work. For convenience, we offer buttons to copy the code to your clipboard, deploy it in a Google Colab notebook, or restart the process. 
 
 ![codegen](media/codeGen_hd.gif)
 
@@ -113,11 +117,11 @@ Otto's modular design makes it readibly extensible, and its use of Wit means its
 
 - **More models**: logistic regression, support vector machines, decision trees
 - **New tasks**: data generation (e.g. GANs), speech recognition
-- **Smarter NLP**: being able to ask Otto to explain machine learning concepts or describe the difference between options
+- **Smarter advice**: being able to ask Otto to explain machine learning concepts or describe the difference between options
 
 ## About
 
-### Contributors
+### Creators
 
 <p align="center">
 <img src="img/a.jpg" height="200px">
@@ -125,7 +129,7 @@ Otto's modular design makes it readibly extensible, and its use of Wit means its
 
 **Kartik Chugh**
 
-Kartik is an incoming second-year at the University of Virginia and currently an intern at Amazon Alexa. An avid open-source contributor, he is passionate about API design and developing only the coolest machine learning tools!
+Kartik is a second-year at the University of Virginia and currently an intern at Amazon's Alexa team. An avid open-source contributor, he is passionate about API design and developing cool machine learning tools! 
 
 <p align="center">
  <img src="img/b.jpg" height="200px">
@@ -133,7 +137,7 @@ Kartik is an incoming second-year at the University of Virginia and currently an
 
 **Sanuj Bhatia**
 
-Sanuj is Software Engineer at Facebook who loves building interactive React-based applications. When possible, he likes to introduce and then fix bugs for maximum impact.
+Sanuj is a software engineer at Facebook who loves building interactive React-based applications. When possible, he likes to introduce and then fix bugs for maximum impact ;)
 
 ### Why Otto the Owl?
 
