@@ -123,7 +123,7 @@ Otto's modular design makes it readibly extensible, and its use of Wit means its
 
 ### Creators
 
-<img src="media/social_kartik.png" height="250px"> &nbsp; <img src="media/social_sanuj.png" height="250px">
+<a href="https://www.linkedin.com/in/compscikartik/"><img src="media/social_kartik_small.png"></a> &nbsp; <a href="https://www.linkedin.com/in/sanujb/"><img src="media/social_sanuj_small.png"></a>
 
 **Kartik Chugh**
 
