@@ -2,9 +2,9 @@
 <a href="https://ottoml.online/"><img src="logo.png" width="80%"></a>
 
 ## Build machine learning pipelines through natural language conversation
-Otto is an intelligent chat application, designed to help aspiring machine learning engineers _go from idea to implementation with zero domain knowledge_. [Our website](https://ottoml.online/) features easy model selection, insightful visualizations, and an intuitive natural language experience guiding you every step of the way. 
+Otto is an intelligent chat application, designed to help aspiring machine learning engineers **go from idea to implementation with minimal domain knowledge**. [Our website](https://ottoml.online/) features easy model selection, insightful visualizations, and an intuitive natural language experience guiding you every step of the way. 
 
-### UPDATE: Otto is a winner at the Facebook AI Challenge!
+### _UPDATE: Otto is a winner at the Facebook AI Challenge!_
 
 We're excited to share that Otto has received a **third-place prize** at the 2020 Facebook AI Challenge series for its innovative use of the [Wit.ai](https://wit.ai/) platform. Congratulations to the other winners, and to everyone who participated! **Check out our submission [here](https://devpost.com/software/otto-v05m26)**.
 
@@ -107,7 +107,7 @@ Instantly explore how parameters affect KNN clusters and regression slopes!
 
 ### Code Display
 
-All done! With your data sorted out, preprocessors set, and model configured, Otto gives you a nice view of your work. For convenience, we offer buttons to copy the code to your clipboard, deploy it in a Google Colab notebook, or restart the process. 
+All done! With your data sorted out, preprocessors set, and model configured, Otto gives you a nice view of your work. For convenience, we offer buttons to copy the code to your clipboard, deploy it to a Google Colab notebook, or restart the process. 
 
 ![codegen](media/codeGen_hd.gif)
 
