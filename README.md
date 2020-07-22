@@ -1,12 +1,12 @@
 # Otto: Your friendly machine learning assistant.
 <a href="https://ottoml.online/"><img src="logo.png" width="80%"></a>
 
-## Build machine learning pipelines through natural language conversation
+## Build machine learning pipelines through a natural language experience
 Otto is an intelligent chat application, designed to help aspiring machine learning engineers **go from idea to implementation with minimal domain knowledge**. [Our website](https://ottoml.online/) features easy model selection, insightful visualizations, and an intuitive natural language experience guiding you every step of the way. 
 
 ### _UPDATE: Otto is a winner at the Facebook AI Challenge!_
 
-We're excited to share that Otto has received a **third-place prize** at the 2020 Facebook AI Challenge series for its innovative use of the [Wit.ai](https://wit.ai/) platform. Congratulations to the other winners, and to everyone who participated! **[Check out our submission.](https://devpost.com/software/otto-v05m26)**.
+We're excited to share that Otto has received a **third-place prize** at the 2020 Facebook AI Challenge series for its innovative use of the [Wit.ai](https://wit.ai/) platform. Congratulations to the other winners, and to everyone who participated! **[Check out our submission](https://devpost.com/software/otto-v05m26)**.
 
 ***
 
