@@ -6,7 +6,7 @@ Otto is an intelligent chat application, designed to help aspiring machine learn
 
 ### _UPDATE: Otto is a winner at the Facebook AI Challenge!_
 
-We're excited to share that Otto has received a **third-place prize** at the 2020 Facebook AI Challenge series for its innovative use of the [Wit.ai](https://wit.ai/) platform. Congratulations to the other winners, and to everyone who participated! **[Check out our submission](https://devpost.com/software/otto-v05m26)**.
+We're excited to share that Otto has received a **third-place prize** at the 2020 Facebook AI Challenge series for its innovative use of the [Wit.ai](https://wit.ai/) NLP platform. Congratulations to the other winners, and to everyone who participated! **[Check out our submission](https://devpost.com/software/otto-v05m26)**.
 
 ***
 
@@ -24,7 +24,7 @@ We're excited to share that Otto has received a **third-place prize** at the 202
 
 To demo some of Otto's core features, try out the following:
 
-- **Say: _I want to label flower species by petal length_** to watch Otto prefill your pipeline options and visualize a nearest neighbors classification for the popular Iris dataset.
+- **Say: _I want to label flower species by petal length_** to watch Otto prefill your pipeline components and visualize a nearest neighbors classification for the popular Iris dataset.
 
 - **Select: _Regression > Sample Dataset_** to preview sample datasets for regression, and discover the strongest predictors using different best fit lines.
 
