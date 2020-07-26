@@ -127,11 +127,15 @@ Otto's modular design makes it readibly extensible, and its use of Wit means its
 
 **Kartik Chugh**
 
-Kartik is a second-year at the University of Virginia and currently an intern at Amazon's Alexa team. An avid open-source contributor, he is passionate about API design and developing cool machine learning tools! 
+Kartik is a second-year at the University of Virginia and currently an intern at Amazon's Alexa team. An avid open-source contributor, he is passionate about API design and developing cool machine learning tools. 
 
 **Sanuj Bhatia**
 
 Sanuj is a software engineer at Facebook who loves building interactive React-based applications. When possible, he likes to introduce and then fix bugs for maximum impact ;)
+
+### Acknowledgements
+
+Thanks to Sean Velhagen for designing the Otto logo!
 
 ### Why Otto the Owl?
 
