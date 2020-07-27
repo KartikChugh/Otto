@@ -6,7 +6,7 @@ Otto is an intelligent chat application, designed to help aspiring machine learn
 
 ### _UPDATE: Otto is a winner at the Facebook AI Challenge!_
 
-We're excited to share that Otto has received a **[third-place prize](https://devpost.com/software/otto-v05m26)** at the 2020 Facebook AI Challenge series for its innovative use of the [Wit.ai](https://wit.ai/) NLP platform. Congratulations to the other winners, and to everyone who participated!
+We're excited to share that Otto has received a **[third-place prize](https://devpost.com/software/otto-v05m26)** at the 2020 Facebook AI Challenge hackathon series for its innovative use of the [Wit.ai](https://wit.ai/) NLP platform. Congratulations to the other winners, and to everyone who participated!
 
 ***
 
@@ -28,7 +28,7 @@ To demo some of Otto's core features, try out the following:
 
 - **Select: _Regression > Sample Dataset_** to preview sample datasets for regression, and discover the strongest predictors using different best fit lines.
 
-- **Say: _Detect fraudulent credit card activity_** and select the Custom Dataset option to experience Otto's model recommendation system and interactive neural network designer.
+- **Say: _Detect fraudulent credit card activity_** and select the Custom Dataset option to experience Otto-matic model recommendation and an interactive neural network designer.
 
 - **Say: _I'd like to interpret the mood of a review_** to query Wit-powered natural language models for live results.
 
@@ -115,13 +115,19 @@ All done! With your data sorted out, preprocessors set, and model configured, Ot
   <img src="media/codeGen_hd.gif"> 
 </p>
 
+***
+
 ## What's Next for Otto?
 
 Otto's modular design makes it readibly extensible, and its use of Wit means its natural language capabilities can be extended to even more domains. Here are just a few things planned for Otto:
 
 - **More models**: logistic regression, support vector machines, decision trees
-- **New tasks**: data generation (e.g. GANs), speech recognition
+- **New tasks**: data generation (e.g. GANs), speech recognition, clustering
 - **Smarter advice**: being able to ask Otto to explain machine learning concepts or describe the difference between options
+
+### Contributors
+
+Contributions are welcome! Feel free to tackle any of the above items, or anything else. We'll be reviewing issues and PRs opened on this repo.
 
 ## About
 
