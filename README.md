@@ -1,5 +1,5 @@
 # Otto: Your friendly machine learning assistant.
-<a href="https://ottoml.online/"><img src="logo.png" width="80%"></a>
+<a href="https://ottoml.online/"><img src="logo.png" width="750px"></a>
 
 ## Machine learning becomes an intuitive, natural language experience
 Otto is an intelligent chat application, designed to help aspiring machine learning engineers **go from idea to implementation with minimal domain knowledge**. **[Our website](https://ottoml.online/)** features easy model selection, insightful visualizations, and an intuitive natural language experience guiding you every step of the way. 
@@ -42,7 +42,7 @@ Below is a step-by-step breakdown of how Otto works.
 
 One of the biggest obstacles faced by those just getting started with ML is the abundance of jargon, from “loss functions” to “contour boundaries“ — beginners can't be expected to decide what model to use based on cryptic terminology, let alone develop one from scratch! **Otto narrows down your options by inferring the high-level task at hand from a simple objective statement**.
 
-![taskInference](media/taskInference_hd.gif)
+![taskInference](media/taskInference_hd_fast.gif)
 
 Task inference is powered by a Wit application (_Otto-Task_) trained on 300 such statements (e.g. “I want to detect loan applications as fraudulent”, “help me forecast stock prices”, or “let's summarize an article into a paragraph”) derived from real-world machine learning research. _Otto-Task_ attempts to categorize the task intent as regression, classification, or natural language processing, and additionally extracts a subject entity embodying a streamlined form of the objective in order to filter out extraneous words. 
 
@@ -52,7 +52,9 @@ The subject is parsed for keyword matches (“tweets”, “housing”, etc) aga
 
 Users are recommended a specific sample dataset matching their subject, or otherwise offered to preview and choose one themselves. **Sample data allows beginners to prototype models quickly and easily**, without the complexity of finding a dataset and figuring out the relevant features among dozens. Users may also opt to with their own data, which they can include later on in the generated code. 
 
-![samplePreview](media/samplePreview_hd.gif)
+<p align="center">
+  <img src="media/samplePreview_hd.gif"> 
+</p>
 
 ### Model
 
@@ -109,7 +111,9 @@ Instantly explore how parameters affect KNN clusters and regression slopes!
 
 All done! With your data sorted out, preprocessors set, and model configured, Otto gives you a nice view of your work. For convenience, we offer buttons to copy the code to your clipboard, deploy it to a Google Colab notebook, or restart the process. 
 
-![codegen](media/codeGen_hd.gif)
+<p align="center">
+  <img src="media/codeGen_hd.gif"> 
+</p>
 
 ## What's Next for Otto?
 
