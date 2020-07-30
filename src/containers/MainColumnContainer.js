@@ -26,7 +26,7 @@ function MainColumnContainer() {
       >
         <VisualizerContainer />
       </Grid>
-      {!state.stepper_finish && (
+      {!state.stepper_finish && (getIsCodeShown() || getIsToolboxShown()) && (
         <Grid item className="codeContainer">
           {getIsCodeShown() ? (
             <CodeContainer getIsShown={getIsCodeShown} />

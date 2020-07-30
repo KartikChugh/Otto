@@ -142,7 +142,7 @@ const useStyles = makeStyles((theme) => ({
   },
   datasetMenu: {
     width: "100%",
-    maxWidth: 190,
+    maxWidth: 170,
   },
 }));
 
