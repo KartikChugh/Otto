@@ -58,7 +58,6 @@ function WidgetContainer() {
   return (
     <Widget
       handleSubmit={handleSubmit}
-      launcher={() => null}
       subtitle=""
       title="Otto"
       titleAvatar={logo}
