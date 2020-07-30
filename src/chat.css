@@ -203,7 +203,7 @@
 }
 .rcw-messages-container {
     background-color: #fff;
-    height: 76vh;
+    height: 66vh;
     overflow-y: auto;
     padding-top: 10px;
 }
@@ -355,7 +355,7 @@
     animation-fill-mode: forwards;
     -ms-flex-item-align: end;
     align-self: flex-end;
-    background-color: #35cce6;
+    background-color: #473080;
     border: 0;
     border-radius: 50%;
     box-shadow: 0 2px 10px 1px #b5b5b5;
@@ -497,8 +497,7 @@
     -ms-flex-direction: column;
     flex-direction: column;
     margin: 0 20px 20px 0;
-    width: 380px;
-    max-width: 380px;
+    max-width: 360px;
     position: fixed;
     right: 0;
     width: 90vw;
